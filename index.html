@@ -1731,12 +1731,20 @@
           document.getElementById('overrideBtnContainer').innerHTML = '';
         } else if (fraction > 0) {
           playSound('correct');
-          wrongQuestionsInRound.push(q);
+          // Create pruned question with ONLY the unmastered remaining fields for the retake round!
+          const remainingFields = q.fields.filter((_, fIdx) => !matchedFieldIndices.has(fIdx));
+          if (remainingFields.length > 0) {
+            wrongQuestionsInRound.push({
+              ...q,
+              fields: remainingFields,
+              isPartialRetry: true
+            });
+          }
           resBox.className = 'mt-6 p-5 rounded-2xl border bg-amber-950/40 border-amber-500/50 block';
           resIcon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-neonAmber border border-amber-500/40 flex items-center justify-center font-bold text-lg shrink-0';
           resIcon.innerText = '½';
           resTitle.className = 'font-display font-bold text-base text-neonAmber mb-1';
-          resTitle.innerText = `Частично верен отговор (${correctCount} от ${totalFields} верни) • (+${fraction.toFixed(2)} т.)`;
+          resTitle.innerText = `Частично верен (${correctCount} от ${totalFields} верни) • Верните полета няма да се повтарят при ретейка!`;
           document.getElementById('overrideBtnContainer').innerHTML = `
             <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
               <span>🛡️ Признай за напълно верен (+${(1 - fraction).toFixed(2)} т.)</span>
@@ -1744,12 +1752,12 @@
           `;
         } else {
           playSound('wrong');
-          wrongQuestionsInRound.push(q);
+          wrongQuestionsInRound.push({ ...q });
           resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
           resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
           resIcon.innerText = '✕';
           resTitle.className = 'font-display font-bold text-base text-rose-400 mb-1';
-          resTitle.innerText = 'Непълен отговор (0 верни полета)';
+          resTitle.innerText = 'Непълен отговор (всички полета се добавят за повторение)';
           document.getElementById('overrideBtnContainer').innerHTML = `
             <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
               <span>🛡️ Бях прав / Признай ми отговора (+1 т.)</span>
@@ -1767,7 +1775,7 @@
     function overrideMarkCorrect() {
       playSound('correct');
       const q = currentQuestions[currentIdx];
-      const wrongIdx = wrongQuestionsInRound.indexOf(q);
+      const wrongIdx = wrongQuestionsInRound.findIndex(item => item.num === q.num && item.subject === q.subject);
       if (wrongIdx > -1) wrongQuestionsInRound.splice(wrongIdx, 1);
       
       earnedPoints = Math.round(earnedPoints) + 1;
