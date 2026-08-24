@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="bg" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Биомеханика XI Клас — Mastery Loop & Exam Simulator</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            obsidian: '#0a0e17',
+            surface: '#111827',
+            card: '#161f30',
+            cardHover: '#1c283f',
+            borderGlow: '#22324e',
+            neonCyan: '#00f0ff',
+            neonLime: '#10b981',
+            neonAmber: '#f59e0b',
+            neonRose: '#f43f5e',
+            accentPurple: '#8b5cf6',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0e17; }
+    ::-webkit-scrollbar-thumb { background: #22324e; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f0ff44; }
+
+    .bg-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glass-panel {
+      background: rgba(22, 31, 48, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+
+<body class="bg-obsidian text-slate-100 min-h-screen font-sans antialiased bg-grid selection:bg-neonCyan selection:text-black">
+
+  <!-- Header with Live Bulgarian Grade Scoreboard -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-borderGlow px-4 lg:px-8 py-3 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Exam Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-neonCyan flex items-center justify-center text-black font-black text-xl shadow-lg shadow-cyan-500/30">
+          ⚡
+        </div>
+        <div>
+          <h1 class="font-display font-black text-lg md:text-xl tracking-tight text-white flex items-center gap-2">
+            <span>Биомеханика XI Клас</span>
+            <span id="masteryBadge" class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-neonCyan border border-cyan-800 font-mono">1:1 ИЗПИТЕН ФОРМАТ</span>
+          </h1>
+          <p class="text-xs text-slate-400 font-medium">Помощник-Треньор • Цикъл за 100% овладяване на грешките</p>
+        </div>
+      </div>
+
+      <!-- Bulgarian Live Grade Display -->
+      <div class="flex items-center gap-3">
+        
+        <!-- Live Grade Box -->
+        <div class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-card border border-borderGlow">
+          <div class="flex flex-col text-left">
+            <span class="text-[10px] text-slate-400 font-mono uppercase leading-none">Текуща Оценка</span>
+            <span id="liveGradeText" class="text-sm font-black font-mono leading-none text-neonLime mt-1">Отличен (6.00)</span>
+          </div>
+          <div id="liveGradeBadge" class="w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-500/50 flex items-center justify-center font-mono font-black text-sm text-neonLime">
+            6.00
+          </div>
+        </div>
+
+        <!-- Audio Toggle -->
+        <button id="soundToggle" onclick="toggleSound()" class="p-2 rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-neonCyan transition-all">
+          <i data-lucide="volume-2" class="w-5 h-5" id="soundIcon"></i>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 lg:px-8 py-6">
+    
+    <!-- Test Selector Controls -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 p-4 rounded-2xl glass-panel border border-borderGlow">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-mono font-bold text-slate-400 mr-2">ИЗБЕРИ:</span>
+        <button onclick="switchExamMode('test1')" id="btn-test1" class="px-4 py-2 text-xs font-display font-bold rounded-xl bg-neonCyan text-black transition-all shadow-lg shadow-cyan-500/25">
+          ТЕСТ № 1 (15 въпроса)
+        </button>
+        <button onclick="switchExamMode('test2')" id="btn-test2" class="px-4 py-2 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">
+          ТЕСТ № 2 (15 въпроса)
+        </button>
+        <button onclick="switchExamMode('all')" id="btn-all" class="px-4 py-2 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">
+          Пълен Изпит (30 въпроса)
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="restartExam()" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-card border border-borderGlow text-slate-300 hover:text-white flex items-center gap-1.5">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Нов опит
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Progress Bar -->
+    <div class="mb-6">
+      <div class="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
+        <span id="examProgressLabel">Въпрос 1 от 15</span>
+        <div class="flex items-center gap-3">
+          <span id="mistakeCounterLabel" class="text-rose-400 font-bold hidden flex items-center gap-1">
+            <span>Грешки за поправка:</span> <span id="mistakeCountNum" class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800">0</span>
+          </span>
+          <span id="examScoreLabel" class="text-neonCyan font-bold">0 / 0 верни точки</span>
+        </div>
+      </div>
+      <div class="w-full h-2.5 bg-card rounded-full overflow-hidden border border-borderGlow">
+        <div id="examProgressBar" class="h-full bg-gradient-to-r from-cyan-500 to-neonLime rounded-full transition-all duration-300" style="width: 6.66%;"></div>
+      </div>
+    </div>
+
+    <!-- Active Question Card -->
+    <div id="questionWrapper" class="glass-panel p-6 sm:p-8 rounded-3xl border border-borderGlow shadow-2xl">
+      
+      <!-- Top Meta Badge -->
+      <div class="flex items-center justify-between mb-4">
+        <span id="qHeaderBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800">
+          ТЕСТ № 1 • Въпрос 1
+        </span>
+        <span id="qTypeBadge" class="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-400 bg-card border border-borderGlow">
+          Избираем отговор
+        </span>
+      </div>
+
+      <!-- Question Text (Exact match from PDF) -->
+      <h2 id="qPrompt" class="font-display font-bold text-xl sm:text-2xl text-white mb-6 leading-snug"></h2>
+
+      <!-- Visual Attachment Container (Joints, Levers, etc.) -->
+      <div id="qAttachment" class="mb-6 p-4 rounded-2xl bg-obsidian border border-slate-800 flex flex-col items-center justify-center hidden"></div>
+
+      <!-- Dynamic Interactive Body: Choices OR Open Input Fields -->
+      <div id="qInteractiveBody" class="space-y-4 mb-6"></div>
+
+      <!-- Submit / Confirm Button for Open Questions -->
+      <div id="qActionRow" class="flex justify-end pt-4 border-t border-slate-800/80">
+        <button id="submitAnswerBtn" onclick="submitCurrentAnswer()" class="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-neonCyan text-black hover:bg-white transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+          <span>Потвърди Отговора</span>
+          <i data-lucide="check" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Result / Correction Box (Shown after answering) -->
+      <div id="qResultBox" class="hidden mt-6 p-5 rounded-2xl border transition-all duration-300">
+        <div class="flex items-start gap-3">
+          <div id="resIcon" class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-lg shrink-0"></div>
+          <div class="flex-1">
+            <h4 id="resTitle" class="font-display font-bold text-base mb-1"></h4>
+            <div id="resOfficialAnswer" class="text-xs font-mono text-slate-200 bg-black/40 p-3 rounded-xl border border-white/5 mb-2 whitespace-pre-line"></div>
+            <p id="resWhy" class="text-slate-300 text-xs leading-relaxed"></p>
+          </div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <div id="overrideBtnContainer"></div>
+          <button onclick="advanceNext()" class="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-neonCyan text-black hover:bg-white transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+            <span>Следващ въпрос</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Final Report Card Modal with Mastery Loop -->
+    <div id="reportCardModal" class="hidden glass-panel p-8 sm:p-12 rounded-3xl border border-neonCyan/40 text-center shadow-2xl mt-6">
+      
+      <div id="finalTrophyIcon" class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-emerald-500 to-neonCyan mx-auto flex items-center justify-center text-black text-4xl mb-6 shadow-xl shadow-cyan-500/30">
+        🏅
+      </div>
+      
+      <h2 id="finalHeading" class="font-display font-black text-3xl text-white mb-2">Изпитният кръг приключи!</h2>
+      <p id="finalSubtext" class="text-slate-300 text-sm max-w-md mx-auto mb-6">Официален резултат по шестобалната система:</p>
+      
+      <!-- Grade Showcase -->
+      <div class="p-6 rounded-3xl bg-card border border-borderGlow max-w-md mx-auto mb-6">
+        <span class="text-xs font-mono text-slate-400 block mb-1">КРАЙНА ОЦЕНКА</span>
+        <div id="finalGradeWord" class="font-display font-black text-3xl text-neonLime mb-1">Отличен (6.00)</div>
+        <div id="finalScoreDetails" class="text-xs font-mono text-slate-400">15 от 15 верни отговора (100%)</div>
+      </div>
+
+      <!-- Mastery Retry Loop CTA (Crucial for AuDHD Learning) -->
+      <div id="masteryLoopContainer" class="max-w-md mx-auto mb-6 p-4 rounded-2xl bg-amber-950/30 border border-amber-500/50 hidden">
+        <div class="flex items-center gap-2 text-neonAmber font-bold text-sm mb-2">
+          <i data-lucide="repeat" class="w-4 h-4"></i>
+          <span>Остават сгрешени въпроси за овладяване!</span>
+        </div>
+        <p class="text-xs text-slate-300 mb-4 text-left">
+          За да гарантираш оценка <strong class="text-neonLime">Отличен (6.00)</strong> на изпита утре, опитай отново <strong id="wrongCountBadge" class="text-rose-400"></strong> сгрешени въпроса (без подсказки), докато не ги научиш на 100%!
+        </p>
+        <button onclick="startMasteryRetryLoop()" class="w-full py-3 px-4 rounded-xl font-display font-black text-sm bg-gradient-to-r from-neonAmber to-orange-500 text-black hover:brightness-110 transition-all shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Поправи само сгрешените въпроси сега!</span>
+        </button>
+      </div>
+
+      <!-- Bulgarian Grading Scale Reference -->
+      <div class="max-w-md mx-auto p-4 rounded-2xl bg-obsidian border border-slate-800 text-left text-xs font-mono mb-8 space-y-1.5">
+        <div class="text-slate-400 font-bold mb-2 pb-1 border-b border-slate-700">Официална Скала за Оценяване:</div>
+        <div class="flex justify-between text-emerald-400"><span>90% – 100%:</span><strong>Отличен (5.50 – 6.00)</strong></div>
+        <div class="flex justify-between text-cyan-400"><span>75% – 89%:</span><strong>Много добър (4.50 – 5.49)</strong></div>
+        <div class="flex justify-between text-amber-400"><span>60% – 74%:</span><strong>Добър (3.50 – 4.49)</strong></div>
+        <div class="flex justify-between text-yellow-500"><span>50% – 59%:</span><strong>Среден (3.00 – 3.49)</strong></div>
+        <div class="flex justify-between text-rose-400"><span>Под 50%:</span><strong>Слаб (2.00)</strong></div>
+      </div>
+
+      <div class="flex justify-center gap-4">
+        <button onclick="restartExam()" class="px-6 py-3 rounded-xl font-display font-bold text-sm bg-neonCyan text-black hover:bg-white transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Нов пълен тест
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT EXAM ENGINE                     -->
+  <!-- ========================================== -->
+  <script>
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        if (type === 'correct') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(now); osc.stop(now + 0.35);
+        } else if (type === 'wrong') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(160, now);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(now); osc.stop(now + 0.25);
+        } else if (type === 'click') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(700, now);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(now); osc.stop(now + 0.04);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      if (soundEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        playSound('click');
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+      }
+      lucide.createIcons();
+    }
+
+    // --- EXACT QUESTION DEFINITIONS FROM THE PDF TEXTBOOK ---
+    const examQuestions = [
+      // ==========================================
+      // ТЕСТ № 1 (стр. 62 - 65)
+      // ==========================================
+      {
+        test: 1,
+        num: 1,
+        type: 'choice',
+        prompt: '1. Тяло е хвърлено вертикално нагоре. Формулирайте най-високата точка от траекторията на скоростта v и ускорението a на тялото. Посочете верния отговор:',
+        options: [
+          { text: 'А) v = 0, a = 0', correct: false },
+          { text: 'Б) v = 0, a = g', correct: true },
+          { text: 'В) v = 0, a < g', correct: false },
+          { text: 'Г) v > 0, a = 0', correct: false },
+        ],
+        why: 'В най-високата точка тялото спира за миг (v = 0), но гравитацията продължава да му действа със земното ускорение g.'
+      },
+      {
+        test: 1,
+        num: 2,
+        type: 'choice',
+        prompt: '2. Посочете коя от изброените величини може да има отрицателна стойност:',
+        options: [
+          { text: 'а) кинетична енергия', correct: false },
+          { text: 'б) работа', correct: true },
+          { text: 'в) маса', correct: false },
+          { text: 'г) всяка от тях', correct: false },
+        ],
+        why: 'Работата е отрицателна, когато действащата сила е противоположна на преместването (A = F·(-d)).'
+      },
+      {
+        test: 1,
+        num: 3,
+        type: 'choice',
+        prompt: '3. Посочете коя от изброените видове работа НЕ е статична:',
+        options: [
+          { text: 'а) задържаща', correct: false },
+          { text: 'б) отстъпваща', correct: true },
+          { text: 'в) фиксираща', correct: false },
+          { text: 'г) укрепваща', correct: false },
+        ],
+        why: 'Отстъпващата работа е динамична (мускулът се удължава при движение). Статичните са: задържаща, укрепваща и фиксираща.'
+      },
+      {
+        test: 1,
+        num: 4,
+        type: 'open_fill',
+        prompt: '4. Посочете липсващите думи в текста, отбелязани с буквите А и Б:\n„Кинематична верига – това е съединяване на няколко съседни .............А............., които представляват две съседни костни звена, съединени със ............Б..................“',
+        fields: [
+          { label: 'А:', keys: ['кинематични двойки', 'кинематична двойка', 'механични оси'] },
+          { label: 'Б:', keys: ['става', 'стави', 'ставна връзка'] }
+        ],
+        official: 'А: кинематични двойки | Б: става',
+        why: 'Две кости свързани със става образуват кинематична двойка. Тяхната поредица прави кинематична верига.'
+      },
+      {
+        test: 1,
+        num: 5,
+        type: 'open_fill',
+        prompt: '5. Посочете основните структури на ставата, като срещу всяка цифра напишете за какво се отнася (виж чертежа):',
+        attachment: `
+          <svg viewBox="0 0 320 180" class="w-full max-w-sm h-40">
+            <path d="M120 15 L200 15 L200 50 C200 65 180 75 160 75 C140 75 120 65 120 50 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+            <path d="M125 55 C125 70 140 73 160 73 C180 73 195 70 195 55 Z" fill="#00f0ff" opacity="0.85"/>
+            <path d="M120 165 L200 165 L200 130 C200 115 180 105 160 105 C140 105 120 115 120 130 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+            <path d="M125 125 C125 110 140 107 160 107 C180 107 195 110 195 125 Z" fill="#00f0ff" opacity="0.85"/>
+            <path d="M120 45 C95 75 95 105 120 135 M200 45 C225 75 225 105 200 135" stroke="#f43f5e" stroke-width="3" fill="none" stroke-dasharray="3 2"/>
+            <ellipse cx="160" cy="90" rx="28" ry="10" fill="#10b981" opacity="0.4"/>
+            <circle cx="250" cy="30" r="10" fill="#f59e0b"/><text x="250" y="34" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">1</text>
+            <circle cx="250" cy="65" r="10" fill="#f59e0b"/><text x="250" y="69" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">2</text>
+            <circle cx="70" cy="90" r="10" fill="#f59e0b"/><text x="70" y="94" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">3</text>
+            <circle cx="70" cy="130" r="10" fill="#f59e0b"/><text x="70" y="134" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">4</text>
+          </svg>
+        `,
+        fields: [
+          { label: '1.', keys: ['кост', 'кости', 'ставни повърхнини', 'ставна повърхност'] },
+          { label: '2.', keys: ['хрущял', 'ставен хрущял'] },
+          { label: '3.', keys: ['синовиална течност', 'синовия', 'ставна кухина'] },
+          { label: '4.', keys: ['ставна капсула', 'капсула', 'ставни връзки'] }
+        ],
+        official: '1. Кост / Ставна повърхност; 2. Ставен хрущял; 3. Синовиална течност (ставна кухина); 4. Ставна капсула',
+        why: 'Четирите задължителни структури на човешката става.'
+      },
+      {
+        test: 1,
+        num: 6,
+        type: 'open_fill',
+        prompt: '6. Посочете липсващите думи в текста, отбелязани с буквите А, Б, В и Г:\n„Костите са ...........А.............част на двигателния апарат на човека. Костната тъкан е изградена от ……..Б…….. вещества (например колаген) и ……….В…….. вещества (например калциеви соли). Колагенът е издръжлив на ………Г……., а минералните соли на натиск.“',
+        fields: [
+          { label: 'А:', keys: ['пасивна', 'пасивната', 'пасивен'] },
+          { label: 'Б:', keys: ['органични', 'органично'] },
+          { label: 'В:', keys: ['неорганични', 'минерални', 'неорганични (минерални)'] },
+          { label: 'Г:', keys: ['опън', 'разтягане', 'теглене'] }
+        ],
+        official: 'А: пасивна | Б: органични | В: неорганични (минерални) | Г: опън (разтягане)',
+        why: 'Костите са пасивната част. Колагенът поема опъна, а калцият – натиска.'
+      },
+      {
+        test: 1,
+        num: 7,
+        type: 'choice',
+        prompt: '7. Различете коя от изброените величини НЕ е силова характеристика:',
+        options: [
+          { text: 'а) ускорение', correct: true },
+          { text: 'б) сила', correct: false },
+          { text: 'в) импулс на сила', correct: false },
+          { text: 'г) въртящ момент', correct: false },
+        ],
+        why: 'Ускорението е кинематична характеристика. Силовите са: сила, момент на сила, импулс на сила и момент на импулса.'
+      },
+      {
+        test: 1,
+        num: 8,
+        type: 'choice',
+        prompt: '8. Различете какъв лост НЕ се среща в човешкото тяло:',
+        options: [
+          { text: 'а) равновесен лост', correct: false },
+          { text: 'б) везна', correct: true },
+          { text: 'в) силов лост', correct: false },
+          { text: 'г) скоростен лост', correct: false },
+        ],
+        why: 'В биомеханиката съществуват само три рода лостове: равновесен (I род), силов (II род) и скоростен (III род).'
+      },
+      {
+        test: 1,
+        num: 9,
+        type: 'open_text',
+        prompt: '9. Кои са етапите за постигане на динамична устойчивост на движението – начална фаза, междинна фаза и заключителна фаза:\n(Опишете накратко какво се случва във всяка фаза)',
+        keywords: ['блокира', 'степени', 'освобождаване', 'усвоено', 'реактивни'],
+        official: '1. Начална фаза: Блокират се излишните степени на свобода, движението е сковано.\n2. Междинна фаза: Започва освобождаване на степените на свобода, движението е по-леко и уверено.\n3. Заключителна фаза: Окончателно усвоено движение с пълно използване и на реактивните сили, леко и свободно.',
+        why: 'Това е класическата етапност при изграждане на двигателен навик.'
+      },
+      {
+        test: 1,
+        num: 10,
+        type: 'open_fill',
+        prompt: '10. Посочени са два метода за биомеханичен анализ. Напишете кои са те:\n[1. Регистрират пространствени, времеви, пространствено-времеви характеристики с кинокамера и видеометрия] → А\n[2. Свързани са с директно записване на силите с намеса на уреда в явлението] → Б',
+        fields: [
+          { label: 'А:', keys: ['кинематични', 'кинематичен', 'кинематични методи', 'кинематичен анализ'] },
+          { label: 'Б:', keys: ['динамични', 'динамичен', 'динамични методи', 'динамичен анализ'] }
+        ],
+        official: 'А: Кинематични методи | Б: Динамични методи',
+        why: 'Камерите записват кинематика (движението), а тензометричните датчици – динамика (силите).'
+      },
+      {
+        test: 1,
+        num: 11,
+        type: 'open_fill',
+        prompt: '11. В тялото на човека ролята на опорна точка на лоста изпълнява ставата. Известни са три вида лостове. За посочения вид дайте пример и наименование:\nЛОСТ ОТ ВТОРИ РОД:',
+        fields: [
+          { label: 'Нарича се още:', keys: ['силов лост', 'лост на силата', 'силов'] },
+          { label: 'Пример за такъв лост в тялото на човек е:', keys: ['ходило', 'ходилото', 'пръсти', 'повдигане на пръсти', 'глезена'] }
+        ],
+        official: 'Нарича се още: Силов лост (лост на силата)\nПример в тялото: Ходилото при повдигане на пръсти (опора в пръстите, тежест в глезена, ахилесът тегли нагоре).',
+        why: 'При лост от втори род товарът е между опората и силата.'
+      },
+      {
+        test: 1,
+        num: 12,
+        type: 'open_fill',
+        prompt: '12. Системата на движение на човека е сложна, динамична и йерархична. Попълнете в йерархията:\nДвигателната система се състои от Кинематична (пространствена, пространствено-времева, времева) и .............(А)............. (силова и .............(Б).............).\nИнформационната система включва: психична, .............(В)............. и ефекторна.',
+        fields: [
+          { label: 'А (Вид система):', keys: ['динамична', 'динамичната'] },
+          { label: 'Б (Подсистема на А):', keys: ['енергетична', 'енергийна', 'енергетична структура'] },
+          { label: 'В (Подсистема на инфо):', keys: ['сетивна', 'сетивна структура'] }
+        ],
+        official: 'А: Динамична | Б: Енергетична | В: Сетивна',
+        why: 'Двигателната система = Кинематична + Динамична (Силова + Енергетична). Информационна = Психична + Сетивна + Ефекторна.'
+      },
+      {
+        test: 1,
+        num: 13,
+        type: 'choice',
+        prompt: '13. Външна активна сила е:',
+        options: [
+          { text: 'а) земното ускорение – g', correct: false },
+          { text: 'б) инерчният момент J = m . r²', correct: false },
+          { text: 'в) опорната реакция – R', correct: false },
+          { text: 'г) силата на тежестта – P', correct: true },
+        ],
+        why: 'Силата на тежестта (гравитацията) е външна активна сила (сама може да премести ОЦТ). Опорната реакция е пасивна.'
+      },
+      {
+        test: 1,
+        num: 14,
+        type: 'choice',
+        prompt: '14. Енергетичните характеристики са:',
+        options: [
+          { text: 'а) импулс, инерчен момент, маса', correct: false },
+          { text: 'б) енергия, температура, умора', correct: false },
+          { text: 'в) работа, мощност, енергия', correct: true },
+          { text: 'г) енергия, маса, деформация', correct: false },
+        ],
+        why: 'Енергетичните характеристики са три: механична работа (A), мощност (P) и енергия (кинетична и потенциална).'
+      },
+      {
+        test: 1,
+        num: 15,
+        type: 'choice',
+        prompt: '15. Биомеханичните свойства на мускулите са:',
+        options: [
+          { text: 'а) вискозитет, съкратимост, възбудимост и пълзене', correct: false },
+          { text: 'б) вискозитет, дължина, тонус и еластичност', correct: false },
+          { text: 'в) вискозитет, плъзгане, релаксация и ротация', correct: false },
+          { text: 'г) вискозитет, еластичност, пълзене и релаксация', correct: true },
+        ],
+        why: 'Четирите биомеханични свойства са еластичност, вискозитет, пълзене и релаксация. Останалите са биологични.'
+      },
+
+      // ==========================================
+      // ТЕСТ № 2 (стр. 66 - 69)
+      // ==========================================
+      {
+        test: 2,
+        num: 1,
+        type: 'open_fill',
+        prompt: '1. Посочете коя е четвъртата пространствена характеристика, която използваме при отчитане на положението на човешкото тяло в пространството:\n1. местоположение\n2. поза\n3. амплитуда\n4. ...........................................................',
+        fields: [
+          { label: '4.', keys: ['ориентация', 'ориентация на тялото'] }
+        ],
+        official: '4. ориентация',
+        why: 'Четирите пространствени характеристики само за човешкото тяло са: местоположение, поза, ориентация и амплитуда.'
+      },
+      {
+        test: 2,
+        num: 2,
+        type: 'choice',
+        prompt: '2. Посочете как се нарича разстоянието от направлението на действие на силата до точката на въртене:',
+        options: [
+          { text: 'а) въртящ момент', correct: false },
+          { text: 'б) рамо на силата', correct: true },
+          { text: 'в) дължина на въртене', correct: false },
+          { text: 'г) радиус на въртене', correct: false },
+        ],
+        why: 'Рамо на силата е най-краткото (перпендикулярно) разстояние от оста на въртене до вектора на силата.'
+      },
+      {
+        test: 2,
+        num: 3,
+        type: 'choice',
+        prompt: '3. Посочете кое от посочените е вярно за земното ускорение:',
+        options: [
+          { text: 'а) по-голямо за тела с по-голяма маса', correct: false },
+          { text: 'б) по-голямо за тела с по-голяма плътност', correct: false },
+          { text: 'в) по-голямо за тела с по-малък обем', correct: false },
+          { text: 'г) еднакво за всички тела', correct: true },
+        ],
+        why: 'Земното ускорение g ≈ 9.81 m/s² е универсално и действа еднакво на всички тела без оглед на маса или форма.'
+      },
+      {
+        test: 2,
+        num: 4,
+        type: 'choice',
+        prompt: '4. Топка лети във въздуха. Посочете коя от изброените характеристики на топката зависи от скоростта ѝ:',
+        options: [
+          { text: 'а) кинетична енергия', correct: true },
+          { text: 'б) потенциална енергия', correct: false },
+          { text: 'в) масата на топката', correct: false },
+          { text: 'г) обемът на топката', correct: false },
+        ],
+        why: 'Кинетичната енергия е Ek = (m·v²)/2 и пряко зависи от скоростта v.'
+      },
+      {
+        test: 2,
+        num: 5,
+        type: 'choice',
+        prompt: '5. Посочете кое от изброените НЕ е биологично свойство на мускулите:\nа) възбудимост ; б) проводимост; в) вискозитет; г) лабилност',
+        options: [
+          { text: 'а) възбудимост', correct: false },
+          { text: 'б) проводимост', correct: false },
+          { text: 'в) вискозитет', correct: true },
+          { text: 'г) лабилност', correct: false },
+        ],
+        why: 'Вискозитетът е биомеханично (механично) свойство, а не чисто биологично/физиологично.'
+      },
+      {
+        test: 2,
+        num: 6,
+        type: 'open_fill',
+        prompt: '6. Напишете в празните полета за кой вид работа се отнасят дадените характеристики:\n[1. мускулите на човешкото тяло и отделните му части се задържат за определено време в необходимото положение] → А\n[2. мускулите на човешкото тяло и отделните му части произвеждат разнообразни движения – например ходене, бягане, скачане] → Б',
+        fields: [
+          { label: 'А (за 1):', keys: ['статична', 'статична работа', 'статично'] },
+          { label: 'Б (за 2):', keys: ['динамична', 'динамична работа', 'динамично'] }
+        ],
+        official: 'А: Статична работа | Б: Динамична работа',
+        why: 'Задържането на поза е статична работа, а движенията като бягане и скачане – динамична работа.'
+      },
+      {
+        test: 2,
+        num: 7,
+        type: 'open_fill',
+        prompt: '7. Посочете липсващите думи в текста, отбелязани с буквите А и Б:\n„Кинематична верига – това е съединяване на няколко съседни .............А............., които представляват две съседни костни звена, съединени със ............Б..................“',
+        fields: [
+          { label: 'А:', keys: ['кинематични двойки', 'кинематична двойка', 'механични оси'] },
+          { label: 'Б:', keys: ['става', 'стави', 'ставна връзка'] }
+        ],
+        official: 'А: кинематични двойки | Б: става',
+        why: 'Две съседни кости, съединени със става, правят кинематична двойка. Поредицата от тях е кинематична верига.'
+      },
+      {
+        test: 2,
+        num: 8,
+        type: 'choice',
+        prompt: '8. Различете как влияе умората върху темпа при циклично движение:',
+        options: [
+          { text: 'а) ускорява движението', correct: false },
+          { text: 'б) забавя движението', correct: true },
+          { text: 'в) движението не се променя', correct: false },
+          { text: 'г) въртящ момент', correct: false },
+        ],
+        why: 'При умора броят цикли за единица време намалява, което забавя темпа на движение.'
+      },
+      {
+        test: 2,
+        num: 9,
+        type: 'open_fill',
+        prompt: '9. Напишете по един пример за посочените групи мускули (напр. при сгъване в лакътната става):',
+        fields: [
+          { label: 'а) мускули агонисти са:', keys: ['бицепс', 'двуглав', 'двуглавият мишничен мускул', 'двуглав мишничен мускул', 'брахиалис'] },
+          { label: 'б) мускули антагонисти са:', keys: ['трицепс', 'триглав', 'триглавият мишничен мускул', 'триглав мишничен мускул'] },
+          { label: 'в) мускули фиксатори са:', keys: ['лопатка', 'лопатката', 'мускулите на лопатката', 'коремна преса', 'корем'] },
+          { label: 'г) мускули неутрализатори са:', keys: ['пронатори', 'пронатор', 'пронаторите'] }
+        ],
+        official: 'а) Агонисти: Бицепс (двуглав мишничен мускул)\nб) Антагонисти: Трицепс (триглав мишничен мускул)\nв) Фиксатори: Мускули около лопатката / коремната преса\nг) Неутрализатори: Пронатори на предмишницата',
+        why: 'Класически функционални роли на мускулите при сгъване на ръката в лакътя.'
+      },
+      {
+        test: 2,
+        num: 10,
+        type: 'open_fill',
+        prompt: '10. В тялото на човека ролята на опорна точка на лоста изпълнява ставата. Известни са три вида лостове. За посочения вид дайте пример с приложението му в тялото на човека:\nЛОСТ ОТ ПЪРВИ РОД:',
+        attachment: `
+          <svg viewBox="0 0 340 120" class="w-full max-w-sm h-32">
+            <line x1="30" y1="60" x2="310" y2="60" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
+            <polygon points="170,60 156,88 184,88" fill="#f59e0b" />
+            <text x="170" y="104" fill="#f59e0b" font-size="10" font-weight="bold" text-anchor="middle" font-family="monospace">ОПОРА О</text>
+            <line x1="60" y1="60" x2="60" y2="28" stroke="#f43f5e" stroke-width="3" />
+            <polygon points="56,36 60,24 64,36" fill="#f43f5e" />
+            <text x="60" y="18" fill="#f43f5e" font-size="11" font-weight="bold" text-anchor="middle" font-family="monospace">F₁</text>
+            <line x1="280" y1="60" x2="280" y2="28" stroke="#00f0ff" stroke-width="3" />
+            <polygon points="276,36 280,24 284,36" fill="#00f0ff" />
+            <text x="280" y="18" fill="#00f0ff" font-size="11" font-weight="bold" text-anchor="middle" font-family="monospace">F₂</text>
+          </svg>
+        `,
+        fields: [
+          { label: 'Нарича се още:', keys: ['равновесен', 'равновесен лост', 'лост на равновесието'] },
+          { label: 'Пример за такъв лост в тялото на човек е:', keys: ['глава', 'главата', 'череп', 'черепът', 'шията', 'врат'] }
+        ],
+        official: 'Нарича се още: Равновесен лост (лост на равновесието)\nПример в тялото: Главата / черепът върху атланто-окципиталната става на шията.',
+        why: 'При лост от първи род опората е в средата между двете сили.'
+      },
+      {
+        test: 2,
+        num: 11,
+        type: 'open_fill',
+        prompt: '11. Системата на движение на човека е сложна, динамична и йерархична. Попълнете подсистемите в схемата:\n1. Кинематична подсистема: пространствена, .............(А)............. и времева.\n2. Динамична подсистема: силова и .............(Б).............\n3. Информационна система: психична, сетивна и .............(В).............',
+        fields: [
+          { label: 'А (Кинематична):', keys: ['пространствено-времева', 'пространствено времева'] },
+          { label: 'Б (Динамична):', keys: ['енергетична', 'енергийна', 'енергетична структура'] },
+          { label: 'В (Информационна):', keys: ['ефекторна', 'моторна', 'ефекторна/моторна'] }
+        ],
+        official: 'А: Пространствено-времева | Б: Енергетична | В: Ефекторна',
+        why: 'Пълната йерархична структура на системата на движенията (фиг. 32).'
+      },
+      {
+        test: 2,
+        num: 12,
+        type: 'choice',
+        prompt: '12. Кой метод НЕ служи за определяне на устойчивост на телата?',
+        options: [
+          { text: 'a) геометричен', correct: false },
+          { text: 'б) енергетичен', correct: false },
+          { text: 'в) аналитичен', correct: true },
+          { text: 'г) динамичен', correct: false },
+        ],
+        why: 'Трите метода за определяне на равновесната устойчивост са само геометричен, енергетичен и динамичен.'
+      },
+      {
+        test: 2,
+        num: 13,
+        type: 'choice',
+        prompt: '13. Законът на Хук при еластична деформация изразява:',
+        options: [
+          { text: 'a) пропорционалността между плътността и напрежението на тяло', correct: false },
+          { text: 'б) пропорционалността между деформацията и масата на тяло', correct: false },
+          { text: 'в) пропорционалността между напрежението и деформацията на тяло', correct: true },
+          { text: 'г) пропорционалността между силата и обема на тяло', correct: false },
+        ],
+        why: 'Законът на Хук изразява правопропорционалност между механичното напрежение и деформацията (σ = E·ε).'
+      },
+      {
+        test: 2,
+        num: 14,
+        type: 'choice',
+        prompt: '14. При ротация на гимнастик на лост (с изправено тяло) как се променя ъгловата скорост на точките от тялото в посока от ходилата към главата?',
+        options: [
+          { text: 'a) нараства', correct: false },
+          { text: 'б) намалява', correct: false },
+          { text: 'в) остава постоянна', correct: true },
+          { text: 'г) нито едно от изброените', correct: false },
+        ],
+        why: 'Всички точки от въртящото се твърдо тяло се завъртат на един и същ ъгъл за едно и също време, затова ъгловата скорост ω е еднаква и постоянна.'
+      },
+      {
+        test: 2,
+        num: 15,
+        type: 'choice',
+        prompt: '15. Коя от изброените комбинации показва последователно силова, инерчна и енергетична характеристики?',
+        options: [
+          { text: 'а) кинетична енергия, импулс на силата, момент на силата', correct: false },
+          { text: 'б) инерчен момент на тяло, приложна точка на силата, импулс на силата', correct: false },
+          { text: 'в) импулс на силата, маса, мощност', correct: true },
+          { text: 'г) посока на силата, импулс на силата, извършена работа', correct: false },
+        ],
+        why: 'Импулс на сила = силова; Маса = инерчна; Мощност = енергетична.'
+      }
+    ];
+
+    // --- State Variables ---
+    let currentMode = 'test1';
+    let currentQuestions = [];
+    let currentIdx = 0;
+    let earnedPoints = 0;
+    let totalQuestionsAnswered = 0;
+    let selectedChoiceIdx = null;
+
+    // --- MASTERY RETRY LOOP QUEUES ---
+    let wrongQuestionsInRound = [];
+    let isMasteryRetryRound = false;
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      switchExamMode('test1');
+    });
+
+    function switchExamMode(mode) {
+      playSound('click');
+      currentMode = mode;
+      isMasteryRetryRound = false;
+      wrongQuestionsInRound = [];
+      
+      document.querySelectorAll('#btn-test1, #btn-test2, #btn-all').forEach(b => {
+        b.className = 'px-4 py-2 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all';
+      });
+      const activeBtn = document.getElementById('btn-' + mode);
+      if (activeBtn) activeBtn.className = 'px-4 py-2 text-xs font-display font-bold rounded-xl bg-neonCyan text-black transition-all shadow-lg shadow-cyan-500/25';
+
+      let pool = [];
+      if (mode === 'test1') pool = examQuestions.filter(q => q.test === 1);
+      else if (mode === 'test2') pool = examQuestions.filter(q => q.test === 2);
+      else pool = [...examQuestions];
+
+      // Randomize the entire question order
+      currentQuestions = shuffleArray(pool);
+
+      restartExam(false); // Don't reshuffle again in restartExam
+    }
+
+    function restartExam(shouldReshuffle = true) {
+      if (shouldReshuffle) {
+        let pool = [];
+        if (currentMode === 'test1') pool = examQuestions.filter(q => q.test === 1);
+        else if (currentMode === 'test2') pool = examQuestions.filter(q => q.test === 2);
+        else pool = [...examQuestions];
+        currentQuestions = shuffleArray(pool);
+      }
+
+      currentIdx = 0;
+      earnedPoints = 0;
+      totalQuestionsAnswered = 0;
+      selectedChoiceIdx = null;
+      wrongQuestionsInRound = [];
+      isMasteryRetryRound = false;
+
+      document.getElementById('masteryBadge').innerText = '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)';
+      document.getElementById('masteryBadge').className = 'text-xs px-2 py-0.5 rounded bg-cyan-950 text-neonCyan border border-cyan-800 font-mono';
+      document.getElementById('mistakeCounterLabel').classList.add('hidden');
+
+      document.getElementById('reportCardModal').classList.add('hidden');
+      document.getElementById('questionWrapper').classList.remove('hidden');
+      renderCurrentQuestion();
+      updateBulgarianGrade();
+    }
+
+    function startMasteryRetryLoop() {
+      playSound('click');
+      if (wrongQuestionsInRound.length === 0) return;
+
+      isMasteryRetryRound = true;
+      currentQuestions = shuffleArray(wrongQuestionsInRound); // Also shuffle the mistake retry pool
+      wrongQuestionsInRound = [];
+      currentIdx = 0;
+      earnedPoints = 0;
+      totalQuestionsAnswered = 0;
+
+      document.getElementById('masteryBadge').innerText = '🔁 MASTERY LOOP (СГРЕШЕНИ • РАЗБЪРКАНИ)';
+      document.getElementById('masteryBadge').className = 'text-xs px-2 py-0.5 rounded bg-amber-950 text-neonAmber border border-amber-800 font-mono animate-pulse';
+
+      document.getElementById('reportCardModal').classList.add('hidden');
+      document.getElementById('questionWrapper').classList.remove('hidden');
+      renderCurrentQuestion();
+      updateBulgarianGrade();
+    }
+
+    // --- Bulgarian 6-Point Grading Scale Calculation ---
+    function calculateBulgarianGrade(points, total) {
+      if (total === 0) return { num: '6.00', word: 'Отличен (6.00)' };
+      const pct = (points / total) * 100;
+      let gradeNum = 2.00;
+      let gradeWord = 'Слаб (2.00)';
+
+      if (pct >= 90) {
+        gradeNum = 5.50 + 0.50 * ((pct - 90) / 10);
+        gradeWord = `Отличен (${gradeNum.toFixed(2)})`;
+      } else if (pct >= 75) {
+        gradeNum = 4.50 + 0.99 * ((pct - 75) / 15);
+        gradeWord = `Много добър (${gradeNum.toFixed(2)})`;
+      } else if (pct >= 60) {
+        gradeNum = 3.50 + 0.99 * ((pct - 60) / 15);
+        gradeWord = `Добър (${gradeNum.toFixed(2)})`;
+      } else if (pct >= 50) {
+        gradeNum = 3.00 + 0.49 * ((pct - 50) / 10);
+        gradeWord = `Среден (${gradeNum.toFixed(2)})`;
+      } else {
+        gradeNum = 2.00;
+        gradeWord = 'Слаб (2.00)';
+      }
+
+      return { num: gradeNum.toFixed(2), word: gradeWord, pct: Math.round(pct) };
+    }
+
+    function updateBulgarianGrade() {
+      const totalPossible = totalQuestionsAnswered > 0 ? totalQuestionsAnswered : 1;
+      const res = calculateBulgarianGrade(earnedPoints, totalPossible);
+      
+      document.getElementById('liveGradeText').innerText = res.word;
+      document.getElementById('liveGradeBadge').innerText = res.num;
+
+      const badge = document.getElementById('liveGradeBadge');
+      if (parseFloat(res.num) >= 5.50) {
+        badge.className = 'w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-500/50 flex items-center justify-center font-mono font-black text-sm text-neonLime';
+      } else if (parseFloat(res.num) >= 4.50) {
+        badge.className = 'w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500/50 flex items-center justify-center font-mono font-black text-sm text-neonCyan';
+      } else if (parseFloat(res.num) >= 3.50) {
+        badge.className = 'w-8 h-8 rounded-lg bg-amber-950 border border-amber-500/50 flex items-center justify-center font-mono font-black text-sm text-neonAmber';
+      } else {
+        badge.className = 'w-8 h-8 rounded-lg bg-rose-950 border border-rose-500/50 flex items-center justify-center font-mono font-black text-sm text-rose-400';
+      }
+    }
+
+    let activeShuffledOptions = [];
+
+    // --- Render Question ---
+    function renderCurrentQuestion() {
+      selectedChoiceIdx = null;
+      document.getElementById('qResultBox').classList.add('hidden');
+      document.getElementById('qActionRow').classList.remove('hidden');
+
+      if (currentIdx >= currentQuestions.length) {
+        showFinalReport();
+        return;
+      }
+
+      const q = currentQuestions[currentIdx];
+
+      // Progress bar & label
+      const progress = ((currentIdx) / currentQuestions.length) * 100;
+      document.getElementById('examProgressBar').style.width = `${Math.max(progress, 6)}%`;
+      document.getElementById('examProgressLabel').innerText = `Въпрос ${currentIdx + 1} от ${currentQuestions.length}`;
+      document.getElementById('examScoreLabel').innerText = `${earnedPoints.toFixed(1)} / ${totalQuestionsAnswered} точки`;
+
+      if (wrongQuestionsInRound.length > 0) {
+        document.getElementById('mistakeCounterLabel').classList.remove('hidden');
+        document.getElementById('mistakeCountNum').innerText = wrongQuestionsInRound.length;
+      }
+
+      // Badge & Type
+      document.getElementById('qHeaderBadge').innerText = `ТЕСТ № ${q.test} • Въпрос ${q.num}`;
+      document.getElementById('qTypeBadge').innerText = q.type === 'choice' ? 'Избираем отговор (Разбъркани опции)' : (q.type === 'open_fill' ? 'Отворен: Разбъркани полета' : 'Отворен: Свободен отговор');
+      document.getElementById('qPrompt').innerText = q.prompt;
+
+      // Attachment
+      const attachBox = document.getElementById('qAttachment');
+      if (q.attachment) {
+        attachBox.innerHTML = q.attachment;
+        attachBox.classList.remove('hidden');
+      } else {
+        attachBox.innerHTML = '';
+        attachBox.classList.add('hidden');
+      }
+
+      // Interactive Body
+      const body = document.getElementById('qInteractiveBody');
+      body.innerHTML = '';
+
+      if (q.type === 'choice') {
+        // Randomize ABCD options on each appearance so user learns by meaning, not position/letter
+        activeShuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+        const cyrillicLetters = ['А', 'Б', 'В', 'Г'];
+
+        activeShuffledOptions.forEach((opt, idx) => {
+          // Strip existing static prefixes like "А)", "а)", "Б)", "1." etc.
+          const cleanText = opt.text.replace(/^[А-Яа-яA-Za-z0-9][\)\.\:\s]+/, '').trim();
+          const displayLabel = `${cyrillicLetters[idx]}) ${cleanText}`;
+
+          const btn = document.createElement('button');
+          btn.className = 'w-full p-4 rounded-2xl bg-card border border-borderGlow hover:border-slate-500 text-left text-slate-200 font-medium text-sm sm:text-base transition-all flex items-center justify-between choice-btn';
+          btn.onclick = () => selectChoice(idx, btn);
+          btn.innerHTML = `
+            <span>${displayLabel}</span>
+            <div class="w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono choice-radio">
+            </div>
+          `;
+          body.appendChild(btn);
+        });
+      } else if (q.type === 'open_fill') {
+        // Render fields in natural, logical order (А, Б, В, Г and 1, 2, 3, 4) to follow paragraph/diagram reading
+        q.fields.forEach((f, idx) => {
+          const row = document.createElement('div');
+          row.className = 'flex flex-col sm:flex-row sm:items-center gap-2 p-3 rounded-2xl bg-card border border-borderGlow';
+          row.innerHTML = `
+            <span class="font-mono font-bold text-neonCyan text-sm w-56 shrink-0">${f.label}</span>
+            <input type="text" id="openField_${idx}" placeholder="Напишете отговора тук..." class="w-full bg-obsidian border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:border-neonCyan focus:outline-none font-mono">
+          `;
+          body.appendChild(row);
+        });
+      } else if (q.type === 'open_text') {
+        const area = document.createElement('textarea');
+        area.id = 'openTextArea';
+        area.rows = 4;
+        area.placeholder = 'Напишете вашия отговор тук...';
+        area.className = 'w-full bg-obsidian border border-slate-700 rounded-2xl p-4 text-sm text-white focus:border-neonCyan focus:outline-none font-mono';
+        body.appendChild(area);
+      }
+
+      lucide.createIcons();
+    }
+
+    function selectChoice(idx, btnEl) {
+      playSound('click');
+      selectedChoiceIdx = idx;
+      document.querySelectorAll('.choice-btn').forEach(b => {
+        b.classList.remove('border-neonCyan', 'bg-cyan-950/30');
+        b.querySelector('.choice-radio').innerHTML = '';
+        b.querySelector('.choice-radio').className = 'w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono choice-radio';
+      });
+      btnEl.classList.add('border-neonCyan', 'bg-cyan-950/30');
+      const radio = btnEl.querySelector('.choice-radio');
+      radio.className = 'w-5 h-5 rounded-md border border-neonCyan bg-neonCyan text-black font-black flex items-center justify-center text-xs font-mono choice-radio';
+      radio.innerText = '✓';
+    }
+
+    // --- Submit and Grade Current Question ---
+    function submitCurrentAnswer() {
+      const q = currentQuestions[currentIdx];
+      let isCorrect = false;
+
+      if (q.type === 'choice') {
+        if (selectedChoiceIdx === null) {
+          alert('Моля, изберете един от отговорите преди да продължите!');
+          return;
+        }
+        isCorrect = activeShuffledOptions[selectedChoiceIdx].correct;
+      } else if (q.type === 'open_fill') {
+        // Smart Validation: Check direct match OR cross-field match if user interchanged A/B
+        const totalFields = q.fields.length;
+        const userValues = [];
+        const matchedFieldIndices = new Set();
+        const matchedInputIndices = new Set();
+
+        for (let i = 0; i < totalFields; i++) {
+          const input = document.getElementById(`openField_${i}`);
+          userValues.push((input ? input.value : '').trim().toLowerCase());
+        }
+
+        // Pass 1: Direct Positional Match
+        q.fields.forEach((f, idx) => {
+          const val = userValues[idx];
+          if (val.length > 0) {
+            const match = f.keys.some(k => {
+              const keyLower = k.toLowerCase();
+              return val.includes(keyLower) || keyLower.includes(val) && val.length >= 3;
+            });
+            if (match) {
+              matchedFieldIndices.add(idx);
+              matchedInputIndices.add(idx);
+              const input = document.getElementById(`openField_${idx}`);
+              if (input) input.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
+            }
+          }
+        });
+
+        // Pass 2: Flexible Cross-Match (if user swapped A and B or typed in a different box)
+        q.fields.forEach((f, fIdx) => {
+          if (!matchedFieldIndices.has(fIdx)) {
+            userValues.forEach((val, inIdx) => {
+              if (!matchedInputIndices.has(inIdx) && val.length > 0) {
+                const match = f.keys.some(k => {
+                  const keyLower = k.toLowerCase();
+                  return val.includes(keyLower) || keyLower.includes(val) && val.length >= 3;
+                });
+                if (match) {
+                  matchedFieldIndices.add(fIdx);
+                  matchedInputIndices.add(inIdx);
+                  const input = document.getElementById(`openField_${inIdx}`);
+                  if (input) input.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
+                }
+              }
+            });
+          }
+        });
+
+        // Highlight unmatched inputs in red
+        for (let i = 0; i < totalFields; i++) {
+          const input = document.getElementById(`openField_${i}`);
+          if (input) {
+            if (!matchedInputIndices.has(i)) {
+              input.classList.add('border-rose-500', 'bg-rose-950/40', 'text-rose-300');
+            }
+            input.disabled = true;
+          }
+        }
+
+        const correctCount = matchedFieldIndices.size;
+        const fraction = correctCount / totalFields;
+        isCorrect = fraction === 1.0;
+        const partialPoints = fraction;
+
+        // Custom handling for open_fill result below
+        totalQuestionsAnswered++;
+        earnedPoints += partialPoints;
+
+        document.getElementById('qActionRow').classList.add('hidden');
+        const resBox = document.getElementById('qResultBox');
+        const resIcon = document.getElementById('resIcon');
+        const resTitle = document.getElementById('resTitle');
+        const resOff = document.getElementById('resOfficialAnswer');
+        const resWhy = document.getElementById('resWhy');
+
+        if (fraction === 1.0) {
+          playSound('correct');
+          confetti({ particleCount: 35, spread: 60, origin: { y: 0.7 } });
+          resBox.className = 'mt-6 p-5 rounded-2xl border bg-emerald-950/40 border-emerald-500/50 block';
+          resIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+          resIcon.innerText = '✓';
+          resTitle.className = 'font-display font-bold text-base text-emerald-400 mb-1';
+          resTitle.innerText = `Пълен верен отговор! (+1.00 т.)`;
+          document.getElementById('overrideBtnContainer').innerHTML = '';
+        } else if (fraction > 0) {
+          playSound('correct');
+          wrongQuestionsInRound.push(q); // Still add to retry loop so user can master the remaining missing parts
+          resBox.className = 'mt-6 p-5 rounded-2xl border bg-amber-950/40 border-amber-500/50 block';
+          resIcon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-neonAmber border border-amber-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+          resIcon.innerText = '½';
+          resTitle.className = 'font-display font-bold text-base text-neonAmber mb-1';
+          resTitle.innerText = `Частично верен отговор (${correctCount} от ${totalFields} верни) • (+${fraction.toFixed(2)} т.)`;
+          document.getElementById('overrideBtnContainer').innerHTML = `
+            <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
+              <span>🛡️ Признай за напълно верен (+${(1 - fraction).toFixed(2)} т.)</span>
+            </button>
+          `;
+        } else {
+          playSound('wrong');
+          wrongQuestionsInRound.push(q);
+          resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
+          resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+          resIcon.innerText = '✕';
+          resTitle.className = 'font-display font-bold text-base text-rose-400 mb-1';
+          resTitle.innerText = 'Непълен отговор (0 верни полета)';
+          document.getElementById('overrideBtnContainer').innerHTML = `
+            <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
+              <span>🛡️ Бях прав / Признай ми отговора (+1 т.)</span>
+            </button>
+          `;
+        }
+
+        resOff.innerText = `Официален верен отговор:\n${q.official}`;
+        resWhy.innerText = q.why;
+        updateBulgarianGrade();
+        lucide.createIcons();
+        return;
+      } else if (q.type === 'open_text') {
+        const area = document.getElementById('openTextArea');
+        const val = (area.value || '').trim().toLowerCase();
+        if (val.length < 5) {
+          alert('Моля, напишете вашия отговор преди да предадете!');
+          area.classList.add('border-rose-500');
+          return;
+        }
+        const matchesCount = q.keywords.filter(k => val.includes(k)).length;
+        isCorrect = matchesCount >= 2;
+        area.disabled = true;
+      }
+
+      // Hide Action Row and show result
+      document.getElementById('qActionRow').classList.add('hidden');
+      const resBox = document.getElementById('qResultBox');
+      const resIcon = document.getElementById('resIcon');
+      const resTitle = document.getElementById('resTitle');
+      const resOff = document.getElementById('resOfficialAnswer');
+      const resWhy = document.getElementById('resWhy');
+
+      totalQuestionsAnswered++;
+
+      if (isCorrect) {
+        playSound('correct');
+        earnedPoints++;
+        confetti({ particleCount: 35, spread: 60, origin: { y: 0.7 } });
+        resBox.className = 'mt-6 p-5 rounded-2xl border bg-emerald-950/40 border-emerald-500/50 block';
+        resIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+        resIcon.innerText = '✓';
+        resTitle.className = 'font-display font-bold text-base text-emerald-400 mb-1';
+        resTitle.innerText = 'Верен отговор (+1 точка)';
+        document.getElementById('overrideBtnContainer').innerHTML = '';
+      } else {
+        playSound('wrong');
+        wrongQuestionsInRound.push(q);
+        resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
+        resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+        resIcon.innerText = '✕';
+        resTitle.className = 'font-display font-bold text-base text-rose-400 mb-1';
+        resTitle.innerText = 'Непълен или грешен отговор (добавен за повторение)';
+        document.getElementById('overrideBtnContainer').innerHTML = `
+          <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
+            <span>🛡️ Бях прав / Признай ми отговора (+1 т.)</span>
+          </button>
+        `;
+      }
+
+      if (q.type === 'choice') {
+        const correctOpt = q.options.find(o => o.correct);
+        resOff.innerText = `Официален верен отговор: ${correctOpt.text}`;
+      } else {
+        resOff.innerText = `Официален верен отговор:\n${q.official}`;
+      }
+      resWhy.innerText = q.why;
+
+      updateBulgarianGrade();
+      lucide.createIcons();
+    }
+
+    function overrideMarkCorrect() {
+      playSound('correct');
+      const q = currentQuestions[currentIdx];
+      const wrongIdx = wrongQuestionsInRound.indexOf(q);
+      if (wrongIdx > -1) wrongQuestionsInRound.splice(wrongIdx, 1);
+      
+      earnedPoints = Math.round(earnedPoints) + 1; // Round up to full points
+      if (earnedPoints > totalQuestionsAnswered) earnedPoints = totalQuestionsAnswered;
+      confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 } });
+
+      const resBox = document.getElementById('qResultBox');
+      const resIcon = document.getElementById('resIcon');
+      const resTitle = document.getElementById('resTitle');
+      resBox.className = 'mt-6 p-5 rounded-2xl border bg-emerald-950/40 border-emerald-500/50 block';
+      resIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+      resIcon.innerText = '✓';
+      resTitle.className = 'font-display font-bold text-base text-emerald-400 mb-1';
+      resTitle.innerText = 'Ръчно признат за пълен верен отговор (+1 точка)';
+      document.getElementById('overrideBtnContainer').innerHTML = '';
+
+      updateBulgarianGrade();
+    }
+
+    function advanceNext() {
+      playSound('click');
+      currentIdx++;
+      renderCurrentQuestion();
+    }
+
+    function showFinalReport() {
+      playSound('correct');
+
+      document.getElementById('questionWrapper').classList.add('hidden');
+      const modal = document.getElementById('reportCardModal');
+      modal.classList.remove('hidden');
+
+      const res = calculateBulgarianGrade(earnedPoints, currentQuestions.length);
+      document.getElementById('finalGradeWord').innerText = res.word;
+      document.getElementById('finalScoreDetails').innerText = `${earnedPoints} от ${currentQuestions.length} верни отговора (${res.pct}%)`;
+
+      const wordEl = document.getElementById('finalGradeWord');
+      const masteryContainer = document.getElementById('masteryLoopContainer');
+      const heading = document.getElementById('finalHeading');
+      const subtext = document.getElementById('finalSubtext');
+
+      if (wrongQuestionsInRound.length > 0) {
+        // There are mistakes to master
+        masteryContainer.classList.remove('hidden');
+        document.getElementById('wrongCountBadge').innerText = `${wrongQuestionsInRound.length}`;
+        heading.innerText = 'Кръгът завърши с няколко пропуснати въпроса!';
+        subtext.innerText = 'Използвай цикъла за поправка, за да ги научиш без подсказки преди изпита.';
+      } else {
+        // 100% Perfection reached!
+        masteryContainer.classList.add('hidden');
+        confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 } });
+        heading.innerText = '🎉 100% ПЪЛНО СЪВЪРШЕНСТВО!';
+        subtext.innerText = 'Нямаш нито една грешка! Готов си за Отличен (6.00) на изпита утре!';
+      }
+
+      if (parseFloat(res.num) >= 5.50) wordEl.className = 'font-display font-black text-3xl text-emerald-400 mb-1';
+      else if (parseFloat(res.num) >= 4.50) wordEl.className = 'font-display font-black text-3xl text-cyan-400 mb-1';
+      else if (parseFloat(res.num) >= 3.50) wordEl.className = 'font-display font-black text-3xl text-amber-400 mb-1';
+      else wordEl.className = 'font-display font-black text-3xl text-rose-400 mb-1';
+
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
