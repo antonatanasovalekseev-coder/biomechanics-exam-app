@@ -388,20 +388,35 @@
         test: 1,
         num: 5,
         type: 'open_fill',
-        prompt: '5. Посочете основните структури на ставата, като срещу всяка цифра напишете за какво се отнася (виж чертежа):',
+        prompt: '5. Посочете основните структури на ставата, като срещу всяка цифра напишете за какво се отнася (виж чертежа на ставата):',
         attachment: `
-          <svg viewBox="0 0 320 180" class="w-full max-w-sm h-40">
-            <path d="M120 15 L200 15 L200 50 C200 65 180 75 160 75 C140 75 120 65 120 50 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
-            <path d="M125 55 C125 70 140 73 160 73 C180 73 195 70 195 55 Z" fill="#00f0ff" opacity="0.85"/>
-            <path d="M120 165 L200 165 L200 130 C200 115 180 105 160 105 C140 105 120 115 120 130 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
-            <path d="M125 125 C125 110 140 107 160 107 C180 107 195 110 195 125 Z" fill="#00f0ff" opacity="0.85"/>
-            <path d="M120 45 C95 75 95 105 120 135 M200 45 C225 75 225 105 200 135" stroke="#f43f5e" stroke-width="3" fill="none" stroke-dasharray="3 2"/>
-            <ellipse cx="160" cy="90" rx="28" ry="10" fill="#10b981" opacity="0.4"/>
-            <circle cx="250" cy="30" r="10" fill="#f59e0b"/><text x="250" y="34" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">1</text>
-            <circle cx="250" cy="65" r="10" fill="#f59e0b"/><text x="250" y="69" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">2</text>
-            <circle cx="70" cy="90" r="10" fill="#f59e0b"/><text x="70" y="94" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">3</text>
-            <circle cx="70" cy="130" r="10" fill="#f59e0b"/><text x="70" y="134" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">4</text>
-          </svg>
+          <div class="w-full flex flex-col items-center">
+            <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. 26: Градивни елементи на ставата</span>
+            <svg viewBox="0 0 340 190" class="w-full max-w-md h-44">
+              <!-- Upper Bone -->
+              <path d="M120 15 L220 15 L220 50 C220 65 195 75 170 75 C145 75 120 65 120 50 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+              <!-- Cartilage Upper -->
+              <path d="M125 53 C125 68 145 73 170 73 C195 73 215 68 215 53 Z" fill="#00f0ff" opacity="0.9"/>
+              <!-- Lower Bone -->
+              <path d="M120 175 L220 175 L220 140 C220 125 195 115 170 115 C145 115 120 125 120 140 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+              <!-- Cartilage Lower -->
+              <path d="M125 137 C125 122 145 117 170 117 C195 117 215 122 215 137 Z" fill="#00f0ff" opacity="0.9"/>
+              <!-- Capsule -->
+              <path d="M120 45 C90 75 90 115 120 145 M220 45 C250 75 250 115 220 145" stroke="#f43f5e" stroke-width="3" fill="none" stroke-dasharray="4 2"/>
+              <!-- Synovial cavity -->
+              <ellipse cx="170" cy="95" rx="35" ry="12" fill="#10b981" opacity="0.45"/>
+              <text x="170" y="99" fill="#a7f3d0" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Синовия</text>
+              <!-- Callout Badges -->
+              <circle cx="270" cy="30" r="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/><text x="270" y="34.5" fill="#000" font-size="12" font-weight="900" font-family="monospace" text-anchor="middle">1</text>
+              <line x1="220" y1="30" x2="258" y2="30" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+              <circle cx="270" cy="65" r="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/><text x="270" y="69.5" fill="#000" font-size="12" font-weight="900" font-family="monospace" text-anchor="middle">2</text>
+              <line x1="215" y1="65" x2="258" y2="65" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+              <circle cx="70" cy="95" r="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/><text x="70" y="99.5" fill="#000" font-size="12" font-weight="900" font-family="monospace" text-anchor="middle">3</text>
+              <line x1="82" y1="95" x2="135" y2="95" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+              <circle cx="70" cy="140" r="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/><text x="70" y="144.5" fill="#000" font-size="12" font-weight="900" font-family="monospace" text-anchor="middle">4</text>
+              <line x1="82" y1="140" x2="110" y2="140" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+            </svg>
+          </div>
         `,
         fields: [
           { label: '1.', keys: ['кост', 'кости', 'ставни повърхнини', 'ставна повърхност'] },
@@ -410,7 +425,7 @@
           { label: '4.', keys: ['ставна капсула', 'капсула'] }
         ],
         official: '1. Кост (ставна повърхност); 2. Ставен хрущял; 3. Синовиална течност (ставна кухина); 4. Ставна капсула',
-        why: 'Четирите основни градивни елемента на всяка става в човешкото тяло.'
+        why: 'Четирите основни градивни елемента на всяка става в човешкото тяло (фиг. 26 в учебника).'
       },
       {
         subject: 'biomechanics',
@@ -487,20 +502,73 @@
         test: 1,
         num: 11,
         type: 'open_fill',
-        prompt: '11. В тялото на човека ролята на опорна точка на лоста изпълнява ставата. Известни са три вида лостове. За посочения вид дайте пример и наименование:\nЛОСТ ОТ ВТОРИ РОД:',
+        prompt: '11. В тялото на човека ролята на опорна точка на лоста изпълнява ставата. Известни са три вида лостове. За посочения вид дайте пример и наименование (виж схемата):\nЛОСТ ОТ ВТОРИ РОД:',
+        attachment: `
+          <div class="w-full flex flex-col items-center">
+            <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. 29: Силов лост от II род (Товарът е по средата)</span>
+            <svg viewBox="0 0 340 120" class="w-full max-w-md h-32 bg-slate-950 p-2 rounded-xl border border-slate-800">
+              <!-- Lever Bar -->
+              <rect x="50" y="55" width="240" height="10" rx="3" fill="#64748b" stroke="#94a3b8" stroke-width="1.5"/>
+              <!-- Fulcrum Pivot (Left) -->
+              <polygon points="50,65 40,85 60,85" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+              <text x="50" y="102" fill="#f59e0b" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Опора (Става)</text>
+              <!-- Load Resistance (Middle down) -->
+              <line x1="160" y1="55" x2="160" y2="20" stroke="#f43f5e" stroke-width="3"/>
+              <polygon points="160,65 154,48 166,48" fill="#f43f5e"/>
+              <text x="160" y="14" fill="#f43f5e" font-size="11" font-weight="bold" font-family="monospace" text-anchor="middle">Товар R (Тежест)</text>
+              <!-- Effort Force (Right up) -->
+              <line x1="280" y1="65" x2="280" y2="20" stroke="#00f0ff" stroke-width="3"/>
+              <polygon points="280,12 274,28 286,28" fill="#00f0ff"/>
+              <text x="280" y="10" fill="#00f0ff" font-size="11" font-weight="bold" font-family="monospace" text-anchor="middle">Сила F (Мускул)</text>
+            </svg>
+          </div>
+        `,
         fields: [
           { label: 'Нарича се още:', keys: ['силов лост', 'лост на силата', 'силов'] },
           { label: 'Пример в тялото:', keys: ['ходило', 'ходилото', 'пръсти', 'повдигане на пръсти', 'глезен'] }
         ],
         official: 'Нарича се още: Силов лост (лост на силата)\nПример в тялото: Ходилото при повдигане на пръсти (опора в пръстите, товар в глезена, ахилесовото сухожилие тегли нагоре).',
-        why: 'Лост от II род – товарът е между опорната точка и мускулната сила.'
+        why: 'Лост от II род – товарът е между опорната точка и мускулната сила (дава печалба в сила).'
       },
       {
         subject: 'biomechanics',
         test: 1,
         num: 12,
         type: 'open_fill',
-        prompt: '12. Попълнете липсващите подсистеми в йерархичната блок-схема на двигателното действие (виж фиг. 32):\nДвигателна система се дели на Кинематична и [А].\nКинематичната съдържа Пространствена, [Б] и Времева.\nДинамичната съдържа [В] и Енергетична.\nИнформационната система съдържа [Г], Сетивна и Ефекторна.',
+        prompt: '12. Попълнете липсващите подсистеми в йерархичната блок-схема на двигателното действие (виж фиг. 32):',
+        attachment: `
+          <div class="w-full flex flex-col items-center">
+            <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. 32: Блок-схема на Двигателното действие като система</span>
+            <svg viewBox="0 0 380 200" class="w-full max-w-lg h-48 bg-slate-950 p-2 rounded-xl border border-slate-800">
+              <!-- Top Node -->
+              <rect x="100" y="10" width="180" height="24" rx="6" fill="#047857" stroke="#10b981" stroke-width="1.5"/>
+              <text x="190" y="26" fill="#fff" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">СИСТЕМА НА ДВИЖЕНИЯТА</text>
+              <!-- Branch Lines -->
+              <line x1="150" y1="34" x2="90" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="230" y1="34" x2="290" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+              <!-- Level 1 -->
+              <rect x="20" y="55" width="140" height="22" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="90" y="70" fill="#93c5fd" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ДВИГАТЕЛНА СИСТЕМА</text>
+              <rect x="220" y="55" width="140" height="22" rx="5" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
+              <text x="290" y="70" fill="#a7f3d0" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ИНФОРМАЦИОННА СИСТЕМА</text>
+              <!-- Level 2 Subsystems -->
+              <rect x="10" y="90" width="75" height="18" rx="4" fill="#0f172a" stroke="#00f0ff" stroke-width="1"/>
+              <text x="47" y="102" fill="#00f0ff" font-size="8" font-family="monospace" text-anchor="middle">Кинематична</text>
+              <rect x="95" y="90" width="75" height="18" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1" stroke-dasharray="3 1"/>
+              <text x="132" y="102" fill="#f43f5e" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">[А] ?</text>
+              <!-- Level 3 Details -->
+              <text x="47" y="125" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Пространствена</text>
+              <text x="47" y="140" fill="#f59e0b" font-size="7.5" font-weight="bold" font-family="monospace" text-anchor="middle">• [Б] ?</text>
+              <text x="47" y="155" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Времева</text>
+              <text x="132" y="125" fill="#f59e0b" font-size="7.5" font-weight="bold" font-family="monospace" text-anchor="middle">• [В] ?</text>
+              <text x="132" y="140" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Енергетична</text>
+              <!-- Info structure -->
+              <text x="290" y="105" fill="#f59e0b" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">• [Г] ?</text>
+              <text x="290" y="125" fill="#cbd5e1" font-size="8" font-family="monospace" text-anchor="middle">• Сетивна</text>
+              <text x="290" y="145" fill="#cbd5e1" font-size="8" font-family="monospace" text-anchor="middle">• Ефекторна</text>
+            </svg>
+          </div>
+        `,
         fields: [
           { label: 'А (подсистема):', keys: ['динамична', 'динамична структура'] },
           { label: 'Б (кинематична):', keys: ['пространствено-времева', 'пространствено времева'] },
@@ -627,7 +695,19 @@
         test: 2,
         num: 6,
         type: 'open_fill',
-        prompt: '6. Напишете в празните полета за кой вид работа се отнасят дадените характеристики:\n[1. мускулите на човешкото тяло и отделните му части се задържат за определено време в необходимото положение] → А\n[2. мускулите на човешкото тяло и отделните му части произвеждат разнообразни движения – например ходене, бягане, скачане] → Б',
+        prompt: '6. Напишете в празните полета за кой вид работа се отнасят дадените характеристики (виж схемата от учебника):',
+        attachment: `
+          <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg">
+            <div class="p-3.5 rounded-2xl bg-card border border-cyan-500/40 text-left">
+              <span class="text-[11px] font-mono text-neonCyan font-bold uppercase block mb-1">Поле А: Задържане</span>
+              <p class="text-xs text-slate-300 leading-snug">„Мускулите на човешкото тяло и отделните му части се задържат за определено време в необходимото положение.“</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-card border border-emerald-500/40 text-left">
+              <span class="text-[11px] font-mono text-neonLime font-bold uppercase block mb-1">Поле Б: Движение</span>
+              <p class="text-xs text-slate-300 leading-snug">„Мускулите на човешкото тяло и отделните му части произвеждат разнообразни движения – например ходене, бягане, скачане.“</p>
+            </div>
+          </div>
+        `,
         fields: [
           { label: 'А (задържане):', keys: ['статична', 'статична работа'] },
           { label: 'Б (движение):', keys: ['динамична', 'динамична работа'] }
@@ -682,28 +762,85 @@
         test: 2,
         num: 10,
         type: 'open_fill',
-        prompt: '10. В тялото на човека ролята на опорна точка на лоста изпълнява ставата. Известни са три вида лостове. За посочения вид дайте пример и наименование:\nЛОСТ ОТ ПЪРВИ РОД:',
+        prompt: '10. В тялото на човека ролята на опорна точка на лоста изпълнява ставата. Известни са три вида лостове. За посочения вид дайте пример и наименование (виж схемата от учебника):\nЛОСТ ОТ ПЪРВИ РОД:',
+        attachment: `
+          <div class="w-full flex flex-col items-center">
+            <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Чертеж от стр. 67: Лост от I род (Равновесен лост с опора в средата)</span>
+            <svg viewBox="0 0 360 140" class="w-full max-w-md h-36 bg-slate-950 p-2 rounded-xl border border-slate-800">
+              <!-- Center Fulcrum -->
+              <polygon points="180,80 170,105 190,105" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+              <circle cx="180" cy="80" r="4" fill="#f43f5e"/>
+              <text x="180" y="120" fill="#f59e0b" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Опорна точка О</text>
+              <!-- Seesaw Beam -->
+              <rect x="50" y="75" width="260" height="8" rx="3" fill="#64748b" stroke="#94a3b8" stroke-width="1.5"/>
+              <!-- Arm l1 (Left) -->
+              <line x1="55" y1="50" x2="175" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+              <text x="115" y="45" fill="#94a3b8" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">l₁</text>
+              <!-- Arm l2 (Right) -->
+              <line x1="185" y1="50" x2="305" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+              <text x="245" y="45" fill="#94a3b8" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">l₂</text>
+              <!-- Left Weights & Force F1 -->
+              <rect x="75" y="60" width="30" height="15" fill="#475569" stroke="#94a3b8"/>
+              <line x1="90" y1="83" x2="90" y2="125" stroke="#f43f5e" stroke-width="2.5"/>
+              <polygon points="90,132 85,120 95,120" fill="#f43f5e"/>
+              <text x="70" y="115" fill="#f43f5e" font-size="12" font-weight="bold" font-family="monospace">F₁</text>
+              <!-- Right Weights & Force F2 -->
+              <rect x="255" y="60" width="30" height="15" fill="#475569" stroke="#94a3b8"/>
+              <line x1="270" y1="83" x2="270" y2="125" stroke="#00f0ff" stroke-width="2.5"/>
+              <polygon points="270,132 265,120 275,120" fill="#00f0ff"/>
+              <text x="288" y="115" fill="#00f0ff" font-size="12" font-weight="bold" font-family="monospace">F₂</text>
+            </svg>
+          </div>
+        `,
         fields: [
           { label: 'Нарича се още:', keys: ['равновесен лост', 'лост на равновесие', 'равновесен'] },
           { label: 'Пример в тялото:', keys: ['глава', 'главата', 'череп', 'черепа', 'шия', 'врат'] }
         ],
         official: 'Нарича се още: Равновесен лост (лост от I род)\nПример в тялото: Главата/черепът върху шийния прешлен (атлантоокципитална става).',
-        why: 'При лост от I род опорната точка е между приложената сила и товара.'
+        why: 'При лост от I род опорната точка е между приложената сила и товара (фиг. от стр. 67).'
       },
       {
         subject: 'biomechanics',
         test: 2,
         num: 11,
         type: 'open_fill',
-        prompt: '11. Попълнете липсващите елементи в йерархичната схема на двигателното действие (виж фиг. 32 на стр. 68):\n[А] е третата подсистема на кинематичната структура (след Пространствена и Времева).\n[Б] е втората подсистема на динамичната структура (заедно с Енергетична).\n[В] и [Г] са подсистеми на Информационната структура (заедно с Ефекторна).',
+        prompt: '11. Попълнете в йерархичната схема подсистемите, участващи в системата на движение на човека (виж схемата от стр. 68):',
+        attachment: `
+          <div class="w-full flex flex-col items-center">
+            <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. от стр. 68: Подсистеми на системата на движенията</span>
+            <svg viewBox="0 0 380 200" class="w-full max-w-lg h-48 bg-slate-950 p-2 rounded-xl border border-slate-800">
+              <rect x="100" y="10" width="180" height="24" rx="6" fill="#047857" stroke="#10b981" stroke-width="1.5"/>
+              <text x="190" y="26" fill="#fff" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">СИСТЕМА НА ДВИЖЕНИЯТА</text>
+              <line x1="150" y1="34" x2="90" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="230" y1="34" x2="290" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+              <rect x="20" y="55" width="140" height="22" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="90" y="70" fill="#93c5fd" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ДВИГАТЕЛНА СИСТЕМА</text>
+              <rect x="220" y="55" width="140" height="22" rx="5" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
+              <text x="290" y="70" fill="#a7f3d0" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ИНФОРМАЦИОННА СИСТЕМА</text>
+              <rect x="10" y="90" width="75" height="18" rx="4" fill="#0f172a" stroke="#00f0ff" stroke-width="1"/>
+              <text x="47" y="102" fill="#00f0ff" font-size="8" font-family="monospace" text-anchor="middle">Кинематична</text>
+              <rect x="95" y="90" width="75" height="18" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1" stroke-dasharray="3 1"/>
+              <text x="132" y="102" fill="#f43f5e" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">[Б] ?</text>
+              <text x="47" y="125" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Пространствена</text>
+              <text x="47" y="140" fill="#f59e0b" font-size="7.5" font-weight="bold" font-family="monospace" text-anchor="middle">• [А] ?</text>
+              <text x="47" y="155" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Времева</text>
+              <text x="132" y="125" fill="#f59e0b" font-size="7.5" font-weight="bold" font-family="monospace" text-anchor="middle">• [В] ?</text>
+              <text x="132" y="140" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Енергетична</text>
+              <text x="290" y="105" fill="#f59e0b" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">• [Г] ?</text>
+              <text x="290" y="125" fill="#f59e0b" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">• [Д] ?</text>
+              <text x="290" y="145" fill="#cbd5e1" font-size="8" font-family="monospace" text-anchor="middle">• Ефекторна</text>
+            </svg>
+          </div>
+        `,
         fields: [
           { label: 'А (кинематична):', keys: ['пространствено-времева', 'пространствено времева'] },
-          { label: 'Б (динамична):', keys: ['силова', 'силова структура'] },
-          { label: 'В (информационна 1):', keys: ['психична', 'психическа'] },
-          { label: 'Г (информационна 2):', keys: ['сетивна', 'сетивна структура'] }
+          { label: 'Б (динамична):', keys: ['динамична', 'динамична структура'] },
+          { label: 'В (динамична):', keys: ['силова', 'силова структура'] },
+          { label: 'Г (информационна 1):', keys: ['психична', 'психическа'] },
+          { label: 'Д (информационна 2):', keys: ['сетивна', 'сетивна структура'] }
         ],
-        official: 'А: Пространствено-времева | Б: Силова | В: Психична | Г: Сетивна',
-        why: 'Компоненти на йерархичната структура на двигателното действие.'
+        official: 'А: Пространствено-времева | Б: Динамична | В: Силова | Г: Психична | Д: Сетивна',
+        why: 'Компоненти на йерархичната структура на двигателното действие (фиг. от стр. 68).'
       },
       {
         subject: 'biomechanics',
@@ -896,15 +1033,34 @@
         section: 'understanding',
         num: 1,
         type: 'open_fill',
-        prompt: '1. Свържете характерните трудности с типичните методи за противодействие:\n1. Надценяване / страх от противника → (А)\n2. Подценяване на противника → (Б)\n3. Главозамайване → (В)\n4. Изненади с непознат противник → (Г)',
+        prompt: '1. Разграничете и групирайте, като свържете със стрелки, характерните трудности с типичните методи за противодействие (виж схемата от стр. 43):',
+        attachment: `
+          <div class="w-full max-w-xl p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
+            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Схема от стр. 43: Трудности и Противодействие</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="space-y-1.5">
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">1. Надценяване, страх от противника</div>
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">2. Подценяването</div>
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">3. Главозамайването</div>
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">4. Изненади с непознат противник</div>
+              </div>
+              <div class="space-y-1.5 text-[11px] text-slate-300">
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">а)</strong> Слаби страни на противника / силни на своя отбор</div>
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">б)</strong> Засилване на спортното разузнаване</div>
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">в)</strong> Припомняне на големите успехи и поуки</div>
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">г)</strong> Вредното влияние и чувството за отговорност</div>
+              </div>
+            </div>
+          </div>
+        `,
         fields: [
           { label: '1. Надценяване:', keys: ['слабите страни', 'слаби страни', 'силни страни'] },
           { label: '2. Подценяване:', keys: ['вредното влияние', 'отговорност', 'примери'] },
           { label: '3. Главозамайване:', keys: ['успехи', 'поуки', 'как са постигнати'] },
           { label: '4. Непознат противник:', keys: ['разузнаване', 'спортно разузнаване', 'внимание'] }
         ],
-        official: '1. Надценяване → Говори се за слабите страни на противника и силните на своя отбор\n2. Подценяване → Разкрива се вредното влияние, набляга се на отговорността\n3. Главозамайване → Припомнят се най-големите успехи и как са постигнати трудностите\n4. Непознат противник → Засилване на спортното разузнаване и вниманието',
-        why: 'Психологически методи за неутрализиране на предстартови изкривявания.'
+        official: '1. Надценяване → Говори се за слабите страни на противника и силните на своя отбор (а)\n2. Подценяване → Разкрива се вредното влияние, набляга се на отговорността (г)\n3. Главозамайване → Припомнят се най-големите успехи и как са постигнати трудностите (в)\n4. Непознат противник → Засилване на спортното разузнаване и вниманието (б)',
+        why: 'Психологически методи за неутрализиране на предстартови изкривявания (стр. 43).'
       },
       {
         subject: 'psychology',
