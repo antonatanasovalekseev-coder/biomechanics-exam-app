@@ -1777,6 +1777,12 @@
       if (q.type === 'choice') {
         document.getElementById('qTypeBadge').innerText = '🎯 1 верен отговор (Единичен избор)';
         document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80';
+        
+        const instruction = document.createElement('div');
+        instruction.className = 'text-xs text-slate-400 font-mono mb-3 flex items-center gap-1.5';
+        instruction.innerHTML = `<span>📌 <strong>Инструкция:</strong> Отбележете със знака <strong>☑</strong> вярното твърдение</span>`;
+        body.appendChild(instruction);
+
         activeShuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
         const cyrillicLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Е'];
 
@@ -1789,8 +1795,8 @@
           btn.className = 'w-full p-4 rounded-2xl bg-card border border-borderGlow hover:border-slate-500 text-left text-slate-200 font-medium text-sm sm:text-base transition-all flex items-center justify-between choice-btn';
           btn.onclick = () => selectChoice(idx, btn);
           btn.innerHTML = `
-            <span>${displayLabel}</span>
-            <div class="w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono choice-radio">
+            <span class="pr-2 leading-snug">${displayLabel}</span>
+            <div class="w-6 h-6 rounded-lg border border-slate-600 flex items-center justify-center text-sm font-mono shrink-0 choice-radio">
             </div>
           `;
           body.appendChild(btn);
@@ -1804,7 +1810,7 @@
         const headerInfo = document.createElement('div');
         headerInfo.className = 'text-xs font-mono font-bold mb-3 p-2.5 rounded-xl bg-amber-950/20 border border-amber-500/30 flex flex-wrap items-center justify-between gap-2';
         headerInfo.innerHTML = `
-          <span class="text-amber-200">👆 Изберете точно <strong>${correctCount} ${correctCount === 1 ? 'верен отговор' : 'верни отговора'}</strong>:</span>
+          <span class="text-amber-200">📌 <strong>Инструкция:</strong> Отбележете с <strong>☑</strong> точно <strong>${correctCount} ${correctCount === 1 ? 'верен отговор' : 'верни отговора'}</strong>:</span>
           <span id="multiSelectCounter" class="text-amber-300 font-mono">Избрани: 0 от ${correctCount}</span>
         `;
         body.appendChild(headerInfo);
@@ -1816,7 +1822,7 @@
           btn.onclick = () => toggleMultiChoice(idx, btn, correctCount);
           btn.innerHTML = `
             <span class="pr-2 leading-snug">${opt.text}</span>
-            <div class="w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box"></div>
+            <div class="w-6 h-6 rounded-lg border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box"></div>
           `;
           body.appendChild(btn);
         });
@@ -1824,9 +1830,10 @@
       } else if (q.type === 'stage_order') {
         document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} позиции за номериране (1, 2, 3)`;
         document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-cyan-300 bg-cyan-950/60 border border-cyan-800/80';
+        
         const note = document.createElement('div');
-        note.className = 'text-xs text-cyan-300 font-mono font-bold mb-3';
-        note.innerText = '👇 Посочете за всяка дейност на кой етап съответства (1. Преди | 2. По време | 3. След):';
+        note.className = 'text-xs text-cyan-300 font-mono font-bold mb-3 p-2.5 rounded-xl bg-cyan-950/20 border border-cyan-500/30';
+        note.innerHTML = '📌 <strong>Инструкция:</strong> Номерирайте отделните етапи в кръгчетата ⭕ (1. Преди | 2. По време | 3. След):';
         body.appendChild(note);
 
         q.items.forEach((item, idx) => {
@@ -1834,11 +1841,14 @@
           row.id = `stageRow_${idx}`;
           row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all';
           row.innerHTML = `
-            <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <button onclick="setStageOrder(${idx}, 1, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">1. Преди</button>
-              <button onclick="setStageOrder(${idx}, 2, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">2. По време</button>
-              <button onclick="setStageOrder(${idx}, 3, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">3. След</button>
+            <div class="flex items-center gap-2">
+              <span id="stageBadge_${idx}" class="w-7 h-7 rounded-full border border-dashed border-cyan-500/50 bg-obsidian flex items-center justify-center text-xs font-mono font-bold text-cyan-400 shrink-0">⭕</span>
+              <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0 self-end sm:self-auto">
+              <button onclick="setStageOrder(${idx}, 1, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-cyan-500 transition-all">① Преди</button>
+              <button onclick="setStageOrder(${idx}, 2, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-cyan-500 transition-all">② По време</button>
+              <button onclick="setStageOrder(${idx}, 3, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-cyan-500 transition-all">③ След</button>
             </div>
           `;
           body.appendChild(row);
@@ -1847,22 +1857,26 @@
       } else if (q.type === 'matching_select') {
         document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} съответствия за свързване`;
         document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-indigo-300 bg-indigo-950/60 border border-indigo-800/80';
+        
         const guide = document.createElement('div');
-        guide.className = 'text-xs text-indigo-300 font-mono font-bold mb-3';
-        guide.innerText = '👇 Изберете правилния отговор за всяка позиция:';
+        guide.className = 'text-xs text-indigo-300 font-mono font-bold mb-3 p-2.5 rounded-xl bg-indigo-950/20 border border-indigo-500/30';
+        guide.innerHTML = '📌 <strong>Инструкция:</strong> Разграничете и групирайте, като свържете със стрелки (➔) лявата с дясната колона:';
         body.appendChild(guide);
 
         q.items.forEach((item) => {
           const card = document.createElement('div');
           card.id = `matchCard_${item.id}`;
           card.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col gap-2 transition-all';
-          let optionsHtml = `<option value="">-- Изберете съответствие от списъка --</option>`;
+          let optionsHtml = `<option value="">-- Изберете правилното противодействие / съответствие --</option>`;
           q.matchOptions.forEach(mo => {
             optionsHtml += `<option value="${mo.key}">${mo.text}</option>`;
           });
           card.innerHTML = `
-            <span class="text-xs sm:text-sm text-slate-200 font-bold leading-snug">${item.text}</span>
-            <select id="matchSelect_${item.id}" onchange="matchingSelections[${item.id}] = this.value" class="w-full bg-obsidian border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:border-purple-500 focus:outline-none font-mono">
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-200 font-bold leading-snug">
+              <span class="text-indigo-400 font-mono">➔</span>
+              <span>${item.text}</span>
+            </div>
+            <select id="matchSelect_${item.id}" onchange="matchingSelections[${item.id}] = this.value" class="w-full bg-obsidian border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:border-indigo-500 focus:outline-none font-mono">
               ${optionsHtml}
             </select>
           `;
@@ -1870,11 +1884,12 @@
         });
 
       } else if (q.type === 'category_classify') {
-        document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} твърдения за класифициране`;
+        document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} позиции за класифициране`;
         document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-teal-300 bg-teal-950/60 border border-teal-800/80';
+        
         const topGuide = document.createElement('div');
-        topGuide.className = 'text-xs text-teal-300 font-mono font-bold mb-3';
-        topGuide.innerText = '👇 За всяко твърдение изберете съответната категория:';
+        topGuide.className = 'text-xs text-teal-300 font-mono font-bold mb-3 p-2.5 rounded-xl bg-teal-950/20 border border-teal-500/30';
+        topGuide.innerHTML = '📌 <strong>Инструкция:</strong> Поставете подходящата буква (А или Б) в квадратчето <strong>[ ]</strong> пред всяко твърдение:';
         body.appendChild(topGuide);
 
         q.items.forEach((item, idx) => {
@@ -1882,14 +1897,17 @@
           row.id = `catRow_${idx}`;
           row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all';
           
-          let btnsHtml = `<div class="flex items-center gap-2 shrink-0">`;
+          let btnsHtml = `<div class="flex items-center gap-2 shrink-0 self-end sm:self-auto">`;
           q.categories.forEach(cat => {
-            btnsHtml += `<button onclick="setCategorySelect(${idx}, '${cat.id}', this)" class="cat-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">${cat.name}</button>`;
+            btnsHtml += `<button onclick="setCategorySelect(${idx}, '${cat.id}', '${cat.name}', this)" class="cat-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-teal-500 transition-all">${cat.name}</button>`;
           });
           btnsHtml += `</div>`;
 
           row.innerHTML = `
-            <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
+            <div class="flex items-start gap-2.5">
+              <span id="catBox_${idx}" class="w-8 h-7 rounded-lg border border-slate-600 bg-obsidian flex items-center justify-center text-xs font-mono font-bold text-slate-400 shrink-0 mt-0.5">[ ? ]</span>
+              <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
+            </div>
             ${btnsHtml}
           `;
           body.appendChild(row);
@@ -1898,23 +1916,27 @@
       } else if (q.type === 'matrix_choice') {
         document.getElementById('qTypeBadge').innerText = '🎯 4 термина за избор (А, Б, В, Г)';
         document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-purple-300 bg-purple-950/60 border border-purple-800/80';
+        
         const guide = document.createElement('div');
-        guide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
-        guide.innerText = '👇 Изберете верния термин за всяка от буквите (А, Б, В, Г):';
+        guide.className = 'text-xs text-purple-400 font-mono font-bold mb-3 p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/30';
+        guide.innerHTML = '📌 <strong>Инструкция:</strong> Изберете по едно предложение от всяко табло за буквите <strong>А, Б, В и Г</strong>:';
         body.appendChild(guide);
 
         q.rows.forEach(rowItem => {
           const rowEl = document.createElement('div');
           rowEl.id = `matrixRow_${rowItem.id}`;
           rowEl.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all';
-          let pills = `<div class="flex flex-wrap gap-2 shrink-0">`;
+          let pills = `<div class="flex flex-wrap gap-2 shrink-0 self-end sm:self-auto">`;
           rowItem.options.forEach(opt => {
             pills += `<button onclick="setMatrixChoice('${rowItem.id}', '${opt}', this)" class="mat-btn-${rowItem.id} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">${opt}</button>`;
           });
           pills += `</div>`;
 
           rowEl.innerHTML = `
-            <span class="text-xs sm:text-sm text-purple-300 font-mono font-black">${rowItem.label}</span>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 border border-purple-500 text-purple-300 font-mono font-black text-xs">[ ${rowItem.id} ]</span>
+              <span class="text-xs sm:text-sm text-purple-200 font-mono font-bold leading-snug">${rowItem.label}</span>
+            </div>
             ${pills}
           `;
           body.appendChild(rowEl);
@@ -1923,6 +1945,12 @@
       } else if (q.type === 'open_fill') {
         document.getElementById('qTypeBadge').innerText = `🎯 ${q.fields.length} полета за попълване`;
         document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-purple-300 bg-purple-950/60 border border-purple-800/80';
+        
+        const openGuide = document.createElement('div');
+        openGuide.className = 'text-xs text-purple-400 font-mono font-bold mb-3 p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/30';
+        openGuide.innerHTML = '📌 <strong>Инструкция:</strong> Попълнете точните термини на пунктираните линии:';
+        body.appendChild(openGuide);
+
         q.fields.forEach((f, idx) => {
           const row = document.createElement('div');
           row.className = 'flex flex-col sm:flex-row sm:items-center gap-2 p-3 rounded-2xl bg-card border border-borderGlow';
@@ -1942,13 +1970,18 @@
       selectedChoiceIdx = idx;
       document.querySelectorAll('.choice-btn').forEach(b => {
         b.classList.remove('border-purple-500', 'bg-purple-950/40');
-        b.querySelector('.choice-radio').innerHTML = '';
-        b.querySelector('.choice-radio').className = 'w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono choice-radio';
+        const radio = b.querySelector('.choice-radio');
+        if (radio) {
+          radio.innerHTML = '';
+          radio.className = 'w-6 h-6 rounded-lg border border-slate-600 flex items-center justify-center text-xs font-mono choice-radio';
+        }
       });
       btnEl.classList.add('border-purple-500', 'bg-purple-950/40');
       const radio = btnEl.querySelector('.choice-radio');
-      radio.className = 'w-5 h-5 rounded-md border border-purple-500 bg-purple-500 text-white font-black flex items-center justify-center text-xs font-mono choice-radio';
-      radio.innerText = '✓';
+      if (radio) {
+        radio.className = 'w-6 h-6 rounded-lg border border-purple-500 bg-purple-500 text-white font-black flex items-center justify-center text-xs font-mono choice-radio';
+        radio.innerText = '☑';
+      }
     }
 
     function toggleMultiChoice(idx, btnEl, requiredCount) {
@@ -1957,14 +1990,18 @@
         selectedMultiIndices.delete(idx);
         btnEl.classList.remove('border-purple-500', 'bg-purple-950/40');
         const box = btnEl.querySelector('.multi-box');
-        box.className = 'w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box';
-        box.innerHTML = '';
+        if (box) {
+          box.className = 'w-6 h-6 rounded-lg border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box';
+          box.innerHTML = '';
+        }
       } else {
         selectedMultiIndices.add(idx);
         btnEl.classList.add('border-purple-500', 'bg-purple-950/40');
         const box = btnEl.querySelector('.multi-box');
-        box.className = 'w-5 h-5 rounded-md border border-purple-500 bg-purple-500 text-white font-black flex items-center justify-center text-xs font-mono shrink-0 multi-box';
-        box.innerText = '✓';
+        if (box) {
+          box.className = 'w-6 h-6 rounded-lg border border-purple-500 bg-purple-500 text-white font-black flex items-center justify-center text-xs font-mono shrink-0 multi-box';
+          box.innerText = '☑';
+        }
       }
       const counter = document.getElementById('multiSelectCounter');
       if (counter) {
@@ -1984,18 +2021,32 @@
       playSound('click');
       selectedStageOrders[itemIdx] = orderNum;
       document.querySelectorAll(`.stage-btn-${itemIdx}`).forEach(b => {
-        b.className = `stage-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all`;
+        b.className = `stage-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-cyan-500 transition-all`;
       });
-      btnEl.className = `stage-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-purple-600 border border-purple-400 text-white shadow-md shadow-purple-500/30 transition-all`;
+      btnEl.className = `stage-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-cyan-600 border border-cyan-400 text-white shadow-md shadow-cyan-500/30 transition-all`;
+      
+      const badge = document.getElementById(`stageBadge_${itemIdx}`);
+      if (badge) {
+        const romanOrNum = orderNum === 1 ? '①' : (orderNum === 2 ? '②' : '③');
+        badge.innerText = romanOrNum;
+        badge.className = 'w-7 h-7 rounded-full border border-cyan-400 bg-cyan-950 font-mono font-bold text-cyan-300 flex items-center justify-center text-xs shrink-0';
+      }
     }
 
-    function setCategorySelect(itemIdx, catId, btnEl) {
+    function setCategorySelect(itemIdx, catId, catName, btnEl) {
       playSound('click');
       categorySelections[itemIdx] = catId;
       document.querySelectorAll(`.cat-btn-${itemIdx}`).forEach(b => {
-        b.className = `cat-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all`;
+        b.className = `cat-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-teal-500 transition-all`;
       });
-      btnEl.className = `cat-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-purple-600 border border-purple-400 text-white shadow-md shadow-purple-500/30 transition-all`;
+      btnEl.className = `cat-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-teal-600 border border-teal-400 text-white shadow-md shadow-teal-500/30 transition-all`;
+      
+      const box = document.getElementById(`catBox_${itemIdx}`);
+      if (box) {
+        const displayLetter = catId === 'A' ? '[ А ]' : (catId === 'B' ? '[ Б ]' : (catId === 'calm' ? '[ 🌙 ]' : '[ ⚡ ]'));
+        box.innerText = displayLetter;
+        box.className = 'w-8 h-7 rounded-lg border border-teal-400 bg-teal-950 font-mono font-bold text-teal-300 flex items-center justify-center text-xs shrink-0 mt-0.5';
+      }
     }
 
     function setMatrixChoice(rowId, optVal, btnEl) {
