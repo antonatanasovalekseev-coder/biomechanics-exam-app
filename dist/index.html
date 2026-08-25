@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>Изпитен Симулатор XI Клас — Биомеханика & Спортна Психология</title>
+  <title>Изпитен Симулатор XI Клас — Спортна Психология & Биомеханика</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #0a0e17; }
     ::-webkit-scrollbar-thumb { background: #22324e; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00f0ff44; }
+    ::-webkit-scrollbar-thumb:hover { background: #8b5cf644; }
 
     .bg-grid {
       background-size: 40px 40px;
@@ -68,25 +68,25 @@
   </style>
 </head>
 
-<body class="bg-obsidian text-slate-100 min-h-screen font-sans antialiased bg-grid selection:bg-neonCyan selection:text-black">
+<body class="bg-obsidian text-slate-100 min-h-screen font-sans antialiased bg-grid selection:bg-purple-500 selection:text-white">
 
-  <!-- Header with Subject Switcher & Live Bulgarian Grade -->
+  <!-- Header with Live Bulgarian Grade -->
   <header class="sticky top-0 z-50 glass-panel border-b border-borderGlow px-4 lg:px-8 py-3 transition-all duration-300">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <!-- Brand & Subject Info -->
       <div class="flex items-center gap-3">
-        <div id="subjectIconBadge" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-neonCyan flex items-center justify-center text-black font-black text-xl shadow-lg shadow-cyan-500/30">
-          🔬
+        <div id="subjectIconBadge" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30">
+          🧠
         </div>
         <div>
           <div class="flex items-center gap-2">
             <h1 id="appMainTitle" class="font-display font-black text-lg md:text-xl tracking-tight text-white">
-              Биомеханика XI Клас
+              Спортна Психология XI Клас
             </h1>
-            <span id="masteryBadge" class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-neonCyan border border-cyan-800 font-mono">1:1 ИЗПИТЕН ФОРМАТ</span>
+            <span id="masteryBadge" class="text-xs px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 font-mono">1:1 ОФИЦИАЛЕН ТЕСТ</span>
           </div>
-          <p id="appSubTitle" class="text-xs text-slate-400 font-medium">гл. ас. Иван Иванов, доктор • Шестобална система & Mastery Loop</p>
+          <p id="appSubTitle" class="text-xs text-slate-400 font-medium">проф. Татяна Янчева, дн • Шестобална система & Mastery Loop</p>
         </div>
       </div>
 
@@ -105,7 +105,7 @@
         </div>
 
         <!-- Audio Toggle -->
-        <button id="soundToggle" onclick="toggleSound()" class="p-2 rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-neonCyan transition-all" title="Звукови ефекти">
+        <button id="soundToggle" onclick="toggleSound()" class="p-2 rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-purple-400 transition-all" title="Звукови ефекти">
           <i data-lucide="volume-2" class="w-5 h-5" id="soundIcon"></i>
         </button>
 
@@ -116,13 +116,13 @@
   <!-- Main Container -->
   <main class="max-w-5xl mx-auto px-4 lg:px-8 py-6">
     
-    <!-- Top-Level Subject Switcher -->
+    <!-- Top-Level Subject Switcher (Default: Psychology) -->
     <div class="grid grid-cols-2 gap-3 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
-      <button onclick="setGlobalSubject('biomechanics')" id="subjectTab-biomechanics" class="py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25">
-        <span>🔬 Биомеханика (30 въпроса)</span>
-      </button>
-      <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all">
+      <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25">
         <span>🧠 Спортна Психология (28 въпроса)</span>
+      </button>
+      <button onclick="setGlobalSubject('biomechanics')" id="subjectTab-biomechanics" class="py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all">
+        <span>🔬 Биомеханика (30 въпроса)</span>
       </button>
     </div>
 
@@ -142,16 +142,16 @@
     <!-- Live Progress Bar -->
     <div class="mb-6">
       <div class="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
-        <span id="examProgressLabel">Въпрос 1 от 30</span>
+        <span id="examProgressLabel">Въпрос 1 от 28</span>
         <div class="flex items-center gap-3">
           <span id="mistakeCounterLabel" class="text-rose-400 font-bold hidden flex items-center gap-1">
             <span>Грешки за поправка:</span> <span id="mistakeCountNum" class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800">0</span>
           </span>
-          <span id="examScoreLabel" class="text-neonCyan font-bold">0.0 / 0 точки</span>
+          <span id="examScoreLabel" class="text-purple-300 font-bold">0.0 / 0 точки</span>
         </div>
       </div>
       <div class="w-full h-2.5 bg-card rounded-full overflow-hidden border border-borderGlow">
-        <div id="examProgressBar" class="h-full bg-gradient-to-r from-cyan-500 to-neonLime rounded-full transition-all duration-300" style="width: 3.33%;"></div>
+        <div id="examProgressBar" class="h-full bg-gradient-to-r from-purple-500 via-indigo-500 to-neonLime rounded-full transition-all duration-300" style="width: 3.57%;"></div>
       </div>
     </div>
 
@@ -160,8 +160,8 @@
       
       <!-- Top Meta Badge -->
       <div class="flex items-center justify-between mb-4">
-        <span id="qHeaderBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800">
-          ТЕСТ № 1 • Въпрос 1
+        <span id="qHeaderBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-800">
+          РАВНИЩЕ ЗНАНИЕ • Въпрос 1
         </span>
         <span id="qTypeBadge" class="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-400 bg-card border border-borderGlow">
           Избираем отговор
@@ -174,12 +174,12 @@
       <!-- Visual Attachment Container (Joints, Levers, Matching) -->
       <div id="qAttachment" class="mb-6 p-4 rounded-2xl bg-obsidian border border-slate-800 flex flex-col items-center justify-center hidden"></div>
 
-      <!-- Dynamic Interactive Body: Choices OR Open Input Fields -->
+      <!-- Dynamic Interactive Body: Choices OR Open Input Fields OR Multi-select -->
       <div id="qInteractiveBody" class="space-y-4 mb-6"></div>
 
       <!-- Submit / Confirm Button -->
       <div id="qActionRow" class="flex justify-end pt-4 border-t border-slate-800/80">
-        <button id="submitAnswerBtn" onclick="submitCurrentAnswer()" class="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-neonCyan text-black hover:bg-white transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+        <button id="submitAnswerBtn" onclick="submitCurrentAnswer()" class="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:brightness-110 transition-all shadow-lg shadow-purple-500/25 flex items-center gap-2">
           <span>Потвърди Отговора</span>
           <i data-lucide="check" class="w-4 h-4"></i>
         </button>
@@ -198,7 +198,7 @@
 
         <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
           <div id="overrideBtnContainer"></div>
-          <button onclick="advanceNext()" class="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-neonCyan text-black hover:bg-white transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+          <button onclick="advanceNext()" class="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:brightness-110 transition-all shadow-lg shadow-purple-500/25 flex items-center gap-2">
             <span>Следващ въпрос</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
@@ -208,10 +208,10 @@
     </div>
 
     <!-- Final Report Card Modal with Mastery Loop -->
-    <div id="reportCardModal" class="hidden glass-panel p-8 sm:p-12 rounded-3xl border border-neonCyan/40 text-center shadow-2xl mt-6">
+    <div id="reportCardModal" class="hidden glass-panel p-8 sm:p-12 rounded-3xl border border-purple-500/40 text-center shadow-2xl mt-6">
       
-      <div id="finalTrophyIcon" class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-emerald-500 to-neonCyan mx-auto flex items-center justify-center text-black text-4xl mb-6 shadow-xl shadow-cyan-500/30">
-        🏅
+      <div id="finalTrophyIcon" class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-purple-500 to-indigo-500 mx-auto flex items-center justify-center text-white text-4xl mb-6 shadow-xl shadow-purple-500/30">
+        🏆
       </div>
       
       <h2 id="finalHeading" class="font-display font-black text-3xl text-white mb-2">Изпитният кръг приключи!</h2>
@@ -221,7 +221,7 @@
       <div class="p-6 rounded-3xl bg-card border border-borderGlow max-w-md mx-auto mb-6">
         <span class="text-xs font-mono text-slate-400 block mb-1">КРАЙНА ОЦЕНКА</span>
         <div id="finalGradeWord" class="font-display font-black text-3xl text-neonLime mb-1">Отличен (6.00)</div>
-        <div id="finalScoreDetails" class="text-xs font-mono text-slate-400">30 от 30 верни отговора (100%)</div>
+        <div id="finalScoreDetails" class="text-xs font-mono text-slate-400">28 от 28 верни отговора (100%)</div>
       </div>
 
       <!-- Mastery Retry Loop CTA -->
@@ -231,7 +231,7 @@
           <span>Остават сгрешени въпроси за овладяване!</span>
         </div>
         <p class="text-xs text-slate-300 mb-4 text-left">
-          За да гарантираш оценка <strong class="text-neonLime">Отличен (6.00)</strong> на утрешния изпит, тренирай отново <strong id="wrongCountBadge" class="text-rose-400"></strong> сгрешени въпроса без подсказки, докато не постигнеш 100%!
+          За да гарантираш оценка <strong class="text-neonLime">Отличен (6.00)</strong> на изпита по Спортна Психология в 12:30, тренирай отново <strong id="wrongCountBadge" class="text-rose-400"></strong> сгрешени въпроса без подсказки!
         </p>
         <button onclick="startMasteryRetryLoop()" class="w-full py-3 px-4 rounded-xl font-display font-black text-sm bg-gradient-to-r from-neonAmber to-orange-500 text-black hover:brightness-110 transition-all shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2">
           <i data-lucide="zap" class="w-4 h-4"></i>
@@ -250,7 +250,7 @@
       </div>
 
       <div class="flex justify-center gap-4">
-        <button onclick="restartExam(true)" class="px-6 py-3 rounded-xl font-display font-bold text-sm bg-neonCyan text-black hover:bg-white transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+        <button onclick="restartExam(true)" class="px-6 py-3 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:brightness-110 transition-all shadow-lg shadow-purple-500/25 flex items-center gap-2">
           <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Нов пълен тест
         </button>
       </div>
@@ -259,7 +259,8 @@
   </main>
 
   <!-- ========================================== -->
-  <!-- JAVASCRIPT: BULLETPROOF EXAM ENGINE        -->
+  <!-- JAVASCRIPT: ALL 28 SPORT PSYCHOLOGY + 30   -->
+  <!-- BIOMECHANICS 1:1 EXACT QUESTIONS ENGINE    -->
   <!-- ========================================== -->
   <script>
     let soundEnabled = true;
@@ -323,11 +324,430 @@
       lucide.createIcons();
     }
 
-    // ==========================================
-    // 1. BIOMECHANICS QUESTIONS (PDF 1: ALL 30)
-    // ==========================================
+    // =========================================================================
+    // 1. SPORT PSYCHOLOGY QUESTIONS (PDF: PP. 41-48 - ALL 28 EXACT QUESTIONS)
+    // =========================================================================
+    const psychologyQuestions = [
+      // -------------------------------------------------------------
+      // ЧАСТ 1: ВЪПРОСИ ОТ РАВНИЩЕ „ЗНАНИЕ“ (стр. 41–42: 9 въпроса)
+      // -------------------------------------------------------------
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 1,
+        type: 'choice',
+        prompt: '1. Отбележете със знака ☒ или ☑ вярното твърдение за психическата подготовка в спорта.\nПсихическата подготовка се състои в:',
+        options: [
+          { text: 'А) Знания, умения, навици, качества', correct: false },
+          { text: 'Б) Психическата подготовка е система от целенасочени въздействия върху психиката и личността на спортиста и треньора с цел достигане на пълноценно, максимално ефективно участие в процеса на подготовка и адекватна състезателна реализация', correct: true },
+          { text: 'В) Свойство да въздейства или да противодейства на външни съпротивления', correct: false },
+        ],
+        why: 'Официалната дефиниция за психическа подготовка в спорта (Тема 17, стр. 36).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 2,
+        type: 'choice',
+        prompt: '2. Посочете кои са факторите на психическото напрежение в съвременния спорт:',
+        options: [
+          { text: 'А) обективни, субективни', correct: true },
+          { text: 'Б) генотипни, фенотипни', correct: false },
+          { text: 'В) съзнателни, волеви', correct: false },
+        ],
+        why: 'Факторите се делят на две основни групи: обективни (среда, публичност, медии) и субективни (мотивация, тревожност, очаквания).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 3,
+        type: 'choice',
+        prompt: '3. Посочете кои са видовете психическа подготовка в зависимост от насочеността ѝ:',
+        options: [
+          { text: 'А) основна, селективна, комплексна', correct: false },
+          { text: 'Б) евристична, вероятностна, екстремална', correct: false },
+          { text: 'В) обща, специализирана, специална', correct: true },
+        ],
+        why: 'Трите основни вида психическа подготовка са: Обща (базова), Специализирана (за вида спорт) и Специална (за конкретно състезание).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 4,
+        type: 'choice',
+        prompt: '4. Посочете верния отговор: Каква е основната цел на ОБЩАТА психическа подготовка?',
+        options: [
+          { text: 'А) Дългосрочно развитие и усъвършенстване на базовите психически функции и качества, които са от значение за спортната дейност и цялостната подготовка на спортиста', correct: true },
+          { text: 'Б) Развива онези психични функции и качества, които биха осигурили успешна изява в съответния вид спорт', correct: false },
+          { text: 'В) Развитие на способностите за самоинформиране и самоконтрол', correct: false },
+        ],
+        why: 'Общата подготовка има дългосрочен перманентен характер за цялостното изграждане на личността (Тема 17, стр. 36).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 5,
+        type: 'choice',
+        prompt: '5. Кой от посочените методи НЕ се отнася към методите на психическата подготовка?\nПосочете грешното становище:',
+        options: [
+          { text: 'А) Десенсибилизационен метод', correct: false },
+          { text: 'Б) Поведенчески тренинг', correct: false },
+          { text: 'В) Моделирането', correct: false },
+          { text: 'Г) Механично повторение по метода на пробата и грешката', correct: true },
+        ],
+        why: 'Методът проба-грешка не е метод на научната психическа подготовка, а механично действие (Тема 11, стр. 23).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 6,
+        type: 'choice',
+        prompt: '6. Разграничете от посочените възможни ОБЕКТИВНИТЕ фактори на психично напрежение:',
+        options: [
+          { text: 'А) публичност, елитарност, фенове, медии, очаквания, комерсиализация, договорна обвързаност', correct: true },
+          { text: 'Б) свръхмотивация, предстартови състояния, продължителност на кариерата, конкуренция', correct: false },
+          { text: 'В) увеличават се изискванията, клубни очаквания, отговорност', correct: false },
+        ],
+        why: 'Обективните фактори произтичат от външната среда и обществото (медии, публика, договори, елитарност).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 7,
+        type: 'choice',
+        prompt: '7. Разграничете кое от посочените възможни условия е ГРЕШНО.\nЕфективността на психическата подготовка зависи от:',
+        options: [
+          { text: 'А) Убедеността и активното участие', correct: false },
+          { text: 'Б) Координацията и доверието между треньор, състезател и психолог', correct: false },
+          { text: 'В) Сходни по кинематика, но различаващи се по динамика упражнения', correct: true },
+          { text: 'Г) Положително отношение', correct: false },
+        ],
+        why: '„Сходни по кинематика...“ е механика, а не психологически фактор за ефективност (Тема 18, стр. 40).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 8,
+        type: 'open_fill',
+        prompt: '8. Номерирайте отделните етапи на специалната психическа подготовка (поставете 1, 2, 3 срещу етапите):',
+        fields: [
+          { label: 'Психическа подготовка преди състезанието:', keys: ['1', 'първи', '1.', 'етап 1'] },
+          { label: 'Психическа подготовка по време на състезанието:', keys: ['2', 'втори', '2.', 'етап 2'] },
+          { label: 'Психическа подготовка след състезанието (Обсъждане на резултати):', keys: ['3', 'трети', '3.', 'етап 3'] }
+        ],
+        official: '1. Преди състезанието | 2. По време на състезанието | 3. След състезанието (Обсъждане на постигнатите резултати)',
+        why: 'Трите хронологични етапа на специалната подготовка за конкретен старт (Тема 17, стр. 37).'
+      },
+      {
+        subject: 'psychology',
+        section: 'knowledge',
+        num: 9,
+        type: 'choice',
+        prompt: '9. Посочете ГРЕШНОТО твърдение:\nПри планирането на психическата подготовка следва да се отчитат:',
+        options: [
+          { text: 'А) индивидуалните, възрастовите и половите особености на състезателите', correct: false },
+          { text: 'Б) изложението на знанията', correct: true },
+          { text: 'В) спортната квалификация, минал спортносъстезателен опит', correct: false },
+          { text: 'Г) особеностите на конкретния спорт и изискванията към качествата и състезателното поведение на спортиста', correct: false },
+        ],
+        why: 'Планирането отчита личност, възраст, пол, спорт и квалификация, а не абстрактно „изложение на знания“.'
+      },
+
+      // -------------------------------------------------------------
+      // ЧАСТ 2: ВЪПРОСИ ОТ РАВНИЩЕ „РАЗБИРАНЕ“ (стр. 43–44: 5 въпроса)
+      // -------------------------------------------------------------
+      {
+        subject: 'psychology',
+        section: 'understanding',
+        num: 1,
+        type: 'open_fill',
+        prompt: '1. Разграничете и групирайте, като свържете със стрелки, характерните трудности с типичните методи за противодействие (виж схемата от стр. 43):',
+        attachment: `
+          <div class="w-full max-w-xl p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
+            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Схема от стр. 43: Трудности и Противодействие</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="space-y-1.5">
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">1. Надценяване, страх от противника</div>
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">2. Подценяването</div>
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">3. Главозамайването</div>
+                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">4. Изненади с непознат противник</div>
+              </div>
+              <div class="space-y-1.5 text-[11px] text-slate-300">
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">а)</strong> Слаби страни на противника / силни на своя отбор</div>
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">б)</strong> Засилване на спортното разузнаване</div>
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">в)</strong> Припомняне на големите успехи и поуки</div>
+                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">г)</strong> Вредното влияние и чувството за отговорност</div>
+              </div>
+            </div>
+          </div>
+        `,
+        fields: [
+          { label: '1. Надценяване / страх:', keys: ['слабите страни', 'слаби страни', 'силни страни', 'а'] },
+          { label: '2. Подценяване:', keys: ['вредното влияние', 'отговорност', 'примери', 'г'] },
+          { label: '3. Главозамайване:', keys: ['успехи', 'поуки', 'как са постигнати', 'в'] },
+          { label: '4. Непознат противник:', keys: ['разузнаване', 'спортно разузнаване', 'внимание', 'б'] }
+        ],
+        official: '1. Надценяване → Говори се за слабите страни на противника и силните на своя отбор (а)\n2. Подценяване → Разкрива се вредното влияние, набляга се на отговорността (г)\n3. Главозамайване → Припомнят се най-големите успехи и как са постигнати трудностите (в)\n4. Непознат противник → Засилване на спортното разузнаване и вниманието (б)',
+        why: 'Психологически методи за неутрализиране на предстартови изкривявания (стр. 43).'
+      },
+      {
+        subject: 'psychology',
+        section: 'understanding',
+        num: 2,
+        type: 'open_fill',
+        prompt: '2. Поставете пред всяка една от характеристиките буквата на психическата подготовка, за която се отнася (А - Обща, Б - Специализирана):\n(Поставете буквата А или Б в полето)',
+        fields: [
+          { label: '1. Дългосрочно развитие на базови психически функции:', keys: ['а', 'обща'] },
+          { label: '2. Насочена към цялостната личност с перманентен характер:', keys: ['а', 'обща'] },
+          { label: '3. В пряка зависимост от изискванията на конкретния вид спорт:', keys: ['б', 'специализирана'] },
+          { label: '4. Развива функции за успешна изява в съответния вид спорт:', keys: ['б', 'специализирана'] }
+        ],
+        official: '1: А (Обща) | 2: А (Обща) | 3: Б (Специализирана) | 4: Б (Специализирана)',
+        why: 'Разграничение между Обща (перманентна, базова) и Специализирана (за спортната дисциплина).'
+      },
+      {
+        subject: 'psychology',
+        section: 'understanding',
+        num: 3,
+        type: 'choice',
+        prompt: '3. Посочете кои компоненти на личността се определят като характеризиращи ПСИХИЧЕСКАТА ГОТОВНОСТ ПРЕДИ СЪСТЕЗАНИЕ (боева готовност):',
+        options: [
+          { text: 'А) самообладание, решителност, недостатъчно осмислени повторения', correct: false },
+          { text: 'Б) представяне, възприемане, скованост, неточност', correct: false },
+          { text: 'В) сложност на двигателното действие, саморегулация, вторични умения', correct: false },
+          { text: 'Г) трезва увереност на спортиста в своите сили, стремеж да мобилизира всички сили за победа, емоционална възбуда, висока устойчивост при преодоляване на препятствията, способност да управлява поведението си', correct: true },
+        ],
+        why: 'Това е пълната психологическа картина на оптималното състояние на боева готовност (Тема 13, стр. 28).'
+      },
+      {
+        subject: 'psychology',
+        section: 'understanding',
+        num: 4,
+        type: 'open_fill',
+        prompt: '4. В лявата колона са изброени задачите, а в дясната са посочени видовете специална психическа подготовка. Намерете съответствието (запишете: преди, по време, след):\n1. Цел за предстоящия старт, положителна нагласа, увереност → [1]\n2. Овладяване на емоции, коригиране на поведението → [2]\n3. Анализ на грешки и затвърждаване на резултати → [3]',
+        fields: [
+          { label: '1. Цел и нагласа:', keys: ['преди', 'преди състезание', 'преди състезанието', 'б'] },
+          { label: '2. Овладяване на емоции:', keys: ['по време', 'по време на състезание', 'по време на състезанието', 'в'] },
+          { label: '3. Анализ на грешки:', keys: ['след', 'след състезание', 'след състезанието', 'а'] }
+        ],
+        official: '1. Преди състезание (б) | 2. По време на състезание (в) | 3. След състезание (а)',
+        why: 'Разпределение на задачите на специалната психическа подготовка (Тема 17, стр. 37).'
+      },
+      {
+        subject: 'psychology',
+        section: 'understanding',
+        num: 5,
+        type: 'open_fill',
+        prompt: '5. Кои от изброените способи са за УСПОКОЯВАНЕ и кои за МОБИЛИЗИРАНЕ?\n1. Разхлабване на мускули | 2. Топлина | 3. Бавни движения | 4. Бърз пулс/дишане | 5. Бавен пулс/дишане | 6. Напрягане | 7. Силни аритмични звуци | 8. Тихи звукове | 9. Успокояващ масаж | 10. Мобилизиращ масаж',
+        fields: [
+          { label: 'Успокояващи са (номера или думи):', keys: ['1, 2, 3, 5, 8, 9', '1,2,3,5,8,9', 'разхлабване', 'бавен', 'топлина', 'тихи', 'успокояващ'] },
+          { label: 'Мобилизиращи са (номера или думи):', keys: ['4, 6, 7, 10', '4,6,7,10', 'бърз', 'напрягане', 'силни', 'мобилизиращ', 'аритмични'] }
+        ],
+        official: 'Успокояващи са: 1, 2, 3, 5, 8, 9 (разхлабване, топлина, бавни движения, бавен пулс, тихи звуци, успокояващ масаж)\nМобилизиращи са: 4, 6, 7, 10 (бърз ритъм, напрягане, силни аритмични звуци, мобилизиращ масаж)',
+        why: 'Психорегулиращи техники за вегетативен и емоционален контрол (Тема 13 и 14).'
+      },
+
+      // -------------------------------------------------------------
+      // ЧАСТ 3: ТЕСТ НА ТЕМА ПСИХИЧЕСКА ПОДГОТОВКА В СПОРТА (стр. 45–48: 14 въпроса)
+      // -------------------------------------------------------------
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 1,
+        type: 'choice',
+        prompt: '1. Посочете верния отговор. Кое от изброените е определение за психическа подготовка:',
+        options: [
+          { text: 'А) Система от целенасочени въздействия върху психиката и личността на спортиста и треньора с цел достигане на пълноценно, максимално ефективно участие в процеса на подготовка и адекватна състезателна реализация', correct: true },
+          { text: 'Б) Процес, при който се събира информация и се оценява действителното състояние на даден състезател и неговото сравняване с планираното', correct: false },
+          { text: 'В) Специализирана система от едновременни и последователни действия, насочени към рационална организация на вътрешните и на външните сили', correct: false },
+        ],
+        why: 'Точната научна дефиниция от Тема 17, стр. 36.'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 2,
+        type: 'choice',
+        prompt: '2. Посочете за кой вид метод на психическата подготовка се отнася следната дефиниция:\n„Чрез него се постига цялостно въздействие върху личността на спортиста, отношението към спорта въобще, базовата мотивация за занимания със спортна дейност“:',
+        options: [
+          { text: 'А) образователен', correct: false },
+          { text: 'Б) общовъзпитателен', correct: true },
+          { text: 'В) социален', correct: false },
+        ],
+        why: 'Общовъзпитателните методи формират ценностите и базовата мотивация към спорта (Тема 17, стр. 38).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 3,
+        type: 'choice',
+        prompt: '3. Отбележете верния отговор. Кое от изброените е основна задача на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ:',
+        options: [
+          { text: 'А) Да се прилага само в подготвителния период на подготовката', correct: false },
+          { text: 'Б) Овладяване на емоционалните състояния на спортиста и треньора и коригиране на поведението', correct: true },
+          { text: 'В) Личното участие на състезателите', correct: false },
+          { text: 'Г) Да се избягва контролът на психологическата подготовка', correct: false },
+        ],
+        why: 'По време на състезанието целта е овладяване на емоциите и волева корекция на поведението.'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 4,
+        type: 'choice',
+        prompt: '4. Посочете ОБЕКТИВНИТЕ фактори на психическото напрежение (от изброените в учебника: публичност, свръхмотивация, публика, отговорност, очаквания, договорна обвързаност, неувереност):',
+        options: [
+          { text: 'А) публичност, публика (фенове), очаквания, договорна обвързаност', correct: true },
+          { text: 'Б) свръхмотивация, отговорност, неувереност', correct: false },
+          { text: 'В) самообладание, дисциплинираност, волеви усилия', correct: false },
+        ],
+        why: 'Обективните фактори произтичат от средата (публика, договори, медии).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 5,
+        type: 'choice',
+        prompt: '5. Изберете един от факторите, който да се впише в текста:\n„.......................... на състезатели и треньори налага повишени изисквания към резултатността на тяхната дейност, а оттам и към тяхната подготовка и реализация. Тя регламентира по строго определен начин поведението и дейността им не само по отношение на прякото им участие в спортносъстезателната дейност, но и по отношение на тяхното публично поведение.“',
+        options: [
+          { text: 'А) Неувереността', correct: false },
+          { text: 'Б) Страхът от неуспех', correct: false },
+          { text: 'В) Договорната обвързаност', correct: true },
+          { text: 'Г) Публичността', correct: false },
+        ],
+        why: 'Договорната обвързаност налага строга професионална регламентация (Тема 17, стр. 36).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 6,
+        type: 'open_fill',
+        prompt: '6. Поставете пред всяка характеристика буквата (А - Обща, Б - Специализирана):\n1. Дългосрочно развитие и усъвършенстване на базовите психически функции → [1]\n2. Насочена е към цялостната личност с перманентен характер → [2]\n3. В пряка зависимост от изискванията на конкретния вид спорт → [3]\n4. Развива онези функции, които биха осигурили успешна изява в съответния спорт → [4]',
+        fields: [
+          { label: '1. Дългосрочно базови:', keys: ['а', 'обща'] },
+          { label: '2. Цялостна личност:', keys: ['а', 'обща'] },
+          { label: '3. Конкретен спорт:', keys: ['б', 'специализирана'] },
+          { label: '4. Успешна изява:', keys: ['б', 'специализирана'] }
+        ],
+        official: '1: А (Обща) | 2: А (Обща) | 3: Б (Специализирана) | 4: Б (Специализирана)',
+        why: 'Класификация на характеристиките (стр. 46).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 7,
+        type: 'open_fill',
+        prompt: '7. Поставете пред всяка от задачите буквата (А - Обща, Б - Специализирана):\n1. Формиране и развитие на мотивация за занимание със спорт → [1]\n2. Развитие на специалните качества за конкретния вид спорт → [2]\n3. Развитие на психическата устойчивост и надеждност на спортиста → [3]\n4. Формиране и развитие на базови личностни качества → [4]',
+        fields: [
+          { label: '1. Мотивация за спорт:', keys: ['а', 'обща'] },
+          { label: '2. Специални качества:', keys: ['б', 'специализирана'] },
+          { label: '3. Устойчивост и надеждност:', keys: ['б', 'специализирана'] },
+          { label: '4. Базови качества:', keys: ['а', 'обща'] }
+        ],
+        official: '1: А (Обща) | 2: Б (Специализирана) | 3: Б (Специализирана) | 4: А (Обща)',
+        why: 'Задачи на общата vs специализираната подготовка (Тема 17, стр. 36–37).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 8,
+        type: 'choice',
+        prompt: '8. Посочете кои четири от дадените методи се отнасят за МЕТОДИТЕ НА ПСИХОЛОГИЧЕСКАТА ТРЕНИРОВКА:',
+        options: [
+          { text: 'А) моделирана тренировка, поведенчески тренинг, десенсибилизационен метод, трениране на психическите функции', correct: true },
+          { text: 'Б) трениране на нервните процеси, словесно внушение, регулиране на концентрацията', correct: false },
+          { text: 'В) отвличане на вниманието, почивка, дихателни упражнения, масаж', correct: false },
+        ],
+        why: 'Четирите основни метода на психологическата тренировка (Тема 17, стр. 38).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 9,
+        type: 'open_fill',
+        prompt: '9. Посочете за кой метод се отнася следната характеристика:\n„Привикване към силно отрицателни емоциогенни фактори“',
+        fields: [
+          { label: 'Метод:', keys: ['десенсибилизационен', 'десенсибилизация', 'десенсибилизационен метод'] }
+        ],
+        official: 'Десенсибилизационен метод (десенсибилизация)',
+        why: 'Десенсибилизацията намалява чувствителността към стресори чрез системно привикване.'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 10,
+        type: 'choice',
+        prompt: '10. Посочете кои са задачите на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ:',
+        options: [
+          { text: 'А) Коригиране на състезателното поведение, управление на мотивацията, активиране на саморегулационните умения, овладяване на емоционалните състояния', correct: true },
+          { text: 'Б) Определяне на целта за предстоящия старт и създаване на положителна нагласа', correct: false },
+          { text: 'В) Мотивиране за следваща подготовка и анализ на допуснатите грешки след финала', correct: false },
+        ],
+        why: 'Задачите по време на състезателния старт (Тема 17, стр. 37).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 11,
+        type: 'open_fill',
+        prompt: '11. При планиране на психическата подготовка се отчитат: 1. Психологически особености; 2. Възрастови особености. Добавете още 2 особености:\n3. [................................]\n4. [................................]',
+        fields: [
+          { label: '3. Особеност:', keys: ['квалификация', 'спортна квалификация', 'опит', 'минал опит', 'спортносъстезателен'] },
+          { label: '4. Особеност:', keys: ['спорт', 'вида спорт', 'конкретния спорт', 'пол', 'полови'] }
+        ],
+        official: '3. Спортна квалификация и минал спортносъстезателен опит | 4. Особености на конкретния спорт / полови особености',
+        why: 'Ключови фактори при изготвяне на плана (Тема 18, стр. 39–40).'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 12,
+        type: 'open_fill',
+        prompt: '12. Изберете едно от посочените предложения (комплексен/учебно-тренировъчен/психиката/подготовка) за буквите А, Б, В и Г:\n„Психическата подготовка е продължителен, системен и ......(А) ..... процес. Тя е съществена страна от единния и цялостен .....(Б)....... процес. Прилагането на специфични средства и методи осигурява целенасочена подготовка на (В) ..................... и личността на състезателя, което му дава възможност за оптимално участие в процеса на спортната ......... (Г) ....... .“',
+        fields: [
+          { label: 'А (процес):', keys: ['комплексен'] },
+          { label: 'Б (процес):', keys: ['учебно-тренировъчен', 'учебно тренировъчен'] },
+          { label: 'В (подготовка на):', keys: ['психиката', 'психика'] },
+          { label: 'Г (спортната):', keys: ['подготовка', 'подготовката'] }
+        ],
+        official: 'А: комплексен | Б: учебно-тренировъчен | В: психиката | Г: подготовка',
+        why: 'Текстът от Тема 16 и Тема 17 в учебника.'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 13,
+        type: 'choice',
+        prompt: '13. Кои от посочените твърдения НЕ се отнасят за специална психическа подготовка за конкретно състезание:',
+        options: [
+          { text: 'А) Оптимално се дозират външните въздействия', correct: true },
+          { text: 'Б) Създава се положителна нагласа към предстоящия старт', correct: false },
+          { text: 'В) При необходимост се коригира състезателното поведение', correct: false },
+          { text: 'Г) Анализират се допуснатите грешки след старта', correct: false },
+        ],
+        why: 'Дозирането на външните въздействия е общопедагогически принцип, а не цел на специалната състезателна психика.'
+      },
+      {
+        subject: 'psychology',
+        section: 'full_test',
+        num: 14,
+        type: 'open_fill',
+        prompt: '14. В зависимост от обекта/насочеността на въздействие, посочете трите вида психическа подготовка (за които е важно постигането на баланс):',
+        fields: [
+          { label: 'А:', keys: ['обща', 'обща психическа подготовка'] },
+          { label: 'Б:', keys: ['специализирана', 'специализирана психическа подготовка'] },
+          { label: 'В:', keys: ['специална', 'специална психическа подготовка'] }
+        ],
+        official: 'А: Обща психическа подготовка | Б: Специализирана психическа подготовка | В: Специална психическа подготовка',
+        why: 'Трите основни вида психическа подготовка според насочеността (Тема 17, стр. 36–38).'
+      }
+    ];
+
+    // =========================================================================
+    // 2. BIOMECHANICS QUESTIONS (PDF 1: PP. 62-69 - ALL 30 QUESTIONS PRESERVED)
+    // =========================================================================
     const biomechanicsQuestions = [
-      // === ТЕСТ № 1 (стр. 62-65: 15 въпроса) ===
+      // === ТЕСТ № 1 (стр. 62-65) ===
       {
         subject: 'biomechanics',
         test: 1,
@@ -393,20 +813,13 @@
           <div class="w-full flex flex-col items-center">
             <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. 26: Градивни елементи на ставата</span>
             <svg viewBox="0 0 340 190" class="w-full max-w-md h-44">
-              <!-- Upper Bone -->
               <path d="M120 15 L220 15 L220 50 C220 65 195 75 170 75 C145 75 120 65 120 50 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
-              <!-- Cartilage Upper -->
               <path d="M125 53 C125 68 145 73 170 73 C195 73 215 68 215 53 Z" fill="#00f0ff" opacity="0.9"/>
-              <!-- Lower Bone -->
               <path d="M120 175 L220 175 L220 140 C220 125 195 115 170 115 C145 115 120 125 120 140 Z" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
-              <!-- Cartilage Lower -->
               <path d="M125 137 C125 122 145 117 170 117 C195 117 215 122 215 137 Z" fill="#00f0ff" opacity="0.9"/>
-              <!-- Capsule -->
               <path d="M120 45 C90 75 90 115 120 145 M220 45 C250 75 250 115 220 145" stroke="#f43f5e" stroke-width="3" fill="none" stroke-dasharray="4 2"/>
-              <!-- Synovial cavity -->
               <ellipse cx="170" cy="95" rx="35" ry="12" fill="#10b981" opacity="0.45"/>
               <text x="170" y="99" fill="#a7f3d0" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Синовия</text>
-              <!-- Callout Badges -->
               <circle cx="270" cy="30" r="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/><text x="270" y="34.5" fill="#000" font-size="12" font-weight="900" font-family="monospace" text-anchor="middle">1</text>
               <line x1="220" y1="30" x2="258" y2="30" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
               <circle cx="270" cy="65" r="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/><text x="270" y="69.5" fill="#000" font-size="12" font-weight="900" font-family="monospace" text-anchor="middle">2</text>
@@ -477,7 +890,7 @@
         type: 'open_fill',
         prompt: '9. Кои са етапите за постигане на динамична устойчивост на движението – начална фаза, междинна фаза и заключителна фаза:',
         fields: [
-          { label: '1. Начална фаза:', keys: ['блокиране', 'степени на свобода', 'сковано', 'тромаво'] },
+          { label: '1. Начална фаза:', keys: ['блокиране', 'степени на свобода', 'сковано', 'тромаво', 'заключваш', 'заключване'] },
           { label: '2. Междинна фаза:', keys: ['освобождаване', 'по-леко', 'уверено', 'частично'] },
           { label: '3. Заключителна фаза:', keys: ['пълно', 'реактивни сили', 'леко', 'свободно', 'окончателно'] }
         ],
@@ -507,16 +920,12 @@
           <div class="w-full flex flex-col items-center">
             <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. 29: Силов лост от II род (Товарът е по средата)</span>
             <svg viewBox="0 0 340 120" class="w-full max-w-md h-32 bg-slate-950 p-2 rounded-xl border border-slate-800">
-              <!-- Lever Bar -->
               <rect x="50" y="55" width="240" height="10" rx="3" fill="#64748b" stroke="#94a3b8" stroke-width="1.5"/>
-              <!-- Fulcrum Pivot (Left) -->
               <polygon points="50,65 40,85 60,85" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
               <text x="50" y="102" fill="#f59e0b" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Опора (Става)</text>
-              <!-- Load Resistance (Middle down) -->
               <line x1="160" y1="55" x2="160" y2="20" stroke="#f43f5e" stroke-width="3"/>
               <polygon points="160,65 154,48 166,48" fill="#f43f5e"/>
               <text x="160" y="14" fill="#f43f5e" font-size="11" font-weight="bold" font-family="monospace" text-anchor="middle">Товар R (Тежест)</text>
-              <!-- Effort Force (Right up) -->
               <line x1="280" y1="65" x2="280" y2="20" stroke="#00f0ff" stroke-width="3"/>
               <polygon points="280,12 274,28 286,28" fill="#00f0ff"/>
               <text x="280" y="10" fill="#00f0ff" font-size="11" font-weight="bold" font-family="monospace" text-anchor="middle">Сила F (Мускул)</text>
@@ -540,29 +949,23 @@
           <div class="w-full flex flex-col items-center">
             <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Фиг. 32: Блок-схема на Двигателното действие като система</span>
             <svg viewBox="0 0 380 200" class="w-full max-w-lg h-48 bg-slate-950 p-2 rounded-xl border border-slate-800">
-              <!-- Top Node -->
               <rect x="100" y="10" width="180" height="24" rx="6" fill="#047857" stroke="#10b981" stroke-width="1.5"/>
               <text x="190" y="26" fill="#fff" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">СИСТЕМА НА ДВИЖЕНИЯТА</text>
-              <!-- Branch Lines -->
               <line x1="150" y1="34" x2="90" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
               <line x1="230" y1="34" x2="290" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
-              <!-- Level 1 -->
               <rect x="20" y="55" width="140" height="22" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
               <text x="90" y="70" fill="#93c5fd" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ДВИГАТЕЛНА СИСТЕМА</text>
               <rect x="220" y="55" width="140" height="22" rx="5" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
               <text x="290" y="70" fill="#a7f3d0" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ИНФОРМАЦИОННА СИСТЕМА</text>
-              <!-- Level 2 Subsystems -->
               <rect x="10" y="90" width="75" height="18" rx="4" fill="#0f172a" stroke="#00f0ff" stroke-width="1"/>
               <text x="47" y="102" fill="#00f0ff" font-size="8" font-family="monospace" text-anchor="middle">Кинематична</text>
               <rect x="95" y="90" width="75" height="18" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1" stroke-dasharray="3 1"/>
               <text x="132" y="102" fill="#f43f5e" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">[А] ?</text>
-              <!-- Level 3 Details -->
               <text x="47" y="125" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Пространствена</text>
               <text x="47" y="140" fill="#f59e0b" font-size="7.5" font-weight="bold" font-family="monospace" text-anchor="middle">• [Б] ?</text>
               <text x="47" y="155" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Времева</text>
               <text x="132" y="125" fill="#f59e0b" font-size="7.5" font-weight="bold" font-family="monospace" text-anchor="middle">• [В] ?</text>
               <text x="132" y="140" fill="#cbd5e1" font-size="7.5" font-family="monospace" text-anchor="middle">• Енергетична</text>
-              <!-- Info structure -->
               <text x="290" y="105" fill="#f59e0b" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle">• [Г] ?</text>
               <text x="290" y="125" fill="#cbd5e1" font-size="8" font-family="monospace" text-anchor="middle">• Сетивна</text>
               <text x="290" y="145" fill="#cbd5e1" font-size="8" font-family="monospace" text-anchor="middle">• Ефекторна</text>
@@ -621,7 +1024,7 @@
         why: 'Четирите биомеханични свойства са: еластичност, вискозитет, пълзене и релаксация (Тема 3.2, стр. 39).'
       },
 
-      // === ТЕСТ № 2 (стр. 66-69: 15 въпроса) ===
+      // === ТЕСТ № 2 (стр. 66-69) ===
       {
         subject: 'biomechanics',
         test: 2,
@@ -767,24 +1170,18 @@
           <div class="w-full flex flex-col items-center">
             <span class="text-xs font-mono text-cyan-400 mb-2 font-bold uppercase tracking-wider">Чертеж от стр. 67: Лост от I род (Равновесен лост с опора в средата)</span>
             <svg viewBox="0 0 360 140" class="w-full max-w-md h-36 bg-slate-950 p-2 rounded-xl border border-slate-800">
-              <!-- Center Fulcrum -->
               <polygon points="180,80 170,105 190,105" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
               <circle cx="180" cy="80" r="4" fill="#f43f5e"/>
               <text x="180" y="120" fill="#f59e0b" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Опорна точка О</text>
-              <!-- Seesaw Beam -->
               <rect x="50" y="75" width="260" height="8" rx="3" fill="#64748b" stroke="#94a3b8" stroke-width="1.5"/>
-              <!-- Arm l1 (Left) -->
               <line x1="55" y1="50" x2="175" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
               <text x="115" y="45" fill="#94a3b8" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">l₁</text>
-              <!-- Arm l2 (Right) -->
               <line x1="185" y1="50" x2="305" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
               <text x="245" y="45" fill="#94a3b8" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">l₂</text>
-              <!-- Left Weights & Force F1 -->
               <rect x="75" y="60" width="30" height="15" fill="#475569" stroke="#94a3b8"/>
               <line x1="90" y1="83" x2="90" y2="125" stroke="#f43f5e" stroke-width="2.5"/>
               <polygon points="90,132 85,120 95,120" fill="#f43f5e"/>
               <text x="70" y="115" fill="#f43f5e" font-size="12" font-weight="bold" font-family="monospace">F₁</text>
-              <!-- Right Weights & Force F2 -->
               <rect x="255" y="60" width="30" height="15" fill="#475569" stroke="#94a3b8"/>
               <line x1="270" y1="83" x2="270" y2="125" stroke="#00f0ff" stroke-width="2.5"/>
               <polygon points="270,132 265,120 275,120" fill="#00f0ff"/>
@@ -900,420 +1297,8 @@
       }
     ];
 
-    // ==========================================
-    // 2. SPORT PSYCHOLOGY QUESTIONS (PDF 2: ALL 28)
-    // ==========================================
-    const psychologyQuestions = [
-      // === Равнище Знание (стр. 41-42: 9 въпроса) ===
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 1,
-        type: 'choice',
-        prompt: '1. Отбележете вярното твърдение за психическата подготовка в спорта.\nПсихическата подготовка се състои в:',
-        options: [
-          { text: 'А) Знания, умения, навици, качества', correct: false },
-          { text: 'Б) Психическата подготовка е система от целенасочени въздействия върху психиката и личността на спортиста и треньора с цел достигане на пълноценно, максимално ефективно участие в процеса на подготовка и адекватна състезателна реализация', correct: true },
-          { text: 'В) Свойство да въздейства или да противодейства на външни съпротивления', correct: false },
-        ],
-        why: 'Официална дефиниция за психическа подготовка в спорта (Тема 17, стр. 36).'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 2,
-        type: 'choice',
-        prompt: '2. Посочете кои са факторите на психическото напрежение в съвременния спорт:',
-        options: [
-          { text: 'А) обективни, субективни', correct: true },
-          { text: 'Б) генотипни, фенотипни', correct: false },
-          { text: 'В) съзнателни, волеви', correct: false },
-        ],
-        why: 'Факторите се делят на обективни (среда, публика, медии) и субективни (тревожност, свръхмотивация, очаквания).'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 3,
-        type: 'choice',
-        prompt: '3. Посочете кои са видовете психическа подготовка в зависимост от насочеността ѝ:',
-        options: [
-          { text: 'А) основна, селективна, комплексна', correct: false },
-          { text: 'Б) евристична, вероятностна, екстремална', correct: false },
-          { text: 'В) обща, специализирана, специална', correct: true },
-        ],
-        why: 'Трите вида по насоченост: Обща (базова), Специализирана (по вид спорт) и Специална (за конкретен старт).'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 4,
-        type: 'choice',
-        prompt: '4. Посочете верния отговор: Каква е основната цел на ОБЩАТА психическа подготовка?',
-        options: [
-          { text: 'А) Дългосрочно развитие и усъвършенстване на базовите психически функции и качества, които са от значение за спортната дейност и цялостната подготовка на спортиста', correct: true },
-          { text: 'Б) Развива онези психични функции и качества, които биха осигурили успешна изява в съответния вид спорт', correct: false },
-          { text: 'В) Развитие на способностите за самоинформиране и самоконтрол', correct: false },
-        ],
-        why: 'Общата психическа подготовка има дългосрочен перманентен характер за базовите качества.'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 5,
-        type: 'choice',
-        prompt: '5. Кой от посочените методи НЕ се отнася към методите на психологическата тренировка (Посочете грешното становище):',
-        options: [
-          { text: 'А) Десенсибилизационен метод', correct: false },
-          { text: 'Б) Поведенчески тренинг', correct: false },
-          { text: 'В) Моделирано трениране', correct: false },
-          { text: 'Г) Механично повтаряне по метода проба-грешка', correct: true },
-        ],
-        why: 'Методът проба-грешка не е научен метод на психологическата тренировка.'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 6,
-        type: 'choice',
-        prompt: '6. Разграничете от посочените възможни ОБЕКТИВНИТЕ фактори на психично напрежение:',
-        options: [
-          { text: 'А) публичност, елитарност, фенове, медии, очаквания, комерсиализация, договорна обвързаност', correct: true },
-          { text: 'Б) свръхмотивация, предстартови състояния, продължителност на кариерата, конкуренция', correct: false },
-          { text: 'В) увеличават се изискванията, клубни очаквания, отговорност', correct: false },
-        ],
-        why: 'Обективните фактори произтичат от външната среда и обществото.'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 7,
-        type: 'choice',
-        prompt: '7. Разграничете кое от посочените условия за ефективността на психическата подготовка е ГРЕШНО:',
-        options: [
-          { text: 'А) Убедеността и активното участие', correct: false },
-          { text: 'Б) Координацията и доверието между треньор, състезател и психолог', correct: false },
-          { text: 'В) Сходни по кинематика, но различаващи се по динамика упражнения', correct: true },
-          { text: 'Г) Положително отношение', correct: false },
-        ],
-        why: '„Сходни по кинематика...“ е механика, а не психологически фактор за ефективност.'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 8,
-        type: 'open_fill',
-        prompt: '8. Номерирайте последователно (1, 2, 3) етапите на специалната психическа подготовка:\n[Психическа подготовка преди състезанието]\n[Психическа подготовка по време на състезанието]\n[Психическа подготовка след състезанието]',
-        fields: [
-          { label: 'Етап 1:', keys: ['преди', 'преди състезание', 'преди състезанието'] },
-          { label: 'Етап 2:', keys: ['по време', 'по време на състезание', 'по време на състезанието'] },
-          { label: 'Етап 3:', keys: ['след', 'след състезание', 'след състезанието', 'обсъждане'] }
-        ],
-        official: '1. Преди състезанието | 2. По време на състезанието | 3. След състезанието',
-        why: 'Трите етапа на специалната психическа подготовка.'
-      },
-      {
-        subject: 'psychology',
-        section: 'knowledge',
-        num: 9,
-        type: 'choice',
-        prompt: '9. Посочете ГРЕШНОТО твърдение: При планирането на психическата подготовка следва да се отчитат:',
-        options: [
-          { text: 'А) индивидуалните, възрастовите и половите особености на състезателите', correct: false },
-          { text: 'Б) изложението на знанията', correct: true },
-          { text: 'В) спортната квалификация, минал спортносъстезателен опит', correct: false },
-          { text: 'Г) особеностите на конкретния спорт и изискванията към качествата и поведението', correct: false },
-        ],
-        why: '„Изложението на знанията“ не е фактор при спортното планиране.'
-      },
-
-      // === Равнище Разбиране (стр. 43-44: 5 въпроса) ===
-      {
-        subject: 'psychology',
-        section: 'understanding',
-        num: 1,
-        type: 'open_fill',
-        prompt: '1. Разграничете и групирайте, като свържете със стрелки, характерните трудности с типичните методи за противодействие (виж схемата от стр. 43):',
-        attachment: `
-          <div class="w-full max-w-xl p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Схема от стр. 43: Трудности и Противодействие</span>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div class="space-y-1.5">
-                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">1. Надценяване, страх от противника</div>
-                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">2. Подценяването</div>
-                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">3. Главозамайването</div>
-                <div class="p-2 rounded-xl bg-card border border-rose-500/30 text-rose-300 font-bold">4. Изненади с непознат противник</div>
-              </div>
-              <div class="space-y-1.5 text-[11px] text-slate-300">
-                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">а)</strong> Слаби страни на противника / силни на своя отбор</div>
-                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">б)</strong> Засилване на спортното разузнаване</div>
-                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">в)</strong> Припомняне на големите успехи и поуки</div>
-                <div class="p-2 rounded-xl bg-card border border-cyan-500/30"><strong class="text-neonCyan">г)</strong> Вредното влияние и чувството за отговорност</div>
-              </div>
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: '1. Надценяване:', keys: ['слабите страни', 'слаби страни', 'силни страни'] },
-          { label: '2. Подценяване:', keys: ['вредното влияние', 'отговорност', 'примери'] },
-          { label: '3. Главозамайване:', keys: ['успехи', 'поуки', 'как са постигнати'] },
-          { label: '4. Непознат противник:', keys: ['разузнаване', 'спортно разузнаване', 'внимание'] }
-        ],
-        official: '1. Надценяване → Говори се за слабите страни на противника и силните на своя отбор (а)\n2. Подценяване → Разкрива се вредното влияние, набляга се на отговорността (г)\n3. Главозамайване → Припомнят се най-големите успехи и как са постигнати трудностите (в)\n4. Непознат противник → Засилване на спортното разузнаване и вниманието (б)',
-        why: 'Психологически методи за неутрализиране на предстартови изкривявания (стр. 43).'
-      },
-      {
-        subject: 'psychology',
-        section: 'understanding',
-        num: 2,
-        type: 'open_fill',
-        prompt: '2. Поставете буквата на подготовката (А - Обща, Б - Специализирана):\n1. Насочена към дългосрочно развитие на базови психически функции → [1]\n2. Насочена към цялостната личност и има перманентен характер → [2]\n3. В пряка зависимост от изискванията на конкретния вид спорт → [3]\n4. Има за цел успешна изява в съответния вид спорт → [4]',
-        fields: [
-          { label: '1. Дългосрочно базови:', keys: ['а', 'обща'] },
-          { label: '2. Цялостна личност:', keys: ['а', 'обща'] },
-          { label: '3. Конкретен спорт:', keys: ['б', 'специализирана'] },
-          { label: '4. Изява в спорта:', keys: ['б', 'специализирана'] }
-        ],
-        official: '1: А (Обща) | 2: А (Обща) | 3: Б (Специализирана) | 4: Б (Специализирана)',
-        why: 'Разграничение между Обща (перманентна) и Специализирана (за спорта) подготовка.'
-      },
-      {
-        subject: 'psychology',
-        section: 'understanding',
-        num: 3,
-        type: 'choice',
-        prompt: '3. Посочете кои компоненти на личността характеризират ПСИХИЧЕСКАТА ГОТОВНОСТ ПРЕДИ СЪСТЕЗАНИЕ (боева готовност):',
-        options: [
-          { text: 'А) самообладание, решителност, недостатъчно осмислени повторения', correct: false },
-          { text: 'Б) представяне, възприемане, скованост, неточност', correct: false },
-          { text: 'В) сложност на двигателното действие, саморегулация, вторични умения', correct: false },
-          { text: 'Г) трезва увереност на спортиста в своите сили, стремеж да мобилизира всички сили за победа, емоционална възбуда, висока устойчивост при преодоляване на препятствията, способност да управлява поведението си', correct: true },
-        ],
-        why: 'Комплексно описание на бойната предстартова готовност.'
-      },
-      {
-        subject: 'psychology',
-        section: 'understanding',
-        num: 4,
-        type: 'open_fill',
-        prompt: '4. Намерете съответствието между задачите и етапите на специалната психическа подготовка (запишете: преди, по време, след):\n1. Цел за предстоящия старт, положителна нагласа, увереност → [1]\n2. Овладяване на емоции, коригиране на поведението → [2]\n3. Анализ на грешки и затвърждаване на резултати → [3]',
-        fields: [
-          { label: '1. Цел и нагласа:', keys: ['преди', 'преди състезание', 'преди състезанието'] },
-          { label: '2. Овладяване на емоции:', keys: ['по време', 'по време на състезание', 'по време на състезанието'] },
-          { label: '3. Анализ на грешки:', keys: ['след', 'след състезание', 'след състезанието'] }
-        ],
-        official: '1. Преди състезание | 2. По време на състезание | 3. След състезание',
-        why: 'Разпределение на задачите по времевата ос на състезанието.'
-      },
-      {
-        subject: 'psychology',
-        section: 'understanding',
-        num: 5,
-        type: 'open_fill',
-        prompt: '5. Разпределете способите на самовъздействие на УСПОКОЯВАЩИ и МОБИЛИЗИРАЩИ:\n(Разхлабване на мускули, бърз ритъм, бавен ритъм, напрягане, силни аритмични звуци, тихи звуци, успокояващ масаж, мобилизиращ масаж)',
-        fields: [
-          { label: 'Успокояващи:', keys: ['разхлабване', 'бавен', 'топлина', 'тихи', 'успокояващ'] },
-          { label: 'Мобилизиращи:', keys: ['бърз', 'напрягане', 'силни', 'мобилизиращ', 'аритмични'] }
-        ],
-        official: 'Успокояващи: Разхлабване на мускулите, топлина, бавни движения, бавен пулс/дишане, тихи звуци, успокояващ масаж.\nМобилизиращи: Напрягане, бърз ритъм, силни аритмични звуци, мобилизиращ масаж.',
-        why: 'Психорегулативни техники за превключване на вегетативните състояния.'
-      },
-
-      // === Тест на тема Психическа подготовка в спорта (стр. 45-48: 14 въпроса) ===
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 1,
-        type: 'choice',
-        prompt: '1. Посочете верния отговор. Кое от изброените е определение за психическа подготовка:',
-        options: [
-          { text: 'А) Система от целенасочени въздействия върху психиката и личността на спортиста и треньора с цел достигане на пълноценно, максимално ефективно участие в процеса на подготовка и адекватна състезателна реализация', correct: true },
-          { text: 'Б) Процес, при който се събира информация и се оценява действителното състояние на даден състезател', correct: false },
-          { text: 'В) Специализирана система от едновременни и последователни действия за организация на вътрешните и външните сили', correct: false },
-        ],
-        why: 'Основна дефиниция (Тема 17, стр. 36).'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 2,
-        type: 'choice',
-        prompt: '2. Посочете за кой вид метод на психическата подготовка се отнася следната дефиниция:\n„Чрез него се постига цялостно въздействие върху личността на спортиста, отношението към спорта въобще, базовата мотивация за занимания със спортна дейност“:',
-        options: [
-          { text: 'А) образователен', correct: false },
-          { text: 'Б) общовъзпитателен', correct: true },
-          { text: 'В) социален', correct: false },
-        ],
-        why: 'Общовъзпитателните методи формират базовата мотивация и личностните ценности.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 3,
-        type: 'choice',
-        prompt: '3. Кое от изброените е основна задача на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ:',
-        options: [
-          { text: 'А) Да се прилага само в подготвителния период', correct: false },
-          { text: 'Б) Овладяване на емоционалните състояния и коригиране на състезателното поведение', correct: true },
-          { text: 'В) Да се избягва контролът на психологическата подготовка', correct: false },
-        ],
-        why: 'По време на старта ключово е овладяването на емоциите и волевата корекция.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 4,
-        type: 'choice',
-        prompt: '4. Посочете ОБЕКТИВНИТЕ фактори на психическото напрежение:',
-        options: [
-          { text: 'А) публичност, публика (фенове), очаквания, договорна обвързаност', correct: true },
-          { text: 'Б) свръхмотивация, неувереност, страх от неуспех', correct: false },
-          { text: 'В) отговорност, предстартова треска, апатия', correct: false },
-        ],
-        why: 'Обективните фактори идват от средата (публика, договори, медии).'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 5,
-        type: 'choice',
-        prompt: '5. Изберете фактора, който да се впише в текста:\n„.......................... на състезатели и треньори налага повишени изисквания към резултатността на тяхната дейност, а оттам и към тяхната подготовка и реализация. Тя регламентира по строго определен начин поведението и дейността им не само по отношение на прякото им участие в спортносъстезателната дейност, но и по отношение на тяхното публично поведение.“',
-        options: [
-          { text: 'А) Неувереността', correct: false },
-          { text: 'Б) Страхът от неуспех', correct: false },
-          { text: 'В) Договорната обвързаност', correct: true },
-          { text: 'Г) Публичността', correct: false },
-        ],
-        why: 'Договорната обвързаност налага строга професионална регламентация.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 6,
-        type: 'open_fill',
-        prompt: '6. Поставете буквата (А - Обща, Б - Специализирана):\n1. Дългосрочно развитие на базови психически функции → [1]\n2. Насочена към цялостната личност с перманентен характер → [2]\n3. В пряка зависимост от изискванията на конкретния спорт → [3]\n4. Развива функции за успешна изява в съответния спорт → [4]',
-        fields: [
-          { label: '1. Дългосрочно:', keys: ['а', 'обща'] },
-          { label: '2. Перманентен:', keys: ['а', 'обща'] },
-          { label: '3. Конкретен спорт:', keys: ['б', 'специализирана'] },
-          { label: '4. Успешна изява:', keys: ['б', 'специализирана'] }
-        ],
-        official: '1: А | 2: А | 3: Б | 4: Б',
-        why: 'Класификация на характеристиките.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 7,
-        type: 'open_fill',
-        prompt: '7. Поставете буквата на задачите (А - Обща, Б - Специализирана):\n1. Формиране и развитие на мотивация за спорт → [1]\n2. Развитие на специални качества за конкретния вид спорт → [2]\n3. Развитие на психическа устойчивост и надеждност на спортиста → [3]\n4. Развитие на базови личностни качества за активността → [4]',
-        fields: [
-          { label: '1. Мотивация за спорт:', keys: ['а', 'обща'] },
-          { label: '2. Специални качества:', keys: ['б', 'специализирана'] },
-          { label: '3. Устойчивост и надеждност:', keys: ['б', 'специализирана'] },
-          { label: '4. Базови качества:', keys: ['а', 'обща'] }
-        ],
-        official: '1: А | 2: Б | 3: Б | 4: А',
-        why: 'Задачи на общата vs специализираната подготовка (Тема 17, стр. 36–37).'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 8,
-        type: 'choice',
-        prompt: '8. Посочете кои 4 метода са МЕТОДИ НА ПСИХОЛОГИЧЕСКАТА ТРЕНИРОВКА:',
-        options: [
-          { text: 'А) моделирана тренировка, поведенчески тренинг, десенсибилизационен метод, трениране на психическите функции', correct: true },
-          { text: 'Б) словесно внушение, заповед, дихателни упражнения, масаж', correct: false },
-          { text: 'В) превключване на вниманието, почивка, хранене, сън', correct: false },
-        ],
-        why: 'Четирите основни метода за психологически тренинг (Тема 17, стр. 38).'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 9,
-        type: 'open_fill',
-        prompt: '9. Посочете за кой метод се отнася следната характеристика:\n„Привикване към силно отрицателни емоциогенни фактори“',
-        fields: [
-          { label: 'Метод:', keys: ['десенсибилизационен', 'десенсибилизация', 'десенсибилизационен метод'] }
-        ],
-        official: 'Десенсибилизационен метод (десенсибилизация)',
-        why: 'Десенсибилизацията намалява чувствителността към стресори чрез системно привикване.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 10,
-        type: 'choice',
-        prompt: '10. Посочете задачите на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ:',
-        options: [
-          { text: 'А) Овладяване на емоционалните състояния, коригиране на поведението, управление на мотивацията и активиране на саморегулацията', correct: true },
-          { text: 'Б) Определяне на целта за старта и създаване на положителна нагласа', correct: false },
-          { text: 'В) Анализ и осмисляне на допуснатите грешки след финала', correct: false },
-        ],
-        why: 'Задачите по време на състезателния старт (Тема 17, стр. 37).'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 11,
-        type: 'open_fill',
-        prompt: '11. При планиране на психическата подготовка се отчитат: 1. Психологически особености; 2. Възрастови особености. Добавете още 2 особености:\n3. [................................]\n4. [................................]',
-        fields: [
-          { label: '3. Особеност:', keys: ['квалификация', 'спортна квалификация', 'опит', 'минал опит'] },
-          { label: '4. Особеност:', keys: ['спорт', 'вида спорт', 'конкретния спорт', 'пол', 'полови'] }
-        ],
-        official: '3. Спортна квалификация и минал спортносъстезателен опит | 4. Особености на конкретния спорт / полова принадлежност',
-        why: 'Ключови фактори при изготвяне на плана (Тема 18, стр. 39–40).'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 12,
-        type: 'open_fill',
-        prompt: '12. Попълнете липсващите думи на местата на буквите А, Б, В и Г:\n„Психическата подготовка е продължителен, системен и ......(А)..... процес. Тя е съществена страна от единния и цялостен .....(Б)....... процес. Прилагането на специфични средства и методи осигурява целенасочена подготовка на .....(В)..... и личността на състезателя, което му дава възможност за оптимално участие в процеса на спортната .....(Г)..... .“',
-        fields: [
-          { label: 'А (процес):', keys: ['комплексен'] },
-          { label: 'Б (процес):', keys: ['учебно-тренировъчен', 'учебно тренировъчен'] },
-          { label: 'В (подготовка на):', keys: ['психиката', 'психика'] },
-          { label: 'Г (спортната):', keys: ['подготовка', 'подготовката'] }
-        ],
-        official: 'А: комплексен | Б: учебно-тренировъчен | В: психиката | Г: подготовка',
-        why: 'Основен текст за същността на психическата подготовка.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 13,
-        type: 'choice',
-        prompt: '13. Кое от посочените твърдения НЕ се отнася за специална психическа подготовка за конкретно състезание:',
-        options: [
-          { text: 'А) Оптимално се дозират външните въздействия', correct: true },
-          { text: 'Б) Създава се положителна нагласа към предстоящия старт', correct: false },
-          { text: 'В) При необходимост се коригира състезателното поведение', correct: false },
-          { text: 'Г) Анализират се допуснатите грешки след старта', correct: false },
-        ],
-        why: 'Дозирането на външните въздействия е общопедагогически принцип, а не специфична цел на състезателната психика.'
-      },
-      {
-        subject: 'psychology',
-        section: 'full_test',
-        num: 14,
-        type: 'open_fill',
-        prompt: '14. В зависимост от обекта/насочеността на въздействие, посочете трите вида психическа подготовка:',
-        fields: [
-          { label: 'А:', keys: ['обща', 'обща психическа подготовка'] },
-          { label: 'Б:', keys: ['специализирана', 'специализирана психическа подготовка'] },
-          { label: 'В:', keys: ['специална', 'специална психическа подготовка'] }
-        ],
-        official: 'А: Обща психическа подготовка | Б: Специализирана психическа подготовка | В: Специална психическа подготовка',
-        why: 'Трите основни вида психическа подготовка според насочеността.'
-      }
-    ];
-
     // --- State Variables ---
-    let currentSubject = 'biomechanics'; // 'biomechanics' (default) or 'psychology'
+    let currentSubject = 'psychology'; // Default: Psychology for the upcoming 12:30 exam!
     let currentSubFilter = 'all';
     let currentQuestions = [];
     let currentIdx = 0;
@@ -1336,7 +1321,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      setGlobalSubject('biomechanics');
+      setGlobalSubject('psychology');
     });
 
     function setGlobalSubject(sub) {
@@ -1349,20 +1334,22 @@
       const subTitle = document.getElementById('appSubTitle');
       const iconBadge = document.getElementById('subjectIconBadge');
 
-      if (sub === 'biomechanics') {
+      if (sub === 'psychology') {
+        psychTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
+        biomechTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all';
+        mainTitle.innerText = 'Спортна Психология XI Клас';
+        subTitle.innerText = 'проф. Татяна Янчева, дн • Шестобална система & Mastery Loop';
+        iconBadge.innerText = '🧠';
+        iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30';
+        renderSubFilters('psychology');
+      } else {
         biomechTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25';
         psychTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all';
         mainTitle.innerText = 'Биомеханика XI Клас';
         subTitle.innerText = 'гл. ас. Иван Иванов, доктор • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🔬';
+        iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-teal-600 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-cyan-500/30';
         renderSubFilters('biomechanics');
-      } else {
-        psychTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
-        biomechTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all';
-        mainTitle.innerText = 'Спортна Психология XI Клас';
-        subTitle.innerText = 'проф. Татяна Янчева • Шестобална система & Mastery Loop';
-        iconBadge.innerText = '🧠';
-        renderSubFilters('psychology');
       }
 
       currentSubFilter = 'all';
@@ -1373,20 +1360,20 @@
       const container = document.getElementById('subFiltersContainer');
       container.innerHTML = '';
 
-      if (sub === 'biomechanics') {
+      if (sub === 'psychology') {
+        container.innerHTML = `
+          <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
+          <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-purple-600 text-white transition-all shadow-lg shadow-purple-500/25">Пълен Изпит (28 въпроса)</button>
+          <button onclick="setSubFilter('knowledge')" id="sub-knowledge" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Равнище „Знание“ (9 въпроса)</button>
+          <button onclick="setSubFilter('understanding')" id="sub-understanding" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Равнище „Разбиране“ (5 въпроса)</button>
+          <button onclick="setSubFilter('full_test')" id="sub-full_test" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Тест „Психическа подготовка“ (14 въпроса)</button>
+        `;
+      } else {
         container.innerHTML = `
           <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ ТЕСТ:</span>
           <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-neonCyan text-black transition-all shadow-lg shadow-cyan-500/25">Пълен Изпит (30 въпроса)</button>
           <button onclick="setSubFilter('test1')" id="sub-test1" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">ТЕСТ № 1 (15 въпроса)</button>
           <button onclick="setSubFilter('test2')" id="sub-test2" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">ТЕСТ № 2 (15 въпроса)</button>
-        `;
-      } else {
-        container.innerHTML = `
-          <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
-          <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-neonCyan text-black transition-all shadow-lg shadow-cyan-500/25">Всички (28 въпроса)</button>
-          <button onclick="setSubFilter('knowledge')" id="sub-knowledge" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Равнище „Знание“</button>
-          <button onclick="setSubFilter('understanding')" id="sub-understanding" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Равнище „Разбиране“</button>
-          <button onclick="setSubFilter('full_test')" id="sub-full_test" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Тест „Психическа подготовка“</button>
         `;
       }
     }
@@ -1399,19 +1386,20 @@
         b.className = 'px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all';
       });
       const activeBtn = document.getElementById('sub-' + filter);
-      if (activeBtn) activeBtn.className = 'px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-neonCyan text-black transition-all shadow-lg shadow-cyan-500/25';
+      const activeColor = currentSubject === 'psychology' ? 'bg-purple-600 text-white shadow-purple-500/25' : 'bg-neonCyan text-black shadow-cyan-500/25';
+      if (activeBtn) activeBtn.className = `px-3.5 py-1.5 text-xs font-display font-bold rounded-xl ${activeColor} transition-all shadow-lg`;
 
       restartExam(true);
     }
 
     function restartExam(shouldReshuffle = true) {
-      let pool = currentSubject === 'biomechanics' ? [...biomechanicsQuestions] : [...psychologyQuestions];
+      let pool = currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions];
 
-      if (currentSubject === 'biomechanics') {
+      if (currentSubject === 'psychology') {
+        if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
+      } else {
         if (currentSubFilter === 'test1') pool = pool.filter(q => q.test === 1);
         else if (currentSubFilter === 'test2') pool = pool.filter(q => q.test === 2);
-      } else {
-        if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
       }
 
       currentQuestions = shouldReshuffle ? shuffleArray(pool) : pool;
@@ -1422,8 +1410,9 @@
       wrongQuestionsInRound = [];
       isMasteryRetryRound = false;
 
+      const badgeColor = currentSubject === 'psychology' ? 'bg-purple-950 text-purple-300 border-purple-800' : 'bg-cyan-950 text-neonCyan border-cyan-800';
       document.getElementById('masteryBadge').innerText = '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)';
-      document.getElementById('masteryBadge').className = 'text-xs px-2 py-0.5 rounded bg-cyan-950 text-neonCyan border border-cyan-800 font-mono';
+      document.getElementById('masteryBadge').className = `text-xs px-2 py-0.5 rounded ${badgeColor} font-mono`;
       document.getElementById('mistakeCounterLabel').classList.add('hidden');
 
       document.getElementById('reportCardModal').classList.add('hidden');
@@ -1525,9 +1514,11 @@
       // Header Tag
       if (q.subject === 'biomechanics') {
         document.getElementById('qHeaderBadge').innerText = `ТЕСТ № ${q.test} • Въпрос ${q.num}`;
+        document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800';
       } else {
         const secName = q.section === 'knowledge' ? 'РАВНИЩЕ ЗНАНИЕ' : (q.section === 'understanding' ? 'РАВНИЩЕ РАЗБИРАНЕ' : 'ТЕСТ ПСИХИКА');
         document.getElementById('qHeaderBadge').innerText = `${secName} • Въпрос ${q.num}`;
+        document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-800';
       }
 
       document.getElementById('qTypeBadge').innerText = q.type === 'choice' ? 'Избираем отговор (Разбъркани опции)' : 'Отворен: Попълване';
@@ -1570,8 +1561,8 @@
           const row = document.createElement('div');
           row.className = 'flex flex-col sm:flex-row sm:items-center gap-2 p-3 rounded-2xl bg-card border border-borderGlow';
           row.innerHTML = `
-            <span class="font-mono font-bold text-neonCyan text-sm w-56 shrink-0">${f.label}</span>
-            <input type="text" id="openField_${idx}" placeholder="Напишете отговора тук..." class="w-full bg-obsidian border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:border-neonCyan focus:outline-none font-mono">
+            <span class="font-mono font-bold text-purple-400 text-sm w-56 shrink-0">${f.label}</span>
+            <input type="text" id="openField_${idx}" placeholder="Напишете отговора тук..." class="w-full bg-obsidian border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:border-purple-500 focus:outline-none font-mono">
           `;
           body.appendChild(row);
         });
@@ -1584,13 +1575,13 @@
       playSound('click');
       selectedChoiceIdx = idx;
       document.querySelectorAll('.choice-btn').forEach(b => {
-        b.classList.remove('border-neonCyan', 'bg-cyan-950/30');
+        b.classList.remove('border-purple-500', 'bg-purple-950/40');
         b.querySelector('.choice-radio').innerHTML = '';
         b.querySelector('.choice-radio').className = 'w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono choice-radio';
       });
-      btnEl.classList.add('border-neonCyan', 'bg-cyan-950/30');
+      btnEl.classList.add('border-purple-500', 'bg-purple-950/40');
       const radio = btnEl.querySelector('.choice-radio');
-      radio.className = 'w-5 h-5 rounded-md border border-neonCyan bg-neonCyan text-black font-black flex items-center justify-center text-xs font-mono choice-radio';
+      radio.className = 'w-5 h-5 rounded-md border border-purple-500 bg-purple-500 text-white font-black flex items-center justify-center text-xs font-mono choice-radio';
       radio.innerText = '✓';
     }
 
@@ -1626,7 +1617,7 @@
           document.getElementById('overrideBtnContainer').innerHTML = '';
         } else {
           playSound('wrong');
-          wrongQuestionsInRound.push(q);
+          wrongQuestionsInRound.push({ ...q });
           resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
           resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
           resIcon.innerText = '✕';
@@ -1663,7 +1654,7 @@
           if (val && val.length > 0) {
             const match = f.keys.some(k => {
               const keyLower = k.toLowerCase();
-              return val.includes(keyLower) || keyLower.includes(val) && val.length >= 2;
+              return val.includes(keyLower) || keyLower.includes(val) && val.length >= 1;
             });
             if (match) {
               matchedFieldIndices.add(idx);
@@ -1681,7 +1672,7 @@
               if (!matchedInputIndices.has(inIdx) && val && val.length > 0) {
                 const match = f.keys.some(k => {
                   const keyLower = k.toLowerCase();
-                  return val.includes(keyLower) || keyLower.includes(val) && val.length >= 2;
+                  return val.includes(keyLower) || keyLower.includes(val) && val.length >= 1;
                 });
                 if (match) {
                   matchedFieldIndices.add(fIdx);
@@ -1731,7 +1722,7 @@
           document.getElementById('overrideBtnContainer').innerHTML = '';
         } else if (fraction > 0) {
           playSound('correct');
-          // Create pruned question with ONLY the unmastered remaining fields for the retake round!
+          // Prune already mastered fields for retry loop
           const remainingFields = q.fields.filter((_, fIdx) => !matchedFieldIndices.has(fIdx));
           if (remainingFields.length > 0) {
             wrongQuestionsInRound.push({
@@ -1744,7 +1735,7 @@
           resIcon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-neonAmber border border-amber-500/40 flex items-center justify-center font-bold text-lg shrink-0';
           resIcon.innerText = '½';
           resTitle.className = 'font-display font-bold text-base text-neonAmber mb-1';
-          resTitle.innerText = `Частично верен (${correctCount} от ${totalFields} верни) • Верните полета няма да се повтарят при ретейка!`;
+          resTitle.innerText = `Частично верен (${correctCount} от ${totalFields} верни) • Верните полета се премахват при ретейка!`;
           document.getElementById('overrideBtnContainer').innerHTML = `
             <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
               <span>🛡️ Признай за напълно верен (+${(1 - fraction).toFixed(2)} т.)</span>
@@ -1821,12 +1812,12 @@
         masteryContainer.classList.remove('hidden');
         document.getElementById('wrongCountBadge').innerText = `${wrongQuestionsInRound.length}`;
         heading.innerText = 'Кръгът завърши с няколко пропуснати въпроса!';
-        subtext.innerText = 'Използвай цикъла за поправка, за да ги научиш без подсказки преди изпита.';
+        subtext.innerText = 'Използвай цикъла за поправка, за да ги научиш без подсказки преди изпита в 12:30.';
       } else {
         masteryContainer.classList.add('hidden');
         confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 } });
         heading.innerText = '🎉 100% ПЪЛНО СЪВЪРШЕНСТВО!';
-        subtext.innerText = 'Нямаш нито една грешка! Готов си за Отличен (6.00) на изпита!';
+        subtext.innerText = 'Нямаш нито една грешка! Готов си за Отличен (6.00) на изпита по Спортна Психология!';
       }
 
       if (parseFloat(res.num) >= 5.50) wordEl.className = 'font-display font-black text-3xl text-emerald-400 mb-1';
