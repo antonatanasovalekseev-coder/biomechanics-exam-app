@@ -132,7 +132,11 @@
         <!-- Dynamically populated filter buttons -->
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex flex-wrap items-center gap-3">
+        <button onclick="openCheatSheetModal()" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/40 text-amber-300 hover:text-white flex items-center gap-1.5 transition-all shadow-md">
+          <i data-lucide="book-open" class="w-3.5 h-3.5 text-neonAmber"></i>
+          <span>📚 ПИЩОВ: 18-ТЕ ТЕМИ (БЪРЗ ПРЕГЛЕД)</span>
+        </button>
         <button onclick="restartExam(true)" class="px-3.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-card border border-borderGlow text-slate-300 hover:text-white flex items-center gap-1.5 transition-all">
           <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Нов опит (Разбъркай)
         </button>
@@ -158,14 +162,24 @@
     <!-- Active Question Card -->
     <div id="questionWrapper" class="glass-panel p-6 sm:p-8 rounded-3xl border border-borderGlow shadow-2xl">
       
-      <!-- Top Meta Badge -->
-      <div class="flex items-center justify-between mb-4">
+      <!-- Top Meta Badge & Quick Learning Hint -->
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
         <span id="qHeaderBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-800">
           РАВНИЩЕ ЗНАНИЕ • Въпрос 1
         </span>
-        <span id="qTypeBadge" class="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-400 bg-card border border-borderGlow">
-          Избираем отговор
-        </span>
+        <div class="flex items-center gap-2">
+          <button id="hintToggleBtn" onclick="toggleQuestionHint()" class="text-xs font-mono text-purple-300 hover:text-white flex items-center gap-1 px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-700/60 transition-all hover:border-purple-400 shadow-sm">
+            <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-neonAmber"></i>
+            <span id="hintBtnLabel">💡 Бърз жокер за учене</span>
+          </button>
+          <span id="qTypeBadge" class="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-400 bg-card border border-borderGlow">
+            Избираем отговор
+          </span>
+        </div>
+      </div>
+
+      <!-- Expandable Question Learning Hint -->
+      <div id="qHintBox" class="mb-4 p-4 rounded-2xl bg-purple-950/40 border border-purple-500/50 text-xs text-purple-200 hidden leading-relaxed font-sans shadow-lg">
       </div>
 
       <!-- Question Text (Exact match from PDF) -->
@@ -253,6 +267,146 @@
         <button onclick="restartExam(true)" class="px-6 py-3 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:brightness-110 transition-all shadow-lg shadow-purple-500/25 flex items-center gap-2">
           <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Нов пълен тест
         </button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CHEAT SHEET MODAL: ALL 18 THEMES SUMMARY   -->
+    <!-- ========================================== -->
+    <div id="cheatSheetModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="bg-card border border-purple-500/50 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+        
+        <!-- Modal Header -->
+        <div class="p-6 border-b border-borderGlow flex items-center justify-between bg-obsidian/60">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-500/50 flex items-center justify-center text-xl">
+              📚
+            </div>
+            <div>
+              <h3 class="font-display font-black text-lg sm:text-xl text-white">Пълен Пищов: 18-те Теми по Спортна Психология</h3>
+              <p class="text-xs text-slate-400 font-mono">Бързо преговаряне на ключовите термини и дефиниции от учебника</p>
+            </div>
+          </div>
+          <button onclick="closeCheatSheetModal()" class="p-2 rounded-xl bg-obsidian border border-slate-700 text-slate-400 hover:text-white transition-all">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body (Scrollable) -->
+        <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300 font-sans">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Тема 1 & 2 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 1 & 2: ОСНОВИ И СТРУКТУРА</span>
+              <p>• <strong>Обект</strong>: Човекът / общността в спортната дейност.</p>
+              <p>• <strong>Предмет</strong>: Психични закономерности и проявления в спорта.</p>
+              <p>• <strong>Фактори на напрежение</strong>:</p>
+              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                – <em>Обективни</em>: публичност, медии, фенове, договори, очаквания.<br>
+                – <em>Субективни</em>: свръхмотивация, страх от неуспех, отговорност, неувереност.
+              </p>
+              <p>• <strong>Структура на дейността</strong>: Изпълнителни (движения/действия), Психични (цел/мотивация/ориентировка/задачи), Личностни (критерии/смисъл/полза).</p>
+            </div>
+
+            <!-- Тема 3 & 4 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 3 & 4: НАВИЦИ И САМОРЕГУЛАЦИЯ</span>
+              <p>• <strong>Двигателни навици (3 етапа)</strong>: 1) Начално разучаване (КАКВО); 2) Задълбочено (КАК точно); 3) Затвърждаване (автоматизация в променлива среда).</p>
+              <p>• <strong>Пренос</strong>: Положително влияние (общ и кръстосан/комисурални връзки).</p>
+              <p>• <strong>Интерференция</strong>: Отрицателно влияние между стари и нови навици.</p>
+              <p>• <strong>Деавтоматизация</strong>: Разрушаване на навика при стрес.</p>
+              <p>• <strong>Саморегулативна система (3 стъпки)</strong>: <strong class="text-neonLime">Самопознание → Самооценка → Самоконтрол</strong>.</p>
+            </div>
+
+            <!-- Тема 5 & 6 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 5 & 6: ТЕМПЕРАМЕНТ И МОТИВАЦИЯ</span>
+              <p>• <strong>4 типа темперамент</strong>:</p>
+              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                – <em>Холерик</em>: силен, неуравновесен, бързоподвижен.<br>
+                – <em>Сангвиник</em>: силен, уравновесен, бързоподвижен.<br>
+                – <em>Флегматик</em>: силен, уравновесен, бавноподвижен.<br>
+                – <em>Меланхолик</em>: слаб, неуравновесен, бавноподвижен.
+              </p>
+              <p>• <strong>Мотивация</strong>: Външна (награди, условия) vs Вътрешна (удоволствие от спорта, развитие, дълг).</p>
+              <p>• <strong>Свръхмотивация</strong> (млади, тревожни) vs <strong>Понижена</strong> (рутинност при опитни).</p>
+            </div>
+
+            <!-- Тема 7 & 8 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 7 & 8: ОТБОР И ОБЩУВАНЕ</span>
+              <p>• <strong>Структура на отбора</strong>: Хоризонтална (състезател–състезател) и Вертикална (треньор–състезател).</p>
+              <p>• <strong>Лидерство</strong>: Формален лидер (треньор) vs Неформален лидер (избран от отбора).</p>
+              <p>• <strong>Общуване</strong>: Вербално (думи) vs Невербално (мимики, жестове, поза).</p>
+              <p>• <strong>Конфликти</strong>: на ролята, на мотивите, междуличностни, междугрупови (стари-млади).</p>
+            </div>
+
+            <!-- Тема 9, 10 & 11 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 9, 10 & 11: ВНИМАНИЕ, ВОЛЯ, ИНТЕЛЕКТ</span>
+              <p>• <strong>Внимание</strong>: Концентрация, Устойчивост, Разпределеност, Превключване, Обем. Предварително съсредоточаване.</p>
+              <p>• <strong>Волеви качества (3 групи)</strong>:</p>
+              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                – <em>на активността</em>: смелост, решителност, инициативност.<br>
+                – <em>на организираността</em>: самообладание, дисциплинираност.<br>
+                – <em>на твърдостта</em>: търпеливост, устойчивост, настойчивост.
+              </p>
+              <p>• <strong>Тактическо мислене</strong>: Нагледно-образно, действено, оперативно, ситуативно (3 етапа: планиране → решаване → оценка).</p>
+            </div>
+
+            <!-- Тема 12, 13 & 14 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 12, 13 & 14: ПРЕДСТАРТОВИ СЪСТОЯНИЯ И ВЪЗСТАНОВЯВАНЕ</span>
+              <p>• <strong>3 Предстартови състояния</strong>:</p>
+              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                – <em>Предстартова треска</em>: превес на възбудата (треперене, припряност).<br>
+                – <em>Предстартова апатия</em>: превес на задържането (сънливост, апатия).<br>
+                – <em>Боева готовност</em>: оптимален баланс с лек превес на възбудата (трезва увереност, висока устойчивост).
+              </p>
+              <p>• <strong>Психично възстановяване</strong>: Автогенна тренировка, Идеомоторна (в плана на представите), Психо-мускулна релаксация.</p>
+              <p>• <strong>Успокояване</strong> (бавен пулс, топлина, бавни движения) vs <strong>Мобилизиране</strong> (бърз пулс, напрежение, силни звуци).</p>
+            </div>
+
+            <!-- Тема 16, 17 & 18 -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2 md:col-span-2">
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 16, 17 & 18: ПСИХОЛОГИЧЕСКО ОСИГУРЯВАНЕ, ПОДГОТОВКА И ПЛАНИРАНЕ</span>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] mt-2">
+                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                  <strong class="text-purple-300 block mb-1">3 Равнища на осигуряване:</strong>
+                  1. Външно равнище<br>
+                  2. Психолого-педагогическо<br>
+                  3. Индивидуално-личностно
+                </div>
+                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                  <strong class="text-purple-300 block mb-1">3 Вида психическа подготовка:</strong>
+                  1. <strong>Обща</strong> (дългосрочна/базова)<br>
+                  2. <strong>Специализирана</strong> (за спорт)<br>
+                  3. <strong>Специална</strong> (за състезание)
+                </div>
+                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                  <strong class="text-purple-300 block mb-1">4 Особености при планиране:</strong>
+                  1. Личностни особености<br>
+                  2. Възрастови особености<br>
+                  3. Спортна квалификация/опит<br>
+                  4. Особености на спорта и пол
+                </div>
+              </div>
+              <p class="mt-2 text-[11px]">• <strong>4 Метода на психологическата тренировка</strong>: 1) Моделирана тренировка; 2) Поведенчески тренинг; 3) Десенсибилизационен метод (привикване към емоциогенни фактори); 4) Трениране на психическите функции.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-4 border-t border-borderGlow bg-obsidian/60 flex justify-end">
+          <button onclick="closeCheatSheetModal()" class="px-6 py-2 rounded-xl font-display font-bold text-xs bg-purple-600 text-white hover:bg-purple-500 transition-all shadow-md">
+            Затвори и Продължи Теста
+          </button>
+        </div>
+
       </div>
     </div>
 
@@ -691,13 +845,16 @@
         subject: 'psychology',
         section: 'full_test',
         num: 9,
-        type: 'open_fill',
-        prompt: '9. Посочете за кой метод се отнася следната характеристика:\n„Привикване към силно отрицателни емоциогенни фактори“',
-        fields: [
-          { label: 'Метод:', keys: ['десенсибилизационен', 'десенсибилизация', 'десенсибилизационен метод'] }
+        type: 'choice',
+        prompt: '9. Посочете за кой метод се отнася следната характеристика:\n„Привикване към силно отрицателни емоциогенни фактори“:',
+        options: [
+          { text: 'А) Десенсибилизационен метод (десенсибилизация)', correct: true },
+          { text: 'Б) Поведенчески тренинг', correct: false },
+          { text: 'В) Моделирана тренировка', correct: false },
+          { text: 'Г) Автогенна тренировка', correct: false },
         ],
-        official: 'Десенсибилизационен метод (десенсибилизация)',
-        why: 'Десенсибилизацията намалява чувствителността към стресори чрез системно привикване.'
+        official: 'А) Десенсибилизационен метод (десенсибилизация)',
+        why: 'Десенсибилизацията намалява чувствителността към стресори чрез системно привикване (Тема 17, стр. 38).'
       },
       {
         subject: 'psychology',
@@ -721,14 +878,17 @@
         subject: 'psychology',
         section: 'full_test',
         num: 11,
-        type: 'open_fill',
-        prompt: '11. Към дадените добавете още две особености при планирането на психическата подготовка:\n1. Да се отчитат психологическите особености на личността\n2. Да се отчитат възрастовите особености\n3. [................................]\n4. [................................]',
-        fields: [
-          { label: '3. Особеност:', keys: ['квалификация', 'спортна квалификация', 'опит', 'минал опит', 'спортносъстезателен'] },
-          { label: '4. Особеност:', keys: ['спорт', 'вида спорт', 'конкретния спорт', 'пол', 'полови'] }
+        type: 'multi_select',
+        prompt: '11. Към дадените две особености (1. Психологически особености, 2. Възрастови особености), отбележете кои са ОСТАНАЛИТЕ ДВЕ особености при планирането на психическата подготовка от учебника (стр. 39–40 & 47):',
+        options: [
+          { text: 'А) Спортна квалификация и минал спортносъстезателен опит', correct: true },
+          { text: 'Б) Особености на конкретния спорт и полови особености', correct: true },
+          { text: 'В) Обем на учебния план и конспект', correct: false },
+          { text: 'Г) Брой на зрителите на трибуните', correct: false },
+          { text: 'Д) Изложението на теоретичните знания', correct: false }
         ],
-        official: '3. Спортна квалификация и минал спортносъстезателен опит | 4. Особености на конкретния спорт / полови особености',
-        why: 'Ключови фактори при изготвяне на плана (Тема 18, стр. 39–40).'
+        official: 'Особеностите при планирането са: 1. Психологически особености; 2. Възрастови особености; 3. Спортна квалификация и минал опит; 4. Особености на конкретния спорт и полови особености',
+        why: 'Четирите задължителни фактора при изготвяне на индивидуалния план за психическа подготовка (Тема 18, стр. 39–40).'
       },
       {
         subject: 'psychology',
@@ -1579,6 +1739,22 @@
 
       document.getElementById('qPrompt').innerText = q.prompt;
 
+      // Question Learning Hint Reset
+      const hintBox = document.getElementById('qHintBox');
+      const hintLabel = document.getElementById('hintBtnLabel');
+      if (hintBox) {
+        hintBox.classList.add('hidden');
+        hintBox.innerHTML = `
+          <div class="flex items-start gap-2.5">
+            <span class="text-neonAmber font-bold font-mono text-xs shrink-0">💡 Ключ за запомняне:</span>
+            <div class="text-purple-200">${q.why}</div>
+          </div>
+        `;
+      }
+      if (hintLabel) {
+        hintLabel.innerText = '💡 Бърз жокер за учене';
+      }
+
       // Attachment
       const attachBox = document.getElementById('qAttachment');
       if (q.attachment) {
@@ -2211,10 +2387,38 @@
       updateBulgarianGrade();
     }
 
+    function toggleQuestionHint() {
+      playSound('click');
+      const box = document.getElementById('qHintBox');
+      const label = document.getElementById('hintBtnLabel');
+      if (!box) return;
+      if (box.classList.contains('hidden')) {
+        box.classList.remove('hidden');
+        if (label) label.innerText = '🔼 Скрий жокера';
+      } else {
+        box.classList.add('hidden');
+        if (label) label.innerText = '💡 Бърз жокер за учене';
+      }
+    }
+
+    function openCheatSheetModal() {
+      playSound('click');
+      const modal = document.getElementById('cheatSheetModal');
+      if (modal) modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeCheatSheetModal() {
+      playSound('click');
+      const modal = document.getElementById('cheatSheetModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
     function advanceNext() {
       playSound('click');
       currentIdx++;
       renderCurrentQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showFinalReport() {
@@ -2251,6 +2455,7 @@
       else wordEl.className = 'font-display font-black text-3xl text-rose-400 mb-1';
 
       lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
