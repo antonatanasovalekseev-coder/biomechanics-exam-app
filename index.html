@@ -1776,7 +1776,8 @@
       body.innerHTML = '';
 
       if (q.type === 'choice') {
-        document.getElementById('qTypeBadge').innerText = 'Единичен избор';
+        document.getElementById('qTypeBadge').innerText = '🎯 1 верен отговор (Единичен избор)';
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80';
         activeShuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
         const cyrillicLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Е'];
 
@@ -1797,17 +1798,23 @@
         });
 
       } else if (q.type === 'multi_select') {
-        document.getElementById('qTypeBadge').innerText = 'Множествен избор (Отбележете верните)';
+        const correctCount = q.options.filter(o => o.correct).length;
+        document.getElementById('qTypeBadge').innerText = `🎯 ${correctCount} ${correctCount === 1 ? 'верен отговор' : 'верни отговора'}`;
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-amber-300 bg-amber-950/60 border border-amber-800/80';
+        
         const headerInfo = document.createElement('div');
-        headerInfo.className = 'text-xs text-purple-400 font-mono font-bold mb-2 flex items-center justify-between';
-        headerInfo.innerHTML = `<span>👆 Изберете всички верни твърдения:</span><span id="multiSelectCounter" class="text-slate-400 font-normal">Избрани: 0</span>`;
+        headerInfo.className = 'text-xs font-mono font-bold mb-3 p-2.5 rounded-xl bg-amber-950/20 border border-amber-500/30 flex flex-wrap items-center justify-between gap-2';
+        headerInfo.innerHTML = `
+          <span class="text-amber-200">👆 Изберете точно <strong>${correctCount} ${correctCount === 1 ? 'верен отговор' : 'верни отговора'}</strong>:</span>
+          <span id="multiSelectCounter" class="text-amber-300 font-mono">Избрани: 0 от ${correctCount}</span>
+        `;
         body.appendChild(headerInfo);
 
         q.options.forEach((opt, idx) => {
           const btn = document.createElement('button');
           btn.id = `multiBtn_${idx}`;
           btn.className = 'w-full p-3.5 rounded-2xl bg-card border border-borderGlow hover:border-slate-500 text-left text-slate-200 font-medium text-xs sm:text-sm transition-all flex items-center justify-between multi-btn';
-          btn.onclick = () => toggleMultiChoice(idx, btn, q.options.length);
+          btn.onclick = () => toggleMultiChoice(idx, btn, correctCount);
           btn.innerHTML = `
             <span class="pr-2 leading-snug">${opt.text}</span>
             <div class="w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box"></div>
@@ -1816,9 +1823,10 @@
         });
 
       } else if (q.type === 'stage_order') {
-        document.getElementById('qTypeBadge').innerText = 'Номериране на етапи (1, 2, 3)';
+        document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} позиции за номериране (1, 2, 3)`;
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-cyan-300 bg-cyan-950/60 border border-cyan-800/80';
         const note = document.createElement('div');
-        note.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        note.className = 'text-xs text-cyan-300 font-mono font-bold mb-3';
         note.innerText = '👇 Посочете за всяка дейност на кой етап съответства (1. Преди | 2. По време | 3. След):';
         body.appendChild(note);
 
@@ -1838,9 +1846,10 @@
         });
 
       } else if (q.type === 'matching_select') {
-        document.getElementById('qTypeBadge').innerText = 'Свързване на съответствия';
+        document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} съответствия за свързване`;
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-indigo-300 bg-indigo-950/60 border border-indigo-800/80';
         const guide = document.createElement('div');
-        guide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        guide.className = 'text-xs text-indigo-300 font-mono font-bold mb-3';
         guide.innerText = '👇 Изберете правилния отговор за всяка позиция:';
         body.appendChild(guide);
 
@@ -1862,9 +1871,10 @@
         });
 
       } else if (q.type === 'category_classify') {
-        document.getElementById('qTypeBadge').innerText = 'Класификация по категории';
+        document.getElementById('qTypeBadge').innerText = `🎯 ${q.items.length} твърдения за класифициране`;
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-teal-300 bg-teal-950/60 border border-teal-800/80';
         const topGuide = document.createElement('div');
-        topGuide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        topGuide.className = 'text-xs text-teal-300 font-mono font-bold mb-3';
         topGuide.innerText = '👇 За всяко твърдение изберете съответната категория:';
         body.appendChild(topGuide);
 
@@ -1887,7 +1897,8 @@
         });
 
       } else if (q.type === 'matrix_choice') {
-        document.getElementById('qTypeBadge').innerText = 'Попълване на термини в текст (Матрица)';
+        document.getElementById('qTypeBadge').innerText = '🎯 4 термина за избор (А, Б, В, Г)';
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-purple-300 bg-purple-950/60 border border-purple-800/80';
         const guide = document.createElement('div');
         guide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
         guide.innerText = '👇 Изберете верния термин за всяка от буквите (А, Б, В, Г):';
@@ -1911,7 +1922,8 @@
         });
 
       } else if (q.type === 'open_fill') {
-        document.getElementById('qTypeBadge').innerText = 'Отворен: Попълване';
+        document.getElementById('qTypeBadge').innerText = `🎯 ${q.fields.length} полета за попълване`;
+        document.getElementById('qTypeBadge').className = 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold text-purple-300 bg-purple-950/60 border border-purple-800/80';
         q.fields.forEach((f, idx) => {
           const row = document.createElement('div');
           row.className = 'flex flex-col sm:flex-row sm:items-center gap-2 p-3 rounded-2xl bg-card border border-borderGlow';
@@ -1940,7 +1952,7 @@
       radio.innerText = '✓';
     }
 
-    function toggleMultiChoice(idx, btnEl, totalOptions) {
+    function toggleMultiChoice(idx, btnEl, requiredCount) {
       playSound('click');
       if (selectedMultiIndices.has(idx)) {
         selectedMultiIndices.delete(idx);
@@ -1956,7 +1968,17 @@
         box.innerText = '✓';
       }
       const counter = document.getElementById('multiSelectCounter');
-      if (counter) counter.innerText = `Избрани: ${selectedMultiIndices.size} от ${totalOptions}`;
+      if (counter) {
+        counter.innerText = `Избрани: ${selectedMultiIndices.size} от ${requiredCount}`;
+        if (selectedMultiIndices.size === requiredCount) {
+          counter.className = 'text-neonLime font-bold font-mono px-2 py-0.5 rounded bg-emerald-950 border border-emerald-500/50';
+        } else if (selectedMultiIndices.size > requiredCount) {
+          counter.className = 'text-rose-400 font-bold font-mono px-2 py-0.5 rounded bg-rose-950 border border-rose-500/50';
+          counter.innerText += ' (Прекалено много!)';
+        } else {
+          counter.className = 'text-amber-300 font-bold font-mono';
+        }
+      }
     }
 
     function setStageOrder(itemIdx, orderNum, btnEl) {
