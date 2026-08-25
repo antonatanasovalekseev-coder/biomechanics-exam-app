@@ -325,7 +325,7 @@
     }
 
     // =========================================================================
-    // 1. SPORT PSYCHOLOGY QUESTIONS (PDF: PP. 41-48 - ALL 28 EXACT QUESTIONS)
+    // 1. SPORT PSYCHOLOGY QUESTIONS (PDF: PP. 41-48 - ALL 28 EXACT QUESTIONS 1:1)
     // =========================================================================
     const psychologyQuestions = [
       // -------------------------------------------------------------
@@ -355,7 +355,7 @@
           { text: 'Б) генотипни, фенотипни', correct: false },
           { text: 'В) съзнателни, волеви', correct: false },
         ],
-        why: 'Факторите се делят на две основни групи: обективни (среда, публичност, медии) и субективни (мотивация, тревожност, очаквания).'
+        why: 'Факторите се делят на две основни групи: обективни (среда, медии, публика) и субективни (мотивация, тревожност, очаквания).'
       },
       {
         subject: 'psychology',
@@ -395,7 +395,7 @@
           { text: 'В) Моделирането', correct: false },
           { text: 'Г) Механично повторение по метода на пробата и грешката', correct: true },
         ],
-        why: 'Методът проба-грешка не е метод на научната психическа подготовка, а механично действие (Тема 11, стр. 23).'
+        why: 'Механичното повторение на принципа „проба-грешка“ е непродуктивно действие, а не научен метод за психическа подготовка (Тема 11, стр. 23).'
       },
       {
         subject: 'psychology',
@@ -428,34 +428,16 @@
         subject: 'psychology',
         section: 'knowledge',
         num: 8,
-        type: 'open_fill',
-        prompt: '8. Номерирайте отделните етапи на специалната психическа подготовка (поставете 1, 2, 3 срещу етапите):',
-        attachment: `
-          <div class="w-full max-w-md p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Списък от стр. 42 (Постави 1, 2 или 3)</span>
-            <div class="space-y-1.5 text-slate-300 font-mono text-xs">
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow flex items-center gap-2">
-                <span class="w-5 h-5 rounded bg-slate-800 border border-slate-600 flex items-center justify-center text-[11px] text-slate-400">?</span>
-                <span>Психическа подготовка по време на състезанието</span>
-              </div>
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow flex items-center gap-2">
-                <span class="w-5 h-5 rounded bg-slate-800 border border-slate-600 flex items-center justify-center text-[11px] text-slate-400">?</span>
-                <span>Психическа подготовка след състезанието (Обсъждане на резултати)</span>
-              </div>
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow flex items-center gap-2">
-                <span class="w-5 h-5 rounded bg-slate-800 border border-slate-600 flex items-center justify-center text-[11px] text-slate-400">?</span>
-                <span>Психическа подготовка преди състезанието</span>
-              </div>
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: 'Преди състезанието:', keys: ['1', 'първи', '1.', 'етап 1'] },
-          { label: 'По време на състезанието:', keys: ['2', 'втори', '2.', 'етап 2'] },
-          { label: 'След състезанието (Обсъждане):', keys: ['3', 'трети', '3.', 'етап 3'] }
+        type: 'stage_order',
+        prompt: '8. Номерирайте отделните етапи на специалната психическа подготовка (посочете за всяка дейност на кой етап съответства: 1 - Преди, 2 - По време, 3 - След):',
+        items: [
+          { text: 'Психическа подготовка по време на състезанието', correct: 2, label: 'По време на състезание' },
+          { text: 'Обсъждане на постигнатите резултати', correct: 3, label: 'След състезание' },
+          { text: 'Психическа подготовка след състезанието', correct: 3, label: 'След състезание' },
+          { text: 'Психическа подготовка преди състезанието', correct: 1, label: 'Преди състезание' }
         ],
-        official: '1. Преди състезанието | 2. По време на състезанието | 3. След състезанието (Обсъждане на резултатите)',
-        why: 'Трите хронологични етапа на специалната подготовка за конкретен старт (Тема 17, стр. 37).'
+        official: '1. Преди състезанието | 2. По време на състезанието | 3. След състезанието / Обсъждане на резултатите',
+        why: 'Трите етапа на специалната психическа подготовка са: 1) Преди състезанието; 2) По време на състезанието; 3) След състезанието (Тема 17, стр. 37).'
       },
       {
         subject: 'psychology',
@@ -467,7 +449,7 @@
           { text: 'А) индивидуалните, възрастовите и половите особености на състезателите', correct: false },
           { text: 'Б) изложението на знанията', correct: true },
           { text: 'В) спортната квалификация, минал спортносъстезателен опит', correct: false },
-          { text: 'Г) особеностите на конкретния спорт и изискванията към качествата и състезателното поведение на спортиста', correct: false },
+          { text: 'Г) особеностите на конкретния спорт и изискванията, които той предявява към качествата и състезателното поведение на спортиста', correct: false },
         ],
         why: 'Планирането отчита личност, възраст, пол, спорт и квалификация, а не абстрактно „изложение на знания“.'
       },
@@ -479,65 +461,41 @@
         subject: 'psychology',
         section: 'understanding',
         num: 1,
-        type: 'open_fill',
-        prompt: '1. Разграничете и групирайте, като свържете със стрелки, характерните трудности с типичните методи за противодействие (виж схемата от стр. 43):',
-        attachment: `
-          <div class="w-full max-w-xl p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Схема от стр. 43: Трудности и Противодействие</span>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 font-mono">
-              <div class="space-y-1.5">
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-200 font-bold">1. Надценяване, страх от противника</div>
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-200 font-bold">2. Подценяването</div>
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-200 font-bold">3. Главозамайването</div>
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-200 font-bold">4. Изненади с непознат противник</div>
-              </div>
-              <div class="space-y-1.5 text-[11px] text-slate-300">
-                <div class="p-2 rounded-xl bg-card border border-borderGlow"><strong class="text-purple-400">а)</strong> С наближаване на старта: слаби страни на противника / силни на своя отбор</div>
-                <div class="p-2 rounded-xl bg-card border border-borderGlow"><strong class="text-purple-400">б)</strong> Засилване на спортното разузнаване и повишаване на вниманието</div>
-                <div class="p-2 rounded-xl bg-card border border-borderGlow"><strong class="text-purple-400">в)</strong> Припомняне на големите успехи и извличане на поуки</div>
-                <div class="p-2 rounded-xl bg-card border border-borderGlow"><strong class="text-purple-400">г)</strong> Разкриване на вредното влияние и наблягане на отговорността</div>
-              </div>
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: '1. Надценяване / страх:', keys: ['слабите страни', 'слаби страни', 'силни страни', 'а'] },
-          { label: '2. Подценяване:', keys: ['вредното влияние', 'отговорност', 'примери', 'г'] },
-          { label: '3. Главозамайване:', keys: ['успехи', 'поуки', 'как са постигнати', 'в'] },
-          { label: '4. Непознат противник:', keys: ['разузнаване', 'спортно разузнаване', 'внимание', 'б'] }
+        type: 'matching_select',
+        prompt: '1. Разграничете и групирайте, като свържете, следните характерни трудности в психическата подготовка (1, 2, 3, 4) с типичните методи за противодействието им (а, б, в, г):',
+        items: [
+          { id: 1, text: '1. Надценяване, страх от противника', correctKey: 'a' },
+          { id: 2, text: '2. Подценяването', correctKey: 'g' },
+          { id: 3, text: '3. Главозамайването', correctKey: 'v' },
+          { id: 4, text: '4. Изненади с непознат противник', correctKey: 'b' }
         ],
-        official: '1. Надценяване → Говори се за слабите страни на противника и силните на своя отбор (а)\n2. Подценяване → Разкрива се вредното влияние, набляга се на отговорността (г)\n3. Главозамайване → Припомнят се най-големите успехи и как са постигнати трудностите (в)\n4. Непознат противник → Засилване на спортното разузнаване и вниманието (б)',
-        why: 'Психологически методи за неутрализиране на предстартови изкривявания (стр. 43).'
+        matchOptions: [
+          { key: 'a', text: 'а) С наближаване на състезанието все повече да се говори за слабите страни на противника и за силните страни на собствения отбор' },
+          { key: 'b', text: 'б) Засилване на спортното разузнаване и повишаване на вниманието' },
+          { key: 'v', text: 'в) Да припомни най-големите успехи на състезателите и по какъв начин са постигнати, да извлекат с общи усилия поуки' },
+          { key: 'g', text: 'г) Да се разкрие вредното влияние на това явление с конкретни примери от собствения и чуждия опит, да се наблегне на чувството за отговорност' }
+        ],
+        official: '1 → а (Слаби страни на противника / силни на своя отбор)\n2 → г (Вредно влияние и чувство за отговорност)\n3 → в (Припомняне на успехите и поуки)\n4 → б (Спортно разузнаване и повишено внимание)',
+        why: 'Психологически методи за неутрализиране на предстартови трудности (стр. 43).'
       },
       {
         subject: 'psychology',
         section: 'understanding',
         num: 2,
-        type: 'open_fill',
-        prompt: '2. Поставете пред всяка една от характеристиките буквата на психическата подготовка, за която се отнася (виж таблицата от стр. 43):\n[А] Обща психическа подготовка\n[Б] Специализирана психическа подготовка',
-        attachment: `
-          <div class="w-full max-w-xl p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Таблица от стр. 43: Видове Подготовка</span>
-            <div class="grid grid-cols-2 gap-2 mb-2 text-center">
-              <div class="p-2 rounded-xl bg-card border border-borderGlow font-bold text-purple-300 text-xs">А. Обща психическа подготовка</div>
-              <div class="p-2 rounded-xl bg-card border border-borderGlow font-bold text-purple-300 text-xs">Б. Специализирана психическа подготовка</div>
-            </div>
-            <div class="space-y-1 text-slate-300 text-[11px] font-mono">
-              <div class="p-1.5 rounded-lg bg-card border border-borderGlow">1. Насочена е към дългосрочно развитие и усъвършенстване на базовите функции и качества</div>
-              <div class="p-1.5 rounded-lg bg-card border border-borderGlow">2. Насочена е към цялостната личност и има перманентен характер</div>
-              <div class="p-1.5 rounded-lg bg-card border border-borderGlow">3. В пряка зависимост от изискванията на конкретния вид спорт</div>
-              <div class="p-1.5 rounded-lg bg-card border border-borderGlow">4. Има за цел да развива функции за успешна изява в съответния вид спорт</div>
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: '1. Дългосрочно базови:', keys: ['а', 'обща'] },
-          { label: '2. Цялостна личност:', keys: ['а', 'обща'] },
-          { label: '3. Конкретен спорт:', keys: ['б', 'специализирана'] },
-          { label: '4. Развива за изява в спорта:', keys: ['б', 'специализирана'] }
+        type: 'category_classify',
+        prompt: '2. Поставете пред всяка една от характеристиките вида психическа подготовка, за която се отнася:',
+        categories: [
+          { id: 'A', name: 'А. Обща подготовка' },
+          { id: 'B', name: 'Б. Специализирана подготовка' }
         ],
-        official: '1: А (Обща) | 2: А (Обща) | 3: Б (Специализирана) | 4: Б (Специализирана)',
-        why: 'Разграничение между Обща (перманентна, базова) и Специализирана (за спортната дисциплина).'
+        items: [
+          { text: '1. Насочена е към дългосрочно развитие и усъвършенстване на онези психически функции и качества, които са от значение за спортната дейност и цялостната подготовка на спортиста', correct: 'A' },
+          { text: '2. Насочена е към цялостната личност, към всички аспекти на дейността и има перманентен характер', correct: 'A' },
+          { text: '3. В пряка зависимост от изискванията на конкретния вид спорт', correct: 'B' },
+          { text: '4. Има за цел да развива онези психични функции и качества, които биха осигурили успешна изява в съответния вид спорт', correct: 'B' }
+        ],
+        official: '1 → А (Обща) | 2 → А (Обща) | 3 → Б (Специализирана) | 4 → Б (Специализирана)',
+        why: 'Разграничение между Обща (перманентна, базова) и Специализирана (за специфичния вид спорт).'
       },
       {
         subject: 'psychology',
@@ -557,68 +515,44 @@
         subject: 'psychology',
         section: 'understanding',
         num: 4,
-        type: 'open_fill',
-        prompt: '4. В лявата колона са изброени задачите, а в дясната са посочени видовете специална психическа подготовка. Намерете съответствието между тях, като към всяка цифра запишете съответстващата ѝ буква (а, б, в) или етап (виж таблицата от стр. 44):',
-        attachment: `
-          <div class="w-full max-w-xl p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-3">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center">Таблица от стр. 44: Задачи и Видове Подготовка</span>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-              
-              <!-- Left Column: Tasks -->
-              <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-2.5 font-mono">
-                <div class="text-purple-300 font-bold pb-1 border-b border-slate-700">Лява колона (Задачи):</div>
-                <div class="text-slate-200 leading-snug"><strong class="text-purple-400">1.</strong> Определяне целта на предстоящия старт, създаване на положителна нагласа, адекватна мотивация, увереност</div>
-                <div class="text-slate-200 leading-snug"><strong class="text-purple-400">2.</strong> Овладяване на емоционалните състояния, коригиране на състезателното поведение, управление насочеността на усилията</div>
-                <div class="text-slate-200 leading-snug"><strong class="text-purple-400">3.</strong> Да се анализират, осмислят и отработят пропуски; да се мотивират състезателите; затвърждаване на положителните резултати</div>
-              </div>
-
-              <!-- Right Column: Types -->
-              <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-2.5 font-mono">
-                <div class="text-purple-300 font-bold pb-1 border-b border-slate-700">Дясна колона (Видове подготовка):</div>
-                <div class="p-2 rounded-lg bg-obsidian border border-slate-800 text-slate-300"><strong class="text-purple-400">а)</strong> Психическа подготовка след състезание</div>
-                <div class="p-2 rounded-lg bg-obsidian border border-slate-800 text-slate-300"><strong class="text-purple-400">б)</strong> Психическа подготовка преди състезание</div>
-                <div class="p-2 rounded-lg bg-obsidian border border-slate-800 text-slate-300"><strong class="text-purple-400">в)</strong> Психическа подготовка по време на състезание</div>
-              </div>
-
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: '1. Цел за старта и нагласа:', keys: ['б', 'преди', 'преди състезание', 'преди състезанието'] },
-          { label: '2. Овладяване на емоции & поведение:', keys: ['в', 'по време', 'по време на състезание', 'по време на състезанието'] },
-          { label: '3. Анализ на пропуски & резултати:', keys: ['а', 'след', 'след състезание', 'след състезанието'] }
+        type: 'matching_select',
+        prompt: '4. В лявата колона са изброени задачите, а в дясната са посочени видовете специална психическа подготовка. Намерете съответствието между тях:',
+        items: [
+          { id: 1, text: '1. Определяне целта на предстоящия старт, създаване положителна нагласа, адекватна мотивация, увереност', correctKey: 'b' },
+          { id: 2, text: '2. Овладяване на емоционалните състояния, коригиране на състезателното поведение, управление насочеността на усилията', correctKey: 'v' },
+          { id: 3, text: '3. Да се анализират, осмислят и отработят пропуски; да мотивира състезателите да се осмислят и затвърдят положителните резултати', correctKey: 'a' }
+        ],
+        matchOptions: [
+          { key: 'a', text: 'а) Психическа подготовка след състезание' },
+          { key: 'b', text: 'б) Психическа подготовка преди състезание' },
+          { key: 'v', text: 'в) Психическа подготовка по време на състезание' }
         ],
         official: '1 → б (Психическа подготовка преди състезание)\n2 → в (Психическа подготовка по време на състезание)\n3 → а (Психическа подготовка след състезание)',
-        why: 'Точното таблично съответствие на задачите от учебника (стр. 44).'
+        why: 'Хронологичните етапи на специалната подготовка според задачите (Тема 17, стр. 37).'
       },
       {
         subject: 'psychology',
         section: 'understanding',
         num: 5,
-        type: 'open_fill',
-        prompt: '5. Кои от изброените механизми и способи на самовъздействие се отнасят за УСПОКОЯВАНЕ и кои за МОБИЛИЗИРАНЕ на състезателите? Поставете съответните цифри към вида (виж таблицата от стр. 44):',
-        attachment: `
-          <div class="w-full max-w-xl p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Списък на 10-те Способа (стр. 44)</span>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-300 font-mono">
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">1.</strong> Разхлабване на мускулатурата</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">2.</strong> Приятна топлина на тялото</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">3.</strong> Бавни движения и действия</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">4.</strong> Бърз ритъм на сърце/дишане</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">5.</strong> Бавен ритъм на сърце/дишане</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">6.</strong> Напрягане на мускулатурата</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">7.</strong> Аритмични и силни звуци</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">8.</strong> Тихи звукове и шумове</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">9.</strong> Успокояващ масаж</div>
-              <div class="p-2 rounded-lg bg-card border border-borderGlow"><strong class="text-purple-400">10.</strong> Мобилизиращ масаж</div>
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: 'Успокояващи са (номера):', keys: ['1, 2, 3, 5, 8, 9', '1,2,3,5,8,9', '1 2 3 5 8 9', 'разхлабване', 'топлина', 'бавни', 'тихи'] },
-          { label: 'Мобилизиращи са (номера):', keys: ['4, 6, 7, 10', '4,6,7,10', '4 6 7 10', 'бърз', 'напрягане', 'силни', 'мобилизиращ'] }
+        type: 'category_classify',
+        prompt: '5. Кои от изброените 10 механизма и способа на самовъздействие се отнасят за УСПОКОЯВАНЕ и кои за МОБИЛИЗИРАНЕ на състезателите? Изберете за всяко:',
+        categories: [
+          { id: 'calm', name: '🌙 Успокояване' },
+          { id: 'mobilize', name: '⚡ Мобилизиране' }
         ],
-        official: 'Успокояващи са: 1, 2, 3, 5, 8, 9 (разхлабване, топлина, бавни движения, бавен пулс, тихи звуци, успокояващ масаж)\nМобилизиращи са: 4, 6, 7, 10 (бърз ритъм, напрягане, силни аритмични звуци, мобилизиращ масаж)',
+        items: [
+          { text: '1. Разхлабване на мускулатурата на тялото', correct: 'calm' },
+          { text: '2. Приятна топлина на тялото', correct: 'calm' },
+          { text: '3. Бавни движения и действия', correct: 'calm' },
+          { text: '4. Бърз ритъм на сърдечната и дихателната система', correct: 'mobilize' },
+          { text: '5. Бавен ритъм на сърдечната и дихателната дейност', correct: 'calm' },
+          { text: '6. Напрягане на мускулатурата', correct: 'mobilize' },
+          { text: '7. Аритмични и силни звуци', correct: 'mobilize' },
+          { text: '8. Тихи звукове и шумове', correct: 'calm' },
+          { text: '9. Успокояващ масаж', correct: 'calm' },
+          { text: '10. Мобилизиращ масаж', correct: 'mobilize' }
+        ],
+        official: 'Успокояващи: 1, 2, 3, 5, 8, 9 (разхлабване, топлина, бавни движения, бавен пулс, тихи звуци, успокояващ масаж)\nМобилизиращи: 4, 6, 7, 10 (бърз ритъм, напрягане, силни аритмични звуци, мобилизиращ масаж)',
         why: 'Психорегулиращи техники за вегетативен и емоционален контрол (Тема 13 и 14, стр. 44).'
       },
 
@@ -656,41 +590,32 @@
         section: 'full_test',
         num: 3,
         type: 'choice',
-        prompt: '3. Отбележете верния отговор. Кое от изброените е основна задача на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ:',
+        prompt: '3. Отбележете верния отговор. Кое от изброените е основна задача на специалната психическа подготовка по време на състезание:',
         options: [
           { text: 'А) Да се прилага само в подготвителния период на подготовката', correct: false },
-          { text: 'Б) Овладяване на емоционалните състояния на спортиста и треньора и коригиране на поведението', correct: true },
+          { text: 'Б) Овладяване на емоционалните състояния на спортиста и треньора и коригиране на състезателното поведение', correct: true },
           { text: 'В) Личното участие на състезателите', correct: false },
           { text: 'Г) Да се избягва контролът на психологическата подготовка', correct: false },
         ],
-        why: 'По време на състезанието целта е овладяване на емоциите и волева корекция на поведението.'
+        why: 'По време на състезанието целта е овладяване на емоциите и волева корекция на поведението (Тема 17, стр. 37).'
       },
       {
         subject: 'psychology',
         section: 'full_test',
         num: 4,
-        type: 'choice',
-        prompt: '4. Посочете ОБЕКТИВНИТЕ фактори на психическото напрежение (виж списъка от стр. 45):',
-        attachment: `
-          <div class="w-full max-w-md p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-1.5">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Списък на факторите (стр. 45)</span>
-            <div class="grid grid-cols-2 gap-1.5 text-slate-300 text-xs font-mono">
-              <div class="p-1.5 rounded bg-card border border-borderGlow">А) публичност</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Б) свръхмотивация</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">В) публика (фенове)</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Г) отговорност</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Д) очаквания</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Е) договорна обвързаност</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow col-span-2">Ж) неувереност</div>
-            </div>
-          </div>
-        `,
+        type: 'multi_select',
+        prompt: '4. Посочете кои са обективните фактори на психическото напрежение (отбележете 4-те обективни фактора от списъка):',
         options: [
-          { text: 'А) публичност, публика (фенове), очаквания, договорна обвързаност', correct: true },
-          { text: 'Б) свръхмотивация, отговорност, неувереност', correct: false },
-          { text: 'В) самообладание, дисциплинираност, волеви усилия', correct: false },
+          { text: 'А) публичност', correct: true },
+          { text: 'Б) свръхмотивация', correct: false },
+          { text: 'В) публика (фенове)', correct: true },
+          { text: 'Г) отговорност', correct: false },
+          { text: 'Д) очаквания', correct: true },
+          { text: 'Е) договорна обвързаност', correct: true },
+          { text: 'Ж) неувереност', correct: false },
         ],
-        why: 'Обективните фактори произтичат от средата (публика, договори, медии).'
+        official: 'Обективните фактори са: А) публичност, В) публика (фенове), Д) очаквания, Е) договорна обвързаност',
+        why: 'Обективните фактори произтичат от средата, докато свръхмотивацията, отговорността и неувереността са субективни (Тема 1, стр. 4 & Тема 17, стр. 36).'
       },
       {
         subject: 'psychology',
@@ -710,58 +635,57 @@
         subject: 'psychology',
         section: 'full_test',
         num: 6,
-        type: 'open_fill',
-        prompt: '6. Поставете пред всяка характеристика буквата (А - Обща, Б - Специализирана):\n1. Дългосрочно развитие и усъвършенстване на базовите психически функции → [1]\n2. Насочена е към цялостната личност с перманентен характер → [2]\n3. В пряка зависимост от изискванията на конкретния вид спорт → [3]\n4. Развива онези функции, които биха осигурили успешна изява в съответния спорт → [4]',
-        fields: [
-          { label: '1. Дългосрочно базови:', keys: ['а', 'обща'] },
-          { label: '2. Цялостна личност:', keys: ['а', 'обща'] },
-          { label: '3. Конкретен спорт:', keys: ['б', 'специализирана'] },
-          { label: '4. Успешна изява:', keys: ['б', 'специализирана'] }
+        type: 'category_classify',
+        prompt: '6. Поставете пред всяко едно от характеристиките буквата на психическата подготовка, за която се отнася:',
+        categories: [
+          { id: 'A', name: 'А. Обща подготовка' },
+          { id: 'B', name: 'Б. Специализирана подготовка' }
         ],
-        official: '1: А (Обща) | 2: А (Обща) | 3: Б (Специализирана) | 4: Б (Специализирана)',
+        items: [
+          { text: '1. Насочена е към дългосрочно развитие и усъвършенстване на онези психически функции и качества, които са от значение за спортната дейност и цялостната подготовка на спортиста', correct: 'A' },
+          { text: '2. Насочена е към цялостната личност, към всички аспекти на дейността и има перманентен характер', correct: 'A' },
+          { text: '3. В пряка зависимост от изискванията на конкретния вид спорт', correct: 'B' },
+          { text: '4. Има за цел да развива онези психични функции и качества, които биха осигурили успешна изява в съответния вид спорт', correct: 'B' }
+        ],
+        official: '1 → А (Обща) | 2 → А (Обща) | 3 → Б (Специализирана) | 4 → Б (Специализирана)',
         why: 'Класификация на характеристиките (стр. 46).'
       },
       {
         subject: 'psychology',
         section: 'full_test',
         num: 7,
-        type: 'open_fill',
-        prompt: '7. Поставете пред всяка от задачите буквата (А - Обща, Б - Специализирана):\n1. Формиране и развитие на мотивация за занимание със спорт → [1]\n2. Развитие на специалните качества за конкретния вид спорт → [2]\n3. Развитие на психическата устойчивост и надеждност на спортиста → [3]\n4. Формиране и развитие на базови личностни качества → [4]',
-        fields: [
-          { label: '1. Мотивация за спорт:', keys: ['а', 'обща'] },
-          { label: '2. Специални качества:', keys: ['б', 'специализирана'] },
-          { label: '3. Устойчивост и надеждност:', keys: ['б', 'специализирана'] },
-          { label: '4. Базови качества:', keys: ['а', 'обща'] }
+        type: 'category_classify',
+        prompt: '7. Поставете пред всяка една от задачите буквата на психическата подготовка, за която се отнася:',
+        categories: [
+          { id: 'A', name: 'А. Обща подготовка' },
+          { id: 'B', name: 'Б. Специализирана подготовка' }
         ],
-        official: '1: А (Обща) | 2: Б (Специализирана) | 3: Б (Специализирана) | 4: А (Обща)',
+        items: [
+          { text: '1. Формиране и развитие на мотивация за занимание със спорт', correct: 'A' },
+          { text: '2. Развитие на специалните психични качества, необходими за успешно изпълнение на специфичните изисквания на конкретния вид спорт', correct: 'B' },
+          { text: '3. Развитие на психическата устойчивост и надеждност на спортиста', correct: 'B' },
+          { text: '4. Формиране и развитие на базови личностни качества, стоящи в основата на активността, отношението към спорта, към подготовката, към себе си и другите', correct: 'A' }
+        ],
+        official: '1 → А (Обща) | 2 → Б (Специализирана) | 3 → Б (Специализирана) | 4 → А (Обща)',
         why: 'Задачи на общата vs специализираната подготовка (Тема 17, стр. 36–37).'
       },
       {
         subject: 'psychology',
         section: 'full_test',
         num: 8,
-        type: 'choice',
-        prompt: '8. Посочете кои четири от дадените методи се отнасят за МЕТОДИТЕ НА ПСИХОЛОГИЧЕСКАТА ТРЕНИРОВКА (виж списъка от стр. 47):',
-        attachment: `
-          <div class="w-full max-w-md p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-1.5">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Списък от стр. 47</span>
-            <div class="space-y-1 text-slate-300 text-xs font-mono">
-              <div class="p-1.5 rounded bg-card border border-borderGlow">А) трениране на нервните процеси</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Б) непосредствено словесно внушение</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">В) моделирана тренировка</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Г) поведенчески тренинг</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Д) регулиране на предстартова концентрация</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Е) десенсибилизационен метод</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Ж) трениране на психическите функции</div>
-            </div>
-          </div>
-        `,
+        type: 'multi_select',
+        prompt: '8. За осъществяване на задачите на психическата подготовка в различните ѝ етапи и форми се използват разнообразни методи. Посочете кои четири от дадените се отнасят за методите на психологическата тренировка:',
         options: [
-          { text: 'А) моделирана тренировка, поведенчески тренинг, десенсибилизационен метод, трениране на психическите функции', correct: true },
-          { text: 'Б) трениране на нервните процеси, словесно внушение, регулиране на концентрацията', correct: false },
-          { text: 'В) отвличане на вниманието, почивка, дихателни упражнения, масаж', correct: false },
+          { text: 'А) трениране на нервните процеси', correct: false },
+          { text: 'Б) непосредствено словесно внушение', correct: false },
+          { text: 'В) моделирана тренировка', correct: true },
+          { text: 'Г) поведенчески тренинг', correct: true },
+          { text: 'Д) непосредствено регулиране на предстартовата концентрация', correct: false },
+          { text: 'Е) десенсибилизационен метод', correct: true },
+          { text: 'Ж) трениране на психическите функции', correct: true }
         ],
-        why: 'Четирите основни метода на психологическата тренировка (Тема 17, стр. 38).'
+        official: 'В) моделирана тренировка, Г) поведенчески тренинг, Е) десенсибилизационен метод, Ж) трениране на психическите функции',
+        why: 'Четирите основни метода на психологическата тренировка от Тема 17, стр. 38.'
       },
       {
         subject: 'psychology',
@@ -779,13 +703,18 @@
         subject: 'psychology',
         section: 'full_test',
         num: 10,
-        type: 'choice',
-        prompt: '10. Посочете кои са задачите на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ (виж списъка от стр. 47):',
+        type: 'multi_select',
+        prompt: '10. Посочете кои са задачите на специалната психическа подготовка ПО ВРЕМЕ НА СЪСТЕЗАНИЕ (изберете всички верни задачи от списъка):',
         options: [
-          { text: 'А) Коригиране на състезателното поведение, управление на мотивацията, активиране на саморегулационните умения, овладяване на емоционалните състояния', correct: true },
-          { text: 'Б) Определяне на целта за предстоящия старт и създаване на положителна нагласа', correct: false },
-          { text: 'В) Мотивиране за следваща подготовка и анализ на допуснатите грешки след финала', correct: false },
+          { text: 'А) Да мотивира състезателите за последващата подготовка (начинът, по който се преживява резултатът от състезанието)', correct: false },
+          { text: 'Б) Коригиране при необходимост на състезателното поведение и действия', correct: true },
+          { text: 'В) Определяне на целта за предстоящия старт', correct: false },
+          { text: 'Г) Управление на мотивацията и насочеността на усилията', correct: true },
+          { text: 'Д) Активиране на саморегулационните умения.', correct: true },
+          { text: 'Е) Овладяване на емоционалните състояния на спортиста и треньора', correct: true },
+          { text: 'Ж) Достигане на оптимална психическа готовност за състезание', correct: false }
         ],
+        official: 'Б) Коригиране на състезателното поведение, Г) Управление на мотивацията, Д) Активиране на саморегулационните умения, Е) Овладяване на емоционалните състояния',
         why: 'Задачите по време на състезателния старт (Тема 17, стр. 37).'
       },
       {
@@ -793,18 +722,7 @@
         section: 'full_test',
         num: 11,
         type: 'open_fill',
-        prompt: '11. Към дадените добавете още две особености при планирането на психическата подготовка (виж списъка от стр. 47):\n1. Да се отчитат психологическите особености на личността\n2. Да се отчитат възрастовите особености\n3. [................................]\n4. [................................]',
-        attachment: `
-          <div class="w-full max-w-md p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Списък от стр. 47</span>
-            <div class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <div class="p-2 rounded bg-card border border-borderGlow">1. Да се отчитат психологическите особености</div>
-              <div class="p-2 rounded bg-card border border-borderGlow">2. Да се отчитат възрастовите особености</div>
-              <div class="p-2 rounded bg-card border border-dashed border-slate-700 text-slate-400">3. [ ? Попълнете в поле 3 ]</div>
-              <div class="p-2 rounded bg-card border border-dashed border-slate-700 text-slate-400">4. [ ? Попълнете в поле 4 ]</div>
-            </div>
-          </div>
-        `,
+        prompt: '11. Към дадените добавете още две особености при планирането на психическата подготовка:\n1. Да се отчитат психологическите особености на личността\n2. Да се отчитат възрастовите особености\n3. [................................]\n4. [................................]',
         fields: [
           { label: '3. Особеност:', keys: ['квалификация', 'спортна квалификация', 'опит', 'минал опит', 'спортносъстезателен'] },
           { label: '4. Особеност:', keys: ['спорт', 'вида спорт', 'конкретния спорт', 'пол', 'полови'] }
@@ -816,52 +734,13 @@
         subject: 'psychology',
         section: 'full_test',
         num: 12,
-        type: 'open_fill',
-        prompt: '12. Изберете едно от посочените три предложения от таблицата, което да поставите на мястото на буквите А, Б, В и Г (виж матрицата от стр. 48):\n„Психическата подготовка е продължителен, системен и ......(А) ..... процес. Тя е съществена страна от единния и цялостен .....(Б)....... процес. Прилагането на специфични средства и методи осигурява целенасочена подготовка на (В) ..................... и личността на състезателя, което му дава възможност за оптимално участие в процеса на спортната ......... (Г) ....... .“',
-        attachment: `
-          <div class="w-full max-w-xl p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Матрица с предложения (стр. 48)</span>
-            <div class="space-y-2 text-xs">
-              <div class="flex items-center gap-2 p-2 rounded-xl bg-card border border-borderGlow">
-                <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center font-mono shrink-0">(А)</span>
-                <div class="flex flex-wrap gap-2 text-slate-300">
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">основен</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">комплексен</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">физически</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 p-2 rounded-xl bg-card border border-borderGlow">
-                <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center font-mono shrink-0">(Б)</span>
-                <div class="flex flex-wrap gap-2 text-slate-300">
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">учебно-тренировъчен</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">възпитателен</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">оздравителен</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 p-2 rounded-xl bg-card border border-borderGlow">
-                <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center font-mono shrink-0">(В)</span>
-                <div class="flex flex-wrap gap-2 text-slate-300">
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">резултата</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">възпитанието</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">психиката</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 p-2 rounded-xl bg-card border border-borderGlow">
-                <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center font-mono shrink-0">(Г)</span>
-                <div class="flex flex-wrap gap-2 text-slate-300">
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">изява</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">среща</span>
-                  <span class="px-2.5 py-1 rounded bg-obsidian border border-slate-700">подготовка</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        `,
-        fields: [
-          { label: 'А (процес):', keys: ['комплексен'] },
-          { label: 'Б (процес):', keys: ['учебно-тренировъчен', 'учебно тренировъчен'] },
-          { label: 'В (подготовка на):', keys: ['психиката', 'психика'] },
-          { label: 'Г (спортната):', keys: ['подготовка', 'подготовката'] }
+        type: 'matrix_choice',
+        prompt: '12. Изберете едно от посочените три предложения, което да поставите на мястото на буквите А, Б, В и Г:\n„Психическата подготовка е продължителен, системен и ......(А) ..... процес. Тя е съществена страна от единния и цялостен .....(Б)....... процес. Прилагането на специфични средства и методи осигурява целенасочена подготовка на (В) ..................... и личността на състезателя, което му дава възможност за оптимално участие в процеса на спортната ......... (Г) ....... .“',
+        rows: [
+          { id: 'A', label: '(А) процес:', options: ['основен', 'комплексен', 'физически'], correct: 'комплексен' },
+          { id: 'B', label: '(Б) процес:', options: ['учебно-тренировъчен', 'възпитателен', 'оздравителен'], correct: 'учебно-тренировъчен' },
+          { id: 'V', label: '(В) подготовка на:', options: ['резултата', 'възпитанието', 'психиката'], correct: 'психиката' },
+          { id: 'G', label: '(Г) спортната:', options: ['изява', 'среща', 'подготовка'], correct: 'подготовка' }
         ],
         official: 'А: комплексен | Б: учебно-тренировъчен | В: психиката | Г: подготовка',
         why: 'Текстът от Тема 16 и Тема 17 в учебника (стр. 48).'
@@ -870,28 +749,19 @@
         subject: 'psychology',
         section: 'full_test',
         num: 13,
-        type: 'choice',
-        prompt: '13. Кои от посочените твърдения НЕ се отнасят за специална психическа подготовка за конкретно състезание (виж списъка от стр. 48):',
-        attachment: `
-          <div class="w-full max-w-md p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-1">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Списък от стр. 48</span>
-            <div class="space-y-1 text-slate-300 text-[11px]">
-              <div class="p-1.5 rounded bg-card border border-borderGlow">А. Създава се положителна нагласа към предстоящия старт</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Б. При необходимост се коригира състезателното поведение</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">В. Оптимално се дозират външните въздействия</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Г. Определяне на целта за предстоящия старт</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Е. Анализират се допуснатите грешки</div>
-              <div class="p-1.5 rounded bg-card border border-borderGlow">Ж. Мотивира се състезателят за следващото състезание</div>
-            </div>
-          </div>
-        `,
+        type: 'multi_select',
+        prompt: '13. Кои от посочените твърдения НЕ се отнасят за специална психическа подготовка, насочена към конкретно състезание (изберете грешното твърдение):',
         options: [
-          { text: 'А) Оптимално се дозират външните въздействия', correct: true },
-          { text: 'Б) Създава се положителна нагласа към предстоящия старт', correct: false },
-          { text: 'В) При необходимост се коригира състезателното поведение', correct: false },
-          { text: 'Г) Анализират се допуснатите грешки след старта', correct: false },
+          { text: 'А. Създава се положителна нагласа към предстоящия старт', correct: false },
+          { text: 'Б. При необходимост се коригира състезателното поведение', correct: false },
+          { text: 'В. Оптимално се дозират външните въздействия', correct: true },
+          { text: 'Г. Определяне на целта за предстоящия старт', correct: false },
+          { text: 'Д. Нагласа за победа', correct: false },
+          { text: 'Е. Анализират се допуснатите грешки', correct: false },
+          { text: 'Ж. Мотивира се състезателят за следващото състезание', correct: false }
         ],
-        why: 'Дозирането на външните въздействия е общопедагогически принцип, а не цел на специалната състезателна психика.'
+        official: 'В. Оптимално се дозират външните въздействия (това е общопедагогически принцип, а не задача на специалната психическа подготовка)',
+        why: 'Дозирането на външните въздействия не е задача на специалната подготовка за конкретен старт.'
       },
       {
         subject: 'psychology',
@@ -899,16 +769,6 @@
         num: 14,
         type: 'open_fill',
         prompt: '14. В зависимост от обекта/насочеността на въздействие, посочете трите вида психическа подготовка (за които е от съществено значение постигането на оптимален баланс):',
-        attachment: `
-          <div class="w-full max-w-md p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-sans space-y-2">
-            <span class="text-[11px] font-mono text-purple-400 font-bold uppercase block text-center mb-1">Схема на Баланса (стр. 48)</span>
-            <div class="grid grid-cols-3 gap-2 text-center text-xs">
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-300 font-mono">А. [ ? ]</div>
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-300 font-mono">Б. [ ? ]</div>
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-slate-300 font-mono">В. [ ? ]</div>
-            </div>
-          </div>
-        `,
         fields: [
           { label: 'А:', keys: ['обща', 'обща психическа подготовка'] },
           { label: 'Б:', keys: ['специализирана', 'специализирана психическа подготовка'] },
@@ -1481,6 +1341,12 @@
     let totalQuestionsAnswered = 0;
     let selectedChoiceIdx = null;
 
+    let selectedMultiIndices = new Set();
+    let selectedStageOrders = {};
+    let matchingSelections = {};
+    let categorySelections = {};
+    let matrixSelections = {};
+
     let wrongQuestionsInRound = [];
     let isMasteryRetryRound = false;
     let activeShuffledOptions = [];
@@ -1582,6 +1448,11 @@
       earnedPoints = 0;
       totalQuestionsAnswered = 0;
       selectedChoiceIdx = null;
+      selectedMultiIndices = new Set();
+      selectedStageOrders = {};
+      matchingSelections = {};
+      categorySelections = {};
+      matrixSelections = {};
       wrongQuestionsInRound = [];
       isMasteryRetryRound = false;
 
@@ -1665,6 +1536,12 @@
     // --- Render Question ---
     function renderCurrentQuestion() {
       selectedChoiceIdx = null;
+      selectedMultiIndices = new Set();
+      selectedStageOrders = {};
+      matchingSelections = {};
+      categorySelections = {};
+      matrixSelections = {};
+
       document.getElementById('qResultBox').classList.add('hidden');
       document.getElementById('qActionRow').classList.remove('hidden');
 
@@ -1696,7 +1573,6 @@
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-800';
       }
 
-      document.getElementById('qTypeBadge').innerText = q.type === 'choice' ? 'Избираем отговор (Разбъркани опции)' : 'Отворен: Попълване';
       document.getElementById('qPrompt').innerText = q.prompt;
 
       // Attachment
@@ -1714,6 +1590,7 @@
       body.innerHTML = '';
 
       if (q.type === 'choice') {
+        document.getElementById('qTypeBadge').innerText = 'Единичен избор';
         activeShuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
         const cyrillicLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Е'];
 
@@ -1731,7 +1608,118 @@
           `;
           body.appendChild(btn);
         });
+
+      } else if (q.type === 'multi_select') {
+        document.getElementById('qTypeBadge').innerText = 'Множествен избор (Отбележете верните)';
+        const headerInfo = document.createElement('div');
+        headerInfo.className = 'text-xs text-purple-400 font-mono font-bold mb-2 flex items-center justify-between';
+        headerInfo.innerHTML = `<span>👆 Изберете всички верни твърдения:</span><span id="multiSelectCounter" class="text-slate-400 font-normal">Избрани: 0</span>`;
+        body.appendChild(headerInfo);
+
+        q.options.forEach((opt, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'w-full p-3.5 rounded-2xl bg-card border border-borderGlow hover:border-slate-500 text-left text-slate-200 font-medium text-xs sm:text-sm transition-all flex items-center justify-between multi-btn';
+          btn.onclick = () => toggleMultiChoice(idx, btn, q.options.length);
+          btn.innerHTML = `
+            <span class="pr-2 leading-snug">${opt.text}</span>
+            <div class="w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box"></div>
+          `;
+          body.appendChild(btn);
+        });
+
+      } else if (q.type === 'stage_order') {
+        document.getElementById('qTypeBadge').innerText = 'Номериране на етапи (1, 2, 3)';
+        const note = document.createElement('div');
+        note.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        note.innerText = '👇 Посочете за всяка дейност на кой етап съответства (1. Преди | 2. По време | 3. След):';
+        body.appendChild(note);
+
+        q.items.forEach((item, idx) => {
+          const row = document.createElement('div');
+          row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+          row.innerHTML = `
+            <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="setStageOrder(${idx}, 1, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">1. Преди</button>
+              <button onclick="setStageOrder(${idx}, 2, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">2. По време</button>
+              <button onclick="setStageOrder(${idx}, 3, this)" class="stage-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">3. След</button>
+            </div>
+          `;
+          body.appendChild(row);
+        });
+
+      } else if (q.type === 'matching_select') {
+        document.getElementById('qTypeBadge').innerText = 'Свързване на съответствия';
+        const guide = document.createElement('div');
+        guide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        guide.innerText = '👇 Изберете правилния отговор за всяка позиция:';
+        body.appendChild(guide);
+
+        q.items.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col gap-2';
+          let optionsHtml = `<option value="">-- Изберете съответствие от списъка --</option>`;
+          q.matchOptions.forEach(mo => {
+            optionsHtml += `<option value="${mo.key}">${mo.text}</option>`;
+          });
+          card.innerHTML = `
+            <span class="text-xs sm:text-sm text-slate-200 font-bold leading-snug">${item.text}</span>
+            <select id="matchSelect_${item.id}" onchange="matchingSelections[${item.id}] = this.value" class="w-full bg-obsidian border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:border-purple-500 focus:outline-none font-mono">
+              ${optionsHtml}
+            </select>
+          `;
+          body.appendChild(card);
+        });
+
+      } else if (q.type === 'category_classify') {
+        document.getElementById('qTypeBadge').innerText = 'Класификация по категории';
+        const topGuide = document.createElement('div');
+        topGuide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        topGuide.innerText = '👇 За всяко твърдение изберете съответната категория:';
+        body.appendChild(topGuide);
+
+        q.items.forEach((item, idx) => {
+          const row = document.createElement('div');
+          row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+          
+          let btnsHtml = `<div class="flex items-center gap-2 shrink-0">`;
+          q.categories.forEach(cat => {
+            btnsHtml += `<button onclick="setCategorySelect(${idx}, '${cat.id}', this)" class="cat-btn-${idx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">${cat.name}</button>`;
+          });
+          btnsHtml += `</div>`;
+
+          row.innerHTML = `
+            <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
+            ${btnsHtml}
+          `;
+          body.appendChild(row);
+        });
+
+      } else if (q.type === 'matrix_choice') {
+        document.getElementById('qTypeBadge').innerText = 'Попълване на термини в текст (Матрица)';
+        const guide = document.createElement('div');
+        guide.className = 'text-xs text-purple-400 font-mono font-bold mb-3';
+        guide.innerText = '👇 Изберете верния термин за всяка от буквите (А, Б, В, Г):';
+        body.appendChild(guide);
+
+        q.rows.forEach(rowItem => {
+          const rowEl = document.createElement('div');
+          rowEl.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+          let pills = `<div class="flex flex-wrap gap-2 shrink-0">`;
+          rowItem.options.forEach(opt => {
+            pills += `<button onclick="setMatrixChoice('${rowItem.id}', '${opt}', this)" class="mat-btn-${rowItem.id} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">${opt}</button>`;
+          });
+          pills += `</div>`;
+
+          rowEl.innerHTML = `
+            <span class="text-xs sm:text-sm text-purple-300 font-mono font-black">${rowItem.label}</span>
+            ${pills}
+          `;
+          body.appendChild(rowEl);
+        });
+
       } else if (q.type === 'open_fill') {
+        document.getElementById('qTypeBadge').innerText = 'Отворен: Попълване';
         q.fields.forEach((f, idx) => {
           const row = document.createElement('div');
           row.className = 'flex flex-col sm:flex-row sm:items-center gap-2 p-3 rounded-2xl bg-card border border-borderGlow';
@@ -1760,10 +1748,57 @@
       radio.innerText = '✓';
     }
 
+    function toggleMultiChoice(idx, btnEl, totalOptions) {
+      playSound('click');
+      if (selectedMultiIndices.has(idx)) {
+        selectedMultiIndices.delete(idx);
+        btnEl.classList.remove('border-purple-500', 'bg-purple-950/40');
+        const box = btnEl.querySelector('.multi-box');
+        box.className = 'w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center text-xs font-mono shrink-0 multi-box';
+        box.innerHTML = '';
+      } else {
+        selectedMultiIndices.add(idx);
+        btnEl.classList.add('border-purple-500', 'bg-purple-950/40');
+        const box = btnEl.querySelector('.multi-box');
+        box.className = 'w-5 h-5 rounded-md border border-purple-500 bg-purple-500 text-white font-black flex items-center justify-center text-xs font-mono shrink-0 multi-box';
+        box.innerText = '✓';
+      }
+      const counter = document.getElementById('multiSelectCounter');
+      if (counter) counter.innerText = `Избрани: ${selectedMultiIndices.size} от ${totalOptions}`;
+    }
+
+    function setStageOrder(itemIdx, orderNum, btnEl) {
+      playSound('click');
+      selectedStageOrders[itemIdx] = orderNum;
+      document.querySelectorAll(`.stage-btn-${itemIdx}`).forEach(b => {
+        b.className = `stage-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all`;
+      });
+      btnEl.className = `stage-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-purple-600 border border-purple-400 text-white shadow-md shadow-purple-500/30 transition-all`;
+    }
+
+    function setCategorySelect(itemIdx, catId, btnEl) {
+      playSound('click');
+      categorySelections[itemIdx] = catId;
+      document.querySelectorAll(`.cat-btn-${itemIdx}`).forEach(b => {
+        b.className = `cat-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all`;
+      });
+      btnEl.className = `cat-btn-${itemIdx} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-purple-600 border border-purple-400 text-white shadow-md shadow-purple-500/30 transition-all`;
+    }
+
+    function setMatrixChoice(rowId, optVal, btnEl) {
+      playSound('click');
+      matrixSelections[rowId] = optVal;
+      document.querySelectorAll(`.mat-btn-${rowId}`).forEach(b => {
+        b.className = `mat-btn-${rowId} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all`;
+      });
+      btnEl.className = `mat-btn-${rowId} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-purple-600 border border-purple-400 text-white shadow-md shadow-purple-500/30 transition-all`;
+    }
+
     // --- Submit and Grade Current Question ---
     function submitCurrentAnswer() {
       const q = currentQuestions[currentIdx];
       let isCorrect = false;
+      let fraction = 0;
 
       if (q.type === 'choice') {
         if (selectedChoiceIdx === null) {
@@ -1771,46 +1806,82 @@
           return;
         }
         isCorrect = activeShuffledOptions[selectedChoiceIdx].correct;
+        fraction = isCorrect ? 1.0 : 0.0;
 
-        totalQuestionsAnswered++;
-        document.getElementById('qActionRow').classList.add('hidden');
-        const resBox = document.getElementById('qResultBox');
-        const resIcon = document.getElementById('resIcon');
-        const resTitle = document.getElementById('resTitle');
-        const resOff = document.getElementById('resOfficialAnswer');
-        const resWhy = document.getElementById('resWhy');
+      } else if (q.type === 'multi_select') {
+        if (selectedMultiIndices.size === 0) {
+          alert('Моля, отбележете поне една от опциите!');
+          return;
+        }
+        let correctPicked = 0;
+        let incorrectPicked = 0;
+        let totalCorrect = q.options.filter(o => o.correct).length;
 
-        if (isCorrect) {
-          playSound('correct');
-          earnedPoints += 1.0;
-          confetti({ particleCount: 35, spread: 60, origin: { y: 0.7 } });
-          resBox.className = 'mt-6 p-5 rounded-2xl border bg-emerald-950/40 border-emerald-500/50 block';
-          resIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-lg shrink-0';
-          resIcon.innerText = '✓';
-          resTitle.className = 'font-display font-bold text-base text-emerald-400 mb-1';
-          resTitle.innerText = 'Верен отговор (+1.00 точка)';
-          document.getElementById('overrideBtnContainer').innerHTML = '';
+        q.options.forEach((opt, idx) => {
+          const isSelected = selectedMultiIndices.has(idx);
+          if (opt.correct && isSelected) correctPicked++;
+          else if (!opt.correct && isSelected) incorrectPicked++;
+        });
+
+        if (correctPicked === totalCorrect && incorrectPicked === 0) {
+          isCorrect = true;
+          fraction = 1.0;
         } else {
-          playSound('wrong');
-          wrongQuestionsInRound.push({ ...q });
-          resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
-          resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
-          resIcon.innerText = '✕';
-          resTitle.className = 'font-display font-bold text-base text-rose-400 mb-1';
-          resTitle.innerText = 'Грешен отговор (добавен за повторение)';
-          document.getElementById('overrideBtnContainer').innerHTML = `
-            <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
-              <span>🛡️ Бях прав / Признай ми отговора (+1 т.)</span>
-            </button>
-          `;
+          fraction = Math.max(0, (correctPicked - incorrectPicked) / totalCorrect);
         }
 
-        const correctOpt = q.options.find(o => o.correct);
-        resOff.innerText = `Официален верен отговор: ${correctOpt ? correctOpt.text : ''}`;
-        resWhy.innerText = q.why;
-        updateBulgarianGrade();
-        lucide.createIcons();
-        return;
+      } else if (q.type === 'stage_order') {
+        const totalItems = q.items.length;
+        if (Object.keys(selectedStageOrders).length < totalItems) {
+          alert('Моля, посочете етап (1, 2 или 3) за всяко едно от твърденията!');
+          return;
+        }
+        let correctMatches = 0;
+        q.items.forEach((item, idx) => {
+          if (selectedStageOrders[idx] === item.correct) correctMatches++;
+        });
+        fraction = correctMatches / totalItems;
+        isCorrect = fraction === 1.0;
+
+      } else if (q.type === 'matching_select') {
+        const totalItems = q.items.length;
+        const answeredCount = Object.keys(matchingSelections).filter(k => matchingSelections[k] && matchingSelections[k] !== '').length;
+        if (answeredCount < totalItems) {
+          alert('Моля, изберете съответствие от всяко падащо меню!');
+          return;
+        }
+        let correctMatches = 0;
+        q.items.forEach(item => {
+          if (matchingSelections[item.id] === item.correctKey) correctMatches++;
+        });
+        fraction = correctMatches / totalItems;
+        isCorrect = fraction === 1.0;
+
+      } else if (q.type === 'category_classify') {
+        const totalItems = q.items.length;
+        if (Object.keys(categorySelections).length < totalItems) {
+          alert('Моля, класифицирайте всички твърдения преди предаване!');
+          return;
+        }
+        let correctMatches = 0;
+        q.items.forEach((item, idx) => {
+          if (categorySelections[idx] === item.correct) correctMatches++;
+        });
+        fraction = correctMatches / totalItems;
+        isCorrect = fraction === 1.0;
+
+      } else if (q.type === 'matrix_choice') {
+        const totalRows = q.rows.length;
+        if (Object.keys(matrixSelections).length < totalRows) {
+          alert('Моля, изберете термин за всяка една от буквите (А, Б, В, Г)!');
+          return;
+        }
+        let correctMatches = 0;
+        q.rows.forEach(r => {
+          if (matrixSelections[r.id] === r.correct) correctMatches++;
+        });
+        fraction = correctMatches / totalRows;
+        isCorrect = fraction === 1.0;
 
       } else if (q.type === 'open_fill') {
         const totalFields = q.fields.length;
@@ -1823,7 +1894,6 @@
           userValues.push((input ? input.value : '').trim().toLowerCase());
         }
 
-        // Pass 1: Direct Match
         q.fields.forEach((f, idx) => {
           const val = userValues[idx];
           if (val && val.length > 0) {
@@ -1840,7 +1910,6 @@
           }
         });
 
-        // Pass 2: Flexible Cross-Match (swapped inputs)
         q.fields.forEach((f, fIdx) => {
           if (!matchedFieldIndices.has(fIdx)) {
             userValues.forEach((val, inIdx) => {
@@ -1860,7 +1929,6 @@
           }
         });
 
-        // Highlight unmatched inputs in red
         for (let i = 0; i < totalFields; i++) {
           const input = document.getElementById(`openField_${i}`);
           if (input) {
@@ -1872,32 +1940,10 @@
         }
 
         const correctCount = matchedFieldIndices.size;
-        const fraction = correctCount / totalFields;
+        fraction = correctCount / totalFields;
         isCorrect = fraction === 1.0;
-        const partialPoints = fraction;
 
-        totalQuestionsAnswered++;
-        earnedPoints += partialPoints;
-
-        document.getElementById('qActionRow').classList.add('hidden');
-        const resBox = document.getElementById('qResultBox');
-        const resIcon = document.getElementById('resIcon');
-        const resTitle = document.getElementById('resTitle');
-        const resOff = document.getElementById('resOfficialAnswer');
-        const resWhy = document.getElementById('resWhy');
-
-        if (fraction === 1.0) {
-          playSound('correct');
-          confetti({ particleCount: 35, spread: 60, origin: { y: 0.7 } });
-          resBox.className = 'mt-6 p-5 rounded-2xl border bg-emerald-950/40 border-emerald-500/50 block';
-          resIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-lg shrink-0';
-          resIcon.innerText = '✓';
-          resTitle.className = 'font-display font-bold text-base text-emerald-400 mb-1';
-          resTitle.innerText = `Пълен верен отговор! (+1.00 т.)`;
-          document.getElementById('overrideBtnContainer').innerHTML = '';
-        } else if (fraction > 0) {
-          playSound('correct');
-          // Prune already mastered fields for retry loop
+        if (fraction > 0 && fraction < 1.0) {
           const remainingFields = q.fields.filter((_, fIdx) => !matchedFieldIndices.has(fIdx));
           if (remainingFields.length > 0) {
             wrongQuestionsInRound.push({
@@ -1906,36 +1952,66 @@
               isPartialRetry: true
             });
           }
-          resBox.className = 'mt-6 p-5 rounded-2xl border bg-amber-950/40 border-amber-500/50 block';
-          resIcon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-neonAmber border border-amber-500/40 flex items-center justify-center font-bold text-lg shrink-0';
-          resIcon.innerText = '½';
-          resTitle.className = 'font-display font-bold text-base text-neonAmber mb-1';
-          resTitle.innerText = `Частично верен (${correctCount} от ${totalFields} верни) • Верните полета се премахват при ретейка!`;
-          document.getElementById('overrideBtnContainer').innerHTML = `
-            <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
-              <span>🛡️ Признай за напълно верен (+${(1 - fraction).toFixed(2)} т.)</span>
-            </button>
-          `;
-        } else {
-          playSound('wrong');
-          wrongQuestionsInRound.push({ ...q });
-          resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
-          resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
-          resIcon.innerText = '✕';
-          resTitle.className = 'font-display font-bold text-base text-rose-400 mb-1';
-          resTitle.innerText = 'Непълен отговор (всички полета се добавят за повторение)';
-          document.getElementById('overrideBtnContainer').innerHTML = `
-            <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
-              <span>🛡️ Бях прав / Признай ми отговора (+1 т.)</span>
-            </button>
-          `;
         }
-
-        resOff.innerText = `Официален верен отговор:\n${q.official}`;
-        resWhy.innerText = q.why;
-        updateBulgarianGrade();
-        lucide.createIcons();
       }
+
+      totalQuestionsAnswered++;
+      earnedPoints += fraction;
+
+      document.getElementById('qActionRow').classList.add('hidden');
+      const resBox = document.getElementById('qResultBox');
+      const resIcon = document.getElementById('resIcon');
+      const resTitle = document.getElementById('resTitle');
+      const resOff = document.getElementById('resOfficialAnswer');
+      const resWhy = document.getElementById('resWhy');
+
+      if (fraction === 1.0) {
+        playSound('correct');
+        confetti({ particleCount: 35, spread: 60, origin: { y: 0.7 } });
+        resBox.className = 'mt-6 p-5 rounded-2xl border bg-emerald-950/40 border-emerald-500/50 block';
+        resIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+        resIcon.innerText = '✓';
+        resTitle.className = 'font-display font-bold text-base text-emerald-400 mb-1';
+        resTitle.innerText = 'Пълен верен отговор (+1.00 точка)';
+        document.getElementById('overrideBtnContainer').innerHTML = '';
+      } else if (fraction > 0) {
+        playSound('correct');
+        if (q.type !== 'open_fill') wrongQuestionsInRound.push({ ...q });
+        resBox.className = 'mt-6 p-5 rounded-2xl border bg-amber-950/40 border-amber-500/50 block';
+        resIcon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-neonAmber border border-amber-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+        resIcon.innerText = '½';
+        resTitle.className = 'font-display font-bold text-base text-neonAmber mb-1';
+        resTitle.innerText = `Частично верен (+${fraction.toFixed(2)} т.) • Добавен за повторение!`;
+        document.getElementById('overrideBtnContainer').innerHTML = `
+          <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
+            <span>🛡️ Признай за напълно верен (+${(1 - fraction).toFixed(2)} т.)</span>
+          </button>
+        `;
+      } else {
+        playSound('wrong');
+        wrongQuestionsInRound.push({ ...q });
+        resBox.className = 'mt-6 p-5 rounded-2xl border bg-rose-950/40 border-rose-500/50 block';
+        resIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold text-lg shrink-0';
+        resIcon.innerText = '✕';
+        resTitle.className = 'font-display font-bold text-base text-rose-400 mb-1';
+        resTitle.innerText = 'Грешен отговор (добавен за повторение)';
+        document.getElementById('overrideBtnContainer').innerHTML = `
+          <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
+            <span>🛡️ Бях прав / Признай ми отговора (+1 т.)</span>
+          </button>
+        `;
+      }
+
+      if (q.type === 'choice') {
+        const correctOpt = q.options.find(o => o.correct);
+        resOff.innerText = `Официален верен отговор: ${correctOpt ? correctOpt.text : ''}`;
+      } else {
+        resOff.innerText = `Официален верен отговор:\n${q.official}`;
+      }
+
+      resWhy.innerText = q.why;
+      updateBulgarianGrade();
+      lucide.createIcons();
     }
 
     function overrideMarkCorrect() {
