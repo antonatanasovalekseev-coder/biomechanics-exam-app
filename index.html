@@ -122,13 +122,16 @@
   <!-- Main Container -->
   <main class="max-w-5xl mx-auto px-4 lg:px-8 py-6">
     
-    <!-- Top-Level Subject Switcher (Default: Psychology) -->
-    <div class="grid grid-cols-2 gap-3 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
-      <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25">
-        <span>🧠 Спортна Психология (28 въпроса)</span>
+    <!-- Top-Level Subject Switcher (Default: BEL) -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
+      <button onclick="setGlobalSubject('bel')" id="subjectTab-bel" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25">
+        <span>📖 БЕЛ 11. Клас (40 въпроса)</span>
       </button>
-      <button onclick="setGlobalSubject('biomechanics')" id="subjectTab-biomechanics" class="py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all">
-        <span>🔬 Биомеханика (30 въпроса)</span>
+      <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>🧠 Спортна Психология (28)</span>
+      </button>
+      <button onclick="setGlobalSubject('biomechanics')" id="subjectTab-biomechanics" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>🔬 Биомеханика (30)</span>
       </button>
     </div>
 
@@ -139,9 +142,9 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-3">
-        <button onclick="openCheatSheetModal()" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/40 text-amber-300 hover:text-white flex items-center gap-1.5 transition-all shadow-md">
+        <button onclick="openCheatSheetModal()" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-amber-500/40 text-amber-300 hover:text-white flex items-center gap-1.5 transition-all shadow-md">
           <i data-lucide="book-open" class="w-3.5 h-3.5 text-neonAmber"></i>
-          <span>📚 ПИЩОВ: 18-ТЕ ТЕМИ (БЪРЗ ПРЕГЛЕД)</span>
+          <span id="cheatSheetBtnLabel">📚 ПИЩОВ ЗА БЕЛ 11. КЛАС</span>
         </button>
         <button onclick="restartExam(true)" class="px-3.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-card border border-borderGlow text-slate-300 hover:text-white flex items-center gap-1.5 transition-all">
           <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Нов опит (Разбъркай)
@@ -277,20 +280,20 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- CHEAT SHEET MODAL: ALL 18 THEMES SUMMARY   -->
+    <!-- CHEAT SHEET MODAL: BEL & PSYCHOLOGY        -->
     <!-- ========================================== -->
     <div id="cheatSheetModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div class="bg-card border border-purple-500/50 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="bg-card border border-emerald-500/50 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
         
         <!-- Modal Header -->
         <div class="p-6 border-b border-borderGlow flex items-center justify-between bg-obsidian/60">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-500/50 flex items-center justify-center text-xl">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600/30 border border-emerald-500/50 flex items-center justify-center text-xl" id="cheatSheetModalIcon">
               📚
             </div>
             <div>
-              <h3 class="font-display font-black text-lg sm:text-xl text-white">Пълен Пищов: 18-те Теми по Спортна Психология</h3>
-              <p class="text-xs text-slate-400 font-mono">Бързо преговаряне на ключовите термини и дефиниции от учебника</p>
+              <h3 id="cheatSheetModalTitle" class="font-display font-black text-lg sm:text-xl text-white">Пълен Пищов: БЕЛ 11. Клас (Автори, Творби, Правила)</h3>
+              <p id="cheatSheetModalSub" class="text-xs text-slate-400 font-mono">15-те задължителни произведения + 5-те златни правила по Български език</p>
             </div>
           </div>
           <button onclick="closeCheatSheetModal()" class="p-2 rounded-xl bg-obsidian border border-slate-700 text-slate-400 hover:text-white transition-all">
@@ -301,105 +304,189 @@
         <!-- Modal Body (Scrollable) -->
         <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300 font-sans">
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- BEL CHEAT SHEET (Shown when currentSubject === 'bel') -->
+          <div id="cheatSheetContentBel" class="space-y-4">
             
-            <!-- Тема 1 & 2 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 1 & 2: ОСНОВИ И СТРУКТУРА</span>
-              <p>• <strong>Обект</strong>: Човекът / общността в спортната дейност.</p>
-              <p>• <strong>Предмет</strong>: Психични закономерности и проявления в спорта.</p>
-              <p>• <strong>Фактори на напрежение</strong>:</p>
-              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
-                – <em>Обективни</em>: публичност, медии, фенове, договори, очаквания.<br>
-                – <em>Субективни</em>: свръхмотивация, страх от неуспех, отговорност, неувереност.
-              </p>
-              <p>• <strong>Структура на дейността</strong>: Изпълнителни (движения/действия), Психични (цел/мотивация/ориентировка/задачи), Личностни (критерии/смисъл/полза).</p>
-            </div>
-
-            <!-- Тема 3 & 4 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 3 & 4: НАВИЦИ И САМОРЕГУЛАЦИЯ</span>
-              <p>• <strong>Двигателни навици (3 етапа)</strong>: 1) Начално разучаване (КАКВО); 2) Задълбочено (КАК точно); 3) Затвърждаване (автоматизация в променлива среда).</p>
-              <p>• <strong>Пренос</strong>: Положително влияние (общ и кръстосан/комисурални връзки).</p>
-              <p>• <strong>Интерференция</strong>: Отрицателно влияние между стари и нови навици.</p>
-              <p>• <strong>Деавтоматизация</strong>: Разрушаване на навика при стрес.</p>
-              <p>• <strong>Саморегулативна система (3 стъпки)</strong>: <strong class="text-neonLime">Самопознание → Самооценка → Самоконтрол</strong>.</p>
-            </div>
-
-            <!-- Тема 5 & 6 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 5 & 6: ТЕМПЕРАМЕНТ И МОТИВАЦИЯ</span>
-              <p>• <strong>4 типа темперамент</strong>:</p>
-              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
-                – <em>Холерик</em>: силен, неуравновесен, бързоподвижен.<br>
-                – <em>Сангвиник</em>: силен, уравновесен, бързоподвижен.<br>
-                – <em>Флегматик</em>: силен, уравновесен, бавноподвижен.<br>
-                – <em>Меланхолик</em>: слаб, неуравновесен, бавноподвижен.
-              </p>
-              <p>• <strong>Мотивация</strong>: Външна (награди, условия) vs Вътрешна (удоволствие от спорта, развитие, дълг).</p>
-              <p>• <strong>Свръхмотивация</strong> (млади, тревожни) vs <strong>Понижена</strong> (рутинност при опитни).</p>
-            </div>
-
-            <!-- Тема 7 & 8 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 7 & 8: ОТБОР И ОБЩУВАНЕ</span>
-              <p>• <strong>Структура на отбора</strong>: Хоризонтална (състезател–състезател) и Вертикална (треньор–състезател).</p>
-              <p>• <strong>Лидерство</strong>: Формален лидер (треньор) vs Неформален лидер (избран от отбора).</p>
-              <p>• <strong>Общуване</strong>: Вербално (думи) vs Невербално (мимики, жестове, поза).</p>
-              <p>• <strong>Конфликти</strong>: на ролята, на мотивите, междуличностни, междугрупови (стари-млади).</p>
-            </div>
-
-            <!-- Тема 9, 10 & 11 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 9, 10 & 11: ВНИМАНИЕ, ВОЛЯ, ИНТЕЛЕКТ</span>
-              <p>• <strong>Внимание</strong>: Концентрация, Устойчивост, Разпределеност, Превключване, Обем. Предварително съсредоточаване.</p>
-              <p>• <strong>Волеви качества (3 групи)</strong>:</p>
-              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
-                – <em>на активността</em>: смелост, решителност, инициативност.<br>
-                – <em>на организираността</em>: самообладание, дисциплинираност.<br>
-                – <em>на твърдостта</em>: търпеливост, устойчивост, настойчивост.
-              </p>
-              <p>• <strong>Тактическо мислене</strong>: Нагледно-образно, действено, оперативно, ситуативно (3 етапа: планиране → решаване → оценка).</p>
-            </div>
-
-            <!-- Тема 12, 13 & 14 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 12, 13 & 14: ПРЕДСТАРТОВИ СЪСТОЯНИЯ И ВЪЗСТАНОВЯВАНЕ</span>
-              <p>• <strong>3 Предстартови състояния</strong>:</p>
-              <p class="pl-2 border-l border-purple-500/40 text-[11px]">
-                – <em>Предстартова треска</em>: превес на възбудата (треперене, припряност).<br>
-                – <em>Предстартова апатия</em>: превес на задържането (сънливост, апатия).<br>
-                – <em>Боева готовност</em>: оптимален баланс с лек превес на възбудата (трезва увереност, висока устойчивост).
-              </p>
-              <p>• <strong>Психично възстановяване</strong>: Автогенна тренировка, Идеомоторна (в плана на представите), Психо-мускулна релаксация.</p>
-              <p>• <strong>Успокояване</strong> (бавен пулс, топлина, бавни движения) vs <strong>Мобилизиране</strong> (бърз пулс, напрежение, силни звуци).</p>
-            </div>
-
-            <!-- Тема 16, 17 & 18 -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2 md:col-span-2">
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 16, 17 & 18: ПСИХОЛОГИЧЕСКО ОСИГУРЯВАНЕ, ПОДГОТОВКА И ПЛАНИРАНЕ</span>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] mt-2">
+            <!-- Golden Rules of Bulgarian Grammar -->
+            <div class="p-4 rounded-2xl bg-obsidian border border-emerald-500/40 space-y-2.5">
+              <span class="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">⚡ 5-ТЕ ЗЛАТНИ ПРАВИЛА ПО БЪЛГАРСКИ ЕЗИК (СИГУРНИ ТОЧКИ)</span>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
                 <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-purple-300 block mb-1">3 Равнища на осигуряване:</strong>
-                  1. Външно равнище<br>
-                  2. Психолого-педагогическо<br>
-                  3. Индивидуално-личностно
+                  <strong class="text-emerald-400 block mb-1">1. Пълен и кратък член (-ът / -а)</strong>
+                  • <strong>ТОЙ</strong> = Пълен член (<em>(Той) Учителят влезе</em>).<br>
+                  • <strong>НЕГО</strong> = Кратък член (<em>Видях (него) учителя</em>).<br>
+                  • След глагола <strong>съм / е / беше</strong> = <strong>Пълен член</strong> (<em>Той е най-добрият</em>).
                 </div>
                 <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-purple-300 block mb-1">3 Вида психическа подготовка:</strong>
-                  1. <strong>Обща</strong> (дългосрочна/базова)<br>
-                  2. <strong>Специализирана</strong> (за спорт)<br>
-                  3. <strong>Специална</strong> (за състезание)
+                  <strong class="text-emerald-400 block mb-1">2. Деепричастия (-йки) и запетаи</strong>
+                  • Думите на <strong>-йки</strong> (<em>вървейки, мислейки</em>) <strong>ВИНАГИ</strong> се отделят със запетаи от двете страни!<br>
+                  • <em>„Той влезе, <strong>усмихвайки се</strong>, в стаята.“</em>
                 </div>
                 <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-purple-300 block mb-1">4 Особености при планиране:</strong>
-                  1. Личностни особености<br>
-                  2. Възрастови особености<br>
-                  3. Спортна квалификация/опит<br>
-                  4. Особености на спорта и пол
+                  <strong class="text-emerald-400 block mb-1">3. Бройна форма (м.р. след числа)</strong>
+                  • <strong>Предмети/животни</strong> = бройна форма на <strong>-а/-я</strong> (<em>пет стола, три компютъра</em>).<br>
+                  • <strong>Лица/хора</strong> = форма за лица (<em>петима ученици, трима лекари</em>).
+                </div>
+                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                  <strong class="text-emerald-400 block mb-1">4. Двойно „-НН-“ при прилагателни</strong>
+                  • Основа на <strong>-Н</strong> + наставка <strong>-ЕН</strong> = <strong>-НН-</strong> (<em>ценен → ценна</em>, <em>военен → военна</em>).<br>
+                  • Без двойно „н“: <em>обикновен → обикновена</em>, <em>писмен → писмена</em>.
                 </div>
               </div>
-              <p class="mt-2 text-[11px]">• <strong>4 Метода на психологическата тренировка</strong>: 1) Моделирана тренировка; 2) Поведенчески тренинг; 3) Десенсибилизационен метод (привикване към емоциогенни фактори); 4) Трениране на психическите функции.</p>
+              <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-[11px]">
+                <strong class="text-emerald-400 block mb-1">5. Най-чести капани с Пароними</strong>
+                • <strong>Афект</strong> (силен гняв/ярост) $\neq$ <strong>Ефект</strong> (резултат/въздействие).<br>
+                • <strong>Кампания</strong> (рекламна/изборна акция) $\neq$ <strong>Компания</strong> (приятелски кръг или фирма).<br>
+                • <strong>Дипломат</strong> (посланик) $\neq$ <strong>Дипломант</strong> (дипломиращ се студент).
+              </div>
+            </div>
+
+            <!-- Literature 15 Works Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Тема 1: Родното и чуждото -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 1: РОДНОТО И ЧУЖДОТО</span>
+                <p>• <strong>Д. Талев – „Железният светилник“</strong> (роман): Традиция vs Възраждане. Султана (пазител на рода), Лазар (водач на народа), Рафе Клинче (свободен творец), Катерина (жертва на родовия закон), иконостасът.</p>
+                <p>• <strong>А. Константинов – „Бай Ганьо журналист“</strong> (фейлетон): Вестник „Народно величие“. Липса на принципи, келепир, ругаене на противниците. Дружина: Гуньо Адвокатина, Бочо Кърлежа, Данко Харсъзина.</p>
+                <p>• <strong>С. Стратиев – „Балкански синдром“</strong> (комедия на абсурда): Театър в театъра. Абсурдът на балканския преход, подмяната на ценностите. Герои: Печо, баба Кера, Кумът, Мечката.</p>
+              </div>
+
+              <!-- Тема 2: Миналото и паметта -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 2: МИНАЛОТО И ПАМЕТТА</span>
+                <p>• <strong>Ив. Вазов – „Паисий“</strong> (ода от „Епопея на забравените“): Хилендарският монах. „История славянобългарска“ като духовен светилник и оръжие срещу робството и забравата.</p>
+                <p>• <strong>Н. Вапцаров – „История“</strong> (стихотворение): Полемика с парадната история. Истинските творци са безименните трудови хора с тяхната тиха човешка драма („Живот ли бе – да го опишеш?“).</p>
+                <p>• <strong>Й. Радичков – „Ноев ковчег“</strong> (мозаечен роман): Ковчегът като спасение за човешката памет, добротата, традициите и природата от духовния потоп.</p>
+              </div>
+
+              <!-- Тема 3: Обществото и властта -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 3: ОБЩЕСТВОТО И ВЛАСТТА</span>
+                <p>• <strong>Хр. Ботев – „Борба“</strong> (сатирично стихотворение): Изобличение на робското търпение и съюза на тирани, богаташи и лъжедуховници („Свестните у нас считат за луди“). Зов за революция.</p>
+                <p>• <strong>Елин Пелин – „Андрешко“</strong> (разказ): Селската солидарност (Андрешко) срещу бездушния държавен чиновник (съдия-изпълнителя). Блатото като морален капан в защита на сиромаха Станоя.</p>
+                <p>• <strong>Хр. Смирненски – „Приказка за стълбата“</strong> (сатирична алегория): Деградацията на бунтаря. Дяволът взима последователно слуха, зрението и сърцето му. На върха: „Аз съм принц по рождение!“.</p>
+              </div>
+
+              <!-- Тема 4 & 5: Животът/смъртта и Природата -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 4 & 5: ЖИВОТЪТ, СМЪРТТА И ПРИРОДАТА</span>
+                <p>• <strong>Хр. Ботев – „До моето първо либе“</strong> (елегия/стихотворение): Отказ от личната любов в името на висшия дълг – юнашката борба за свобода.</p>
+                <p>• <strong>Ив. Вазов – „Новото гробище над Сливница“</strong> (ода/елегия): Саможертвата на падналите за защита на Съединението през 1885 г. („Българийо, за тебе те умряха...“).</p>
+                <p>• <strong>Ем. Станев – „Крадецът на праскови“</strong> (повест): Любовта на Елисавета и сръбския пленник Иво Обретенович в прасковената градина на фона на войната и полковника Михаил.</p>
+                <p>• <strong>Ив. Вазов – „При Рилския манастир“</strong> (ода): Природата като храм на душевния покой далеч от хорската злоба („Сега съм у дома...“).</p>
+                <p>• <strong>Пенчо Славейков – „Спи езерото“</strong> (миниатюра): Вечният мир, съзерцанието и хармонията между душата и природата.</p>
+                <p>• <strong>П. Яворов – „Градушка“</strong> (поема): Трагедията на трудовия селянин пред унищожителната природна стихия.</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- SPORT PSYCHOLOGY CHEAT SHEET (Shown when currentSubject === 'psychology') -->
+          <div id="cheatSheetContentPsychology" class="space-y-4 hidden">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Тема 1 & 2 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 1 & 2: ОСНОВИ И СТРУКТУРА</span>
+                <p>• <strong>Обект</strong>: Човекът / общността в спортната дейност.</p>
+                <p>• <strong>Предмет</strong>: Психични закономерности и проявления в спорта.</p>
+                <p>• <strong>Фактори на напрежение</strong>:</p>
+                <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                  – <em>Обективни</em>: публичност, медии, фенове, договори, очаквания.<br>
+                  – <em>Субективни</em>: свръхмотивация, страх от неуспех, отговорност, неувереност.
+                </p>
+                <p>• <strong>Структура на дейността</strong>: Изпълнителни (движения/действия), Психични (цел/мотивация/ориентировка/задачи), Личностни (критерии/смисъл/полза).</p>
+              </div>
+
+              <!-- Тема 3 & 4 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 3 & 4: НАВИЦИ И САМОРЕГУЛАЦИЯ</span>
+                <p>• <strong>Двигателни навици (3 етапа)</strong>: 1) Начално разучаване (КАКВО); 2) Задълбочено (КАК точно); 3) Затвърждаване (автоматизация в променлива среда).</p>
+                <p>• <strong>Пренос</strong>: Положително влияние (общ и кръстосан/комисурални връзки).</p>
+                <p>• <strong>Интерференция</strong>: Отрицателно влияние между стари и нови навици.</p>
+                <p>• <strong>Деавтоматизация</strong>: Разрушаване на навика при стрес.</p>
+                <p>• <strong>Саморегулативна система (3 стъпки)</strong>: <strong class="text-neonLime">Самопознание → Самооценка → Самоконтрол</strong>.</p>
+              </div>
+
+              <!-- Тема 5 & 6 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 5 & 6: ТЕМПЕРАМЕНТ И МОТИВАЦИЯ</span>
+                <p>• <strong>4 типа темперамент</strong>:</p>
+                <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                  – <em>Холерик</em>: силен, неуравновесен, бързоподвижен.<br>
+                  – <em>Сангвиник</em>: силен, уравновесен, бързоподвижен.<br>
+                  – <em>Флегматик</em>: силен, уравновесен, бавноподвижен.<br>
+                  – <em>Меланхолик</em>: слаб, неуравновесен, бавноподвижен.
+                </p>
+                <p>• <strong>Мотивация</strong>: Външна (награди, условия) vs Вътрешна (удоволствие от спорта, развитие, дълг).</p>
+                <p>• <strong>Свръхмотивация</strong> (млади, тревожни) vs <strong>Понижена</strong> (рутинност при опитни).</p>
+              </div>
+
+              <!-- Тема 7 & 8 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 7 & 8: ОТБОР И ОБЩУВАНЕ</span>
+                <p>• <strong>Структура на отбора</strong>: Хоризонтална (състезател–състезател) и Вертикална (треньор–състезател).</p>
+                <p>• <strong>Лидерство</strong>: Формален лидер (треньор) vs Неформален лидер (избран от отбора).</p>
+                <p>• <strong>Общуване</strong>: Вербално (думи) vs Невербално (мимики, жестове, поза).</p>
+                <p>• <strong>Конфликти</strong>: на ролята, на мотивите, междуличностни, междугрупови (стари-млади).</p>
+              </div>
+
+              <!-- Тема 9, 10 & 11 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 9, 10 & 11: ВНИМАНИЕ, ВОЛЯ, ИНТЕЛЕКТ</span>
+                <p>• <strong>Внимание</strong>: Концентрация, Устойчивост, Разпределеност, Превключване, Обем. Предварително съсредоточаване.</p>
+                <p>• <strong>Волеви качества (3 групи)</strong>:</p>
+                <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                  – <em>на активността</em>: смелост, решителност, инициативност.<br>
+                  – <em>на организираността</em>: самообладание, дисциплинираност.<br>
+                  – <em>на твърдостта</em>: търпеливост, устойчивост, настойчивост.
+                </p>
+                <p>• <strong>Тактическо мислене</strong>: Нагледно-образно, действено, оперативно, ситуативно (3 етапа: планиране → решаване → оценка).</p>
+              </div>
+
+              <!-- Тема 12, 13 & 14 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 12, 13 & 14: ПРЕДСТАРТОВИ СЪСТОЯНИЯ И ВЪЗСТАНОВЯВАНЕ</span>
+                <p>• <strong>3 Предстартови състояния</strong>:</p>
+                <p class="pl-2 border-l border-purple-500/40 text-[11px]">
+                  – <em>Предстартова треска</em>: превес на възбудата (треперене, припряност).<br>
+                  – <em>Предстартова апатия</em>: превес на задържането (сънливост, апатия).<br>
+                  – <em>Боева готовност</em>: оптимален баланс с лек превес на възбудата (трезва увереност, висока устойчивост).
+                </p>
+                <p>• <strong>Психично възстановяване</strong>: Автогенна тренировка, Идеомоторна (в плана на представите), Психо-мускулна релаксация.</p>
+                <p>• <strong>Успокояване</strong> (бавен пулс, топлина, бавни движения) vs <strong>Мобилизиране</strong> (бърз пулс, напрежение, силни звуци).</p>
+              </div>
+
+              <!-- Тема 16, 17 & 18 -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2 md:col-span-2">
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 16, 17 & 18: ПСИХОЛОГИЧЕСКО ОСИГУРЯВАНЕ, ПОДГОТОВКА И ПЛАНИРАНЕ</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] mt-2">
+                  <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                    <strong class="text-purple-300 block mb-1">3 Равнища на осигуряване:</strong>
+                    1. Външно равнище<br>
+                    2. Психолого-педагогическо<br>
+                    3. Индивидуално-личностно
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                    <strong class="text-purple-300 block mb-1">3 Вида психическа подготовка:</strong>
+                    1. <strong>Обща</strong> (дългосрочна/базова)<br>
+                    2. <strong>Специализирана</strong> (за спорт)<br>
+                    3. <strong>Специална</strong> (за състезание)
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
+                    <strong class="text-purple-300 block mb-1">4 Особености при планиране:</strong>
+                    1. Личностни особености<br>
+                    2. Възрастови особености<br>
+                    3. Спортна квалификация/опит<br>
+                    4. Особености на спорта и пол
+                  </div>
+                </div>
+                <p class="mt-2 text-[11px]">• <strong>4 Метода на психологическата тренировка</strong>: 1) Моделирана тренировка; 2) Поведенчески тренинг; 3) Десенсибилизационен метод (привикване към емоциогенни фактори); 4) Трениране на психическите функции.</p>
+              </div>
+
             </div>
 
           </div>
@@ -408,7 +495,7 @@
 
         <!-- Modal Footer -->
         <div class="p-4 border-t border-borderGlow bg-obsidian/60 flex justify-end">
-          <button onclick="closeCheatSheetModal()" class="px-6 py-2 rounded-xl font-display font-bold text-xs bg-purple-600 text-white hover:bg-purple-500 transition-all shadow-md">
+          <button onclick="closeCheatSheetModal()" class="px-6 py-2 rounded-xl font-display font-bold text-xs bg-emerald-600 text-white hover:bg-emerald-500 transition-all shadow-md">
             Затвори и Продължи Теста
           </button>
         </div>
@@ -483,6 +570,623 @@
       }
       lucide.createIcons();
     }
+
+    // =========================================================================
+    // 0. BULGARIAN & LITERATURE XI GRADE (КЛАСНА РАБОТА 1. И 2. СРОК - 40 ВЪПРОСА)
+    // =========================================================================
+    const belQuestions = [
+      // -------------------------------------------------------------
+      // ЧАСТ 1: ЛИТЕРАТУРА 1. СРОК („Родното и чуждото“, „Миналото и паметта“)
+      // -------------------------------------------------------------
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 1,
+        type: 'choice',
+        prompt: '1. Към кой литературен жанр принадлежи творбата „Железният светилник“ на Димитър Талев?',
+        options: [
+          { text: 'А) Повест', correct: false },
+          { text: 'Б) Роман (първа част от тетралогия)', correct: true },
+          { text: 'В) Историческа поема', correct: false },
+          { text: 'Г) Сатиричен очерк', correct: false }
+        ],
+        hint: 'Творбата е първата книга от прочутата четирилогия на Димитър Талев за Преспа.',
+        why: '„Железният светилник“ е роман и е първата книга от тетралогията на Талев („Железният светилник“, „Преспанските камбани“, „Илинден“, „Гласовете ви чувам“).'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 2,
+        type: 'choice',
+        prompt: '2. Кое твърдение за героинята Султана от романа „Железният светилник“ е ВЯРНО?',
+        options: [
+          { text: 'А) Тя се отрича от родовите традиции и насърчава свободата на децата си', correct: false },
+          { text: 'Б) Тя е непоколебим пазител на патриархалния родов ред, за когото честта на дома е над всичко', correct: true },
+          { text: 'В) Тя подкрепя любовта и брака между Катерина и Рафе Клинче от самото начало', correct: false },
+          { text: 'Г) Тя е водач на борбата срещу гръцкия владика в Преспа', correct: false }
+        ],
+        hint: 'Султана жертва дори живота на собствената си дъщеря Катерина, за да спаси родовата чест от срам.',
+        why: 'Султана олицетворява строгия патриархален родов морал и ред. За нея спасяването на семейната чест стои дори над майчините чувства.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 3,
+        type: 'choice',
+        prompt: '3. Какво символизира изработването на иконостаса от Рафе Клинче в „Железният светилник“?',
+        options: [
+          { text: 'А) Сляпо следване на църковния канон и строгите догми', correct: false },
+          { text: 'Б) Пробуждането на свободния възрожденски творчески дух и земната човешка красота', correct: true },
+          { text: 'В) Желанието на майстора да натрупа богатство и слава', correct: false },
+          { text: 'Г) Победата на чуждото изкуство над родната традиция', correct: false }
+        ],
+        hint: 'Рафе Клинче извайва образа на Катерина върху иконостаса, нарушавайки канона в името на живата хубост.',
+        why: 'Иконостасът на Рафе Клинче е връх на възрожденското пробуждане — творецът вгражда образа на любимата жена (Катерина), свързвайки святото с реалната човешка любов.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 4,
+        type: 'choice',
+        prompt: '4. Кой герой от „Железният светилник“ застава начело на борбата за българска черква и народностно пробуждане в Преспа?',
+        options: [
+          { text: 'А) Стоян Глаушев', correct: false },
+          { text: 'Б) Рафе Клинче', correct: false },
+          { text: 'В) Лазар Глаушев', correct: true },
+          { text: 'Г) Климент Бенков', correct: false }
+        ],
+        hint: 'Синът на Султана и Стоян, който се превръща в духовен и политически лидер на младите в града.',
+        why: 'Лазар Глаушев е новият възрожденски тип водач, който повежда съгражданите си в борбата срещу фанариотщината и за самостоятелна българска църква.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 5,
+        type: 'choice',
+        prompt: '5. Какъв е жанрът на произведението „Бай Ганьо журналист“ от Алеко Константинов?',
+        options: [
+          { text: 'А) Исторически разказ', correct: false },
+          { text: 'Б) Фейлетон / сатиричен очерк', correct: true },
+          { text: 'В) Драматична поема', correct: false },
+          { text: 'Г) Мемоарна повест', correct: false }
+        ],
+        hint: 'Творбата осмива чрез сатира и гротеска появата на корумпираната партизанска преса.',
+        why: '„Бай Ганьо журналист“ е сатиричен фейлетон/очерк от книгата „Бай Ганьо“, изобличаващ моралното падение и превръщането на журналистиката в средство за келепир.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 6,
+        type: 'choice',
+        prompt: '6. С каква цел Бай Ганьо и неговите съмишленици решават да издават вестник „Народно величие“?',
+        options: [
+          { text: 'А) За да разпространяват европейска култура и просвета сред народа', correct: false },
+          { text: 'Б) За да служат вярно на опозицията и да защитават истината', correct: false },
+          { text: 'В) За да ругаят политическите противници, да се подмажат на властта и да извлекат лична материална изгода (келепир)', correct: true },
+          { text: 'Г) За да насърчават развитието на българската литература', correct: false }
+        ],
+        hint: 'Бай Ганьо казва: „Повдигни на този полицата, клъвни онзи... тука свий, там отрежи, та да излезе нещо за нас“.',
+        why: 'Вестник „Народно величие“ е пародия на журналистика — целта е рекет, клевети срещу опонентите и лични облаги.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 7,
+        type: 'choice',
+        prompt: '7. Кои са персонажите, които влизат в „редакционния комитет“ на Бай Ганьо в „Бай Ганьо журналист“?',
+        options: [
+          { text: 'А) Гуньо Адвокатина, Бочо Кърлежа и Данко Харсъзина', correct: true },
+          { text: 'Б) Лазар Глаушев, Рафе Клинче и Стоян Глаушев', correct: false },
+          { text: 'В) Андрешко, Станоя и Съдия-изпълнителят', correct: false },
+          { text: 'Г) Печо, Кумът и Баба Кера', correct: false }
+        ],
+        hint: 'Имената на неговата дружина говорят сами за себе си – мошеници, нагаждачи и безделници.',
+        why: 'Гуньо Адвокатина, Бочо Кърлежа и Данко Харсъзина са моралните двойници на Бай Ганьо, готови да напишат всякаква лъжа за пари.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 8,
+        type: 'choice',
+        prompt: '8. Какъв похват и жанрова специфика използва Станислав Стратиев в пиесата „Балкански синдром“?',
+        options: [
+          { text: 'А) Историческа трагедия в класически стил', correct: false },
+          { text: 'Б) Сатирична комедия / драматургия на абсурда с похвата „театър в театъра“', correct: true },
+          { text: 'В) Романтична балада в рими', correct: false },
+          { text: 'Г) Документален пътепис', correct: false }
+        ],
+        hint: 'Героите нахлуват на сцената и прекъсват представлението, за да решават личните си проблеми пред публиката.',
+        why: '„Балкански синдром“ е комедия на абсурда, където границата между сцена и реалност се размива („театър в театъра“), разкривайки гротеската на балканския манталитет.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 9,
+        type: 'choice',
+        prompt: '9. Каква е основната роля на Паисий Хилендарски и неговата „История славянобългарска“ в одата „Паисий“ от Иван Вазов?',
+        options: [
+          { text: 'А) Да опише подробно живота на средновековните царе без връзка с настоящето', correct: false },
+          { text: 'Б) Да даде на българите памет и национално самочувствие като оръжие срещу робството и забравата', correct: true },
+          { text: 'В) Да призове към помирение с поробителите', correct: false },
+          { text: 'Г) Да критикува българската природа и бит', correct: false }
+        ],
+        hint: '„О, неразумни и юроде! Поради что се срамиш да се наречеш болгарин...“',
+        why: 'В одата „Паисий“ (от „Епопея на забравените“) историята е представена като духовен светилник, който възкресява потъпканото национално достойнство.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit1',
+        num: 10,
+        type: 'choice',
+        prompt: '10. В стихотворението „История“ на Никола Вапцаров, кои са истинските творци на историята според поета?',
+        options: [
+          { text: 'А) Царете, военачалниците и министрите, описани в дебелите томове', correct: false },
+          { text: 'Б) Обикновените, безименни трудови хора, преживели мъка, глад и борба', correct: true },
+          { text: 'В) Учените и летописците, които записват събитията', correct: false },
+          { text: 'Г) Богатите търговци и фабриканти', correct: false }
+        ],
+        hint: 'Поетът води полемика с официалната история, която пропуска драмата на малкия човек („Живот ли бе – да го опишеш?“).',
+        why: 'Вапцаров защитава тезата, че истинската история не е в сухите дати и помпозните паради, а в страданието и тихия подвиг на трудовия народ.'
+      },
+
+      // -------------------------------------------------------------
+      // ЧАСТ 2: ЛИТЕРАТУРА 2. СРОК („Обществото и властта“, „Животът и смъртта“, „Природата“)
+      // -------------------------------------------------------------
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 11,
+        type: 'choice',
+        prompt: '11. Какво изобличава Христо Ботев в стихотворението „Борба“?',
+        options: [
+          { text: 'А) Студената зима и тежките природни бедствия', correct: false },
+          { text: 'Б) Робското примирение, търпението и съюза между тираните, богаташите и лъжедуховниците („Свестните у нас считат за луди“)', correct: true },
+          { text: 'В) Несподелената любов на младежа към девойката', correct: false },
+          { text: 'Г) Неуспеха на хайдушките чети в Балкана', correct: false }
+        ],
+        hint: 'Ботев атакува лицемерието на обществото, в което подлецът и крадецът са на почит, а борецът за правда е обявен за луд.',
+        why: 'В „Борба“ Ботев развенчава фалшивите ценности на робското общество, където подлостта тържествува, и призовава към кървава и безкомпромисна борба.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 12,
+        type: 'choice',
+        prompt: '12. Какъв е основният конфликт в разказа „Андрешко“ от Елин Пелин?',
+        options: [
+          { text: 'А) Между двама съседи за границата на селските им ниви', correct: false },
+          { text: 'Б) Между бедния трудов селянин (Андрешко) и бездушната държавна машина (Съдия-изпълнителя)', correct: true },
+          { text: 'В) Между селяните и търговците на зърно в града', correct: false },
+          { text: 'Г) Между младото и старото поколение в селото', correct: false }
+        ],
+        hint: 'Съдията пътува, за да продаде житото на сиромаха Станоя за неплатени данъци.',
+        why: 'Конфликтът е между моралната правда и солидарност на селото (Андрешко) срещу безсърдечния буквален държавен закон (съдията).'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 13,
+        type: 'choice',
+        prompt: '13. Каква е постъпката на Андрешко в края на разказа на Елин Пелин?',
+        options: [
+          { text: 'А) Закарва съдията бързо до селото и му помага да секвестира имуществото на Станоя', correct: false },
+          { text: 'Б) Отпряга конете и изоставя съдия-изпълнителя насред калното блато, за да даде време на съселянина си да скрие житото си', correct: true },
+          { text: 'В) Ограбва съдията и избягва в гората', correct: false },
+          { text: 'Г) Обръща каруцата и се връща обратно в града', correct: false }
+        ],
+        hint: 'Блатото става капан за високомерния чиновник.',
+        why: 'Андрешко избира човешката солидарност пред парите от курса — той оставя съдията в блатото, за да защити бедното селско семейство на Станоя.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 14,
+        type: 'choice',
+        prompt: '14. Какво представлява творбата „Приказка за стълбата“ на Христо Смирненски?',
+        options: [
+          { text: 'А) Документален исторически разказ за работническите стачки', correct: false },
+          { text: 'Б) Сатирична приказка / алегория за духовната деградация на бунтаря при изкачването му към властта', correct: true },
+          { text: 'В) Приказка за деца с фантастични герои и щастлив край', correct: false },
+          { text: 'Г) Реалистичен роман за живота в столицата', correct: false }
+        ],
+        hint: 'Смирненски посвещава творбата „На всички, които ще кажат: Това не се отнася до мене!“.',
+        why: 'Творбата алегорично показва как човекът, тръгнал да отмъщава за бедните, продава душата си на Дявола за власт и богатство.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 15,
+        type: 'choice',
+        prompt: '15. Какво отнема Дяволът от момъка на всяко от трите стъпала в „Приказка за стълбата“?',
+        options: [
+          { text: 'А) Парите, дрехите и оръжието му', correct: false },
+          { text: 'Б) Първо: слуха му; Второ: зрението (очите); Трето: сърцето му (заменя го с камък/лед)', correct: true },
+          { text: 'В) Гласа, силата и младостта му', correct: false },
+          { text: 'Г) Спомените, приятелите и свободата му', correct: false }
+        ],
+        hint: 'На върха, загубил човешките си сетива и съвест, той вижда пируващите богаташи като ангели и казва: „Аз съм принц по рождение!“.',
+        why: 'Смирненски гениално показва метаморфозата: без слух не чува плача на онеправданите, без очи вижда рози вместо рани, а без сърце става безжалостен тиранин.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 16,
+        type: 'choice',
+        prompt: '16. В стихотворението „До моето първо либе“ на Христо Ботев, какъв избор прави лирическият герой?',
+        options: [
+          { text: 'А) Избира тихото семейно щастие и спокойния живот с девойката', correct: false },
+          { text: 'Б) Отхвърля интимната любов и призовава девойката да запее юнашката песен на борбата и саможертвата', correct: true },
+          { text: 'В) Напуска родината завинаги, за да учи в чужбина', correct: false },
+          { text: 'Г) Примирява се с поробителя в името на мира', correct: false }
+        ],
+        hint: '„Остави таз песен любовна, / не ранявай сърце ми ранено... чуй как стене гората!“',
+        why: 'Героят подчинява личното щастие на висшия дълг към отечеството — любовната песен отстъпва пред кървавата песен на свободата.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 17,
+        type: 'choice',
+        prompt: '17. По какъв исторически повод е написана елегията „Новото гробище над Сливница“ от Иван Вазов?',
+        options: [
+          { text: 'А) Априлското въстание от 1876 г.', correct: false },
+          { text: 'Б) Сръбско-българската война от 1885 г. за защита на Съединението', correct: true },
+          { text: 'В) Освобождението на България през 1878 г.', correct: false },
+          { text: 'Г) Балканската война от 1912 г.', correct: false }
+        ],
+        hint: 'Българските войници защитават младата свободна родина при Сливница срещу братоубийствено нападение.',
+        why: 'Вазов увековечава подвига на младите български воини, паднали в защита на Съединението през 1885 г. („Покойници, вий в други полк преминахте...“).'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 18,
+        type: 'choice',
+        prompt: '18. Кои са главните герои в повестта „Крадецът на праскови“ на Емилиян Станев?',
+        options: [
+          { text: 'А) Султана, Стоян и Лазар Глаушеви', correct: false },
+          { text: 'Б) Елисавета, сръбският военнопленник Иво Обретенович и полковникът Михаил', correct: true },
+          { text: 'В) Андрешко, Станоя и Съдия-изпълнителят', correct: false },
+          { text: 'Г) Печо, баба Кера и Кумът', correct: false }
+        ],
+        hint: 'Действието се развива във Велико Търново по време на Първата световна война.',
+        why: 'В центъра на повестта е трагичната любов между самотната съпруга на коменданта (Елисавета) и сръбския пленник (Иво Обретенович).'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 19,
+        type: 'choice',
+        prompt: '19. Какво символизира прасковената градина в „Крадецът на праскови“?',
+        options: [
+          { text: 'А) Военната дисциплина и строгостта на полковника', correct: false },
+          { text: 'Б) Оазис на живота, копнежа по свобода, красота и споделена любов насред войната и разрухата', correct: true },
+          { text: 'В) Място за търговия с плодове в града', correct: false },
+          { text: 'Г) Символ на робството и предателството', correct: false }
+        ],
+        hint: 'Оградената градина е пространството, където възкръсва женствеността на Елисавета и човечността на Иво.',
+        why: 'Градината е метафора на Рая и живия живот, който побеждава сковаващия страх и омразата, наложени от войната.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 20,
+        type: 'choice',
+        prompt: '20. Как е представена природата в одата „При Рилския манастир“ на Иван Вазов?',
+        options: [
+          { text: 'А) Като враждебна и заплашителна сила, носеща беди', correct: false },
+          { text: 'Б) Като храм на душевния покой, възродителка на силите и духовно убежище от обществената пошлост („Сега съм у дома...“)', correct: true },
+          { text: 'В) Като място за селскостопански труд и обработване на земята', correct: false },
+          { text: 'Г) Като безразлична и студена към човешката болка', correct: false }
+        ],
+        hint: 'В подножието на Рилския манастир поетът намира спасение от „хорските сплетни“ и завист.',
+        why: 'За Вазов величествената природа на Рила е божествен олтар, който лекува изстрадалата душа и връща вярата в доброто и вечното.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 21,
+        type: 'choice',
+        prompt: '21. Какъв е философският смисъл на лирическата миниатюра „Спи езерото“ от Пенчо Славейков (сборник „Сън за щастие“)?',
+        options: [
+          { text: 'А) Призив за бунт срещу социалното потисничество', correct: false },
+          { text: 'Б) Съзерцание на вечния покой, вътрешната хармония и спокойното приемане на житейския кръговрат', correct: true },
+          { text: 'В) Описание на лятна буря в планината', correct: false },
+          { text: 'Г) Скръб по загиналите във войните българи', correct: false }
+        ],
+        hint: 'Огледалната водна повърхност отразява тишината и покоя на буките – съвършено съзвучие между душата и природата.',
+        why: '„Спи езерото“ е образец на модерната пейзажно-философска лирика на Пенчо Славейков за мира и красотата на битието.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 22,
+        type: 'choice',
+        prompt: '22. Какъв е жанрът и основната тема на творбата „Градушка“ от Пейо Яворов?',
+        options: [
+          { text: 'А) Исторически роман за живота на българските царе', correct: false },
+          { text: 'Б) Социална поема за трагичния сблъсък на селския труд с жестоката природна стихия', correct: true },
+          { text: 'В) Любовен сонет за несподелени чувства', correct: false },
+          { text: 'Г) Сатиричен фейлетон срещу градската бюрокрация', correct: false }
+        ],
+        hint: '„Една, че две, че три - усилни / и паметни години... Боже, защо ни наказа?“',
+        why: 'Поемата „Градушка“ пресъздава покъртителната трагедия на селяните, чийто едногодишен кървав труд е унищожен за минути от ледените зърна на градушката.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 23,
+        type: 'choice',
+        prompt: '23. Кой от изброените автори НЕ принадлежи към авторите, изучавани в 11. клас по новата програма на МОН?',
+        options: [
+          { text: 'А) Димитър Талев', correct: false },
+          { text: 'Б) Христо Смирненски', correct: false },
+          { text: 'В) Уилям Шекспир (изучаван в 8. клас)', correct: true },
+          { text: 'Г) Емилиян Станев', correct: false }
+        ],
+        hint: 'В 11. клас програмата по литература е изцяло фокусирана върху българската класика.',
+        why: 'В 11. клас се изучава само българска литература, организирана в 5 тематични цикъла.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 24,
+        type: 'choice',
+        prompt: '24. Коя от изброените творби принадлежи към тематичния цикъл „Миналото и паметта“?',
+        options: [
+          { text: 'А) „Паисий“ на Иван Вазов', correct: true },
+          { text: 'Б) „Андрешко“ на Елин Пелин', correct: false },
+          { text: 'В) „Градушка“ на Пейо Яворов', correct: false },
+          { text: 'Г) „Бай Ганьо журналист“ на Алеко Константинов', correct: false }
+        ],
+        hint: 'Творбите в този цикъл са: „Паисий“ (Вазов), „История“ (Вапцаров) и „Ноев ковчег“ (Радичков).',
+        why: 'В тема „Миналото и паметта“ попадат „Паисий“, „История“ и „Ноев ковчег“.'
+      },
+      {
+        subject: 'bel',
+        section: 'lit2',
+        num: 25,
+        type: 'choice',
+        prompt: '25. Кои три произведения образуват тематичния блок „Обществото и властта“ в 11. клас?',
+        options: [
+          { text: 'А) „Борба“ (Ботев), „Андрешко“ (Елин Пелин) и „Приказка за стълбата“ (Смирненски)', correct: true },
+          { text: 'Б) „Паисий“ (Вазов), „История“ (Вапцаров) и „Ноев ковчег“ (Радичков)', correct: false },
+          { text: 'В) „Железният светилник“ (Талев), „Бай Ганьо“ (Алеко) и „Балкански синдром“ (Стратиев)', correct: false },
+          { text: 'Г) „При Рилския манастир“ (Вазов), „Спи езерото“ (Славейков) и „Градушка“ (Яворов)', correct: false }
+        ],
+        hint: 'Тези три произведения изобличават тиранията, чиновническото бездушие и изкушението на властта.',
+        why: 'Точно тези три творби изграждат темата „Обществото и властта“ в официалната програма на МОН за 11. клас.'
+      },
+
+      // -------------------------------------------------------------
+      // ЧАСТ 3: БЪЛГАРСКИ ЕЗИК (Правопис, Пунктуация, Граматика, Пароними)
+      // -------------------------------------------------------------
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 26,
+        type: 'choice',
+        prompt: '26. В кое от изреченията е допусната ПРАВОПИСНА грешка при членуването?',
+        options: [
+          { text: 'А) Директорът на училището откри официално новата учебна година.', correct: false },
+          { text: 'Б) Ученика предаде контролната си работа навреме.', correct: true },
+          { text: 'В) Всички поздравиха победителя в състезанието.', correct: false },
+          { text: 'Г) Заместник-кметът поздрави гражданите за празника.', correct: false }
+        ],
+        hint: 'Замести с ТОЙ: (Той) Ученикът предаде... Думата е подлог и изисква пълен член!',
+        why: 'В изречение Б думата „ученика“ е подлог (кой върши действието) и трябва да бъде с пълен член: „Ученикът предаде...“.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 27,
+        type: 'choice',
+        prompt: '27. В кое изречение думата в мъжки род е членувана ПРАВИЛНО с кратък член (-а / -я)?',
+        options: [
+          { text: 'А) Автобуса пристигна точно по разписание.', correct: false },
+          { text: 'Б) Публиката аплодира възторжено младия пианист.', correct: true },
+          { text: 'В) Резултата от теста беше обявен вчера.', correct: false },
+          { text: 'Г) Лекаря прегледа внимателно пациента.', correct: false }
+        ],
+        hint: 'В изречение Б „младия пианист“ е допълнение (кого аплодираха? -> него), затова се пише с кратък член.',
+        why: 'В изречение Б пианистът е обект на действието (допълнение), затова членуването с кратък член „младия“ е напълно правилно.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 28,
+        type: 'choice',
+        prompt: '28. В кое изречение членуването на съставното именно сказуемо е ВЯРНО?',
+        options: [
+          { text: 'А) Той беше най-добрия ученик в целия випуск.', correct: false },
+          { text: 'Б) Иван е най-добрият спортист в отбора ни.', correct: true },
+          { text: 'В) Петър стана новия капитан на футболния тим.', correct: false },
+          { text: 'Г) Този роман е най-четения в библиотеката.', correct: false }
+        ],
+        hint: 'След формите на глагола „съм“ (съм, е, беше, ще бъде, стана) се пише ПЪЛЕН член (-ът / -ят).',
+        why: 'Именната част на съставното именно сказуемо след спомагателния глагол „съм / стана“ се членува задължително с пълен член: „най-добрият спортист“.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 29,
+        type: 'choice',
+        prompt: '29. В коя от посочените думи е допусната ПРАВОПИСНА грешка?',
+        options: [
+          { text: 'А) ценна информация', correct: false },
+          { text: 'Б) военна база', correct: false },
+          { text: 'В) обикновенна среща', correct: true },
+          { text: 'Г) есенна вечер', correct: false }
+        ],
+        hint: 'В мъжки род думата е „обикновен“ (основата не завършва на -нн-). Затова в ж.р. се пише само едно „н“: обикновена!',
+        why: 'Правилното изписване е „обикновена“ (с едно „н“). Двойно „нн“ се пише само когато в м.р. думата завършва на -ЕН и коренът има „н“ (ценен -> ценна).'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 30,
+        type: 'choice',
+        prompt: '30. В кой от редовете всички думи са написани ПРАВИЛНО?',
+        options: [
+          { text: 'А) заместник директор, министър-председател, кандидат-студент', correct: false },
+          { text: 'Б) заместник-директор, министър-председател, кандидат-студент', correct: true },
+          { text: 'В) заместник директор, министър председател, кандидат студент', correct: false },
+          { text: 'Г) заместник-директор, министърпредседател, кандидат студент', correct: false }
+        ],
+        hint: 'Сложните съществителни имена от равностойни или подчинени длъжности се пишат полуслято с дефис (-).',
+        why: 'Всички тези длъжности и звания се пишат полуслято (с тире): „заместник-директор“, „министър-председател“, „кандидат-студент“.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 31,
+        type: 'choice',
+        prompt: '31. В кое от изреченията има ПРАВОПИСНА грешка при частиците за степенуване?',
+        options: [
+          { text: 'А) Той е най-бързият бегач в групата.', correct: false },
+          { text: 'Б) Днес се чувствам по добре от вчера.', correct: true },
+          { text: 'В) Това е най-важното решение за годината.', correct: false },
+          { text: 'Г) Задачата стана по-сложна за решаване.', correct: false }
+        ],
+        hint: 'Частиците „по-“ и „най-“ винаги се пишат с дефис (тире) пред прилагателни и наречия!',
+        why: 'В изречение Б трябва да се напише „по-добре“ (с тире).'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 32,
+        type: 'choice',
+        prompt: '32. В кое изречение отрицателната частица „НЕ“ е написана ПРАВИЛНО?',
+        options: [
+          { text: 'А) Той влезе в залата, незнаейки за събранието.', correct: false },
+          { text: 'Б) Аз неможах да реша последната задача.', correct: false },
+          { text: 'В) Тя показа невиждана досега смелост.', correct: true },
+          { text: 'Г) Те неискаха да признаят грешката си.', correct: false }
+        ],
+        hint: '„НЕ“ се пише разделно с глаголи (не можах, не искаха) и деепричастия (не знаейки), но СЛЯТО с прилагателни (невиждана).',
+        why: '„Невиждана“ е прилагателно/причастие и се пише слято. С глаголи (не можах, не искаха) и деепричастия (не знаейки) се пише разделно.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 33,
+        type: 'choice',
+        prompt: '33. В коя от формите на думата „голям“ е спазено правилото за променливо „Я“?',
+        options: [
+          { text: 'А) голями (грешно)', correct: false },
+          { text: 'Б) големи (правилно)', correct: true },
+          { text: 'В) голямият (грешно)', correct: false },
+          { text: 'Г) голямички (грешно)', correct: false }
+        ],
+        hint: 'В множествено число ударението се мести или гласната в следващата сричка е мека (е, и), затова „я“ преминава в „е“: големи.',
+        why: 'Според правилото за променливото „Я“, пред мека сричка с гласна „и“ или „е“, „я“ преминава в „е“: голям -> големи, бял -> бели.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 34,
+        type: 'choice',
+        prompt: '34. В кое изречение е допусната ПУНКТУАЦИОННА грешка при деепричастен оборот?',
+        options: [
+          { text: 'А) Вървейки бавно към спирката, той срещна стар приятел.', correct: false },
+          { text: 'Б) Ученикът слушайки внимателно учителя си записваше всичко.', correct: true },
+          { text: 'В) Тя се усмихна, благодарейки за цветята.', correct: false },
+          { text: 'Г) Мислейки за бъдещето, младежът взе важно решение.', correct: false }
+        ],
+        hint: 'Деепричастията (завършващи на -йки) ВИНАГИ се ограждат със запетаи от двете страни!',
+        why: 'В изречение Б деепричастният оборот „слушайки внимателно учителя“ трябва да се отдели със запетаи от двете страни: „Ученикът, слушайки внимателно учителя, си записваше всичко.“.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 35,
+        type: 'choice',
+        prompt: '35. В кое изречение запетаята пред относителното местоимение „който/която“ е поставена ПРАВИЛНО?',
+        options: [
+          { text: 'А) Книгата която прочетох вчера беше много полезна.', correct: false },
+          { text: 'Б) Книгата, която прочетох вчера, беше много полезна.', correct: true },
+          { text: 'В) Книгата която прочетох вчера, беше много полезна.', correct: false },
+          { text: 'Г) Книгата, която прочетох вчера беше много полезна.', correct: false }
+        ],
+        hint: 'Подчиненото определително изречение се отделя със запетаи и отпред, и отзад, когато е в средата на главното.',
+        why: 'Подчиненото изречение „която прочетох вчера“ разкъсва главното изречение и задължително се огражда със запетаи от двете страни.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 36,
+        type: 'choice',
+        prompt: '36. В кое изречение сложният съюз „за да“ е пунктуационно оформен ПРАВИЛНО?',
+        options: [
+          { text: 'А) Той стана рано за, да хване първия влак.', correct: false },
+          { text: 'Б) Той стана рано, за да хване първия влак.', correct: true },
+          { text: 'В) Той стана рано, за, да хване първия влак.', correct: false },
+          { text: 'Г) Той стана рано за да хване, първия влак.', correct: false }
+        ],
+        hint: 'Запетаята се поставя пред целия сложен съюз „, за да“ (никога между „за“ и „да“!).',
+        why: 'При сложни съюзи (за да, въпреки че, тъй като) запетаята се пише преди целия съюз: „..., за да...“.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 37,
+        type: 'choice',
+        prompt: '37. В кое изречение е спазено правилото за БРОЙНА форма на съществителните от мъжки род?',
+        options: [
+          { text: 'А) В залата бяха поставени пет столове и три компютри.', correct: false },
+          { text: 'Б) В залата бяха поставени пет стола и три компютъра.', correct: true },
+          { text: 'В) В стаята влязоха двама стола.', correct: false },
+          { text: 'Г) Наградиха трима компютъра за бързина.', correct: false }
+        ],
+        hint: 'Неодушевените предмети след числителни приемат бройна форма на -а/-я: пет стола, три компютъра.',
+        why: 'След числителни бройни имена (два, три, пет...) съществителните от м.р., означаващи предмети/животни, приемат бройна форма на -а/-я (пет стола, три компютъра).'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 38,
+        type: 'choice',
+        prompt: '38. В кое изречение местоимението „КОЙТО / КОГОТО“ е употребено ПРАВИЛНО?',
+        options: [
+          { text: 'А) Това е човекът, който срещнахме вчера на улицата.', correct: false },
+          { text: 'Б) Това е човекът, когото срещнахме вчера на улицата.', correct: true },
+          { text: 'В) Ученикът, когото спечели олимпиадата, беше награден.', correct: false },
+          { text: 'Г) Човекът, на който помогна, ти благодари.', correct: false }
+        ],
+        hint: 'Когото се използва за допълнение (лице, върху което пада действието: срещнахме НЕГО -> когото). Който е за подлог (ТОЙ спечели -> който).',
+        why: 'В изречение Б лицето е допълнение на глагола „срещнахме“ (срещнахме него -> когото), затова формата „когото“ е единствено вярната.'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 39,
+        type: 'choice',
+        prompt: '39. В кое изречение е спазено правилото за УЧТИВА форма?',
+        options: [
+          { text: 'А) Госпожо Петрова, Вие сте поканена на тържеството и сте подготвила доклад.', correct: false },
+          { text: 'Б) Госпожо Петрова, Вие сте поканена на тържеството и сте подготвили доклад.', correct: true },
+          { text: 'В) Госпожо Петрова, Вие сте поканен на тържеството и сте подготвил доклад.', correct: false },
+          { text: 'Г) Госпожо Петрова, Вие сте поканени на тържеството и сте подготвила доклад.', correct: false }
+        ],
+        hint: 'В учтива форма: страдателното причастие на -н/-т е в ед.ч. съгласувано по род (поканена), а глаголите и деепричастията/минало свършено деятелно на -л са в МНОЖЕСТВЕНО число (сте подготвили)!',
+        why: 'При учтива форма глаголът и деятелното причастие на -л са винаги в мн.ч. („сте подготвили“), докато страдателното причастие се съгласува по род в ед.ч. („поканена“).'
+      },
+      {
+        subject: 'bel',
+        section: 'grammar',
+        num: 40,
+        type: 'choice',
+        prompt: '40. В кое от изреченията паронимът е употребен НЕПРАВИЛНО?',
+        options: [
+          { text: 'А) Новото лекарство има силен лечебен ефект.', correct: false },
+          { text: 'Б) Под въздействие на силен ефект той напусна залата разгневен.', correct: true },
+          { text: 'В) Компанията организира мащабна рекламна кампания.', correct: false },
+          { text: 'Г) Младият дипломат започна работа в посолството.', correct: false }
+        ],
+        hint: 'Силно емоционално състояние на гняв или ярост се нарича АФЕКТ (не ефект!).',
+        why: 'В изречение Б трябва да се употреби думата „афект“ (състояние на силна краткотрайна душевна възбуда/гняв), а не „ефект“ (резултат/последица).'
+      }
+    ];
 
     // =========================================================================
     // 1. SPORT PSYCHOLOGY QUESTIONS (PDF: PP. 41-48 - ALL 28 EXACT QUESTIONS 1:1)
@@ -1502,7 +2206,7 @@
     ];
 
     // --- State Variables ---
-    let currentSubject = 'psychology'; // Default: Psychology for the upcoming 12:30 exam!
+    let currentSubject = 'bel'; // Default: BEL for the upcoming 8:00 AM exam!
     let currentSubFilter = 'all';
     let currentQuestions = [];
     let currentIdx = 0;
@@ -1531,34 +2235,50 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      setGlobalSubject('psychology');
+      setGlobalSubject('bel');
     });
 
     function setGlobalSubject(sub) {
       playSound('click');
       currentSubject = sub;
       
+      const belTab = document.getElementById('subjectTab-bel');
       const psychTab = document.getElementById('subjectTab-psychology');
       const biomechTab = document.getElementById('subjectTab-biomechanics');
       const mainTitle = document.getElementById('appMainTitle');
       const subTitle = document.getElementById('appSubTitle');
       const iconBadge = document.getElementById('subjectIconBadge');
+      const cheatBtnLabel = document.getElementById('cheatSheetBtnLabel');
 
-      if (sub === 'psychology') {
-        psychTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
-        biomechTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all';
+      if (sub === 'bel') {
+        belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25';
+        psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
+        biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
+        mainTitle.innerText = 'Български език и литература XI Клас';
+        subTitle.innerText = 'Класна работа (1. и 2. срок) • 40 тестови въпроса с обяснения & Mastery Loop';
+        iconBadge.innerText = '📖';
+        iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-emerald-500/30';
+        if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ ЗА БЕЛ 11. КЛАС';
+        renderSubFilters('bel');
+      } else if (sub === 'psychology') {
+        psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
+        belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
+        biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
         mainTitle.innerText = 'Спортна Психология XI Клас';
         subTitle.innerText = 'проф. Татяна Янчева, дн • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🧠';
         iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30';
+        if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: 18-ТЕ ТЕМИ (ПСИХОЛОГИЯ)';
         renderSubFilters('psychology');
       } else {
-        biomechTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25';
-        psychTab.className = 'py-3 px-4 rounded-xl font-display font-black text-sm sm:text-base flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-all';
+        biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25';
+        belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
+        psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
         mainTitle.innerText = 'Биомеханика XI Клас';
         subTitle.innerText = 'гл. ас. Иван Иванов, доктор • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🔬';
         iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-teal-600 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-cyan-500/30';
+        if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ ЗА БИОМЕХАНИКА';
         renderSubFilters('biomechanics');
       }
 
@@ -1570,7 +2290,15 @@
       const container = document.getElementById('subFiltersContainer');
       container.innerHTML = '';
 
-      if (sub === 'psychology') {
+      if (sub === 'bel') {
+        container.innerHTML = `
+          <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
+          <button onclick="setSubFilter('all')" id="sub-all" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-emerald-600 text-white transition-all shadow-lg shadow-emerald-500/25">Пълен Изпит (40 въпроса)</button>
+          <button onclick="setSubFilter('lit1')" id="sub-lit1" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Литература: 1. срок (10 в.)</button>
+          <button onclick="setSubFilter('lit2')" id="sub-lit2" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Литература: 2. срок (15 в.)</button>
+          <button onclick="setSubFilter('grammar')" id="sub-grammar" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Български език (15 в.)</button>
+        `;
+      } else if (sub === 'psychology') {
         container.innerHTML = `
           <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
           <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-purple-600 text-white transition-all shadow-lg shadow-purple-500/25">Пълен Изпит (28 въпроса)</button>
@@ -1593,19 +2321,24 @@
       currentSubFilter = filter;
 
       document.querySelectorAll('#subFiltersContainer button').forEach(b => {
-        b.className = 'px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all';
+        b.className = 'px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all';
       });
       const activeBtn = document.getElementById('sub-' + filter);
-      const activeColor = currentSubject === 'psychology' ? 'bg-purple-600 text-white shadow-purple-500/25' : 'bg-neonCyan text-black shadow-cyan-500/25';
-      if (activeBtn) activeBtn.className = `px-3.5 py-1.5 text-xs font-display font-bold rounded-xl ${activeColor} transition-all shadow-lg`;
+      let activeColor = 'bg-emerald-600 text-white shadow-emerald-500/25';
+      if (currentSubject === 'psychology') activeColor = 'bg-purple-600 text-white shadow-purple-500/25';
+      else if (currentSubject === 'biomechanics') activeColor = 'bg-neonCyan text-black shadow-cyan-500/25';
+
+      if (activeBtn) activeBtn.className = `px-3 py-1.5 text-xs font-display font-bold rounded-xl ${activeColor} transition-all shadow-lg`;
 
       restartExam(true);
     }
 
     function restartExam(shouldReshuffle = true) {
-      let pool = currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions];
+      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions]);
 
-      if (currentSubject === 'psychology') {
+      if (currentSubject === 'bel') {
+        if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
+      } else if (currentSubject === 'psychology') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
       } else {
         if (currentSubFilter === 'test1') pool = pool.filter(q => q.test === 1);
@@ -1625,7 +2358,10 @@
       wrongQuestionsInRound = [];
       isMasteryRetryRound = false;
 
-      const badgeColor = currentSubject === 'psychology' ? 'bg-purple-950 text-purple-300 border-purple-800' : 'bg-cyan-950 text-neonCyan border-cyan-800';
+      let badgeColor = 'bg-emerald-950 text-emerald-300 border-emerald-800';
+      if (currentSubject === 'psychology') badgeColor = 'bg-purple-950 text-purple-300 border-purple-800';
+      else if (currentSubject === 'biomechanics') badgeColor = 'bg-cyan-950 text-neonCyan border-cyan-800';
+
       document.getElementById('masteryBadge').innerText = '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)';
       document.getElementById('masteryBadge').className = `text-xs px-2 py-0.5 rounded ${badgeColor} font-mono`;
       document.getElementById('mistakeCounterLabel').classList.add('hidden');
@@ -1733,7 +2469,11 @@
       }
 
       // Header Tag
-      if (q.subject === 'biomechanics') {
+      if (q.subject === 'bel') {
+        const secName = q.section === 'lit1' ? '📖 ЛИТЕРАТУРА 1. СРОК' : (q.section === 'lit2' ? '🎭 ЛИТЕРАТУРА 2. СРОК' : '✍️ БЪЛГАРСКИ ЕЗИК');
+        document.getElementById('qHeaderBadge').innerText = `${secName} • Въпрос ${q.num}`;
+        document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800';
+      } else if (q.subject === 'biomechanics') {
         document.getElementById('qHeaderBadge').innerText = `ТЕСТ № ${q.test} • Въпрос ${q.num}`;
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800';
       } else {
@@ -1749,10 +2489,14 @@
       const hintLabel = document.getElementById('hintBtnLabel');
       if (hintBox) {
         hintBox.classList.add('hidden');
+        const hintText = q.hint ? `<div class="mb-1 text-neonAmber font-bold">🔍 Подсказка: ${q.hint}</div>` : '';
         hintBox.innerHTML = `
           <div class="flex items-start gap-2.5">
             <span class="text-neonAmber font-bold font-mono text-xs shrink-0">💡 Ключ за запомняне:</span>
-            <div class="text-purple-200">${q.why}</div>
+            <div class="text-slate-200">
+              ${hintText}
+              <div>${q.why}</div>
+            </div>
           </div>
         `;
       }
@@ -2485,6 +3229,26 @@
     function openCheatSheetModal() {
       playSound('click');
       const modal = document.getElementById('cheatSheetModal');
+      const belContent = document.getElementById('cheatSheetContentBel');
+      const psychContent = document.getElementById('cheatSheetContentPsychology');
+      const title = document.getElementById('cheatSheetModalTitle');
+      const sub = document.getElementById('cheatSheetModalSub');
+      const icon = document.getElementById('cheatSheetModalIcon');
+
+      if (currentSubject === 'bel') {
+        if (belContent) belContent.classList.remove('hidden');
+        if (psychContent) psychContent.classList.add('hidden');
+        if (title) title.innerText = 'Пълен Пищов: БЕЛ 11. Клас (Автори, Творби, Правила)';
+        if (sub) sub.innerText = '15-те задължителни произведения + 5-те златни правила по Български език';
+        if (icon) icon.innerText = '📚';
+      } else {
+        if (belContent) belContent.classList.add('hidden');
+        if (psychContent) psychContent.classList.remove('hidden');
+        if (title) title.innerText = 'Пълен Пищов: 18-те Теми по Спортна Психология';
+        if (sub) sub.innerText = 'Бързо преговаряне на ключовите термини и дефиниции от учебника';
+        if (icon) icon.innerText = '🧠';
+      }
+
       if (modal) modal.classList.remove('hidden');
       lucide.createIcons();
     }
@@ -2518,16 +3282,18 @@
       const heading = document.getElementById('finalHeading');
       const subtext = document.getElementById('finalSubtext');
 
+      const subjectName = currentSubject === 'bel' ? 'Български език и литература' : (currentSubject === 'psychology' ? 'Спортна Психология' : 'Биомеханика');
+
       if (wrongQuestionsInRound.length > 0) {
         masteryContainer.classList.remove('hidden');
         document.getElementById('wrongCountBadge').innerText = `${wrongQuestionsInRound.length}`;
         heading.innerText = 'Кръгът завърши с няколко пропуснати въпроса!';
-        subtext.innerText = 'Използвай цикъла за поправка, за да ги научиш без подсказки преди изпита в 12:30.';
+        subtext.innerText = `Използвай цикъла за поправка, за да ги научиш без подсказки преди изпита по ${subjectName}!`;
       } else {
         masteryContainer.classList.add('hidden');
         confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 } });
         heading.innerText = '🎉 100% ПЪЛНО СЪВЪРШЕНСТВО!';
-        subtext.innerText = 'Нямаш нито една грешка! Готов си за Отличен (6.00) на изпита по Спортна Психология!';
+        subtext.innerText = `Нямаш нито една грешка! Готов си за Отличен (6.00) на изпита по ${subjectName}!`;
       }
 
       if (parseFloat(res.num) >= 5.50) wordEl.className = 'font-display font-black text-3xl text-emerald-400 mb-1';
