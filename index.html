@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <!-- Bulgarian Live Grade Display & Sound -->
+      <!-- Bulgarian Live Grade Display & Sound & Reload -->
       <div class="flex items-center gap-3">
         
         <!-- Live Grade Box -->
@@ -103,6 +103,12 @@
             6.00
           </div>
         </div>
+
+        <!-- Reload / Cache Clear Button -->
+        <button onclick="forceFreshReload()" class="px-3 py-1.5 rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white flex items-center gap-1.5 text-xs font-mono transition-all" title="Изчисти кеша и зареди най-новата версия">
+          <i data-lucide="refresh-cw" class="w-4 h-4 text-neonLime"></i>
+          <span class="hidden md:inline">Опресни</span>
+        </button>
 
         <!-- Audio Toggle -->
         <button id="soundToggle" onclick="toggleSound()" class="p-2 rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-purple-400 transition-all" title="Звукови ефекти">
@@ -2242,36 +2248,39 @@
           userValues.push((input ? input.value : '').trim().toLowerCase());
         }
 
+        function checkFieldMatch(userVal, fieldKeys) {
+          if (!userVal || userVal.length === 0) return false;
+          const userNums = (userVal.match(/\d+/g) || []).map(Number).sort((a,b) => a-b);
+          
+          return fieldKeys.some(k => {
+            const keyNums = (k.match(/\d+/g) || []).map(Number).sort((a,b) => a-b);
+            if (keyNums.length > 0 && userNums.length > 0) {
+              const hasAll = keyNums.every(n => userNums.includes(n));
+              if (hasAll && Math.abs(userNums.length - keyNums.length) <= 1) return true;
+            }
+            const keyLower = k.toLowerCase();
+            return userVal.includes(keyLower) || (keyLower.includes(userVal) && userVal.length >= 1);
+          });
+        }
+
         q.fields.forEach((f, idx) => {
           const val = userValues[idx];
-          if (val && val.length > 0) {
-            const match = f.keys.some(k => {
-              const keyLower = k.toLowerCase();
-              return val.includes(keyLower) || (keyLower.includes(val) && val.length >= 1);
-            });
-            if (match) {
-              matchedFieldIndices.add(idx);
-              matchedInputIndices.add(idx);
-              const input = document.getElementById(`openField_${idx}`);
-              if (input) input.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
-            }
+          if (checkFieldMatch(val, f.keys)) {
+            matchedFieldIndices.add(idx);
+            matchedInputIndices.add(idx);
+            const input = document.getElementById(`openField_${idx}`);
+            if (input) input.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
           }
         });
 
         q.fields.forEach((f, fIdx) => {
           if (!matchedFieldIndices.has(fIdx)) {
             userValues.forEach((val, inIdx) => {
-              if (!matchedInputIndices.has(inIdx) && val && val.length > 0) {
-                const match = f.keys.some(k => {
-                  const keyLower = k.toLowerCase();
-                  return val.includes(keyLower) || (keyLower.includes(val) && val.length >= 1);
-                });
-                if (match) {
-                  matchedFieldIndices.add(fIdx);
-                  matchedInputIndices.add(inIdx);
-                  const input = document.getElementById(`openField_${inIdx}`);
-                  if (input) input.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
-                }
+              if (!matchedInputIndices.has(inIdx) && checkFieldMatch(val, f.keys)) {
+                matchedFieldIndices.add(fIdx);
+                matchedInputIndices.add(inIdx);
+                const input = document.getElementById(`openField_${inIdx}`);
+                if (input) input.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
               }
             });
           }
@@ -2456,6 +2465,14 @@
 
       lucide.createIcons();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function forceFreshReload() {
+      try {
+        localStorage.clear();
+        sessionStorage.clear();
+      } catch (e) {}
+      window.location.href = window.location.origin + window.location.pathname + '?v=' + Date.now();
     }
   </script>
 </body>
