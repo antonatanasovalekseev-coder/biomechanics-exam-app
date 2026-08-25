@@ -123,9 +123,12 @@
   <main class="max-w-5xl mx-auto px-4 lg:px-8 py-6">
     
     <!-- Top-Level Subject Switcher (Default: BEL) -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
       <button onclick="setGlobalSubject('bel')" id="subjectTab-bel" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25">
-        <span>📖 БЕЛ 11. Клас (40 въпроса)</span>
+        <span>📖 БЕЛ 11. Клас (54)</span>
+      </button>
+      <button onclick="setGlobalSubject('paisiy_essay')" id="subjectTab-paisiy_essay" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>✍️ СЪЧИНЕНИЕ: „ПАИСИЙ“ (10)</span>
       </button>
       <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
         <span>🧠 Спортна Психология (28)</span>
@@ -2788,6 +2791,254 @@
       }
     ];
 
+    // =========================================================================
+    // 4. DEDICATED INTERACTIVE ESSAY TRAINER: „ПАИСИЙ“ (ИВАН ВАЗОВ) - 10 СТЪПКИ
+    // =========================================================================
+    const paisiyEssayQuestions = [
+      {
+        subject: 'paisiy_essay',
+        section: 'intro',
+        num: 1,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">СТЪПКА 1: УВОДЪТ (НАЧАЛОТО НА СЪЧИНЕНИЕТО)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">МОДЕЛ ЗА 6.00</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              Уводът на съчинението за одата „Паисий“ трябва да отговори на 3 задължителни въпроса: <strong>1) Кой е авторът и коя е творбата? 2) В коя епоха се развива действието? 3) Защо монахът се затваря да пише историята?</strong>
+            </p>
+          </div>
+        `,
+        prompt: '1. [СТЪПКА 1: УВОД] Кое от посочените изречения е най-правилното за начало на твоето съчинение върху одата „Паисий“ на Иван Вазов?',
+        options: [
+          { text: 'А) В одата „Паисий“ от цикъла „Епопея на забравените“ Иван Вазов изгражда величествения образ на светогорския монах, извел народа от мрака на робството към светлината на националното самоосъзнаване.', correct: true },
+          { text: 'Б) В романа „Под игото“ Иван Вазов разказва за подготовката на въстанието и за героизма на Боримечката.', correct: false },
+          { text: 'В) Паисий Хилендарски е съвременен автор от XXI век, който анализира дигиталните архиви.', correct: false },
+          { text: 'Г) Одата „Паисий“ е написана от Христо Ботев за борбата на връх Околчица.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО: Уводът задължително свързва Иван Вазов, цикъла „Епопея на забравените“ и одата „Паисий“ с темата за духовната светлина сред мрака на робството.',
+        why: 'Вариант А въвежда точно автора, творбата, цикъла и главния идейно-емоционален конфликт (мрак vs светлина).'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'thesis',
+        num: 2,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">СТЪПКА 2: ТЕЗАТА (СЪРЦЕТО НА СЪЧИНЕНИЕТО)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">3 ПОДТЕЗИ</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              Тезата трябва директно да отговори на заглавието на темата чрез <strong>3 ясни подтези</strong>: <em>1. Мракът се превръща в светлина; 2. Срамът се превръща в гордост; 3. Робите се превръщат в осъзнат народ.</em>
+            </p>
+          </div>
+        `,
+        prompt: '2. [СТЪПКА 2: ТЕЗА] Коя от следните формулировки представлява перфектната трикомпонентна Теза за съчинението?',
+        options: [
+          { text: 'А) В одата Вазов утвърждава Паисий като спасител на нацията: 1) делото му в килията носи светлина в робския мрак; 2) словото му превръща родовия срам в гордост; 3) неговата история преобразява безличните роби в единен и свободолюбив народ.', correct: true },
+          { text: 'Б) Паисий е просто самотен монах, който пише за собствено удоволствие, без да се интересува от българите.', correct: false },
+          { text: 'В) Тезата трябва да описва само географията на Света гора и височината на Атонския връх.', correct: false },
+          { text: 'Г) Творбата доказва, че историята е безсмислена наука, която не може да промени съдбата на хората.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО: Тезата отговаря на въпроса „Какво внушава авторът?“ чрез 3 взаимосвързани аргумента.',
+        why: 'Вариант А съдържа пълната трикомпонентна структура на тезата, която директно осигурява 4 от 4 точки по критерий „Теза“ на МОН.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'body1',
+        num: 3,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">СТЪПКА 3: АБЗАЦ 1 (КИЛИЯТА, МРАКЪТ И СВЕТЛИНАТА)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">ПРОСТРАНСТВО & ОБРАЗ</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Сто и двайсет години назад… Тъмнини дълбоки! В светогорский скит, във тиха килийка... монах тъмен, непознат и бледен, седеше и пишеше на свещта... Работеше глухо, без отдих, без сън...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '3. [СТЪПКА 3: АБЗАЦ 1] Как трябва да формулираш първия аргументативен абзац (Микротеза 1)?',
+        options: [
+          { text: 'А) Преди всичко Вазов изгражда образа на Паисий чрез контраста между шума на бурята отвън и тишината в килията, подчертавайки, че самотният денонощен труд на монаха ражда светлината на просвещението насред вековния робски мрак.', correct: true },
+          { text: 'Б) Паисий е седял в килията само защото е нямал пари за хотел в Солун.', correct: false },
+          { text: 'В) Бурята отвън показва, че монахът е трябвало да поправи покрива на манастира преди да пише.', correct: false },
+          { text: 'Г) Килията е описана като тъмна, за да се докаже, че в манастирите е нямало електричество.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА АБЗАЦ 1: Започни с контраста ТЪМНИНА - СВЕТЛИНА. Килията е сакрално убежище, където се кове духовното оръжие на България.',
+        why: 'Вариант А представя завършена микротеза с точен анализ на пространството и духовния подвиг на монаха.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'body2',
+        num: 4,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">СТЪПКА 4: АБЗАЦ 2 (МОНОЛОГЪТ СРЕЩУ ОТСТЪПНИЦИТЕ)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">СРАМ vs ГОРДОСТ</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„О, неразумни и юроде! Поради що се срамиш да се наречеш българин и не четеш, и не говориш на своя език? Или българите не са имали царство и господарство? ...Ти, българино, не се мами, знай своя род и език!“</em>
+            </p>
+          </div>
+        `,
+        prompt: '4. [СТЪПКА 4: АБЗАЦ 2] Кое разсъждение и цитат доказват най-убедително разобличаването на чуждопоклонничеството?',
+        options: [
+          { text: 'А) С гневния възглас „О, неразумни и юроде!“ Паисий нанася морален удар върху онези, които се срамуват от родното и се гърчеят, припомняйки им славното минало на българските царе, за да превърне срама в национална гордост.', correct: true },
+          { text: 'Б) Паисий се кара на хората само за правописни грешки в техните тетрадки.', correct: false },
+          { text: 'В) Гърчеенето е представено като модерно и похвално поведение за възрожденския българин.', correct: false },
+          { text: 'Г) Паисий съветва българите да забравят българския език и да учат само чужди езици.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА АБЗАЦ 2: Гневният монолог е емоционалната кулминация на одата – разобличава отстъпниците и лекува робския комплекс за малоценност.',
+        why: 'Вариант А анализира точния смисъл на цитата и извежда функцията на Паисиевата полемика.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'body3',
+        num: 5,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">СТЪПКА 5: АБЗАЦ 3 (АПОТЕОЗЪТ: РАЖДАНЕТО НА НАРОДА)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">РОБИ $\\rightarrow$ НАРОД</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„И тъй младият старец, в килийката скрит, написа таз книга с горещо сърце, и фърли в мрака първата искра... И от днеска нататък българският род история има и става народ!“</em>
+            </p>
+          </div>
+        `,
+        prompt: '5. [СТЪПКА 5: АБЗАЦ 3] Каква е ролята на финалния апотеоз за доказване на третата подтеза?',
+        options: [
+          { text: 'А) Финалът доказва качествения прелом в националното битие: метафората „първата искра“ и стихът „история има и става народ“ показват как историческата памет превръща покорното робско население („род“) в свободна и осъзната нация („народ“).', correct: true },
+          { text: 'Б) Финалът показва, че искрата е подпалила манастирската килия и затова монахът е трябвало да бяга.', correct: false },
+          { text: 'В) Стихът доказва, че думата „род“ и думата „народ“ не означават нищо особено.', correct: false },
+          { text: 'Г) Вазов завършва с песимизъм, че българите никога няма да се събудят.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА АБЗАЦ 3: Стихът „история има и става народ“ е най-важният във Вазовата ода. Той показва резултата от Паисиевото дело.',
+        why: 'Вариант А разкрива дълбокия смисъл на опозицията „род“ vs „народ“ и символиката на „първата искра“.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'conclusion',
+        num: 6,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">СТЪПКА 6: ЗАКЛЮЧЕНИЕТО (ФИНАЛНИЯТ АКОРД)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">ОБОБЩЕНИЕ</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              В заключението НЕ повтаряме тезата буквално, а я издигаме на философско ниво: защо делото на Паисий и одата на Вазов са вечни.
+            </p>
+          </div>
+        `,
+        prompt: '6. [СТЪПКА 6: ЗАКЛЮЧЕНИЕ] Кой от следните текстове представлява съвършено Заключение за съчинението?',
+        options: [
+          { text: 'А) В заключение, одата „Паисий“ на Иван Вазов е поетически паметник на първия възрожденски будител. Чрез словото си хилендарският монах пробива мрака на забравата и завещава вечен урок: народ, който познава своето минало и пази езика си, никога не може да бъде победен.', correct: true },
+          { text: 'Б) В заключение, това съчинение беше написано бързо и няма какво повече да се добави.', correct: false },
+          { text: 'В) В заключение, Вазов спира да пише оди след „Паисий“ и става търговец.', correct: false },
+          { text: 'Г) В заключение, одата доказва, че четенето на книги е излишно за младите хора.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА ЗАКЛЮЧЕНИЕ: Започни с „В заключение...“, подчертай вечното значение на Паисиевия завет и завърши с мощна финална мисъл.',
+        why: 'Вариант А синтезира цялостното послание на одата и оставя трайно впечатление у оценителя.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'connectors',
+        num: 7,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '7. [СВЪРЗВАЩИ ДУМИ & КОМПОЗИЦИЯ] Коя поредица от съюзи и вметнати изрази гарантира максимални точки за логическа връзка между абзаците?',
+        options: [
+          { text: 'А) „Преди всичко...“, „От друга страна...“, „Особено силно впечатление прави...“, „Следователно...“, „В заключение...“', correct: true },
+          { text: 'Б) „И после...“, „И тогава...“, „Ама после...“, „И край.“', correct: false },
+          { text: 'В) „Първо да кажа...“, „Второ да кажа...“, „Трето да кажа...“', correct: false },
+          { text: 'Г) Използване само на точки без никакви свързващи думи.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА ЛОГИЧЕСКИ ПРЕХОДИ: Богатият речник от свързващи думи доказва високо ниво на академична грамотност.',
+        why: 'Вариант А представя класическия академичен арсенал от свързващи думи, изискван от МОН.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'quotes',
+        num: 8,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '8. [ПРАВИЛА ЗА ЦИТИРАНЕ] Как трябва да се вгради цитат в изречение, за да няма граматична или пунктуационна грешка?',
+        options: [
+          { text: 'А) Вазов възкликва: „О, неразумни и юроде!“, за да подчертае възмущението на монаха от чуждопоклонничеството.', correct: true },
+          { text: 'Б) Вазов възкликва о неразумни и юроде без кавички и без запетаи.', correct: false },
+          { text: 'В) Цитатите трябва да се пишат само с главни букви в средата на текста.', correct: false },
+          { text: 'Г) Цитатите никога не трябва да се поставят в кавички.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА ЦИТИРАНЕ: Цитатът задължително се огражда в кавички („...“), а пред него се поставя двоеточие или се вгражда плавно в синтаксиса.',
+        why: 'Вариант А спазва стриктно пунктуационните правила за пряка реч и цитиране.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'mistakes',
+        num: 9,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '9. [ФАТАЛНИ ГРЕШКИ] Кое от следните действия ще доведе до автоматично отнемане на 10-15 точки на изпита по БЕЛ?',
+        options: [
+          { text: 'А) Преразказване на случките в одата („Паисий седеше в стаята, после писа, после каза нещо...“) вместо анализ на символите и идеите.', correct: true },
+          { text: 'Б) Използване на литературни понятия като „опозиция“, „метафора“, „апотеоз“.', correct: false },
+          { text: 'В) Вграждане на 3 точни цитата в подкрепа на микротезите.', correct: false },
+          { text: 'Г) Разделяне на съчинението на 5 ясни структурни абзаца.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО: Преразказът е най-големият враг на съчинението. Винаги отговаряй на въпроса „ЗАЩО авторът пише това?“, а не само „КАКВО се случва?“.',
+        why: 'Преразказът нарушава жанровите изисквания за интерпретативно съчинение и се наказва строго от изпитната комисия.'
+      },
+      {
+        subject: 'paisiy_essay',
+        section: 'full_model',
+        num: 10,
+        type: 'choice',
+        maxPoints: 3,
+        attachment: `
+          <div class="p-4 sm:p-5 rounded-2xl bg-card border-2 border-emerald-500/70 text-slate-100 shadow-xl space-y-3">
+            <div class="flex items-center justify-between border-b border-emerald-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-emerald-400">ГОТОВИЯТ СКЕЛЕТ НА ТВОЕТО СЪЧИНЕНИЕ (ЗА 6.00):</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold">100% ПЪЛЕН МОДЕЛ</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm leading-relaxed font-serif text-slate-200 space-y-2">
+              <p><strong>Увод:</strong> Вазов, „Епопея на забравените“, одата „Паисий“ – светлина сред робския мрак.</p>
+              <p><strong>Теза:</strong> 1) Мрак $\\rightarrow$ Светлина; 2) Срам $\\rightarrow$ Гордост; 3) Роби $\\rightarrow$ Народ.</p>
+              <p><strong>Абзац 1:</strong> Килията и свещта – усамотеният монах ражда спасителното знание.</p>
+              <p><strong>Абзац 2:</strong> Монологът: <em>„О, неразумни и юроде!...“</em> – срамът се превръща в гордост.</p>
+              <p><strong>Абзац 3:</strong> Апотеозът: <em>„...история има и става народ!“</em> – раждането на нацията.</p>
+              <p><strong>Заключение:</strong> Вечният завет на Паисий: знанието за миналото е щит за бъдещето.</p>
+            </div>
+          </div>
+        `,
+        prompt: '10. [ФИНАЛЕН СИНТЕЗ] Готов ли си да приложиш този 4-стъпков скелет на утрешния изпит?',
+        options: [
+          { text: 'А) ДА! Разполагам с ясния 4-стъпков план: Увод, 3-компонентна Теза, 3 доказателствени абзаца с цитати и философско Заключение.', correct: true },
+          { text: 'Б) Ще преразкажа цялата ода от начало до край без план.', correct: false },
+          { text: 'В) Ще напиша само 2 изречения и ще предам листа.', correct: false },
+          { text: 'Г) Ще пиша за съвсем друг автор, който не е в програмата.', correct: false }
+        ],
+        hint: '💡 ПРАВИЛО ЗА САМОЧУВСТВИЕ: Този скелет е твоят непобедим компас за Отличен 6.00!',
+        why: 'След преминаването на този 10-стъпков треньор ти вече владееш пълната архитектура на съчинението за одата „Паисий“.'
+      }
+    ];
+
     // --- State Variables ---
     let currentSubject = 'bel'; // Default: BEL for the upcoming 8:00 AM exam!
     let currentSubFilter = 'all';
@@ -2848,6 +3099,7 @@
       currentSubject = sub;
       
       const belTab = document.getElementById('subjectTab-bel');
+      const paisiyTab = document.getElementById('subjectTab-paisiy_essay');
       const psychTab = document.getElementById('subjectTab-psychology');
       const biomechTab = document.getElementById('subjectTab-biomechanics');
       const mainTitle = document.getElementById('appMainTitle');
@@ -2855,20 +3107,28 @@
       const iconBadge = document.getElementById('subjectIconBadge');
       const cheatBtnLabel = document.getElementById('cheatSheetBtnLabel');
 
+      [belTab, paisiyTab, psychTab, biomechTab].forEach(t => {
+        if (t) t.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
+      });
+
       if (sub === 'bel') {
         belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25';
-        psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
-        biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
         mainTitle.innerText = 'Български език и литература XI Клас';
         subTitle.innerText = 'Класна работа & ДЗИ • 54 тестови въпроса с обяснения & Mastery Loop';
         iconBadge.innerText = '📖';
         iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-emerald-500/30';
         if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ ЗА БЕЛ 11. КЛАС';
         renderSubFilters('bel');
+      } else if (sub === 'paisiy_essay') {
+        if (paisiyTab) paisiyTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 text-white shadow-lg shadow-purple-500/30';
+        mainTitle.innerText = 'Интерпретативно Съчинение: „Паисий“ (Иван Вазов)';
+        subTitle.innerText = '10-стъпков интерактивен треньор за Отличен 6.00 • Структура, Теза, Цитати';
+        iconBadge.innerText = '✍️';
+        iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30';
+        if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: СЪЧИНЕНИЕ „ПАИСИЙ“';
+        renderSubFilters('paisiy_essay');
       } else if (sub === 'psychology') {
         psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
-        belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
-        biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
         mainTitle.innerText = 'Спортна Психология XI Клас';
         subTitle.innerText = 'проф. Татяна Янчева, дн • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🧠';
@@ -2877,8 +3137,6 @@
         renderSubFilters('psychology');
       } else {
         biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25';
-        belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
-        psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
         mainTitle.innerText = 'Биомеханика XI Клас';
         subTitle.innerText = 'гл. ас. Иван Иванов, доктор • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🔬';
@@ -2888,7 +3146,7 @@
       }
 
       currentSubFilter = 'all';
-      restartExam(true);
+      restartExam(false);
     }
 
     function renderSubFilters(sub) {
@@ -2904,6 +3162,14 @@
           <button onclick="setSubFilter('grammar')" id="sub-grammar" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">Български език (15 в.)</button>
           <button onclick="setSubFilter('dzi_text')" id="sub-dzi_text" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">📰 ДЗИ: Текст & Редакция (6 в.)</button>
           <button onclick="setSubFilter('essay_trainer')" id="sub-essay_trainer" class="px-3 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-purple-500/60 text-purple-300 hover:text-white transition-all">✍️ Треньор: Съчинение „Паисий“ (8 в.)</button>
+        `;
+      } else if (sub === 'paisiy_essay') {
+        container.innerHTML = `
+          <span class="text-xs font-mono font-bold text-slate-400 mr-1">ФИЛТЪР ПО СТЪПКИ:</span>
+          <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all shadow-lg shadow-purple-500/25">Всички 10 Стъпки</button>
+          <button onclick="setSubFilter('intro_thesis')" id="sub-intro_thesis" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">1. Увод & Теза (2 в.)</button>
+          <button onclick="setSubFilter('body')" id="sub-body" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">2. Трите Абзаца & Цитати (3 в.)</button>
+          <button onclick="setSubFilter('mastery')" id="sub-mastery" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">3. Заключение & Правила за 6.00 (5 в.)</button>
         `;
       } else if (sub === 'psychology') {
         container.innerHTML = `
@@ -2932,19 +3198,24 @@
       });
       const activeBtn = document.getElementById('sub-' + filter);
       let activeColor = 'bg-emerald-600 text-white shadow-emerald-500/25';
-      if (currentSubject === 'psychology') activeColor = 'bg-purple-600 text-white shadow-purple-500/25';
+      if (currentSubject === 'paisiy_essay') activeColor = 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-purple-500/25';
+      else if (currentSubject === 'psychology') activeColor = 'bg-purple-600 text-white shadow-purple-500/25';
       else if (currentSubject === 'biomechanics') activeColor = 'bg-neonCyan text-black shadow-cyan-500/25';
 
       if (activeBtn) activeBtn.className = `px-3 py-1.5 text-xs font-display font-bold rounded-xl ${activeColor} transition-all shadow-lg`;
 
-      restartExam(true);
+      restartExam(currentSubject === 'paisiy_essay' ? false : true);
     }
 
     function restartExam(shouldReshuffle = true) {
-      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions]);
+      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'paisiy_essay' ? [...paisiyEssayQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions]));
 
       if (currentSubject === 'bel') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
+      } else if (currentSubject === 'paisiy_essay') {
+        if (currentSubFilter === 'intro_thesis') pool = pool.filter(q => q.section === 'intro' || q.section === 'thesis');
+        else if (currentSubFilter === 'body') pool = pool.filter(q => q.section.startsWith('body'));
+        else if (currentSubFilter === 'mastery') pool = pool.filter(q => q.section === 'conclusion' || q.section === 'connectors' || q.section === 'quotes' || q.section === 'mistakes' || q.section === 'full_model');
       } else if (currentSubject === 'psychology') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
       } else {
@@ -2968,10 +3239,11 @@
       isMasteryRetryRound = false;
 
       let badgeColor = 'bg-emerald-950 text-emerald-300 border-emerald-800';
-      if (currentSubject === 'psychology') badgeColor = 'bg-purple-950 text-purple-300 border-purple-800';
+      if (currentSubject === 'paisiy_essay') badgeColor = 'bg-purple-950 text-pink-300 border-purple-800';
+      else if (currentSubject === 'psychology') badgeColor = 'bg-purple-950 text-purple-300 border-purple-800';
       else if (currentSubject === 'biomechanics') badgeColor = 'bg-cyan-950 text-neonCyan border-cyan-800';
 
-      document.getElementById('masteryBadge').innerText = '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)';
+      document.getElementById('masteryBadge').innerText = currentSubject === 'paisiy_essay' ? '10-СТЪПКОВ ТРЕНЬОР (СТЪПКА ПО СТЪПКА)' : '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)';
       document.getElementById('masteryBadge').className = `text-xs px-2 py-0.5 rounded ${badgeColor} font-mono`;
       document.getElementById('mistakeCounterLabel').classList.add('hidden');
 
@@ -3110,7 +3382,8 @@
 
       // Dynamic Submit and Next Button Theme
       let primaryGradient = 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-emerald-500/25';
-      if (currentSubject === 'psychology') primaryGradient = 'bg-gradient-to-r from-purple-600 to-indigo-600 shadow-purple-500/25';
+      if (currentSubject === 'paisiy_essay') primaryGradient = 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 shadow-purple-500/25';
+      else if (currentSubject === 'psychology') primaryGradient = 'bg-gradient-to-r from-purple-600 to-indigo-600 shadow-purple-500/25';
       else if (currentSubject === 'biomechanics') primaryGradient = 'bg-gradient-to-r from-cyan-600 to-teal-600 shadow-cyan-500/25';
 
       const submitBtn = document.getElementById('submitAnswerBtn');
@@ -3123,6 +3396,22 @@
         const secName = q.section === 'lit1' ? '📖 ЛИТЕРАТУРА 1. СРОК' : (q.section === 'lit2' ? '🎭 ЛИТЕРАТУРА 2. СРОК' : (q.section === 'dzi_text' ? '📰 ДЗИ: ТЕКСТ & РЕДАКЦИЯ' : (q.section === 'essay_trainer' ? '✍️ ТРЕНЬОР: СЪЧИНЕНИЕ „ПАИСИЙ“' : '✍️ БЪЛГАРСКИ ЕЗИК')));
         document.getElementById('qHeaderBadge').innerText = `${secName} • Въпрос ${q.num}`;
         document.getElementById('qHeaderBadge').className = q.section === 'essay_trainer' ? 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-800' : 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800';
+      } else if (q.subject === 'paisiy_essay') {
+        const stepNames = {
+          intro: 'СТЪПКА 1 • УВОД',
+          thesis: 'СТЪПКА 2 • ТЕЗА',
+          body1: 'СТЪПКА 3 • АБЗАЦ 1 (МРАК / СВЕТЛИНА)',
+          body2: 'СТЪПКА 4 • АБЗАЦ 2 (СРАМ / ГОРДОСТ)',
+          body3: 'СТЪПКА 5 • АБЗАЦ 3 (РОБИ / НАРОД)',
+          conclusion: 'СТЪПКА 6 • ЗАКЛЮЧЕНИЕ',
+          connectors: 'СТЪПКА 7 • СВЪРЗВАЩИ ДУМИ',
+          quotes: 'СТЪПКА 8 • ПРАВИЛА ЗА ЦИТИРАНЕ',
+          mistakes: 'СТЪПКА 9 • ФАТАЛНИ ГРЕШКИ',
+          full_model: 'СТЪПКА 10 • ПЪЛЕН МОДЕЛ ЗА 6.00'
+        };
+        const secName = stepNames[q.section] || 'ТРЕНЬОР ЗА СЪЧИНЕНИЕ';
+        document.getElementById('qHeaderBadge').innerText = `✍️ ${secName} • Стъпка ${q.num}`;
+        document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-purple-950 to-pink-950 text-pink-300 border border-purple-800';
       } else if (q.subject === 'biomechanics') {
         document.getElementById('qHeaderBadge').innerText = `ТЕСТ № ${q.test} • Въпрос ${q.num}`;
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800';
