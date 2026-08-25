@@ -1599,6 +1599,7 @@
           const displayLabel = `${cyrillicLetters[idx]}) ${cleanText}`;
 
           const btn = document.createElement('button');
+          btn.id = `choiceBtn_${idx}`;
           btn.className = 'w-full p-4 rounded-2xl bg-card border border-borderGlow hover:border-slate-500 text-left text-slate-200 font-medium text-sm sm:text-base transition-all flex items-center justify-between choice-btn';
           btn.onclick = () => selectChoice(idx, btn);
           btn.innerHTML = `
@@ -1618,6 +1619,7 @@
 
         q.options.forEach((opt, idx) => {
           const btn = document.createElement('button');
+          btn.id = `multiBtn_${idx}`;
           btn.className = 'w-full p-3.5 rounded-2xl bg-card border border-borderGlow hover:border-slate-500 text-left text-slate-200 font-medium text-xs sm:text-sm transition-all flex items-center justify-between multi-btn';
           btn.onclick = () => toggleMultiChoice(idx, btn, q.options.length);
           btn.innerHTML = `
@@ -1636,7 +1638,8 @@
 
         q.items.forEach((item, idx) => {
           const row = document.createElement('div');
-          row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+          row.id = `stageRow_${idx}`;
+          row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all';
           row.innerHTML = `
             <span class="text-xs sm:text-sm text-slate-200 font-medium leading-snug">${item.text}</span>
             <div class="flex items-center gap-1.5 shrink-0">
@@ -1657,7 +1660,8 @@
 
         q.items.forEach((item) => {
           const card = document.createElement('div');
-          card.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col gap-2';
+          card.id = `matchCard_${item.id}`;
+          card.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col gap-2 transition-all';
           let optionsHtml = `<option value="">-- Изберете съответствие от списъка --</option>`;
           q.matchOptions.forEach(mo => {
             optionsHtml += `<option value="${mo.key}">${mo.text}</option>`;
@@ -1680,7 +1684,8 @@
 
         q.items.forEach((item, idx) => {
           const row = document.createElement('div');
-          row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+          row.id = `catRow_${idx}`;
+          row.className = 'p-3 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all';
           
           let btnsHtml = `<div class="flex items-center gap-2 shrink-0">`;
           q.categories.forEach(cat => {
@@ -1704,7 +1709,8 @@
 
         q.rows.forEach(rowItem => {
           const rowEl = document.createElement('div');
-          rowEl.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+          rowEl.id = `matrixRow_${rowItem.id}`;
+          rowEl.className = 'p-3.5 rounded-2xl bg-card border border-borderGlow flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all';
           let pills = `<div class="flex flex-wrap gap-2 shrink-0">`;
           rowItem.options.forEach(opt => {
             pills += `<button onclick="setMatrixChoice('${rowItem.id}', '${opt}', this)" class="mat-btn-${rowItem.id} px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-obsidian border border-slate-700 text-slate-300 hover:border-purple-500 transition-all">${opt}</button>`;
@@ -1819,15 +1825,47 @@
 
         q.options.forEach((opt, idx) => {
           const isSelected = selectedMultiIndices.has(idx);
-          if (opt.correct && isSelected) correctPicked++;
-          else if (!opt.correct && isSelected) incorrectPicked++;
+          const btnEl = document.getElementById(`multiBtn_${idx}`);
+
+          if (opt.correct && isSelected) {
+            correctPicked++;
+            if (btnEl) {
+              btnEl.className = 'w-full p-3.5 rounded-2xl bg-emerald-950/40 border border-emerald-500 text-left text-emerald-200 font-medium text-xs sm:text-sm transition-all flex items-center justify-between';
+              const box = btnEl.querySelector('.multi-box');
+              if (box) {
+                box.className = 'w-5 h-5 rounded-md border border-emerald-500 bg-emerald-500 text-white font-black flex items-center justify-center text-xs font-mono shrink-0';
+                box.innerText = '✓';
+              }
+            }
+          } else if (!opt.correct && isSelected) {
+            incorrectPicked++;
+            if (btnEl) {
+              btnEl.className = 'w-full p-3.5 rounded-2xl bg-rose-950/40 border border-rose-500 text-left text-rose-200 font-medium text-xs sm:text-sm transition-all flex items-center justify-between';
+              const box = btnEl.querySelector('.multi-box');
+              if (box) {
+                box.className = 'w-5 h-5 rounded-md border border-rose-500 bg-rose-500 text-white font-black flex items-center justify-center text-xs font-mono shrink-0';
+                box.innerText = '✕';
+              }
+            }
+          } else if (opt.correct && !isSelected) {
+            if (btnEl) {
+              btnEl.className = 'w-full p-3.5 rounded-2xl bg-amber-950/20 border border-dashed border-amber-500/80 text-left text-amber-200 font-medium text-xs sm:text-sm transition-all flex items-center justify-between';
+              const box = btnEl.querySelector('.multi-box');
+              if (box) {
+                box.className = 'w-5 h-5 rounded-md border border-amber-500 text-neonAmber font-black flex items-center justify-center text-xs font-mono shrink-0';
+                box.innerText = '!';
+              }
+            }
+          }
+          if (btnEl) btnEl.disabled = true;
         });
 
         if (correctPicked === totalCorrect && incorrectPicked === 0) {
           isCorrect = true;
           fraction = 1.0;
         } else {
-          fraction = Math.max(0, (correctPicked - incorrectPicked) / totalCorrect);
+          const net = Math.max(0, correctPicked - (incorrectPicked * 0.5));
+          fraction = Math.min(1.0, net / totalCorrect);
         }
 
       } else if (q.type === 'stage_order') {
@@ -1837,11 +1875,43 @@
           return;
         }
         let correctMatches = 0;
+        const remainingItems = [];
+
         q.items.forEach((item, idx) => {
-          if (selectedStageOrders[idx] === item.correct) correctMatches++;
+          const rowEl = document.getElementById(`stageRow_${idx}`);
+          const isItemCorrect = (selectedStageOrders[idx] === item.correct);
+          if (isItemCorrect) {
+            correctMatches++;
+            if (rowEl) {
+              rowEl.classList.add('border-emerald-500/80', 'bg-emerald-950/20');
+              const badge = document.createElement('span');
+              badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold shrink-0';
+              badge.innerText = `✓ Вярно (Етап ${item.correct})`;
+              rowEl.appendChild(badge);
+            }
+          } else {
+            remainingItems.push(item);
+            if (rowEl) {
+              rowEl.classList.add('border-rose-500/80', 'bg-rose-950/20');
+              const badge = document.createElement('span');
+              badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold shrink-0';
+              badge.innerText = `✕ Верен: ${item.correct}. ${item.label}`;
+              rowEl.appendChild(badge);
+            }
+          }
+          if (rowEl) rowEl.querySelectorAll('button').forEach(b => b.disabled = true);
         });
+
         fraction = correctMatches / totalItems;
         isCorrect = fraction === 1.0;
+
+        if (fraction > 0 && fraction < 1.0) {
+          wrongQuestionsInRound.push({
+            ...q,
+            items: remainingItems,
+            isPartialRetry: true
+          });
+        }
 
       } else if (q.type === 'matching_select') {
         const totalItems = q.items.length;
@@ -1851,11 +1921,42 @@
           return;
         }
         let correctMatches = 0;
+        const remainingItems = [];
+
         q.items.forEach(item => {
-          if (matchingSelections[item.id] === item.correctKey) correctMatches++;
+          const cardEl = document.getElementById(`matchCard_${item.id}`);
+          const selectEl = document.getElementById(`matchSelect_${item.id}`);
+          const isItemCorrect = (matchingSelections[item.id] === item.correctKey);
+          const correctOptObj = q.matchOptions.find(mo => mo.key === item.correctKey);
+
+          if (isItemCorrect) {
+            correctMatches++;
+            if (cardEl) cardEl.classList.add('border-emerald-500/80', 'bg-emerald-950/20');
+            if (selectEl) selectEl.classList.add('border-emerald-500', 'text-emerald-300');
+          } else {
+            remainingItems.push(item);
+            if (cardEl) {
+              cardEl.classList.add('border-rose-500/80', 'bg-rose-950/20');
+              const info = document.createElement('div');
+              info.className = 'text-xs text-rose-300 font-mono font-bold mt-1';
+              info.innerText = `✕ Верен отговор: ${correctOptObj ? correctOptObj.text : item.correctKey}`;
+              cardEl.appendChild(info);
+            }
+            if (selectEl) selectEl.classList.add('border-rose-500', 'text-rose-300');
+          }
+          if (selectEl) selectEl.disabled = true;
         });
+
         fraction = correctMatches / totalItems;
         isCorrect = fraction === 1.0;
+
+        if (fraction > 0 && fraction < 1.0) {
+          wrongQuestionsInRound.push({
+            ...q,
+            items: remainingItems,
+            isPartialRetry: true
+          });
+        }
 
       } else if (q.type === 'category_classify') {
         const totalItems = q.items.length;
@@ -1864,11 +1965,46 @@
           return;
         }
         let correctMatches = 0;
+        const remainingItems = [];
+
         q.items.forEach((item, idx) => {
-          if (categorySelections[idx] === item.correct) correctMatches++;
+          const rowEl = document.getElementById(`catRow_${idx}`);
+          const isItemCorrect = (categorySelections[idx] === item.correct);
+          const correctCatObj = q.categories.find(c => c.id === item.correct);
+          const correctCatName = correctCatObj ? correctCatObj.name : item.correct;
+
+          if (isItemCorrect) {
+            correctMatches++;
+            if (rowEl) {
+              rowEl.classList.add('border-emerald-500/80', 'bg-emerald-950/20');
+              const badge = document.createElement('span');
+              badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold shrink-0';
+              badge.innerText = '✓ Вярно';
+              rowEl.appendChild(badge);
+            }
+          } else {
+            remainingItems.push(item);
+            if (rowEl) {
+              rowEl.classList.add('border-rose-500/80', 'bg-rose-950/20');
+              const badge = document.createElement('span');
+              badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold shrink-0';
+              badge.innerText = `✕ Вярно: ${correctCatName}`;
+              rowEl.appendChild(badge);
+            }
+          }
+          if (rowEl) rowEl.querySelectorAll('button').forEach(btn => btn.disabled = true);
         });
+
         fraction = correctMatches / totalItems;
         isCorrect = fraction === 1.0;
+
+        if (fraction > 0 && fraction < 1.0) {
+          wrongQuestionsInRound.push({
+            ...q,
+            items: remainingItems,
+            isPartialRetry: true
+          });
+        }
 
       } else if (q.type === 'matrix_choice') {
         const totalRows = q.rows.length;
@@ -1877,11 +2013,43 @@
           return;
         }
         let correctMatches = 0;
+        const remainingRows = [];
+
         q.rows.forEach(r => {
-          if (matrixSelections[r.id] === r.correct) correctMatches++;
+          const rowEl = document.getElementById(`matrixRow_${r.id}`);
+          const isRowCorrect = (matrixSelections[r.id] === r.correct);
+          if (isRowCorrect) {
+            correctMatches++;
+            if (rowEl) {
+              rowEl.classList.add('border-emerald-500/80', 'bg-emerald-950/20');
+              const badge = document.createElement('span');
+              badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold shrink-0';
+              badge.innerText = `✓ Вярно (${r.correct})`;
+              rowEl.appendChild(badge);
+            }
+          } else {
+            remainingRows.push(r);
+            if (rowEl) {
+              rowEl.classList.add('border-rose-500/80', 'bg-rose-950/20');
+              const badge = document.createElement('span');
+              badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold shrink-0';
+              badge.innerText = `✕ Верен термин: ${r.correct}`;
+              rowEl.appendChild(badge);
+            }
+          }
+          if (rowEl) rowEl.querySelectorAll('button').forEach(b => b.disabled = true);
         });
+
         fraction = correctMatches / totalRows;
         isCorrect = fraction === 1.0;
+
+        if (fraction > 0 && fraction < 1.0) {
+          wrongQuestionsInRound.push({
+            ...q,
+            rows: remainingRows,
+            isPartialRetry: true
+          });
+        }
 
       } else if (q.type === 'open_fill') {
         const totalFields = q.fields.length;
@@ -1899,7 +2067,7 @@
           if (val && val.length > 0) {
             const match = f.keys.some(k => {
               const keyLower = k.toLowerCase();
-              return val.includes(keyLower) || keyLower.includes(val) && val.length >= 1;
+              return val.includes(keyLower) || (keyLower.includes(val) && val.length >= 1);
             });
             if (match) {
               matchedFieldIndices.add(idx);
@@ -1916,7 +2084,7 @@
               if (!matchedInputIndices.has(inIdx) && val && val.length > 0) {
                 const match = f.keys.some(k => {
                   const keyLower = k.toLowerCase();
-                  return val.includes(keyLower) || keyLower.includes(val) && val.length >= 1;
+                  return val.includes(keyLower) || (keyLower.includes(val) && val.length >= 1);
                 });
                 if (match) {
                   matchedFieldIndices.add(fIdx);
@@ -1976,12 +2144,14 @@
         document.getElementById('overrideBtnContainer').innerHTML = '';
       } else if (fraction > 0) {
         playSound('correct');
-        if (q.type !== 'open_fill') wrongQuestionsInRound.push({ ...q });
+        if (q.type !== 'open_fill' && q.type !== 'category_classify' && q.type !== 'stage_order' && q.type !== 'matching_select' && q.type !== 'matrix_choice') {
+          wrongQuestionsInRound.push({ ...q });
+        }
         resBox.className = 'mt-6 p-5 rounded-2xl border bg-amber-950/40 border-amber-500/50 block';
         resIcon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-neonAmber border border-amber-500/40 flex items-center justify-center font-bold text-lg shrink-0';
         resIcon.innerText = '½';
         resTitle.className = 'font-display font-bold text-base text-neonAmber mb-1';
-        resTitle.innerText = `Частично верен (+${fraction.toFixed(2)} т.) • Добавен за повторение!`;
+        resTitle.innerText = `Частично верен (+${fraction.toFixed(2)} от 1.00 т.) • Сгрешените елементи са маркирани и се повтарят!`;
         document.getElementById('overrideBtnContainer').innerHTML = `
           <button onclick="overrideMarkCorrect()" class="px-3.5 py-1.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-card border border-borderGlow hover:border-emerald-500 transition-all flex items-center gap-1.5">
             <span>🛡️ Признай за напълно верен (+${(1 - fraction).toFixed(2)} т.)</span>
