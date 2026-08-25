@@ -305,78 +305,285 @@
         <div class="p-6 overflow-y-auto space-y-4 text-xs leading-relaxed text-slate-300 font-sans">
           
           <!-- BEL CHEAT SHEET (Shown when currentSubject === 'bel') -->
-          <div id="cheatSheetContentBel" class="space-y-4">
+          <div id="cheatSheetContentBel" class="space-y-6">
             
-            <!-- Golden Rules of Bulgarian Grammar -->
-            <div class="p-4 rounded-2xl bg-obsidian border border-emerald-500/40 space-y-2.5">
-              <span class="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">⚡ 5-ТЕ ЗЛАТНИ ПРАВИЛА ПО БЪЛГАРСКИ ЕЗИК (СИГУРНИ ТОЧКИ)</span>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-emerald-400 block mb-1">1. Пълен и кратък член (-ът / -а)</strong>
-                  • <strong>ТОЙ</strong> = Пълен член (<em>(Той) Учителят влезе</em>).<br>
-                  • <strong>НЕГО</strong> = Кратък член (<em>Видях (него) учителя</em>).<br>
-                  • След глагола <strong>съм / е / беше</strong> = <strong>Пълен член</strong> (<em>Той е най-добрият</em>).
-                </div>
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-emerald-400 block mb-1">2. Деепричастия (-йки) и запетаи</strong>
-                  • Думите на <strong>-йки</strong> (<em>вървейки, мислейки</em>) <strong>ВИНАГИ</strong> се отделят със запетаи от двете страни!<br>
-                  • <em>„Той влезе, <strong>усмихвайки се</strong>, в стаята.“</em>
-                </div>
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-emerald-400 block mb-1">3. Бройна форма (м.р. след числа)</strong>
-                  • <strong>Предмети/животни</strong> = бройна форма на <strong>-а/-я</strong> (<em>пет стола, три компютъра</em>).<br>
-                  • <strong>Лица/хора</strong> = форма за лица (<em>петима ученици, трима лекари</em>).
-                </div>
-                <div class="p-2.5 rounded-xl bg-card border border-borderGlow">
-                  <strong class="text-emerald-400 block mb-1">4. Двойно „-НН-“ при прилагателни</strong>
-                  • Основа на <strong>-Н</strong> + наставка <strong>-ЕН</strong> = <strong>-НН-</strong> (<em>ценен → ценна</em>, <em>военен → военна</em>).<br>
-                  • Без двойно „н“: <em>обикновен → обикновена</em>, <em>писмен → писмена</em>.
+            <!-- SECTION 2: GRAMMAR NORMS (Put first for instant points) -->
+            <div class="p-5 rounded-2xl bg-obsidian border border-emerald-500/50 space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 font-mono font-bold text-xs">⚡ СЕКЦИЯ: БЪЛГАРСКИ ЕЗИК — КНИЖОВНИ НОРМИ И КАПАНИ</span>
+                <span class="text-[11px] font-mono text-emerald-400 font-bold">100% СИГУРНИ ТОЧКИ</span>
+              </div>
+
+              <!-- 1. Правописна норма -->
+              <div class="space-y-3">
+                <h4 class="font-display font-bold text-sm text-emerald-300 flex items-center gap-1.5">
+                  <span>✍️ 1. Правописна норма (Членуване, Двойно -НН-, Слято писане, Променливо Я)</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Пълен (-ът/-ят) и кратък (-а/-я) член</strong>
+                    • <strong>ТОЙ</strong> = <strong>Пълен член</strong> (<em>(Той) <u>Учителят</u> влезе</em>; <em><u>Новият директор</u> откри годината</em>).<br>
+                    • <strong>НЕГО / ГО</strong> = <strong>Кратък член</strong> (<em>Поздравих (него) <u>новия ученик</u></em>).<br>
+                    • След предлог (в, на, от, за, с, при, към, заради, под, над, през) = <strong>ВИНАГИ КРАТЪК ЧЛЕН</strong> (<em>с управител<u>я</u>, на стълб<u>а</u></em>).<br>
+                    • След свързващи глаголи <strong>съм, бъда, оказвам се, изглеждам, ставам, се наричам</strong> = <strong>ПЪЛЕН ЧЛЕН</strong> (<em>Иван е <u>директорът</u>; Той се оказа <u>най-добрият</u></em>).<br>
+                    • <strong>Мека морфема (-ят/-я)</strong>: при същ. на <em>-тел, -ар/-яр</em> с ударение на наставката (<em>учи́тел → учителят; лека́р → лекарят</em>), както и: <em>път, ден, сън, огън, зет, лакът, нокът, край, цар</em>.
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Двойно „-НН-“ срещу единично „-Н-“</strong>
+                    • <strong>Двойно -НН-</strong>: САМО ако мъжкият род завършва на <strong>-НЕН</strong> (<em>каме<u>нен</u> → каме<u>нна</u>; време<u>нен</u> → време<u>нна</u>; есе<u>нен</u> → есе<u>нна</u></em>).<br>
+                    • <strong>Единично -Н-</strong>: Ако мъжкият род завършва на <strong>-ЕН</strong> (<em>обикнов<u>ен</u> → обикнов<u>ена</u>; писм<u>ен</u> → писм<u>ена</u>; стихи<u>ен</u> → стихи<u>йна</u></em>).<br>
+                    • <strong>Минали страдателни причастия</strong>: ВИНАГИ с едно „н“ (<em>написан → написана; решен → решена; прочетен → прочетена</em>).<br>
+                    • Изключение: <em>свещеник</em> (с 1 „н“), но <em>свещен → свещена</em> (с 2 „н“).
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Слято, полуслято и разделно писане</strong>
+                    • <strong>Частици по- и най-</strong>: с дефис (<em>по-добър, най-висок</em>). Разделно, когато е предлог (<em>по пътя</em>).<br>
+                    • <strong>Частица НЕ</strong>: Слято при съществителни, прилагателни, наречия, деепричастия (<em>неистина, незнаен, неволно, незнаейки</em>). Разделно с глаголи (<em>не знам, не мога</em>).<br>
+                    • <strong>Сложни съществителни</strong>: Слято със съединителна гласна (<em>земевладелец, автопарк, фотоизложба</em>). Полуслято при равни/стесняващи (<em>кандидат-студент, заместник-директор</em>). Разделно: <em>къща музей, съдия изпълнител</em>.<br>
+                    • <strong>Сложни прилагателни</strong>: Слято от подчинителна връзка (<em>сладководен, новобългарски</em>). Полуслято от съюз „и“ (<em>българо-английски, научно-технически</em>).
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Правило за променливото „Я“ (3 условия)</strong>
+                    „Я“ се запазва САМО при едновременно наличие на 3 условия:<br>
+                    1. Върху гласната пада <strong>ударението</strong>.<br>
+                    2. Следващата сричка съдържа <strong>твърда гласна (а, о, у, ъ)</strong> или е в края.<br>
+                    3. След нея <strong>НЯМА мека съгласна или ж, ч, ш, й</strong>.<br>
+                    • Ако 1 условие липсва → преминава в <strong>Е</strong>:<br>
+                    <em>бял → бели</em> (следва „и“); <em>мляко → млечен</em> (следва „ч“); <em>голям → големи</em>.
+                  </div>
                 </div>
               </div>
-              <div class="p-2.5 rounded-xl bg-card border border-borderGlow text-[11px]">
-                <strong class="text-emerald-400 block mb-1">5. Най-чести капани с Пароними</strong>
-                • <strong>Афект</strong> (силен гняв/ярост) $\neq$ <strong>Ефект</strong> (резултат/въздействие).<br>
-                • <strong>Кампания</strong> (рекламна/изборна акция) $\neq$ <strong>Компания</strong> (приятелски кръг или фирма).<br>
-                • <strong>Дипломат</strong> (посланик) $\neq$ <strong>Дипломант</strong> (дипломиращ се студент).
+
+              <!-- 2. Пунктуационна норма -->
+              <div class="space-y-3 pt-2 border-t border-slate-800">
+                <h4 class="font-display font-bold text-sm text-emerald-300 flex items-center gap-1.5">
+                  <span>📍 2. Пунктуационна норма (Съюзи, Деепричастия, Вметнати думи)</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-[11px]">
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Сложни съюзи & частици</strong>
+                    • При съставни съюзи (<em>въпреки че, макар че, за да, след като, при положение че</em>) запетаята е <strong>САМО ПРЕД ПЪРВАТА ЧАСТ</strong> (<em>Той излезе, въпреки че валеше</em>).<br>
+                    • <strong>Уточняваща частица</strong> (<em>само, едва, чак, не</em>) премества запетаята пред втората част: (<em>дойде не заради парите, а само защото...</em>).<br>
+                    • Пред съюза <strong>„ДА“</strong> по правило <strong>НЕ СЕ ПИШЕ</strong> запетая (<em>Искам да уча</em>).
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Деепричастия (-йки)</strong>
+                    • Обособените деепричастни обороти <strong>ВИНАГИ СЕ ОТДЕЛЯТ СЪС ЗАПЕТАИ</strong> от двете страни!<br>
+                    • <em>„Излизайки от стаята, той загаси лампата.“</em><br>
+                    • <em>„Ученикът, мислейки за теста, крачеше бързо.“</em><br>
+                    • Обособени определения: <em>„Книгата, написана с талант, спечели награда.“</em>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Вметнати думи и изрази</strong>
+                    • <strong>ОТДЕЛЯТ СЕ със запетаи</strong>: <em>разбира се, за съжаление, от една страна, напротив, честно казано, според мен</em>.<br>
+                    • <strong>НИКОГА НЕ СЕ ОТДЕЛЯТ</strong> (Тестови капани!): <em>може би, навярно, вероятно, сякаш, като че ли, всъщност, по всяка вероятност</em>, както и <em>обаче</em> вътре в простото изречение.
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Граматична и Лексикална норма -->
+              <div class="space-y-3 pt-2 border-t border-slate-800">
+                <h4 class="font-display font-bold text-sm text-emerald-300 flex items-center gap-1.5">
+                  <span>🧠 3. Граматична и Лексикална норма (Бройна форма, Учтива форма, Пароними, Плеоназми)</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-[11px]">
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Бройна форма & Местоимения</strong>
+                    • <strong>Предмети/животни</strong>: бройна форма на <strong>-а/-я</strong> (<em>два стола, пет молива, три коня, колко лева</em>).<br>
+                    • <strong>Лица/хора</strong>: обикновено мн.ч. + мъжколично число (<em>двама ученици, трима войници, петима лекари</em>).<br>
+                    • Подлог: <strong>който</strong>. Пряко допълнение: <strong>когото</strong> (<em>Мъжът, когото срещнах</em>). Непряко: <strong>на когото</strong>.<br>
+                    • Формата е само <strong>ТЕХЕН</strong> (формата „тяхен“ е грешна).
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Учтива форма („Вие“)</strong>
+                    • <strong>Глаголи</strong>: винаги в мн.ч. (<em>Вие четете, знаете</em>).<br>
+                    • <strong>Деятелни причастия на -Л</strong>: в мн.ч. (<em>Господине, Вие сте написа<u>ли</u></em>).<br>
+                    • <strong>Страдателни причастия</strong>: в ед.ч. по род (<em>Госпожо, Вие сте поканен<u>а</u></em>).<br>
+                    • <strong>Прилагателни & Съществителни</strong>: в ед.ч. по род (<em>Вие сте любез<u>ен</u>; Вие сте отличен специалист</em>).
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-card border border-borderGlow space-y-1.5">
+                    <strong class="text-emerald-400 block text-xs">Пароними & Плеоназми</strong>
+                    • <strong>Ефект</strong> (резултат) vs <strong>Афект</strong> (ярост/шок).<br>
+                    • <strong>Компания</strong> (фирма/кръг) vs <strong>Кампания</strong> (акция).<br>
+                    • <strong>Дипломат</strong> (политик) vs <strong>Дипломант</strong> (дипломант).<br>
+                    • <strong>Емигрант</strong> (напуска) vs <strong>Имигрант</strong> (заселва се).<br>
+                    • <strong>Плеоназми (грешни)</strong>: <em>първа премиера, месец май, лично мое мнение, вътрешен интериор, главен приоритет, съвместно заедно</em>.
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Literature 15 Works Overview -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              <!-- Тема 1: Родното и чуждото -->
-              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 1: РОДНОТО И ЧУЖДОТО</span>
-                <p>• <strong>Д. Талев – „Железният светилник“</strong> (роман): Традиция vs Възраждане. Султана (пазител на рода), Лазар (водач на народа), Рафе Клинче (свободен творец), Катерина (жертва на родовия закон), иконостасът.</p>
-                <p>• <strong>А. Константинов – „Бай Ганьо журналист“</strong> (фейлетон): Вестник „Народно величие“. Липса на принципи, келепир, ругаене на противниците. Дружина: Гуньо Адвокатина, Бочо Кърлежа, Данко Харсъзина.</p>
-                <p>• <strong>С. Стратиев – „Балкански синдром“</strong> (комедия на абсурда): Театър в театъра. Абсурдът на балканския преход, подмяната на ценностите. Герои: Печо, баба Кера, Кумът, Мечката.</p>
+            <!-- SECTION 1: LITERATURE MONOGRAPHIC ANALYSIS -->
+            <div class="p-5 rounded-2xl bg-obsidian border border-emerald-500/40 space-y-4">
+              <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 font-mono font-bold text-xs block w-fit">📖 СЕКЦИЯ: ЛИТЕРАТУРА — 15-ТЕ ЗАДЪЛЖИТЕЛНИ ПРОИЗВЕДЕНИЯ</span>
+
+              <!-- Comparative Table -->
+              <div class="overflow-x-auto rounded-xl border border-borderGlow bg-card p-2">
+                <table class="w-full text-left text-[11px] border-collapse">
+                  <thead>
+                    <tr class="border-b border-slate-700 text-emerald-400 font-mono">
+                      <th class="p-2">Цикъл</th>
+                      <th class="p-2">Автор & Произведение</th>
+                      <th class="p-2">Жанр</th>
+                      <th class="p-2">Ключов конфликт</th>
+                      <th class="p-2">Централен символ</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-800 text-slate-300">
+                    <tr>
+                      <td class="p-2 text-emerald-300 font-bold">Родното и чуждото</td>
+                      <td class="p-2"><strong>Д. Талев</strong> — „Железният светилник“</td>
+                      <td class="p-2">Исторически роман</td>
+                      <td class="p-2">Родов канон vs. Индивидуален бунт и просвета</td>
+                      <td class="p-2 text-neonAmber">Иконостасът / Светилникът</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-emerald-300 font-bold">Родното и чуждото</td>
+                      <td class="p-2"><strong>А. Константинов</strong> — „Бай Ганьо журналист“</td>
+                      <td class="p-2">Сатиричен очерк / фейлетон</td>
+                      <td class="p-2">Свобода на словото vs. Келепир и демагогия</td>
+                      <td class="p-2 text-neonAmber">Вестник „Народно величие“</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-emerald-300 font-bold">Родното и чуждото</td>
+                      <td class="p-2"><strong>С. Стратиев</strong> — „Балкански синдром“</td>
+                      <td class="p-2">Сатирична комедия на абсурда</td>
+                      <td class="p-2">Култура и изкуство vs. Битов хаос и нахалство</td>
+                      <td class="p-2 text-neonAmber">Театралната сцена / Извънземното</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-cyan-300 font-bold">Миналото и паметта</td>
+                      <td class="p-2"><strong>Ив. Вазов</strong> — „Паисий“</td>
+                      <td class="p-2">Лиро-епическа ода</td>
+                      <td class="p-2">Историческа памет vs. Робска забрава и срам</td>
+                      <td class="p-2 text-neonAmber">„История славянобългарска“</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-cyan-300 font-bold">Миналото и паметта</td>
+                      <td class="p-2"><strong>Н. Вапцаров</strong> — „История“</td>
+                      <td class="p-2">Философско стихотворение</td>
+                      <td class="p-2">Реална човешка драма vs. Официална историография</td>
+                      <td class="p-2 text-neonAmber">Калта / Пожълтелите страници</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-cyan-300 font-bold">Миналото и паметта</td>
+                      <td class="p-2"><strong>Й. Радичков</strong> — „Ноев ковчег“</td>
+                      <td class="p-2">Фрагментарен роман</td>
+                      <td class="p-2">Словесно съхранение vs. Потопът на забравата</td>
+                      <td class="p-2 text-neonAmber">Ноевият ковчег / Тъмният трюм</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-amber-300 font-bold">Обществото и властта</td>
+                      <td class="p-2"><strong>Хр. Ботев</strong> — „Борба“</td>
+                      <td class="p-2">Сатирично стихотворение</td>
+                      <td class="p-2">Свободомислие vs. Тирания и фалшиво смирение</td>
+                      <td class="p-2 text-neonAmber">Хомотът / Страшният съд</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-amber-300 font-bold">Обществото и властта</td>
+                      <td class="p-2"><strong>Елин Пелин</strong> — „Андрешко“</td>
+                      <td class="p-2">Реалистичен разказ</td>
+                      <td class="p-2">Селска солидарност vs. Бездушен държавен закон</td>
+                      <td class="p-2 text-neonAmber">Блатото / Каруцата</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-amber-300 font-bold">Обществото и властта</td>
+                      <td class="p-2"><strong>Хр. Смирненски</strong> — „Приказка за стълбата“</td>
+                      <td class="p-2">Сатирична приказка / алегория</td>
+                      <td class="p-2">Идеализъм vs. Властолюбие и деградация</td>
+                      <td class="p-2 text-neonAmber">Стълбата / Вишневите рози</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-rose-300 font-bold">Животът и смъртта</td>
+                      <td class="p-2"><strong>Хр. Ботев</strong> — „До моето първо либе“</td>
+                      <td class="p-2">Интимно-гражданска лирика</td>
+                      <td class="p-2">Лично щастие vs. Синовен дълг и свобода</td>
+                      <td class="p-2 text-neonAmber">Кървавата сватба</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-rose-300 font-bold">Животът и смъртта</td>
+                      <td class="p-2"><strong>Ив. Вазов</strong> — „Новото гробище над Сливница“</td>
+                      <td class="p-2">Мемориална елегия / ода</td>
+                      <td class="p-2">Преходност на тялото vs. Безсмъртие на подвига</td>
+                      <td class="p-2 text-neonAmber">Новото гробище / Лавровият венец</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-rose-300 font-bold">Животът и смъртта</td>
+                      <td class="p-2"><strong>Ем. Станев</strong> — „Крадецът на праскови“</td>
+                      <td class="p-2">Психологическа повест</td>
+                      <td class="p-2">Любов и виталност vs. Война, ред и дълг</td>
+                      <td class="p-2 text-neonAmber">Прасковите / Лозето</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-purple-300 font-bold">Природата</td>
+                      <td class="p-2"><strong>Ив. Вазов</strong> — „При Рилския манастир“</td>
+                      <td class="p-2">Химнична ода / стихотворение</td>
+                      <td class="p-2">Чистота на природата vs. Злоба на обществото</td>
+                      <td class="p-2 text-neonAmber">Рила планина / Върховете</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-purple-300 font-bold">Природата</td>
+                      <td class="p-2"><strong>Пенчо Славейков</strong> — „Спи езерото“</td>
+                      <td class="p-2">Лирическа миниатюра</td>
+                      <td class="p-2">Хармония между статика (покой) и динамика (дух)</td>
+                      <td class="p-2 text-neonAmber">Спящото езеро / Букът</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 text-purple-300 font-bold">Природата</td>
+                      <td class="p-2"><strong>Пейо Яворов</strong> — „Градушка“</td>
+                      <td class="p-2">Лиро-епическа поема</td>
+                      <td class="p-2">Селски труд и надежда vs. Сляпа природна стихия</td>
+                      <td class="p-2 text-neonAmber">Черният облак / Житото</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <!-- Тема 2: Миналото и паметта -->
-              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 2: МИНАЛОТО И ПАМЕТТА</span>
-                <p>• <strong>Ив. Вазов – „Паисий“</strong> (ода от „Епопея на забравените“): Хилендарският монах. „История славянобългарска“ като духовен светилник и оръжие срещу робството и забравата.</p>
-                <p>• <strong>Н. Вапцаров – „История“</strong> (стихотворение): Полемика с парадната история. Истинските творци са безименните трудови хора с тяхната тиха човешка драма („Живот ли бе – да го опишеш?“).</p>
-                <p>• <strong>Й. Радичков – „Ноев ковчег“</strong> (мозаечен роман): Ковчегът като спасение за човешката памет, добротата, традициите и природата от духовния потоп.</p>
-              </div>
+              <!-- Detailed 5 Themes Breakdown -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px]">
+                
+                <!-- Тема 1: Родното и чуждото -->
+                <div class="p-3.5 rounded-xl bg-card border border-borderGlow space-y-2">
+                  <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold block w-fit">1. РОДНОТО И ЧУЖДОТО</span>
+                  <p>• <strong>„Железният светилник“ (Д. Талев)</strong>: Султана (пазителка на родовия закон, убива Катерина с биле за честта на рода), Стоян (селска виталност), Лазар (просветител и народен водач срещу фанариотите), Рафе Клинче (свободен ренесансов резбар, изсича лика на Катерина върху Богородица).</p>
+                  <p>• <strong>„Бай Ганьо журналист“ (А. Константинов)</strong>: Вестник „Народно величие“. Мотивът за „келепира“, омаскаряването на опозицията, липсата на принципи. Дружина: Гуньо Адвокатина, Бочо Кърлежа, Гочоолу, Дочоолу, Данко Харлакопа.</p>
+                  <p>• <strong>„Балкански синдром“ (С. Стратиев)</strong>: Похват „театър в театъра“, разрушаване на 4-тата стена. Битовата сватбарска стихия нахлува на сцената. Извънземното замлъква пред балканския абсурд. Бялата врана = самотната духовна чистота.</p>
+                </div>
 
-              <!-- Тема 3: Обществото и властта -->
-              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 3: ОБЩЕСТВОТО И ВЛАСТТА</span>
-                <p>• <strong>Хр. Ботев – „Борба“</strong> (сатирично стихотворение): Изобличение на робското търпение и съюза на тирани, богаташи и лъжедуховници („Свестните у нас считат за луди“). Зов за революция.</p>
-                <p>• <strong>Елин Пелин – „Андрешко“</strong> (разказ): Селската солидарност (Андрешко) срещу бездушния държавен чиновник (съдия-изпълнителя). Блатото като морален капан в защита на сиромаха Станоя.</p>
-                <p>• <strong>Хр. Смирненски – „Приказка за стълбата“</strong> (сатирична алегория): Деградацията на бунтаря. Дяволът взима последователно слуха, зрението и сърцето му. На върха: „Аз съм принц по рождение!“.</p>
-              </div>
+                <!-- Тема 2: Миналото и паметта -->
+                <div class="p-3.5 rounded-xl bg-card border border-borderGlow space-y-2">
+                  <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono font-bold block w-fit">2. МИНАЛОТО И ПАМЕТТА</span>
+                  <p>• <strong>„Паисий“ (Ив. Вазов)</strong>: Ода от „Епопея на забравените“. Тъмната килия в Атон vs светлината на „История славянобългарска“. Антитеза „тъмнина/срам“ vs „светлина/памет“. Паисий като пръв пророк на Възраждането.</p>
+                  <p>• <strong>„История“ (Н. Вапцаров)</strong>: Спор с официалната историография. Истинската история е в невидимото човешко страдание, потта, глада и калта. Оправдание: „Защото ни обичаше / безкрайно“.</p>
+                  <p>• <strong>„Ноев ковчег“ (Й. Радичков)</strong>: 13 фрагмента. Потопът = заличаването на с. Калиманица под яз. „Огоста“ и оварваряването. Ноевият ковчег = спасение на паметта и доброто чрез художественото слово. Въшкарчето = уязвимостта на живота.</p>
+                </div>
 
-              <!-- Тема 4 & 5: Животът/смъртта и Природата -->
-              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
-                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono font-bold text-[11px] block w-fit">ТЕМА 4 & 5: ЖИВОТЪТ, СМЪРТТА И ПРИРОДАТА</span>
-                <p>• <strong>Хр. Ботев – „До моето първо либе“</strong> (елегия/стихотворение): Отказ от личната любов в името на висшия дълг – юнашката борба за свобода.</p>
-                <p>• <strong>Ив. Вазов – „Новото гробище над Сливница“</strong> (ода/елегия): Саможертвата на падналите за защита на Съединението през 1885 г. („Българийо, за тебе те умряха...“).</p>
-                <p>• <strong>Ем. Станев – „Крадецът на праскови“</strong> (повест): Любовта на Елисавета и сръбския пленник Иво Обретенович в прасковената градина на фона на войната и полковника Михаил.</p>
-                <p>• <strong>Ив. Вазов – „При Рилския манастир“</strong> (ода): Природата като храм на душевния покой далеч от хорската злоба („Сега съм у дома...“).</p>
-                <p>• <strong>Пенчо Славейков – „Спи езерото“</strong> (миниатюра): Вечният мир, съзерцанието и хармонията между душата и природата.</p>
-                <p>• <strong>П. Яворов – „Градушка“</strong> (поема): Трагедията на трудовия селянин пред унищожителната природна стихия.</p>
+                <!-- Тема 3: Обществото и властта -->
+                <div class="p-3.5 rounded-xl bg-card border border-borderGlow space-y-2">
+                  <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-mono font-bold block w-fit">3. ОБЩЕСТВОТО И ВЛАСТТА</span>
+                  <p>• <strong>„Борба“ (Хр. Ботев)</strong>: Изобличение на цар Соломон и фалшивото смирение („търпи и ще се спасиш“). Парадокс: „Свестните у нас считат за луди“. Единствен изход: пречистващият Страшен съд на революцията.</p>
+                  <p>• <strong>„Андрешко“ (Елин Пелин)</strong>: Андрешко (селски хуманизъм и съсловна солидарност) vs съдия-изпълнителя (бездушен бюрократ, идващ да секвестира житото на сиромаха Станойчо). Блатото = социален капан и естествено възмездие.</p>
+                  <p>• <strong>„Приказка за стълбата“ (Хр. Смирненски)</strong>: Дяволът взима последователно: 1) слуха (за стоновете), 2) очите (за раните), 3) сърцето (жалостта). Финал: „Аз съм принц по рождение!“. Епиграф: посветено на онези, които казват „Това не се отнася до мене!“.</p>
+                </div>
+
+                <!-- Тема 4 & 5: Животът/смъртта и Природата -->
+                <div class="p-3.5 rounded-xl bg-card border border-borderGlow space-y-2">
+                  <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono font-bold block w-fit">4 & 5. ЖИВОТЪТ, СМЪРТТА И ПРИРОДАТА</span>
+                  <p>• <strong>„До моето първо либе“ (Хр. Ботев)</strong>: Отказ от любовната песен („не приливай куршум в сърце ми“). Смъртта като „кървава сватба“ със свободата.</p>
+                  <p>• <strong>„Новото гробище над Сливница“ (Ив. Вазов)</strong>: Сръбско-българската война (1885 г.). „Българийо, за тебе те умряха...“. Смъртта като спокоен юнашки сън и вечно безсмъртие.</p>
+                  <p>• <strong>„Крадецът на праскови“ (Ем. Станев)</strong>: Рамкова композиция. Елисавета (възкръсване чрез любовта) и сръбският пленник Иво vs милитаризма на полковника Михаил. Прасковите = виталност; изстрелът = безсмислената жестокост на войната.</p>
+                  <p>• <strong>„При Рилския манастир“ (Ив. Вазов)</strong>: Бягство от светската злоба и клевети. Опозиция Долу (градът, калта) vs Горе (планината, чистотата). „Сега съм у дома...“.</p>
+                  <p>• <strong>„Спи езерото“ (П. Славейков)</strong>: Модернизъм / кръг „Мисъл“. Одухотворен пейзаж на душата. Езерото (покой, нирвана) и буките (устрем нагоре). Начален глагол: „Спи“.</p>
+                  <p>• <strong>„Градушка“ (П. Яворов)</strong>: Селският труд и дядо Рад vs демоничната стихия. Звукопис (алитерация на [р], [с], [т]). Финал: нивата като „гроб за твоя труд“.</p>
+                </div>
+
               </div>
 
             </div>
