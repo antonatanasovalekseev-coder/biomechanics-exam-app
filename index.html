@@ -123,7 +123,7 @@
   <main class="max-w-5xl mx-auto px-4 lg:px-8 py-6">
     
     <!-- Top-Level Subject Switcher (Default: BEL) -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
       <button onclick="setGlobalSubject('bel')" id="subjectTab-bel" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25">
         <span>📖 БЕЛ 11. Клас (54)</span>
       </button>
@@ -132,6 +132,9 @@
       </button>
       <button onclick="setGlobalSubject('authors_genres')" id="subjectTab-authors_genres" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
         <span>📚 АВТОРИ & ЖАНРОВЕ (15)</span>
+      </button>
+      <button onclick="setGlobalSubject('russian')" id="subjectTab-russian" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>🇷🇺 РУСКИ ЕЗИК А2 (30)</span>
       </button>
       <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
         <span>🧠 Психология (28)</span>
@@ -735,6 +738,181 @@
                   </div>
                 </div>
                 <p class="mt-2 text-[11px]">• <strong>4 Метода на психологическата тренировка</strong>: 1) Моделирана тренировка; 2) Поведенчески тренинг; 3) Десенсибилизационен метод (привикване към емоциогенни фактори); 4) Трениране на психическите функции.</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- RUSSIAN CHEAT SHEET CONTENT (Учебник „Привет!“ 11. Клас - Ниво А2) -->
+          <div id="cheatSheetContentRussian" class="space-y-6 hidden">
+            
+            <!-- Quick Rules Bar -->
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-red-950/60 via-blue-950/60 to-slate-900 border border-sky-500/40 space-y-2">
+              <h4 class="font-display font-black text-sm sm:text-base text-sky-300 flex items-center gap-2">
+                <span>🇷🇺 ПИЩОВ ЗА 30 СЕКУНДИ: РУСКИ ЕЗИК А2 (11. КЛАС „ПРИВЕТ!“)</span>
+              </h4>
+              <p class="text-xs text-slate-200 leading-relaxed font-sans">
+                Като българин вече знаеш 70% от думите и буквите! Ето 4-те златни правила за утрешния изпит:
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs font-mono pt-1">
+                <div class="p-2 rounded-lg bg-obsidian border border-sky-500/30 text-sky-300">
+                  <strong>1. БУКВИТЕ:</strong><br>
+                  Ё = [йо]<br>
+                  Ы = [твърдо и]<br>
+                  Э = [е]
+                </div>
+                <div class="p-2 rounded-lg bg-obsidian border border-sky-500/30 text-emerald-300">
+                  <strong>2. ОКОНЧАНИЯ:</strong><br>
+                  Я $\rightarrow$ <strong>-ю / -у</strong><br>
+                  Ты $\rightarrow$ <strong>-ешь / -ишь</strong><br>
+                  Они $\rightarrow$ <strong>-ут/-ют/-ат/-ят</strong>
+                </div>
+                <div class="p-2 rounded-lg bg-obsidian border border-sky-500/30 text-amber-300">
+                  <strong>3. ПАДЕЖИ:</strong><br>
+                  <em>Заниматься</em> + <strong>-ом</strong><br>
+                  <em>Мне нравится</em><br>
+                  <em>У меня нет...</em>
+                </div>
+                <div class="p-2 rounded-lg bg-obsidian border border-sky-500/30 text-pink-300">
+                  <strong>4. ДВИЖЕНИЕ:</strong><br>
+                  <em>Идти</em> = пеша сега<br>
+                  <em>Ходить</em> = редовно<br>
+                  <em>Ехать</em> = с транспорт сега
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Tables Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px]">
+
+              <!-- Раздел 1: Руската азбука & Разликите с българския -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 font-mono font-bold text-[11px] block w-fit">1. РУСКАТА АЗБУКА & СПЕЦИАЛНИ БУКВИ</span>
+                <p>• <strong>Общо 33 букви</strong> — 30 са 1:1 с българската кирилица!</p>
+                <div class="p-2.5 rounded-xl bg-card border border-borderGlow space-y-1 font-mono text-[11px]">
+                  <p><strong class="text-sky-300">Ё, ё</strong> = чете се <em>„ЙО“</em> (напр. <em>самолёт</em> [самольот], <em>ещё</em> [ешчó]).</p>
+                  <p><strong class="text-sky-300">Ы, ы</strong> = чете се твърдо <em>„И“</em> (напр. <em>мы</em> [ми = ние], <em>ты</em> [ти], <em>сыр</em> [сир]).</p>
+                  <p><strong class="text-sky-300">Э, э</strong> = чисто <em>„Е“</em> в началото на думи (напр. <em>это</em> [това е], <em>экзамен</em>, <em>этаж</em>).</p>
+                  <p><strong class="text-sky-300">Ъ, ъ & Ь, ь</strong> = твърд и мек знак (напр. <em>объявление</em>, <em>день</em>, <em>словарь</em>).</p>
+                </div>
+              </div>
+
+              <!-- Раздел 2: Глаголи & Спрежения -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 font-mono font-bold text-[11px] block w-fit">2. СПРЕЖЕНИЕ НА ГЛАГОЛИТЕ (ОКОНЧАНИЯ)</span>
+                <table class="w-full text-left font-mono text-[11px] border border-borderGlow">
+                  <thead class="bg-sky-950/60 text-sky-300">
+                    <tr>
+                      <th class="p-1 border border-borderGlow">Лице</th>
+                      <th class="p-1 border border-borderGlow">I Спряжение (-ать/-ять)</th>
+                      <th class="p-1 border border-borderGlow">II Спряжение (-ить/-еть)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-borderGlow">
+                    <tr><td class="p-1 font-bold text-sky-300">Я (аз)</td><td class="p-1">чита́<strong>ю</strong> / дела́<strong>ю</strong></td><td class="p-1">говор<strong>ю́</strong> / уч<strong>у́</strong></td></tr>
+                    <tr><td class="p-1 font-bold text-sky-300">Ты (ти)</td><td class="p-1">чита́<strong>ешь</strong> / дела́<strong>ешь</strong></td><td class="p-1">говор<strong>и́шь</strong> / у́ч<strong>ишь</strong></td></tr>
+                    <tr><td class="p-1 font-bold text-sky-300">Он/Она (той/тя)</td><td class="p-1">чита́<strong>ет</strong> / дела́<strong>ет</strong></td><td class="p-1">говор<strong>и́т</strong> / у́ч<strong>ит</strong></td></tr>
+                    <tr><td class="p-1 font-bold text-sky-300">Мы (ние)</td><td class="p-1">чита́<strong>ем</strong> / дела́<strong>ем</strong></td><td class="p-1">говор<strong>и́м</strong> / у́ч<strong>им</strong></td></tr>
+                    <tr><td class="p-1 font-bold text-sky-300">Вы (вие)</td><td class="p-1">чита́<strong>ете</strong> / дела́<strong>ете</strong></td><td class="p-1">говор<strong>и́те</strong> / у́ч<strong>ите</strong></td></tr>
+                    <tr><td class="p-1 font-bold text-sky-300">Они (те)</td><td class="p-1">чита́<strong>ют</strong> / дела́<strong>ют</strong></td><td class="p-1">говор<strong>я́т</strong> / у́ч<strong>ат</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Раздел 3: Таблица на 6-те Падежа за 11. Клас -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2 md:col-span-2">
+                <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 font-mono font-bold text-[11px] block w-fit">3. ШЕСТТЕ ПАДЕЖА — ЗЛАТНА ТАБЛИЦА С ВЪПРОСИ И ПРИМЕРИ</span>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left font-sans text-[11px] border border-borderGlow">
+                    <thead class="bg-sky-950/60 text-sky-300 font-mono">
+                      <tr>
+                        <th class="p-1.5 border border-borderGlow">Падеж</th>
+                        <th class="p-1.5 border border-borderGlow">Въпрос</th>
+                        <th class="p-1.5 border border-borderGlow">Кога се ползва / Конструкция</th>
+                        <th class="p-1.5 border border-borderGlow">Примери за изпита</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-borderGlow font-mono">
+                      <tr>
+                        <td class="p-1.5 font-bold text-slate-200">1. Именительный</td>
+                        <td class="p-1.5">Кто? Что?</td>
+                        <td class="p-1.5">Подлог (кой върши действието)</td>
+                        <td class="p-1.5 text-emerald-300"><strong>Студент</strong> читает книгу.</td>
+                      </tr>
+                      <tr>
+                        <td class="p-1.5 font-bold text-slate-200">2. Родительный</td>
+                        <td class="p-1.5">Кого? Чего? Откуда?</td>
+                        <td class="p-1.5">Отрицание с <strong>НЕТ</strong>, притежание, откъде (из/с)</td>
+                        <td class="p-1.5 text-emerald-300">У меня <strong>нет времени</strong>. Я приехал <strong>из Болгарии</strong>.</td>
+                      </tr>
+                      <tr>
+                        <td class="p-1.5 font-bold text-slate-200">3. Дательный</td>
+                        <td class="p-1.5">Кому? Чему?</td>
+                        <td class="p-1.5">Харесване с <strong>нравится</strong>, обаждане, на кого давам</td>
+                        <td class="p-1.5 text-emerald-300"><strong>Мне</strong> нравится русский язык. Звонить <strong>другу</strong>.</td>
+                      </tr>
+                      <tr>
+                        <td class="p-1.5 font-bold text-slate-200">4. Винительный</td>
+                        <td class="p-1.5">Кого? Что? Куда?</td>
+                        <td class="p-1.5">Пряко допълнение, посока на движение (накъде)</td>
+                        <td class="p-1.5 text-emerald-300">Я люблю <strong>спорт</strong>. Завтра я иду <strong>в школу</strong>.</td>
+                      </tr>
+                      <tr>
+                        <td class="p-1.5 font-bold text-slate-200">5. Творительный</td>
+                        <td class="p-1.5">Кем? Чем? С кем?</td>
+                        <td class="p-1.5">Занимания (<strong>заниматься</strong>), професии (<strong>быть/стать</strong>), със <strong>С</strong></td>
+                        <td class="p-1.5 text-emerald-300">Заниматься <strong>спортом</strong>. Стать <strong>врачом</strong>. Чай <strong>с сахаром</strong>.</td>
+                      </tr>
+                      <tr>
+                        <td class="p-1.5 font-bold text-slate-200">6. Предложный</td>
+                        <td class="p-1.5">О ком? О чём? Где?</td>
+                        <td class="p-1.5">Място (<strong>в/на + -е</strong>), мисли/разговори (о/об)</td>
+                        <td class="p-1.5 text-emerald-300">Я учусь <strong>в школе</strong>. Мы на <strong>стадионе</strong>. Думать <strong>о лете</strong>.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Раздел 4: Глаголи за движение -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 font-mono font-bold text-[11px] block w-fit">4. ГЛАГОЛИ ЗА ДВИЖЕНИЕ</span>
+                <div class="space-y-2 text-[11px]">
+                  <p>• <strong>Пеша:</strong></p>
+                  <p class="pl-2 border-l border-sky-500/40 font-mono text-[11px]">
+                    – <em>Идти</em> (я иду, ты идёшь, они идут): движение пеша в една посока в <strong>този момент</strong> (<em>Сейчас я иду в школу</em>).<br>
+                    – <em>Ходить</em> (я хожу, ты ходишь, они ходят): <strong>редовно/многократно</strong> движение пеша (<em>Каждый день я хожу на тренировку</em>).
+                  </p>
+                  <p>• <strong>С превозно средство (транспорт):</strong></p>
+                  <p class="pl-2 border-l border-sky-500/40 font-mono text-[11px]">
+                    – <em>Ехать</em> (я еду, ты едешь, они едут): пътувам с транспорт в <strong>този момент</strong> (<em>Мы едем на автобусе</em>).<br>
+                    – <em>Ездить</em> (я езжу, ты ездишь, они ездят): <strong>редовно</strong> пътуване с транспорт (<em>Летом я часто езжу на море</em>).
+                  </p>
+                </div>
+              </div>
+
+              <!-- Раздел 5: Топ лексика по темите на „Привет!“ 11. клас -->
+              <div class="p-4 rounded-2xl bg-obsidian border border-borderGlow space-y-2">
+                <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 font-mono font-bold text-[11px] block w-fit">5. КЛЮЧОВИ ДУМИ ПО ТЕМИТЕ ОТ УЧЕБНИКА</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-[11px]">
+                  <div class="p-2 rounded-lg bg-card border border-borderGlow">
+                    <strong class="text-sky-300 block mb-1">Спорт & Здраве:</strong>
+                    тренировка, стадион, победа, матч, играть в футбол / волейбол, чувствовать себя отлично, врач (лекар), больница.
+                  </div>
+                  <div class="p-2 rounded-lg bg-card border border-borderGlow">
+                    <strong class="text-sky-300 block mb-1">Храна & Ресторант:</strong>
+                    завтрак (закуска), обед (обяд), ужин (вечеря), счёт (сметка), меню, вкусно, чай с лимоном, овощи, фрукты.
+                  </div>
+                  <div class="p-2 rounded-lg bg-card border border-borderGlow">
+                    <strong class="text-sky-300 block mb-1">Мода & Пазаруване:</strong>
+                    одежда (дрехи), куртка (яке), кроссовки (маратонки), рубашка (риза), сколько это стоит?, размер, скидка (намаление).
+                  </div>
+                  <div class="p-2 rounded-lg bg-card border border-borderGlow">
+                    <strong class="text-sky-300 block mb-1">Пътуване & Град:</strong>
+                    вокзал (жп гара), поезд (влак), самолёт (самолет), билет, гостиница (хотел), идите прямо, потом направо.
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -3288,8 +3466,501 @@
       }
     ];
 
+    // =========================================================================
+    // 6. RUSSIAN LANGUAGE (11. CLASS • LEVEL A2 • УЧЕБНИК „ПРИВЕТ!“)
+    // =========================================================================
+    const russianQuestions = [
+      // --- РАЗДЕЛ 1: ЛЕКСИКА & ТЕМИ ОТ УЧЕБНИКА (10 ВЪПРОСА) ---
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 1,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '1. [ТЕМА „СПОРТ – ЭТО ЗДОРОВЬЕ“] Как се казва на руски „Тренирам футбол / Занимавам се с футбол“?',
+        options: [
+          { text: 'А) Я занимаюсь футболом', correct: true },
+          { text: 'Б) Я играю футболом', correct: false },
+          { text: 'В) Я спорт футбол', correct: false },
+          { text: 'Г) Я делаю футбол', correct: false }
+        ],
+        hint: '💡 Конструкцията за спорт е глаголът „заниматься“ + Творителен падеж с окончание „-ом“: заниматься спортом / футболом.',
+        why: '„Я занимаюсь футболом“ е правилният израз на руски език. При „играть“ се казва „играть в футбол“ (с предлог „в“).'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 2,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '2. [ТЕМА „ВЫБОР ПРОФЕССИИ“] Коя руска дума означава „лекар“?',
+        options: [
+          { text: 'А) Врач', correct: true },
+          { text: 'Б) Учитель', correct: false },
+          { text: 'В) Повар', correct: false },
+          { text: 'Г) Водитель', correct: false }
+        ],
+        hint: '💡 Врач = лекар, Учитель = учител, Повар = готвач, Водитель = шофьор.',
+        why: '„Врач“ (или „доктор“) е точната дума за лекар на руски език.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 3,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '3. [ТЕМА „В ПОГОНЕ ЗА МОДОЙ“] Какво означава на български: „Мне нужна тёплая куртка и удобные кроссовки“?',
+        options: [
+          { text: 'А) Трябва ми топло яке и удобни маратонки', correct: true },
+          { text: 'Б) Трябва ми топъл пуловер и официални обувки', correct: false },
+          { text: 'В) Търся си летни панталони и шапка', correct: false },
+          { text: 'Г) Купих си топло палто и ботуши', correct: false }
+        ],
+        hint: '💡 Куртка = яке, Кроссовки = маратонки / спортни обувки.',
+        why: '„Куртка“ е яке, а „кроссовки“ са маратонки.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 4,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '4. [ТЕМА „ПОХОД В МАГАЗИН“] Как учтиво питаме за цената на даден артикул в руски магазин?',
+        options: [
+          { text: 'А) Сколько это стоит?', correct: true },
+          { text: 'Б) Где это стоит?', correct: false },
+          { text: 'В) Кто это стоит?', correct: false },
+          { text: 'Г) Почему это стоит?', correct: false }
+        ],
+        hint: '💡 „Сколько“ = колко. „Сколько это стоит?“ = Колко струва това?',
+        why: '„Сколько это стоит?“ е стандартната фраза за запитване за цена.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 5,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '5. [ТЕМА „ЕДА И ЗДОРОВЬЕ“] Коя от изброените думи означава „закуска“ (сутрешно хранене)?',
+        options: [
+          { text: 'А) Завтрак', correct: true },
+          { text: 'Б) Обед', correct: false },
+          { text: 'В) Ужин', correct: false },
+          { text: 'Г) Десерт', correct: false }
+        ],
+        hint: '💡 Завтрак = закуска (сутрин), Обед = обяд (обед), Ужин = вечеря (вечер).',
+        why: '„Завтрак“ е сутрешното хранене (закуска).'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 6,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '6. [ТЕМА „ПРИХОДИТЕ НА ЧАЙ“] Как учтиво каним гост да влезе и да седне в дома ни?',
+        options: [
+          { text: 'А) Проходите, пожалуйста, садитесь к столу!', correct: true },
+          { text: 'Б) Уходите быстрее отсюда!', correct: false },
+          { text: 'В) Не садитесь на диван!', correct: false },
+          { text: 'Г) Купите себе чай!', correct: false }
+        ],
+        hint: '💡 „Проходите, пожалуйста“ = Влезте / Заповядайте, моля.',
+        why: '„Проходите, пожалуйста, садитесь к столу!“ е класическата руска формула за гостоприемство.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 7,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '7. [ТЕМА „КАК ЖИТЬ ЭКОЛОГИЧНО“] Какво означава руският израз „защита окружающей среды“?',
+        options: [
+          { text: 'А) Опазване на околната среда', correct: true },
+          { text: 'Б) Опазване на дивите животни в зоопарка', correct: false },
+          { text: 'В) Почистване на дома и двора', correct: false },
+          { text: 'Г) Строеж на нови фабрики', correct: false }
+        ],
+        hint: '💡 „Окружающая среда“ = околна среда, „защита“ = защита / опазване.',
+        why: '„Защита окружающей среды“ е официалният термин за опазване на околната среда.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 8,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '8. [ТЕМА „ПУТЕШЕСТВИЯ“] Къде отиваме, ако искаме да си купим билет за влак?',
+        options: [
+          { text: 'А) На железнодорожный вокзал', correct: true },
+          { text: 'Б) В аптеку', correct: false },
+          { text: 'В) В библиотеку', correct: false },
+          { text: 'Г) На стадион', correct: false }
+        ],
+        hint: '💡 Вокзал = жп гара (жд вокзал = железопътна гара).',
+        why: '„Вокзал“ е жп гара, а „поезд“ е влак.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 9,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '9. [ТЕМА „СКАЖИ МНЕ, КТО ТЫ“] Какво означава характеристиката „Он очень общительный и надёжный друг“?',
+        options: [
+          { text: 'А) Той е много общителен и надежден приятел', correct: true },
+          { text: 'Б) Той е много мълчалив и строг приятел', correct: false },
+          { text: 'В) Той е мързелив и несериозен човек', correct: false },
+          { text: 'Г) Той е висок и слаб спортист', correct: false }
+        ],
+        hint: '💡 Общительный = комуникативен/общителен, Надёжный = надежден/верен.',
+        why: '„Общительный“ означава контактен човек, а „надёжный“ – сигурен и надежден.'
+      },
+      {
+        subject: 'russian',
+        section: 'lexis',
+        num: 10,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '10. [ТЕМА „ОКОНЧАНИЕ ШКОЛЫ“] Как се казва на руски „Взех (положих успешно) изпита“?',
+        options: [
+          { text: 'А) Я успешно сдал экзамен', correct: true },
+          { text: 'Б) Я забыл экзамен дома', correct: false },
+          { text: 'В) Я потерял экзамен', correct: false },
+          { text: 'Г) Я закрыл экзамен', correct: false }
+        ],
+        hint: '💡 „Сдать экзамен“ = полагам успешно / взимам изпит.',
+        why: 'В руския език изразът за успешно взет изпит е „сдать экзамен“.'
+      },
+
+      // --- РАЗДЕЛ 2: ГРАМАТИКА & ПАДЕЖИ (10 ВЪПРОСА) ---
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 11,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '11. [ДАТЕЛЕН ПАДЕЖ] Попълнете правилното местоимение: „... очень нравится изучать иностранные языки.“',
+        options: [
+          { text: 'А) Мне', correct: true },
+          { text: 'Б) Я', correct: false },
+          { text: 'В) Меня', correct: false },
+          { text: 'Г) Мной', correct: false }
+        ],
+        hint: '💡 С глагола „нравится“ (харесва ми) винаги се използва Дателен падеж: Мне нравится (На мен ми харесва).',
+        why: 'В руския език субектът при „нравится“ е в Дателен падеж: „Мне нравится“. Нито „Я“, нито „Меня“ са верни.'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 12,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '12. [ТВОРИТЕЛЕН ПАДЕЖ] Попълнете правилно: „После окончания школы мой брат хочет стать ...“',
+        options: [
+          { text: 'А) программистом', correct: true },
+          { text: 'Б) программист', correct: false },
+          { text: 'В) программиста', correct: false },
+          { text: 'Г) программисту', correct: false }
+        ],
+        hint: '💡 След глаголите „быть / стать“ (да бъда / да стана) се използва Творителен падеж с окончание „-ом“: стать врачом / программистом / тренером.',
+        why: 'Професиите след „стать“ приемат окончание за Творителен падеж: „программистом“.'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 13,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '13. [РОДИТЕЛЕН ПАДЕЖ] Попълнете правилно израза за липса/отрицание: „К сожалению, сегодня у меня нет свободного ...“',
+        options: [
+          { text: 'А) времени', correct: true },
+          { text: 'Б) время', correct: false },
+          { text: 'В) временем', correct: false },
+          { text: 'Г) временищу', correct: false }
+        ],
+        hint: '💡 След думата „нет“ (няма) задължително следва Родителен падеж: нет времени / нет денег / нет урока.',
+        why: 'Родителният падеж от „время“ е „времени“ (у меня нет свободного времени).'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 14,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '14. [ПРЕДЛОЖЕН ПАДЕЖ • МЯСТО] Попълнете на въпрос „Где?“: „Сейчас все ученики находятся ...“',
+        options: [
+          { text: 'А) в школе', correct: true },
+          { text: 'Б) в школу', correct: false },
+          { text: 'В) из школы', correct: false },
+          { text: 'Г) над школой', correct: false }
+        ],
+        hint: '💡 На въпрос „Где?“ (Къде се намирам?) се използва Предложен падеж с окончание „-е“: в школе, в классе, в театре.',
+        why: '„В школе“ отговаря на въпрос „Где?“. „В школу“ е Винителен падеж и отговаря на въпрос „Куда?“ (Накъде отивам).'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 15,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '15. [ВИНИТЕЛЕН ПАДЕЖ • ПОСОКА] Попълнете на въпрос „Куда?“: „Завтра вечером мы с классом идём ...“',
+        options: [
+          { text: 'А) в театр', correct: true },
+          { text: 'Б) в театре', correct: false },
+          { text: 'В) о театре', correct: false },
+          { text: 'Г) с театром', correct: false }
+        ],
+        hint: '💡 На въпрос „Куда?“ (Накъде отивам?) мъжки род за неодушевени предмети не се променя: в театр, в музей, на стадион.',
+        why: '„Идём в театр“ посочва посока на движение (Винителен падеж).'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 16,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '16. [СПРЕЖЕНИЕ НА ГЛАГОЛИ] Изберете вярната форма за „Они“ (те): „Они каждый вечер ... русский текст.“',
+        options: [
+          { text: 'А) читают', correct: true },
+          { text: 'Б) читает', correct: false },
+          { text: 'В) читаем', correct: false },
+          { text: 'Г) читаешь', correct: false }
+        ],
+        hint: '💡 За местоимението „Они“ глаголите от I спрежение приемат окончание „-ют / -ут“: они читают, знают, делают.',
+        why: 'Они $\\rightarrow$ читают (Я читаю, ты читаешь, он читает, мы читаем, вы читаете, они читают).'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 17,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '17. [СПРЕЖЕНИЕ НА ГЛАГОЛИ] Изберете вярната форма за „Ты“: „Ты очень хорошо ... по-русски!“',
+        options: [
+          { text: 'А) говоришь', correct: true },
+          { text: 'Б) говорит', correct: false },
+          { text: 'В) говорим', correct: false },
+          { text: 'Г) говорят', correct: false }
+        ],
+        hint: '💡 За „Ты“ във II спрежение окончанието е „-ишь“: ты говоришь, учишь, смотришь.',
+        why: 'Ты $\\rightarrow$ говоришь (Я говорю, ты говоришь, он говорит, мы говорим, вы говорите, они говорят).'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 18,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '18. [ПРИТЕЖАТЕЛНИ МЕСТОИМЕНИЯ] Попълнете съгласуваното местоимение за женски род: „Это ... новая машина.“',
+        options: [
+          { text: 'А) моя', correct: true },
+          { text: 'Б) мой', correct: false },
+          { text: 'В) моё', correct: false },
+          { text: 'Г) мои', correct: false }
+        ],
+        hint: '💡 Машина е женски род $\\rightarrow$ моя (мой = мъжки род, моё = среден род, мои = множествено число).',
+        why: '„Моя машина“ е правилното граматично съгласуване в женски род.'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 19,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '19. [СРАВНИТЕЛНА СТЕПЕН] Попълнете: „Наш спортивный клуб играет ..., чем клуб соперников.“',
+        options: [
+          { text: 'А) лучше', correct: true },
+          { text: 'Б) хороший', correct: false },
+          { text: 'В) самый хороший', correct: false },
+          { text: 'Г) плохой', correct: false }
+        ],
+        hint: '💡 Сравнителна степен: хороший / хорошо $\\rightarrow$ лучше (по-добре / по-добър).',
+        why: '„Лучше“ е сравнителната степен на „хорошо“.'
+      },
+      {
+        subject: 'russian',
+        section: 'grammar',
+        num: 20,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '20. [ТВОРИТЕЛЕН ПАДЕЖ • СЪВМЕСТНОСТ] Попълнете: „Вчера я долго гулял по парку со своим лучшим ...“',
+        options: [
+          { text: 'А) другом', correct: true },
+          { text: 'Б) друг', correct: false },
+          { text: 'В) друга', correct: false },
+          { text: 'Г) другу', correct: false }
+        ],
+        hint: '💡 С предлог „с / со“ (с кого?) се използва Творителен падеж с окончание „-ом“: с другом, с братом.',
+        why: '„С лучшим другом“ е форма за Творителен падеж.'
+      },
+
+      // --- РАЗДЕЛ 3: ГЛАГОЛИ ЗА ДВИЖЕНИЕ (5 ВЪПРОСА) ---
+      {
+        subject: 'russian',
+        section: 'verbs',
+        num: 21,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '21. [ИДТИ vs ХОДИТЬ • ПЕША СЕГА] Попълнете за моментно движение пеша: „Посмотри в окно: куда сейчас ... этот мальчик?“',
+        options: [
+          { text: 'А) идёт', correct: true },
+          { text: 'Б) ходит', correct: false },
+          { text: 'В) ездит', correct: false },
+          { text: 'Г) пошёл', correct: false }
+        ],
+        hint: '💡 Думата „сейчас“ (в момента) изисква глагола „идти“ (той идёт) – конкретно еднопосочно движение пеша в момента.',
+        why: '„Идёт“ изразява движение пеша в настоящия момент. „Ходит“ означава повтарящо се/редовно действие.'
+      },
+      {
+        subject: 'russian',
+        section: 'verbs',
+        num: 22,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '22. [ХОДИТЬ • РЕДОВНО ДЕЙСТВИЕ] Попълнете за редовно повтарящо се действие: „Каждый понедельник и среду я ... в бассейн.“',
+        options: [
+          { text: 'А) хожу', correct: true },
+          { text: 'Б) иду', correct: false },
+          { text: 'В) еду', correct: false },
+          { text: 'Г) поехал', correct: false }
+        ],
+        hint: '💡 „Каждый понедельник“ (всеки понеделник) показва навик/редовност $\\rightarrow$ ползваме глагола „ходить“ (я хожу).',
+        why: '„Хожу“ (от „ходить“) изразява повтарящо се, редовно ходене.'
+      },
+      {
+        subject: 'russian',
+        section: 'verbs',
+        num: 23,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '23. [ЕХАТЬ vs ЕЗДИТЬ • С ТРАНСПОРТ СЕГА] Попълнете: „Мы сейчас сидим в такси и ... на вокзал.“',
+        options: [
+          { text: 'А) едем', correct: true },
+          { text: 'Б) ездим', correct: false },
+          { text: 'В) идём', correct: false },
+          { text: 'Г) ходим', correct: false }
+        ],
+        hint: '💡 Пътуване с превозно средство (такси) в момента (сейчас) $\\rightarrow$ глагол „ехать“ (мы едем).',
+        why: '„Едем“ се използва при движение с транспорт в конкретния момент.'
+      },
+      {
+        subject: 'russian',
+        section: 'verbs',
+        num: 24,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '24. [ЕЗДИТЬ • РЕДОВНИ ПЪТУВАНИЯ С ТРАНСПОРТ] Попълнете: „Каждое лето наша семья ... на море на поезде.“',
+        options: [
+          { text: 'А) ездит', correct: true },
+          { text: 'Б) едет', correct: false },
+          { text: 'В) идёт', correct: false },
+          { text: 'Г) ходит', correct: false }
+        ],
+        hint: '💡 „Каждое лето“ (всяко лято) + превозно средство (поезд) $\\rightarrow$ глагол „ездить“ (семья ездит).',
+        why: '„Ездит“ показва редовни, ежегодни пътувания с транспорт.'
+      },
+      {
+        subject: 'russian',
+        section: 'verbs',
+        num: 25,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '25. [ГЛАГОЛИ ЗА ДВИЖЕНИЕ С ПРЕДСТАВКИ] Попълнете: „Звонок уже прозвенел, и учитель ... в класс.“',
+        options: [
+          { text: 'А) вошёл', correct: true },
+          { text: 'Б) ушёл', correct: false },
+          { text: 'В) перешёл', correct: false },
+          { text: 'Г) отошёл', correct: false }
+        ],
+        hint: '💡 Представката „в- / во-“ означава влизане навътре (вошёл в класс = влезе в клас). „Ушёл“ означава си тръгна.',
+        why: '„Вошёл в класс“ означава, че учителят е влязъл в класната стая.'
+      },
+
+      // --- РАЗДЕЛ 4: СИТУАЦИИ & ДИАЛОЗИ (5 ВЪПРОСА) ---
+      {
+        subject: 'russian',
+        section: 'dialogues',
+        num: 26,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '26. [ОРИЕНТАЦИЯ В ГРАДА] Минувач на улицата ви пита: „Скажите, пожалуйста, где находится станция метро?“. Какъв е верният отговор?',
+        options: [
+          { text: 'А) Идите прямо, а на перекрёстке поверните направо.', correct: true },
+          { text: 'Б) Метро стоит десять рублей.', correct: false },
+          { text: 'В) Я вчера ел вкусное метро.', correct: false },
+          { text: 'Г) Метро работает до утра.', correct: false }
+        ],
+        hint: '💡 „Идите прямо, поверните направо“ = Вървете направо, завийте надясно.',
+        why: 'Вариант А указва точната посока на движение в градска среда.'
+      },
+      {
+        subject: 'russian',
+        section: 'dialogues',
+        num: 27,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '27. [В КАФЕНЕ / РЕСТОРАНТ] Сервитьорът пита: „Что вы будете заказывать?“. Как отговаряте най-учтиво?',
+        options: [
+          { text: 'А) Принесите, пожалуйста, минеральную воду и салат.', correct: true },
+          { text: 'Б) Меня зовут Иван и я школьник.', correct: false },
+          { text: 'В) Болгария находится на Балканах.', correct: false },
+          { text: 'Г) Я не знаю, где вокзал.', correct: false }
+        ],
+        hint: '💡 „Принесите, пожалуйста...“ = Донесете, моля... е стандартната формула за поръчка.',
+        why: '„Принесите, пожалуйста...“ е точната фраза за поръчка на храна и напитки.'
+      },
+      {
+        subject: 'russian',
+        section: 'dialogues',
+        num: 28,
+        type: 'choice',
+        maxPoints: 1,
+        prompt: '28. [ЗАПОЗНАНСТВО & ЕТИКЕТ] Как се отговаря учтиво на репликата: „Очень приятно познакомиться!“?',
+        options: [
+          { text: 'А) Мне тоже очень приятно!', correct: true },
+          { text: 'Б) Спокойной ночи!', correct: false },
+          { text: 'В) Сколько это стоит?', correct: false },
+          { text: 'Г) Ни за что!', correct: false }
+        ],
+        hint: '💡 „Мне тоже очень приятно!“ = И на мен ми е много приятно!',
+        why: '„Мне тоже очень приятно!“ е класическият етикетиран отговор при запознанство.'
+      },
+      {
+        subject: 'russian',
+        section: 'dialogues',
+        num: 29,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '29. [ЗДРАВЕ & ЛЕКАР] Лекарят в кабинета ви пита: „На что вы жалуетесь?“. Какво означава този въпрос?',
+        options: [
+          { text: 'А) От какво се оплаквате? / Какъв е здравословният ви проблем?', correct: true },
+          { text: 'Б) Колко пари имате в джоба си?', correct: false },
+          { text: 'В) На какъв език говорите в училище?', correct: false },
+          { text: 'Г) Къде сте учили в детството си?', correct: false }
+        ],
+        hint: '💡 „Жаловаться на здоровье“ = оплаквам се от болки/здравословен проблем.',
+        why: '„На что вы жалуетесь?“ е стандартният медицински въпрос за симптомите на пациента.'
+      },
+      {
+        subject: 'russian',
+        section: 'dialogues',
+        num: 30,
+        type: 'choice',
+        maxPoints: 2,
+        prompt: '30. [ПОЖЕЛАНИЕ ЗА ИЗПИТ] Кой е традиционният руски идиом за пожелаване на успех преди изпит?',
+        options: [
+          { text: 'А) Ни пуха ни пера! (Удачи на экзамене!)', correct: true },
+          { text: 'Б) Приятного аппетита!', correct: false },
+          { text: 'В) С лёгким паром!', correct: false },
+          { text: 'Г) Спокойной ночи!', correct: false }
+        ],
+        hint: '💡 Преди изпит в Русия казват „Ни пуха ни пера!“ (а ученикът отговаря „К чёрту!“).',
+        why: '„Ни пуха ни пера!“ е универсалното руско пожелание за късмет и успех на изпит.'
+      }
+    ];
+
     // --- State Variables ---
-    let currentSubject = 'bel'; // Default: BEL for the upcoming 8:00 AM exam!
+    let currentSubject = 'bel'; // Default: BEL
     let currentSubFilter = 'all';
     let currentQuestions = [];
     let currentIdx = 0;
@@ -3318,13 +3989,11 @@
       if (q.type === 'open_fill') return (q.fields ? q.fields.length : 2); // 2-4 т.
       if (q.type === 'multi_select') return 2; // 2 т.
       if (q.type === 'choice') {
-        // Grammar & punctuation analysis questions require deeper multi-step reasoning = 2 т.
         if (q.subject === 'bel' && q.section === 'grammar') return 2;
-        // Complex understanding level in Psychology = 2 т.
         if (q.subject === 'psychology' && q.section === 'understanding') return 2;
         if (q.difficulty === 'hard') return 3;
         if (q.difficulty === 'medium') return 2;
-        return 1; // Basic recall & knowledge = 1 т.
+        return 1;
       }
       return 1;
     }
@@ -3350,6 +4019,7 @@
       const belTab = document.getElementById('subjectTab-bel');
       const paisiyTab = document.getElementById('subjectTab-paisiy_essay');
       const authTab = document.getElementById('subjectTab-authors_genres');
+      const russianTab = document.getElementById('subjectTab-russian');
       const psychTab = document.getElementById('subjectTab-psychology');
       const biomechTab = document.getElementById('subjectTab-biomechanics');
       const mainTitle = document.getElementById('appMainTitle');
@@ -3357,7 +4027,7 @@
       const iconBadge = document.getElementById('subjectIconBadge');
       const cheatBtnLabel = document.getElementById('cheatSheetBtnLabel');
 
-      [belTab, paisiyTab, authTab, psychTab, biomechTab].forEach(t => {
+      [belTab, paisiyTab, authTab, russianTab, psychTab, biomechTab].forEach(t => {
         if (t) t.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
       });
 
@@ -3385,6 +4055,14 @@
         iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-emerald-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-cyan-500/30';
         if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: АВТОРИ И ЖАНРОВЕ';
         renderSubFilters('authors_genres');
+      } else if (sub === 'russian') {
+        if (russianTab) russianTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 text-white shadow-lg shadow-sky-500/30';
+        mainTitle.innerText = 'Руски език XI Клас (Ниво А2 • „Привет!“)';
+        subTitle.innerText = 'Учебник „Привет!“ (Просвета) • 30 изпитни въпроса (Лексика, Падежи, Движение, Диалози) & Mastery Loop';
+        iconBadge.innerText = '🇷🇺';
+        iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-sky-500/30';
+        if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: РУСКИ ЕЗИК А2';
+        renderSubFilters('russian');
       } else if (sub === 'psychology') {
         psychTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
         mainTitle.innerText = 'Спортна Психология XI Клас';
@@ -3439,6 +4117,15 @@
           <button onclick="setSubFilter('zhivota')" id="sub-zhivota" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">4. Животът и смъртта (3)</button>
           <button onclick="setSubFilter('prirodata')" id="sub-prirodata" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">5. Природата (3)</button>
         `;
+      } else if (sub === 'russian') {
+        container.innerHTML = `
+          <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
+          <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 text-white transition-all shadow-lg shadow-sky-500/25">Пълен Тест (30 въпроса)</button>
+          <button onclick="setSubFilter('lexis')" id="sub-lexis" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">1. Лексика & Теми (10 в.)</button>
+          <button onclick="setSubFilter('grammar')" id="sub-grammar" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">2. Падежи & Окончания (10 в.)</button>
+          <button onclick="setSubFilter('verbs')" id="sub-verbs" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">3. Глаголи & Движение (5 в.)</button>
+          <button onclick="setSubFilter('dialogues')" id="sub-dialogues" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">4. Ситуации & Диалози (5 в.)</button>
+        `;
       } else if (sub === 'psychology') {
         container.innerHTML = `
           <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
@@ -3468,6 +4155,7 @@
       let activeColor = 'bg-emerald-600 text-white shadow-emerald-500/25';
       if (currentSubject === 'paisiy_essay') activeColor = 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-purple-500/25';
       else if (currentSubject === 'authors_genres') activeColor = 'bg-gradient-to-r from-cyan-600 to-emerald-600 text-white shadow-cyan-500/25';
+      else if (currentSubject === 'russian') activeColor = 'bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 text-white shadow-sky-500/25';
       else if (currentSubject === 'psychology') activeColor = 'bg-purple-600 text-white shadow-purple-500/25';
       else if (currentSubject === 'biomechanics') activeColor = 'bg-neonCyan text-black shadow-cyan-500/25';
 
@@ -3477,7 +4165,7 @@
     }
 
     function restartExam(shouldReshuffle = true) {
-      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'paisiy_essay' ? [...paisiyEssayQuestions] : (currentSubject === 'authors_genres' ? [...authorsGenresQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions])));
+      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'paisiy_essay' ? [...paisiyEssayQuestions] : (currentSubject === 'authors_genres' ? [...authorsGenresQuestions] : (currentSubject === 'russian' ? [...russianQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions]))));
 
       if (currentSubject === 'bel') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
@@ -3486,6 +4174,8 @@
         else if (currentSubFilter === 'body') pool = pool.filter(q => q.section.startsWith('body'));
         else if (currentSubFilter === 'mastery') pool = pool.filter(q => q.section === 'conclusion' || q.section === 'connectors' || q.section === 'quotes' || q.section === 'mistakes' || q.section === 'full_model');
       } else if (currentSubject === 'authors_genres') {
+        if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
+      } else if (currentSubject === 'russian') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
       } else if (currentSubject === 'psychology') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
@@ -3512,10 +4202,11 @@
       let badgeColor = 'bg-emerald-950 text-emerald-300 border-emerald-800';
       if (currentSubject === 'paisiy_essay') badgeColor = 'bg-purple-950 text-pink-300 border-purple-800';
       else if (currentSubject === 'authors_genres') badgeColor = 'bg-cyan-950 text-emerald-300 border-cyan-800';
+      else if (currentSubject === 'russian') badgeColor = 'bg-sky-950 text-sky-300 border-sky-800';
       else if (currentSubject === 'psychology') badgeColor = 'bg-purple-950 text-purple-300 border-purple-800';
       else if (currentSubject === 'biomechanics') badgeColor = 'bg-cyan-950 text-neonCyan border-cyan-800';
 
-      document.getElementById('masteryBadge').innerText = currentSubject === 'paisiy_essay' ? '10-СТЪПКОВ ТРЕНЬОР (СТЪПКА ПО СТЪПКА)' : (currentSubject === 'authors_genres' ? '15 ТВОРБИ • 5 ТЕМИ ПО МОН' : '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)');
+      document.getElementById('masteryBadge').innerText = currentSubject === 'paisiy_essay' ? '10-СТЪПКОВ ТРЕНЬОР (СТЪПКА ПО СТЪПКА)' : (currentSubject === 'authors_genres' ? '15 ТВОРБИ • 5 ТЕМИ ПО МОН' : (currentSubject === 'russian' ? '30 ВЪПРОСА • НИВО А2 (ПРИВЕТ!)' : '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)'));
       document.getElementById('masteryBadge').className = `text-xs px-2 py-0.5 rounded ${badgeColor} font-mono`;
       document.getElementById('reportCardModal').classList.add('hidden');
       document.getElementById('questionWrapper').classList.remove('hidden');
@@ -3654,6 +4345,7 @@
       let primaryGradient = 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-emerald-500/25';
       if (currentSubject === 'paisiy_essay') primaryGradient = 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 shadow-purple-500/25';
       else if (currentSubject === 'authors_genres') primaryGradient = 'bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 shadow-cyan-500/25';
+      else if (currentSubject === 'russian') primaryGradient = 'bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 shadow-sky-500/25';
       else if (currentSubject === 'psychology') primaryGradient = 'bg-gradient-to-r from-purple-600 to-indigo-600 shadow-purple-500/25';
       else if (currentSubject === 'biomechanics') primaryGradient = 'bg-gradient-to-r from-cyan-600 to-teal-600 shadow-cyan-500/25';
 
@@ -3694,6 +4386,16 @@
         const secName = topicNames[q.section] || 'АВТОРИ & ЖАНРОВЕ';
         document.getElementById('qHeaderBadge').innerText = `📚 ${secName} • Творба ${q.num} от 15`;
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-cyan-950 to-emerald-950 text-cyan-300 border border-cyan-800';
+      } else if (q.subject === 'russian') {
+        const secNames = {
+          lexis: '1. ЛЕКСИКА & ТЕМИ',
+          grammar: '2. ПАДЕЖИ & ОКОНЧАНИЯ',
+          verbs: '3. ГЛАГОЛИ & ДВИЖЕНИЕ',
+          dialogues: '4. СИТУАЦИИ & ДИАЛОЗИ'
+        };
+        const secName = secNames[q.section] || 'РУСКИ ЕЗИК А2';
+        document.getElementById('qHeaderBadge').innerText = `🇷🇺 ${secName} • Въпрос ${q.num} от 30`;
+        document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-sky-950 via-blue-950 to-indigo-950 text-sky-300 border border-sky-800';
       } else if (q.subject === 'biomechanics') {
         document.getElementById('qHeaderBadge').innerText = `ТЕСТ № ${q.test} • Въпрос ${q.num}`;
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800';
@@ -4580,6 +5282,7 @@
       const modal = document.getElementById('cheatSheetModal');
       const belContent = document.getElementById('cheatSheetContentBel');
       const psychContent = document.getElementById('cheatSheetContentPsychology');
+      const russianContent = document.getElementById('cheatSheetContentRussian');
       const title = document.getElementById('cheatSheetModalTitle');
       const sub = document.getElementById('cheatSheetModalSub');
       const icon = document.getElementById('cheatSheetModalIcon');
@@ -4587,12 +5290,21 @@
       if (currentSubject === 'bel' || currentSubject === 'paisiy_essay' || currentSubject === 'authors_genres') {
         if (belContent) belContent.classList.remove('hidden');
         if (psychContent) psychContent.classList.add('hidden');
+        if (russianContent) russianContent.classList.add('hidden');
         if (title) title.innerText = currentSubject === 'authors_genres' ? 'Пълен Пищов: 15-те Произведения в 11. Клас' : (currentSubject === 'paisiy_essay' ? 'Пълен Пищов: Съчинение „Паисий“' : 'Пълен Пищов: БЕЛ 11. Клас (Автори, Творби, Правила)');
         if (sub) sub.innerText = '15-те задължителни произведения по 5-те теми на МОН + Автор + Жанр';
         if (icon) icon.innerText = '📚';
+      } else if (currentSubject === 'russian') {
+        if (belContent) belContent.classList.add('hidden');
+        if (psychContent) psychContent.classList.add('hidden');
+        if (russianContent) russianContent.classList.remove('hidden');
+        if (title) title.innerText = 'Пълен Пищов: Руски Език 11. Клас (Ниво А2)';
+        if (sub) sub.innerText = 'Учебник „Привет!“ (Просвета) • Азбука, 6-те Падежа, Спрежения, Движение и Речник';
+        if (icon) icon.innerText = '🇷🇺';
       } else {
         if (belContent) belContent.classList.add('hidden');
         if (psychContent) psychContent.classList.remove('hidden');
+        if (russianContent) russianContent.classList.add('hidden');
         if (title) title.innerText = 'Пълен Пищов: 18-те Теми по Спортна Психология';
         if (sub) sub.innerText = 'Бързо преговаряне на ключовите термини и дефиниции от учебника';
         if (icon) icon.innerText = '🧠';
@@ -4645,6 +5357,7 @@
         bel: 'Български език и литература',
         paisiy_essay: 'Съчинение върху „Паисий“',
         authors_genres: 'Автори и Жанрове (11. Клас)',
+        russian: 'Руски език (Ниво А2)',
         psychology: 'Спортна Психология',
         biomechanics: 'Биомеханика'
       };
