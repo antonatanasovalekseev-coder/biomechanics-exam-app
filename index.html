@@ -123,17 +123,20 @@
   <main class="max-w-5xl mx-auto px-4 lg:px-8 py-6">
     
     <!-- Top-Level Subject Switcher (Default: BEL) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
-      <button onclick="setGlobalSubject('bel')" id="subjectTab-bel" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-6 p-1.5 rounded-2xl bg-card/80 border border-borderGlow shadow-lg">
+      <button onclick="setGlobalSubject('bel')" id="subjectTab-bel" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25">
         <span>📖 БЕЛ 11. Клас (54)</span>
       </button>
-      <button onclick="setGlobalSubject('paisiy_essay')" id="subjectTab-paisiy_essay" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
-        <span>✍️ СЪЧИНЕНИЕ: „ПАИСИЙ“ (10)</span>
+      <button onclick="setGlobalSubject('paisiy_essay')" id="subjectTab-paisiy_essay" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>✍️ СЪЧИНЕНИЕ (10)</span>
       </button>
-      <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
-        <span>🧠 Спортна Психология (28)</span>
+      <button onclick="setGlobalSubject('authors_genres')" id="subjectTab-authors_genres" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>📚 АВТОРИ & ЖАНРОВЕ (15)</span>
       </button>
-      <button onclick="setGlobalSubject('biomechanics')" id="subjectTab-biomechanics" class="py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+      <button onclick="setGlobalSubject('psychology')" id="subjectTab-psychology" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
+        <span>🧠 Психология (28)</span>
+      </button>
+      <button onclick="setGlobalSubject('biomechanics')" id="subjectTab-biomechanics" class="py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all">
         <span>🔬 Биомеханика (30)</span>
       </button>
     </div>
@@ -3039,6 +3042,417 @@
       }
     ];
 
+    // =========================================================================
+    // 5. BLITZ TRAINER: ALL 15 WORKS, AUTHORS & GENRES (11. CLASS SYLLABUS)
+    // =========================================================================
+    const authorsGenresQuestions = [
+      {
+        subject: 'authors_genres',
+        section: 'rodnoto',
+        num: 1,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-emerald-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-emerald-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-emerald-400">ТЕМА: „РОДНОТО И ЧУЖДОТО“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold">ТВОРБА 1</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Възрожденският град Преспа, родът на Глаушевите, бунтът на Лазар Глаушев и резбарското изкуство на Климент Бенков и Рафе Клинче...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '1. Кой е авторът и какъв е жанрът на творбата „Железният светилник“?',
+        options: [
+          { text: 'А) Димитър Талев • Роман (първа част от знаменитата тетралогия)', correct: true },
+          { text: 'Б) Иван Вазов • Ода', correct: false },
+          { text: 'В) Елин Пелин • Разказ', correct: false },
+          { text: 'Г) Йордан Радичков • Повест', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Димитър Талев е автор на романната тетралогия („Железният светилник“, „Преспанските камбани“, „Илинден“, „Гласовете ви чувам“). Жанр: РОМАН.',
+        why: '„Железният светилник“ е класически български исторически РОМАН от Димитър Талев.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'rodnoto',
+        num: 2,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-emerald-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-emerald-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-emerald-400">ТЕМА: „РОДНОТО И ЧУЖДОТО“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold">ТВОРБА 2</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Театър в театъра, появата на извънземно в българско село, абсурдни сватбени ритуали и балкански манталитет...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '2. Кой е авторът и какъв е жанрът на творбата „Балкански синдром“?',
+        options: [
+          { text: 'А) Станислав Стратиев • Сатирична комедия / Драма (театрална пиеса на абсурда)', correct: true },
+          { text: 'Б) Алеко Константинов • Роман', correct: false },
+          { text: 'В) Христо Смирненски • Поема', correct: false },
+          { text: 'Г) Никола Вапцаров • Елегия', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Станислав Стратиев е големият български драматург на сатиричния абсурд. Жанр: КОМЕДИЯ / ДРАМА (ПИЕСА).',
+        why: '„Балкански синдром“ е сатирична КОМЕДИЯ (пиеса) от Станислав Стратиев.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'rodnoto',
+        num: 3,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-emerald-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-emerald-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-emerald-400">ТЕМА: „РОДНОТО И ЧУЖДОТО“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold">ТВОРБА 3</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Дисаги с розово масло, банята във Виена, гостуването у професор Иречек в Прага и изборите в България...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '3. Кой е авторът и какъв е жанрът на книгата „Бай Ганьо“ („Бай Ганьо пътува“, „Бай Ганьо у Иречека“)?',
+        options: [
+          { text: 'А) Алеко Константинов (Щастливеца) • Сборник със сатирични очерци и разкази / Сатирична книга', correct: true },
+          { text: 'Б) Христо Ботев • Историческа поема', correct: false },
+          { text: 'В) Любен Каравелов • Драма', correct: false },
+          { text: 'Г) Пенчо Славейков • Лирическа поема', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Алеко Константинов създава емблематичния образ на Бай Ганьо. Жанр: САТИРИЧЕН ОЧЕРК / РАЗКАЗ (САТИРИЧНА КНИГА).',
+        why: '„Бай Ганьо“ е САТИРИЧНА КНИГА / СБОРНИК ОЧЕРЦИ от Алеко Константинов.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'pametta',
+        num: 4,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-amber-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-amber-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-neonAmber">ТЕМА: „МИНАЛОТО И ПАМЕТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-mono text-[10px] font-bold">ТВОРБА 4</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Сто и двайсет години назад... Тъмнини дълбоки! В светогорский скит... О, неразумни и юроде!... история има и става народ!“</em>
+            </p>
+          </div>
+        `,
+        prompt: '4. Кой е авторът и какъв е жанрът на творбата „Паисий“?',
+        options: [
+          { text: 'А) Иван Вазов • Ода (от цикъла „Епопея на забравените“)', correct: true },
+          { text: 'Б) Паисий Хилендарски • Роман', correct: false },
+          { text: 'В) Пейо Яворов • Елегия', correct: false },
+          { text: 'Г) Христо Смирненски • Приказка', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Иван Вазов възпява Паисий в прочутия си цикъл „Епопея на забравените“. Жанр: ОДА.',
+        why: '„Паисий“ е ОДА от Иван Вазов.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'pametta',
+        num: 5,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-amber-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-amber-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-neonAmber">ТЕМА: „МИНАЛОТО И ПАМЕТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-mono text-[10px] font-bold">ТВОРБА 5</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Какво ще ни дадеш, историйо, от пожълтелите си страници?... Живот ли бе да го опишеш? Живот ли бе да го разровиш?...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '5. Кой е авторът и какъв е жанрът на творбата „История“?',
+        options: [
+          { text: 'А) Никола Вапцаров • Стихотворение (социално-философски лирически монолог)', correct: true },
+          { text: 'Б) Иван Вазов • Роман', correct: false },
+          { text: 'В) Христо Ботев • Сатира', correct: false },
+          { text: 'Г) Елин Пелин • Очерк', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Никола Вапцаров води диалог с историята за съдбата на обикновения трудов човек. Жанр: СТИХОТВОРЕНИЕ.',
+        why: '„История“ е СТИХОТВОРЕНИЕ от Никола Вапцаров.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'pametta',
+        num: 6,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-amber-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-amber-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-neonAmber">ТЕМА: „МИНАЛОТО И ПАМЕТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-mono text-[10px] font-bold">ТВОРБА 6</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Въображаем кораб, спасяващ душите, спомените за Северозапада, магията на птиците и изчезващия селски космос...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '6. Кой е авторът и какъв е жанрът на творбата „Ноев ковчег“?',
+        options: [
+          { text: 'А) Йордан Радичков • Роман-пътуване / фрагментарен роман (философска проза)', correct: true },
+          { text: 'Б) Димитър Димов • Пиеса', correct: false },
+          { text: 'В) Павел Вежинов • Поема', correct: false },
+          { text: 'Г) Емилиян Станев • Повест', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Йордан Радичков създава уникален магически реализъм за спасяването на човешката памет. Жанр: РОМАН-ПЪТУВАНЕ.',
+        why: '„Ноев ковчег“ е РОМАН-ПЪТУВАНЕ (фрагментарен роман) от Йордан Радичков.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'obshtestvoto',
+        num: 7,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-rose-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-rose-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-rose-400">ТЕМА: „ОБЩЕСТВОТО И ВЛАСТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] font-bold">ТВОРБА 7</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„В тъмнини дълбоки... Свестните у нас считат за луди, глупецът вредом всеки почита... Светът, безумен, скотски сънува...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '7. Кой е авторът и какъв е жанрът на творбата „Борба“?',
+        options: [
+          { text: 'А) Христо Ботев • Стихотворение (гражданска сатира и елегия)', correct: true },
+          { text: 'Б) Иван Вазов • Ода', correct: false },
+          { text: 'В) Пейо Яворов • Поема', correct: false },
+          { text: 'Г) Пенчо Славейков • Миниатюра', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Христо Ботев изобличава робското примирение и духовната слепота на обществото. Жанр: СТИХОТВОРЕНИЕ (САТИРА).',
+        why: '„Борба“ е СТИХОТВОРЕНИЕ (сатира) от Христо Ботев.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'obshtestvoto',
+        num: 8,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-rose-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-rose-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-rose-400">ТЕМА: „ОБЩЕСТВОТО И ВЛАСТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] font-bold">ТВОРБА 8</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Каруцарят, Съдия-изпълнителят, блатото край селото и спасяването на сиромаха Станойчо...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '8. Кой е авторът и какъв е жанрът на творбата „Андрешко“?',
+        options: [
+          { text: 'А) Елин Пелин • Разказ (социално-реалистична белетристика)', correct: true },
+          { text: 'Б) Йордан Йовков • Роман', correct: false },
+          { text: 'В) Станислав Стратиев • Комедия', correct: false },
+          { text: 'Г) Георги Караславов • Драма', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Елин Пелин е ненадминатият майстор на българския къс разказ за селото. Жанр: РАЗКАЗ.',
+        why: '„Андрешко“ е РАЗКАЗ от Елин Пелин.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'obshtestvoto',
+        num: 9,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-rose-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-rose-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-rose-400">ТЕМА: „ОБЩЕСТВОТО И ВЛАСТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] font-bold">ТВОРБА 9</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Младежът с плебейски произход, стълбата към върха, Дяволът и продажбата на слуха, очите и сърцето...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '9. Кой е авторът и какъв е жанрът на творбата „Приказка за стълбата“?',
+        options: [
+          { text: 'А) Христо Смирненски • Сатирична приказка / Алегоричен разказ', correct: true },
+          { text: 'Б) Алеко Константинов • Фейлетон', correct: false },
+          { text: 'В) Никола Вапцаров • Стихотворение', correct: false },
+          { text: 'Г) Иван Вазов • Ода', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Христо Смирненски посвещава творбата „на всички, които ще кажат: Това не се отнася до мен!“. Жанр: САТИРИЧНА ПРИКАЗКА.',
+        why: '„Приказка за стълбата“ е САТИРИЧНА ПРИКАЗКА (алегория) от Христо Смирненски.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'zhivota',
+        num: 10,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">ТЕМА: „ЖИВОТЪТ И СМЪРТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">ТВОРБА 10</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Остави таз песен любовна, не приливай куршум в сърцето... Запей и ти песен такава, запей ми, девойко, на жалост...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '10. Кой е авторът и какъв е жанрът на творбата „До моето първо либе“?',
+        options: [
+          { text: 'А) Христо Ботев • Стихотворение (лирическа изповед / елегия)', correct: true },
+          { text: 'Б) Пейо Яворов • Роман', correct: false },
+          { text: 'В) Димчо Дебелянов • Сонет', correct: false },
+          { text: 'Г) Пенчо Славейков • Поема', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Христо Ботев надмогва личната любов в името на свещения дълг пред родината. Жанр: СТИХОТВОРЕНИЕ.',
+        why: '„До моето първо либе“ е СТИХОТВОРЕНИЕ от Христо Ботев.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'zhivota',
+        num: 11,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">ТЕМА: „ЖИВОТЪТ И СМЪРТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">ТВОРБА 11</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„В тъмни нощи, в нощи ледни... призраци бродят, разпятия, майчината молитва и копнежът по покой...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '11. Кой е авторът и какъв е жанрът на творбата „Нощ“?',
+        options: [
+          { text: 'А) Пейо Яворов • Поема (драматична психологическа поема)', correct: true },
+          { text: 'Б) Христо Ботев • Балада', correct: false },
+          { text: 'В) Елин Пелин • Разказ', correct: false },
+          { text: 'Г) Станислав Стратиев • Пиеса', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Пейо Яворов описва трагичното раздвоение на човешката душа между бунта и смъртта. Жанр: ПОЕМА.',
+        why: '„Нощ“ е психологическа ПОЕМА от Пейо Яворов.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'zhivota',
+        num: 12,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-purple-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-purple-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-purple-300">ТЕМА: „ЖИВОТЪТ И СМЪРТТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">ТВОРБА 12</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Автомобилно пътуване през есента, странната среща с извънземен разум на шосето и размисли за смисъла на човешкия живот...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '12. Кой е авторът и какъв е жанрът на творбата „Един есенен ден по шосето“?',
+        options: [
+          { text: 'А) Павел Вежинов • Разказ (психологическа и философско-фантастична белетристика)', correct: true },
+          { text: 'Б) Димитър Талев • Роман', correct: false },
+          { text: 'В) Иван Вазов • Ода', correct: false },
+          { text: 'Г) Йордан Радичков • Драма', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Павел Вежинов съчетава фантастика и дълбок хуманизъм за земната мисия на човека. Жанр: РАЗКАЗ.',
+        why: '„Един есенен ден по шосето“ е РАЗКАЗ от Павел Вежинов.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'prirodata',
+        num: 13,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-cyan-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-neonCyan">ТЕМА: „ПРИРОДАТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-cyan-950 text-neonCyan font-mono text-[10px] font-bold">ТВОРБА 13</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Царува там духът на вечната природа... Сега съм у дома, на свобода съм веч... пречистен от суетата на света...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '13. Кой е авторът и какъв е жанрът на творбата „При Рилския манастир“?',
+        options: [
+          { text: 'А) Иван Вазов • Стихотворение / Ода (пейзажно-патриотична лирика)', correct: true },
+          { text: 'Б) Пейо Яворов • Поема', correct: false },
+          { text: 'В) Никола Вапцаров • Балада', correct: false },
+          { text: 'Г) Пенчо Славейков • Разказ', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Иван Вазов открива в Рила духовен храм и извор на творческо възраждане. Жанр: СТИХОТВОРЕНИЕ.',
+        why: '„При Рилския манастир“ е СТИХОТВОРЕНИЕ (ода) от Иван Вазов.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'prirodata',
+        num: 14,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-cyan-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-neonCyan">ТЕМА: „ПРИРОДАТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-cyan-950 text-neonCyan font-mono text-[10px] font-bold">ТВОРБА 14</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Една, че две, че три - усилни и божи години... Падна първа капка... Спряха, погледнаха се в очи, ожънати надежди...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '14. Кой е авторът и какъв е жанрът на творбата „Градушка“?',
+        options: [
+          { text: 'А) Пейо Яворов • Поема (социално-реалистична и трагична поема)', correct: true },
+          { text: 'Б) Елин Пелин • Разказ', correct: false },
+          { text: 'В) Христо Ботев • Стихотворение', correct: false },
+          { text: 'Г) Димитър Талев • Роман', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Пейо Яворов описва трагедията на селския труд, опустошен от природното бедствие. Жанр: ПОЕМА.',
+        why: '„Градушка“ е класическа българска ПОЕМА от Пейо Яворов.'
+      },
+      {
+        subject: 'authors_genres',
+        section: 'prirodata',
+        num: 15,
+        type: 'choice',
+        maxPoints: 2,
+        attachment: `
+          <div class="p-4 rounded-2xl bg-card border-2 border-cyan-500/60 text-slate-100 shadow-xl space-y-2">
+            <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2">
+              <span class="text-xs font-mono font-bold text-neonCyan">ТЕМА: „ПРИРОДАТА“ (11. КЛАС)</span>
+              <span class="px-2 py-0.5 rounded bg-cyan-950 text-neonCyan font-mono text-[10px] font-bold">ТВОРБА 15</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-serif">
+              <em>„Спи езерото; белостволи буки над него скланят ресисти клони, и трепетно треперят... с вечна хармония в сърцето...“</em>
+            </p>
+          </div>
+        `,
+        prompt: '15. Кой е авторът и какъв е жанрът на творбата „Спи езерото“ (сборник „Сън за щастие“)?',
+        options: [
+          { text: 'А) Пенчо Славейков • Философско стихотворение / Лирическа миниатюра', correct: true },
+          { text: 'Б) Иван Вазов • Ода', correct: false },
+          { text: 'В) Пейо Яворов • Драма', correct: false },
+          { text: 'Г) Алеко Константинов • Очерк', correct: false }
+        ],
+        hint: '💡 ЗАПОМНИ: Пенчо Славейков пренася модернизма в пейзажната миниатюра в сборника „Сън за щастие“. Жанр: ЛИРИЧЕСКА МИНИАТЮРА / СТИХОТВОРЕНИЕ.',
+        why: '„Спи езерото“ е ЛИРИЧЕСКА МИНИАТЮРА (стихотворение) от Пенчо Славейков.'
+      }
+    ];
+
     // --- State Variables ---
     let currentSubject = 'bel'; // Default: BEL for the upcoming 8:00 AM exam!
     let currentSubFilter = 'all';
@@ -3100,6 +3514,7 @@
       
       const belTab = document.getElementById('subjectTab-bel');
       const paisiyTab = document.getElementById('subjectTab-paisiy_essay');
+      const authTab = document.getElementById('subjectTab-authors_genres');
       const psychTab = document.getElementById('subjectTab-psychology');
       const biomechTab = document.getElementById('subjectTab-biomechanics');
       const mainTitle = document.getElementById('appMainTitle');
@@ -3107,12 +3522,12 @@
       const iconBadge = document.getElementById('subjectIconBadge');
       const cheatBtnLabel = document.getElementById('cheatSheetBtnLabel');
 
-      [belTab, paisiyTab, psychTab, biomechTab].forEach(t => {
-        if (t) t.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
+      [belTab, paisiyTab, authTab, psychTab, biomechTab].forEach(t => {
+        if (t) t.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all';
       });
 
       if (sub === 'bel') {
-        belTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25';
+        belTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25';
         mainTitle.innerText = 'Български език и литература XI Клас';
         subTitle.innerText = 'Класна работа & ДЗИ • 54 тестови въпроса с обяснения & Mastery Loop';
         iconBadge.innerText = '📖';
@@ -3120,15 +3535,23 @@
         if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ ЗА БЕЛ 11. КЛАС';
         renderSubFilters('bel');
       } else if (sub === 'paisiy_essay') {
-        if (paisiyTab) paisiyTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 text-white shadow-lg shadow-purple-500/30';
+        if (paisiyTab) paisiyTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 text-white shadow-lg shadow-purple-500/30';
         mainTitle.innerText = 'Интерпретативно Съчинение: „Паисий“ (Иван Вазов)';
         subTitle.innerText = '10-стъпков интерактивен треньор за Отличен 6.00 • Структура, Теза, Цитати';
         iconBadge.innerText = '✍️';
         iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30';
         if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: СЪЧИНЕНИЕ „ПАИСИЙ“';
         renderSubFilters('paisiy_essay');
+      } else if (sub === 'authors_genres') {
+        if (authTab) authTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 text-white shadow-lg shadow-cyan-500/30';
+        mainTitle.innerText = 'Автори, Творби и Жанрове (11. Клас)';
+        subTitle.innerText = 'Блиц-треньор върху всичките 15 произведения от 5-те теми на МОН';
+        iconBadge.innerText = '📚';
+        iconBadge.className = 'w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-emerald-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-cyan-500/30';
+        if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: АВТОРИ И ЖАНРОВЕ';
+        renderSubFilters('authors_genres');
       } else if (sub === 'psychology') {
-        psychTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
+        psychTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25';
         mainTitle.innerText = 'Спортна Психология XI Клас';
         subTitle.innerText = 'проф. Татяна Янчева, дн • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🧠';
@@ -3136,7 +3559,7 @@
         if (cheatBtnLabel) cheatBtnLabel.innerText = '📚 ПИЩОВ: 18-ТЕ ТЕМИ (ПСИХОЛОГИЯ)';
         renderSubFilters('psychology');
       } else {
-        biomechTab.className = 'py-3 px-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25';
+        biomechTab.className = 'py-3 px-2.5 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-lg shadow-cyan-500/25';
         mainTitle.innerText = 'Биомеханика XI Клас';
         subTitle.innerText = 'гл. ас. Иван Иванов, доктор • Шестобална система & Mastery Loop';
         iconBadge.innerText = '🔬';
@@ -3171,6 +3594,16 @@
           <button onclick="setSubFilter('body')" id="sub-body" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">2. Трите Абзаца & Цитати (3 в.)</button>
           <button onclick="setSubFilter('mastery')" id="sub-mastery" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">3. Заключение & Правила за 6.00 (5 в.)</button>
         `;
+      } else if (sub === 'authors_genres') {
+        container.innerHTML = `
+          <span class="text-xs font-mono font-bold text-slate-400 mr-1">ФИЛТЪР ПО ТЕМИ:</span>
+          <button onclick="setSubFilter('all')" id="sub-all" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-600 text-white transition-all shadow-lg shadow-cyan-500/25">Всички 15 Творби</button>
+          <button onclick="setSubFilter('rodnoto')" id="sub-rodnoto" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">1. Родното и чуждото (3)</button>
+          <button onclick="setSubFilter('pametta')" id="sub-pametta" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">2. Миналото и паметта (3)</button>
+          <button onclick="setSubFilter('obshtestvoto')" id="sub-obshtestvoto" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">3. Обществото и властта (3)</button>
+          <button onclick="setSubFilter('zhivota')" id="sub-zhivota" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">4. Животът и смъртта (3)</button>
+          <button onclick="setSubFilter('prirodata')" id="sub-prirodata" class="px-3.5 py-1.5 text-xs font-display font-bold rounded-xl bg-card border border-borderGlow text-slate-300 hover:text-white transition-all">5. Природата (3)</button>
+        `;
       } else if (sub === 'psychology') {
         container.innerHTML = `
           <span class="text-xs font-mono font-bold text-slate-400 mr-1">ИЗБЕРИ РАЗДЕЛ:</span>
@@ -3199,16 +3632,17 @@
       const activeBtn = document.getElementById('sub-' + filter);
       let activeColor = 'bg-emerald-600 text-white shadow-emerald-500/25';
       if (currentSubject === 'paisiy_essay') activeColor = 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-purple-500/25';
+      else if (currentSubject === 'authors_genres') activeColor = 'bg-gradient-to-r from-cyan-600 to-emerald-600 text-white shadow-cyan-500/25';
       else if (currentSubject === 'psychology') activeColor = 'bg-purple-600 text-white shadow-purple-500/25';
       else if (currentSubject === 'biomechanics') activeColor = 'bg-neonCyan text-black shadow-cyan-500/25';
 
       if (activeBtn) activeBtn.className = `px-3 py-1.5 text-xs font-display font-bold rounded-xl ${activeColor} transition-all shadow-lg`;
 
-      restartExam(currentSubject === 'paisiy_essay' ? false : true);
+      restartExam(currentSubject === 'paisiy_essay' || currentSubject === 'authors_genres' ? false : true);
     }
 
     function restartExam(shouldReshuffle = true) {
-      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'paisiy_essay' ? [...paisiyEssayQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions]));
+      let pool = currentSubject === 'bel' ? [...belQuestions] : (currentSubject === 'paisiy_essay' ? [...paisiyEssayQuestions] : (currentSubject === 'authors_genres' ? [...authorsGenresQuestions] : (currentSubject === 'psychology' ? [...psychologyQuestions] : [...biomechanicsQuestions])));
 
       if (currentSubject === 'bel') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
@@ -3216,6 +3650,8 @@
         if (currentSubFilter === 'intro_thesis') pool = pool.filter(q => q.section === 'intro' || q.section === 'thesis');
         else if (currentSubFilter === 'body') pool = pool.filter(q => q.section.startsWith('body'));
         else if (currentSubFilter === 'mastery') pool = pool.filter(q => q.section === 'conclusion' || q.section === 'connectors' || q.section === 'quotes' || q.section === 'mistakes' || q.section === 'full_model');
+      } else if (currentSubject === 'authors_genres') {
+        if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
       } else if (currentSubject === 'psychology') {
         if (currentSubFilter !== 'all') pool = pool.filter(q => q.section === currentSubFilter);
       } else {
@@ -3240,13 +3676,12 @@
 
       let badgeColor = 'bg-emerald-950 text-emerald-300 border-emerald-800';
       if (currentSubject === 'paisiy_essay') badgeColor = 'bg-purple-950 text-pink-300 border-purple-800';
+      else if (currentSubject === 'authors_genres') badgeColor = 'bg-cyan-950 text-emerald-300 border-cyan-800';
       else if (currentSubject === 'psychology') badgeColor = 'bg-purple-950 text-purple-300 border-purple-800';
       else if (currentSubject === 'biomechanics') badgeColor = 'bg-cyan-950 text-neonCyan border-cyan-800';
 
-      document.getElementById('masteryBadge').innerText = currentSubject === 'paisiy_essay' ? '10-СТЪПКОВ ТРЕНЬОР (СТЪПКА ПО СТЪПКА)' : '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)';
+      document.getElementById('masteryBadge').innerText = currentSubject === 'paisiy_essay' ? '10-СТЪПКОВ ТРЕНЬОР (СТЪПКА ПО СТЪПКА)' : (currentSubject === 'authors_genres' ? '15 ТВОРБИ • 5 ТЕМИ ПО МОН' : '1:1 ИЗПИТЕН ФОРМАТ (РАЗБЪРКАН)');
       document.getElementById('masteryBadge').className = `text-xs px-2 py-0.5 rounded ${badgeColor} font-mono`;
-      document.getElementById('mistakeCounterLabel').classList.add('hidden');
-
       document.getElementById('reportCardModal').classList.add('hidden');
       document.getElementById('questionWrapper').classList.remove('hidden');
       renderCurrentQuestion();
@@ -3383,6 +3818,7 @@
       // Dynamic Submit and Next Button Theme
       let primaryGradient = 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-emerald-500/25';
       if (currentSubject === 'paisiy_essay') primaryGradient = 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 shadow-purple-500/25';
+      else if (currentSubject === 'authors_genres') primaryGradient = 'bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 shadow-cyan-500/25';
       else if (currentSubject === 'psychology') primaryGradient = 'bg-gradient-to-r from-purple-600 to-indigo-600 shadow-purple-500/25';
       else if (currentSubject === 'biomechanics') primaryGradient = 'bg-gradient-to-r from-cyan-600 to-teal-600 shadow-cyan-500/25';
 
@@ -3412,6 +3848,17 @@
         const secName = stepNames[q.section] || 'ТРЕНЬОР ЗА СЪЧИНЕНИЕ';
         document.getElementById('qHeaderBadge').innerText = `✍️ ${secName} • Стъпка ${q.num}`;
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-purple-950 to-pink-950 text-pink-300 border border-purple-800';
+      } else if (q.subject === 'authors_genres') {
+        const topicNames = {
+          rodnoto: '1. РОДНОТО И ЧУЖДОТО',
+          pametta: '2. МИНАЛОТО И ПАМЕТТА',
+          obshtestvoto: '3. ОБЩЕСТВОТО И ВЛАСТТА',
+          zhivota: '4. ЖИВОТЪТ И СМЪРТТА',
+          prirodata: '5. ПРИРОДАТА'
+        };
+        const secName = topicNames[q.section] || 'АВТОРИ & ЖАНРОВЕ';
+        document.getElementById('qHeaderBadge').innerText = `📚 ${secName} • Творба ${q.num} от 15`;
+        document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-cyan-950 to-emerald-950 text-cyan-300 border border-cyan-800';
       } else if (q.subject === 'biomechanics') {
         document.getElementById('qHeaderBadge').innerText = `ТЕСТ № ${q.test} • Въпрос ${q.num}`;
         document.getElementById('qHeaderBadge').className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-neonCyan border border-cyan-800';
@@ -4302,11 +4749,11 @@
       const sub = document.getElementById('cheatSheetModalSub');
       const icon = document.getElementById('cheatSheetModalIcon');
 
-      if (currentSubject === 'bel') {
+      if (currentSubject === 'bel' || currentSubject === 'paisiy_essay' || currentSubject === 'authors_genres') {
         if (belContent) belContent.classList.remove('hidden');
         if (psychContent) psychContent.classList.add('hidden');
-        if (title) title.innerText = 'Пълен Пищов: БЕЛ 11. Клас (Автори, Творби, Правила)';
-        if (sub) sub.innerText = '15-те задължителни произведения + 5-те златни правила по Български език';
+        if (title) title.innerText = currentSubject === 'authors_genres' ? 'Пълен Пищов: 15-те Произведения в 11. Клас' : (currentSubject === 'paisiy_essay' ? 'Пълен Пищов: Съчинение „Паисий“' : 'Пълен Пищов: БЕЛ 11. Клас (Автори, Творби, Правила)');
+        if (sub) sub.innerText = '15-те задължителни произведения по 5-те теми на МОН + Автор + Жанр';
         if (icon) icon.innerText = '📚';
       } else {
         if (belContent) belContent.classList.add('hidden');
@@ -4359,7 +4806,14 @@
       const heading = document.getElementById('finalHeading');
       const subtext = document.getElementById('finalSubtext');
 
-      const subjectName = currentSubject === 'bel' ? 'Български език и литература' : (currentSubject === 'psychology' ? 'Спортна Психология' : 'Биомеханика');
+      const subjectNames = {
+        bel: 'Български език и литература',
+        paisiy_essay: 'Съчинение върху „Паисий“',
+        authors_genres: 'Автори и Жанрове (11. Клас)',
+        psychology: 'Спортна Психология',
+        biomechanics: 'Биомеханика'
+      };
+      const subjectName = subjectNames[currentSubject] || 'Изпита';
 
       if (wrongQuestionsInRound.length > 0) {
         masteryContainer.classList.remove('hidden');
